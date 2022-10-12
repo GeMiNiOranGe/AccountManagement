@@ -27,6 +27,12 @@
     <ClCompile Include="CEmployee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UIHaveNoUX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandleMiscellaneous.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CUser.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CEmployee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UIHaveNoUX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleMiscellaneous.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

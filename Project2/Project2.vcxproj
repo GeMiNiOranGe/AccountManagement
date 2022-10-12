@@ -154,12 +154,16 @@
     <ClCompile Include="CAdministrator.cpp" />
     <ClCompile Include="CEmployee.cpp" />
     <ClCompile Include="CUser.cpp" />
+    <ClCompile Include="HandleMiscellaneous.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="UIHaveNoUX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CAdministrator.h" />
     <ClInclude Include="CEmployee.h" />
     <ClInclude Include="CUser.h" />
+    <ClInclude Include="HandleMiscellaneous.h" />
+    <ClInclude Include="UIHaveNoUX.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
