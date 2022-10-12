@@ -19,41 +19,41 @@ CUser::CUser(const CUser & tempUser) {
 CUser::~CUser() {
 }
 
-string CUser::getFullName() {
+const string& CUser::getFullName() {
 	return this->fullName;
 }
-string CUser::getAddress() {
+const string& CUser::getAddress() {
 	return this->address;
 }
-string CUser::getPhoneNumber() {
+const string& CUser::getPhoneNumber() {
 	return this->phoneNumber;
 }
-string CUser::getEmailAddress() {
+const string& CUser::getEmailAddress() {
 	return this->emailAddress;
 }
-string CUser::getUsername() {
+const string& CUser::getUsername() {
 	return this->username;
 }
-string CUser::getPassword() {
+const string& CUser::getPassword() {
 	return this->password;
 }
 
-void CUser::setFullName(string _fullName) {
+void CUser::setFullName(const string& _fullName) {
 	this->fullName = _fullName;
 }
-void CUser::setAddress(string _address) {
+void CUser::setAddress(const string& _address) {
 	this->address = _address;
 }
-void CUser::setPhoneNumber(string _phoneNumber) {
+void CUser::setPhoneNumber(const string& _phoneNumber) {
 	this->phoneNumber = _phoneNumber;
 }
-void CUser::setEmailAddress(string _emailAddress) {
+void CUser::setEmailAddress(const string& _emailAddress) {
 	this->emailAddress = _emailAddress;
 }
-void CUser::setUsername(string _username) {
+void CUser::setUsername(const string& _username) {
 	this->username = _username;
 }
-void CUser::setPassword(string _password) {
+void CUser::setPassword(const string& _password) {
 	this->password = _password;
 }
 
