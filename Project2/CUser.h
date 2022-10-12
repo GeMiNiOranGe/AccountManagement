@@ -3,7 +3,9 @@
 #pragma once
 
 #include <string>
-using std::string;
+#include <iostream>
+
+using namespace std;
 
 class CUser {
 public:
@@ -24,6 +26,9 @@ public:
 	void setEmailAddress(string);
 	void setUsername(string);
 	void setPassword(string);
+
+	void input();
+	void output();
 private:
 	string fullName;
 	string address;

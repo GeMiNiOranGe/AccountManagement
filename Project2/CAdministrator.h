@@ -8,8 +8,6 @@ class CAdministrator:
 	public CUser {
 public:
 	CAdministrator(string = "", string = "", string = "", string = "", string = "", string = "111111");
-	CAdministrator(const CAdministrator &);
-	~CAdministrator();
 
 	void addEmployee();
 	void eraseEmployee();

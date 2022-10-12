@@ -56,3 +56,16 @@ void CUser::setUsername(string _username) {
 void CUser::setPassword(string _password) {
 	this->password = _password;
 }
+
+void CUser::input() {
+	cin >> this->fullName;
+	cin >> this->address;
+	cin >> this->phoneNumber;
+	cin >> this->emailAddress;
+}
+void CUser::output() {
+	cout << this->fullName << endl;
+	cout << this->address << endl;
+	cout << this->phoneNumber << endl;
+	cout << this->emailAddress << endl;
+}

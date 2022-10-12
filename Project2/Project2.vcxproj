@@ -152,11 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CAdministrator.cpp" />
+    <ClCompile Include="CEmployee.cpp" />
     <ClCompile Include="CUser.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CAdministrator.h" />
+    <ClInclude Include="CEmployee.h" />
     <ClInclude Include="CUser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
