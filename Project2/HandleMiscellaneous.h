@@ -2,6 +2,14 @@
 #define HANDLEMISCELLANEOUS_H
 #pragma once
 
-void encodePassword();
+#include <iostream>
+#include <Windows.h>
+#include <string>
+#include <conio.h>
+
+using namespace std;
+
+void encodePassword(string & strHandle);
+void textAndBackgroundColor(int textColor, int backgroundColor);
 
 #endif
