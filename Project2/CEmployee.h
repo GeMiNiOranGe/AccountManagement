@@ -7,7 +7,7 @@
 class CEmployee:
 	public CUser {
 public:
-	CEmployee(string = "", string = "", string = "", string = "", string = "", string = "111111");
+	CEmployee(string = "", string = "111111", string = "", string = "", string = "", string = "");
 
 	void viewInfoAccount();
 	void changePassword();

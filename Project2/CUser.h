@@ -9,7 +9,7 @@ using namespace std;
 
 class CUser {
 public:
-	CUser(string = "", string = "", string = "", string = "", string = "", string = "111111");
+	CUser(string = "", string = "111111", string = "", string = "", string = "", string = "");
 	CUser(const CUser &);
 	~CUser();
 	
@@ -21,29 +21,29 @@ public:
 	Setter have "const", why ??? because i used reference for that function, and it can run faster.
 	I am not sure it can run faster or not =))))) */
 
+	const string& getUsername();
+	const string& getPassword();
 	const string& getFullName();
 	const string& getAddress();
 	const string& getPhoneNumber();
 	const string& getEmailAddress();
-	const string& getUsername();
-	const string& getPassword();
 
+	void setUsername(const string&);
+	void setPassword(const string&);
 	void setFullName(const string&);
 	void setAddress(const string&);
 	void setPhoneNumber(const string&);
 	void setEmailAddress(const string&);
-	void setUsername(const string&);
-	void setPassword(const string&);
 
 	void input();
 	void output();
 private:
+	string username;
+	string password;
 	string fullName;
 	string address;
 	string phoneNumber;
 	string emailAddress;
-	string username;
-	string password;
 };
 
 #endif

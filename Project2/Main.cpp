@@ -13,7 +13,9 @@ void check(CUser & temp) {
 }
 
 int main() {
-	//CEmployee tempEmployee("Ng Van A", "280 ADV", "90910290", "ahsdj@mail.com", "", ""), tempAd;
+	resizeConsole(500, 500);
+
+	//CEmployee tempEmployee("", "", "Ng Van A", "280 ADV", "90910290", "ahsdj@mail.com"), tempAd;
 	//tempAd = tempEmployee;
 	//check(tempEmployee);
 	//textAndBackgroundColor(1, 3);

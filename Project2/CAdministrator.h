@@ -7,7 +7,7 @@
 class CAdministrator:
 	public CUser {
 public:
-	CAdministrator(string = "", string = "", string = "", string = "", string = "", string = "111111");
+	CAdministrator(string = "", string = "111111", string = "", string = "", string = "", string = "");
 
 	void addEmployee();
 	void eraseEmployee();

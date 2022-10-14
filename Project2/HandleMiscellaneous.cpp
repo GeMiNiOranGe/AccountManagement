@@ -8,6 +8,9 @@ void encodePassword(string & strPassword) {
 		//if (cEvent == 27) {
 		//	exit(0);
 		//}
+		
+		//TODO: make erase a line with "ctrl + backspace" ascii: 127
+
 		// ENTER key
 		if (cEvent == 13) {
 			break;
@@ -19,7 +22,9 @@ void encodePassword(string & strPassword) {
 		}
 		else {
 			strPassword.push_back(cEvent);
-			cout << "*";
+			cout << cEvent;
+			Sleep(100);
+			cout << "\b \b*";
 		}
 	}
 	while (cEvent != 13);
@@ -37,4 +42,11 @@ void textAndBackgroundColor(int textColor, int backgroundColor) {
 	int tempColor = backgroundColor * 16 + textColor;
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(h, tempColor);
+}
+
+void resizeConsole(int width, int height) {
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r);
+	MoveWindow(console, r.left, r.top, width, height, TRUE);
 }
