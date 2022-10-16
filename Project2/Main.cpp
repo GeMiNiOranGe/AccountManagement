@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include "CUser.h"
 #include "CAdministrator.h"
 #include "CEmployee.h"
@@ -8,24 +7,31 @@
 
 using namespace std;
 
-void check(CUser & temp) {
-	temp.setPassword("hmmmm");
-}
+char g_cCatchEvent;
+
+void handleAdmin();
+void handleEmployee();
 
 int main() {
-	resizeConsole(500, 500);
-
-	//CEmployee tempEmployee("", "", "Ng Van A", "280 ADV", "90910290", "ahsdj@mail.com"), tempAd;
-	//tempAd = tempEmployee;
-	//check(tempEmployee);
-	//textAndBackgroundColor(1, 3);
-	//cout << tempEmployee.getPassword() << endl;
-	//textAndBackgroundColor(7, 0);
-	//tempEmployee.output();
-
-	string strTemp;
-	encodePassword(strTemp);
-	cout << strTemp;
+	SetConsoleTitle(L"Employee manager - Group ProCoder");
+	resizeConsole(435, 475);
+	string strPasswordTemp, strUsernameTemp;
+	while (true) {
+		g_cCatchEvent = chooseAdminOrEmployee();
+		switch (g_cCatchEvent) {
+		case 49:
+			//TODO: should clear strPasswordTemp when re-login
+			loginAdmin(strUsernameTemp, strPasswordTemp);
+			handleAdmin();
+			break;
+		case 50:
+			handleEmployee();
+			break;
+		default:
+			chooseWrong();
+			break;
+		}
+	}
 
 	//char key_press;
 	//int ascii_value;
@@ -38,4 +44,40 @@ int main() {
 	//	cout << "Ban nhap phim-> \" " << key_press << " \" Gia tri ASCII =  " << ascii_value << "\n";
 	//}
 	return 0;
+}
+
+void handleAdmin() {
+	g_cCatchEvent = menuAdmin();
+	switch (g_cCatchEvent) {
+	case 49:
+		break;
+	case 50:
+		break;
+	case 51:
+		break;
+	case 52:
+		break;
+	case 53:
+		break;
+	case 54:
+		return;
+	default:
+		chooseWrong();
+		break;
+	}
+}
+
+void handleEmployee() {
+	g_cCatchEvent = menuEmployee();
+	switch (g_cCatchEvent) {
+	case 49:
+		break;
+	case 50:
+		break;
+	case 51:
+		break;
+	default:
+		chooseWrong();
+		break;
+	}
 }

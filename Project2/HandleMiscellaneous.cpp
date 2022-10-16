@@ -39,14 +39,25 @@ void encodePassword(string & strPassword) {
 // 6 = Yellow | 14 = Light Yellow
 // 7 = White  | 15 = Bright White
 void textAndBackgroundColor(int textColor, int backgroundColor) {
-	int tempColor = backgroundColor * 16 + textColor;
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(h, tempColor);
+	int colorCode = backgroundColor * 16 + textColor;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
 }
 
 void resizeConsole(int width, int height) {
-	HWND console = GetConsoleWindow();
 	RECT r;
-	GetWindowRect(console, &r);
-	MoveWindow(console, r.left, r.top, width, height, TRUE);
+	GetWindowRect(GetConsoleWindow(), &r);
+	MoveWindow(GetConsoleWindow(), r.left, r.top, width, height, TRUE);
+}
+
+void gotoXY(int x, int y) {
+	COORD pos = {x, y};
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
+void chooseWrong() {
+	textAndBackgroundColor(7, 4);
+	cout << "\a\tLua chon khong hop le!!!" << endl;
+	textAndBackgroundColor(7, 0);
+	cout << "\t";
+	system("pause");
 }

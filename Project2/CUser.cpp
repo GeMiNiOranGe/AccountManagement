@@ -58,10 +58,10 @@ void CUser::setEmailAddress(const string& _emailAddress) {
 }
 
 void CUser::input() {
-	cin >> this->fullName;
-	cin >> this->address;
-	cin >> this->phoneNumber;
-	cin >> this->emailAddress;
+	getline(cin, this->fullName);
+	getline(cin, this->address);
+	getline(cin, this->phoneNumber);
+	getline(cin, this->emailAddress);
 }
 void CUser::output() {
 	cout << this->fullName << endl;

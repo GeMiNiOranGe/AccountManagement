@@ -12,5 +12,7 @@ using namespace std;
 void encodePassword(string & strHandle);
 void textAndBackgroundColor(int textColor, int backgroundColor);
 void resizeConsole(int width, int height);
+void gotoXY(int x, int y);
+void chooseWrong();
 
 #endif
