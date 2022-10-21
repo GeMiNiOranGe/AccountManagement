@@ -2,8 +2,9 @@
 #define CUSER_H
 #pragma once
 
-#include <string>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -12,9 +13,9 @@ public:
 	CUser(string = "", string = "111111", string = "", string = "", string = "", string = "");
 	CUser(const CUser &);
 	~CUser();
-	
+
 	/* If getter have no "const", it's a combination of setter and getter, this function can use like this.
-	Code: 
+	Code:
 	CUser.getFullName() = "Some string";
 	cout << CUser.getFullName();
 	Also, it have "const", so it's just a normal getter.
@@ -34,6 +35,13 @@ public:
 	void setAddress(const string&);
 	void setPhoneNumber(const string&);
 	void setEmailAddress(const string&);
+
+	virtual void readAccount(ifstream&);
+	virtual void readInfo(ifstream&);
+	virtual void writeInfo(ofstream&);
+	virtual ofstream createFile(string&);
+	virtual void OpenFile(ifstream&, char* &);
+	virtual void DeleteFile(string);
 
 	void input();
 	void output();

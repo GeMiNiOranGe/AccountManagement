@@ -15,23 +15,33 @@ void handleEmployee();
 int main() {
 	SetConsoleTitle(L"Employee manager - Group ProCoder");
 	resizeConsole(435, 475);
-	string strPasswordTemp, strUsernameTemp;
-	while (true) {
-		g_cCatchEvent = chooseAdminOrEmployee();
-		switch (g_cCatchEvent) {
-		case 49:
-			//TODO: should clear strPasswordTemp when re-login
-			loginAdmin(strUsernameTemp, strPasswordTemp);
-			handleAdmin();
-			break;
-		case 50:
-			handleEmployee();
-			break;
-		default:
-			chooseWrong();
-			break;
-		}
-	}
+	string strUsernameTemp, strPasswordTemp;
+	//CUser *userTemp = new CAdministrator;
+	cin >> strUsernameTemp;
+	//ofstream fileOut = userTemp->createFile(strUsernameTemp);
+	//cout << "nhap thong tin" << endl;
+	//userTemp->input();
+	//userTemp->writeInfo(fileOut);
+	
+	if (checkUsername<CEmployee>(strUsernameTemp))
+		cout << "met moi";
+
+	//while (true) {
+	//	g_cCatchEvent = chooseAdminOrEmployee();
+	//	switch (g_cCatchEvent) {
+	//	case 49:
+	//		//TODO: should clear strPasswordTemp when re-login
+	//		loginAdmin(strUsernameTemp, strPasswordTemp);
+	//		handleAdmin();
+	//		break;
+	//	case 50:
+	//		handleEmployee();
+	//		break;
+	//	default:
+	//		chooseWrong();
+	//		break;
+	//	}
+	//}
 
 	//char key_press;
 	//int ascii_value;

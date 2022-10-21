@@ -165,6 +165,9 @@
     <ClInclude Include="HandleMiscellaneous.h" />
     <ClInclude Include="UIHaveNoUX.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Employees.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

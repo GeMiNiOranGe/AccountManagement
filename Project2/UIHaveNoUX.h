@@ -5,7 +5,7 @@
 #include "HandleMiscellaneous.h"
 
 void loginAdmin(string & strUsername, string & strPassword);
-void loginEmployees();
+void loginEmployees(string & strUsername, string & strPassword);
 char chooseAdminOrEmployee();
 char menuAdmin();
 char menuEmployee();

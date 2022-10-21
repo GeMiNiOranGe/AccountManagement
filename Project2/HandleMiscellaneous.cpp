@@ -49,7 +49,7 @@ void resizeConsole(int width, int height) {
 	MoveWindow(GetConsoleWindow(), r.left, r.top, width, height, TRUE);
 }
 
-void gotoXY(int x, int y) {
+void gotoXY(short x, short y) {
 	COORD pos = {x, y};
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
@@ -61,3 +61,4 @@ void chooseWrong() {
 	cout << "\t";
 	system("pause");
 }
+

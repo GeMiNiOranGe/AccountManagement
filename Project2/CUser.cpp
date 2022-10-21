@@ -57,7 +57,46 @@ void CUser::setEmailAddress(const string& _emailAddress) {
 	this->emailAddress = _emailAddress;
 }
 
+void CUser::readAccount(ifstream &fileIn) {
+	getline(fileIn, this->username, ',');
+	getline(fileIn, this->password);
+}
+void CUser::readInfo(ifstream& fileIn) {
+	getline(fileIn, this->fullName);
+	getline(fileIn, this->address);
+	getline(fileIn, this->phoneNumber);
+	getline(fileIn, this->emailAddress);
+}
+void CUser::writeInfo(ofstream& fileOut) {
+	fileOut << this->fullName << endl;
+	fileOut << this->address << endl;
+	fileOut << this->phoneNumber << endl;
+	fileOut << this->emailAddress << endl;
+}
+ofstream CUser::createFile(string & fileName) {
+	string filePath = fileName + ".txt";
+	ofstream fileTemp(fileName);
+	return fileTemp;
+}
+void CUser::OpenFile(ifstream &fileIn, char* &fileName) {
+	string str = (string)fileName;
+	string filePath = str + ".TXT";
+	fileName = new char[filePath.length() + 1];
+	strcpy_s(fileName, filePath.length() + 1, filePath.c_str());
+	if (fileName != NULL) {
+		fileIn.open(fileName, ios_base::in);
+	}
+	delete[] fileName;
+}
+void CUser::DeleteFile(string fileName) {
+	string filePath = "\"del " + fileName + ".txt\"";
+	char* strDelete = new char[filePath.length() + 1];
+	strcpy_s(strDelete, filePath.length() + 1, filePath.c_str());
+	system(strDelete);
+}
+
 void CUser::input() {
+	cin.ignore();
 	getline(cin, this->fullName);
 	getline(cin, this->address);
 	getline(cin, this->phoneNumber);
