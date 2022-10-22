@@ -29,7 +29,6 @@ void encodePassword(string & strPassword) {
 	}
 	while (cEvent != 13);
 }
-
 // 0 = Black  |  8 = Gray
 // 1 = Blue   |  9 = Light Blue
 // 2 = Green  | 10 = Light Green
@@ -42,26 +41,22 @@ void textAndBackgroundColor(int textColor, int backgroundColor) {
 	int colorCode = backgroundColor * 16 + textColor;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
 }
-
 void resizeConsole(int width, int height) {
 	RECT r;
 	GetWindowRect(GetConsoleWindow(), &r);
 	MoveWindow(GetConsoleWindow(), r.left, r.top, width, height, TRUE);
 }
-
 void gotoXY(short x, short y) {
 	COORD pos = {x, y};
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
-
-void chooseWrong() {
+void chooseWrong(string strMessage) {
 	textAndBackgroundColor(7, 4);
-	cout << "\a\tLua chon khong hop le!!!" << endl;
+	cout << "\a\t" << strMessage << endl;
 	textAndBackgroundColor(7, 0);
 	cout << "\t";
 	system("pause");
 }
-
 char* convertStringToChar(string strInput) {
 	char* p_cOutput = new char[strInput.length() + 1];
 	strcpy_s(p_cOutput, strInput.length() + 1, strInput.c_str());

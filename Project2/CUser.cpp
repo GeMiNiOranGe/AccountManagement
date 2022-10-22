@@ -74,7 +74,7 @@ void CUser::writeInfo(ofstream& fileOut) {
 	fileOut << this->emailAddress << endl;
 }
 ofstream CUser::createFile(string & fileName) {
-	string filePath = fileName + ".txt";
+	string filePath = "Resources/UserInfo/" + fileName + ".txt";
 	ofstream fileTemp(filePath);
 	return fileTemp;
 }
@@ -97,14 +97,18 @@ void CUser::DeleteFile(string fileName) {
 
 void CUser::input() {
 	cin.ignore();
+	cout << "\tNhap ho ten: ";
 	getline(cin, this->fullName);
+	cout << "\tNhap dia chi: ";
 	getline(cin, this->address);
+	cout << "\tNhap so dien thoai: ";
 	getline(cin, this->phoneNumber);
+	cout << "\tNhap dia chi email: ";
 	getline(cin, this->emailAddress);
 }
 void CUser::output() {
-	cout << this->fullName << endl;
-	cout << this->address << endl;
-	cout << this->phoneNumber << endl;
-	cout << this->emailAddress << endl;
+	cout << "Ho ten: " << this->fullName << endl;
+	cout << "Dia chi: " << this->address << endl;
+	cout << "So dien thoai: " << this->phoneNumber << endl;
+	cout << "Dia chi email: " << this->emailAddress << endl;
 }

@@ -55,5 +55,8 @@
     <Text Include="Resources\Employees.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Resources\Admin.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

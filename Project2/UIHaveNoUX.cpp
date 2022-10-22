@@ -21,6 +21,7 @@ void loginAdmin(string & strUsername, string & strPassword) {
 	getline(cin , strUsername);
 	gotoXY(14, 4);
 	encodePassword(strPassword);
+	cout << endl;
 }
 void loginEmployees(string & strUsername, string & strPassword) {
 	system("cls");
@@ -39,6 +40,7 @@ void loginEmployees(string & strUsername, string & strPassword) {
 	getline(cin, strUsername);
 	gotoXY(14, 4);
 	encodePassword(strPassword);
+	cout << endl;
 }
 
 char chooseAdminOrEmployee() {
