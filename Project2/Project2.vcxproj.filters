@@ -50,6 +50,9 @@
     <ClInclude Include="HandleMiscellaneous.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HandleMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Employees.txt">

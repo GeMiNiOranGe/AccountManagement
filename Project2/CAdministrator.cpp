@@ -5,17 +5,25 @@ CAdministrator::CAdministrator(string _username, string _password, string _fullN
 }
 
 void CAdministrator::addEmployee(string strUsername, string strPassword) {
-	textAndBackgroundColor(13, 0);
-	cout << "Nhap ten tai khoan muon them: ";
+	textAndBackgroundColor(14, 0);
+	cout << endl << "<Them Employees>" << endl;
+	textAndBackgroundColor(12, 0);
+	cout << "Ten tai khoan khong duoc co khoang cach" << endl;
+	textAndBackgroundColor(9, 0);
+	cout << "    Nhap ten tai khoan muon them: ";
 	textAndBackgroundColor(15, 0);
 	cin >> strUsername;
+	//check strUsername exists in file Employees.txt
 	if (hasAccount<CEmployee>("Resources/Employees.txt", strUsername))
 		chooseWrong("Username da ton tai!!!");
 	else {
+		//update file Employees.txt
+		ofstream fileUpdated;
+		fileUpdated.open("Resources/Employees.txt");
+		fileUpdated << strUsername << "," << "111111" << endl;
+		//create a new file and add information to the newly created file
 		CUser *userTemp = new CAdministrator;
 		ofstream fileOut = userTemp->createFile(strUsername);
-		textAndBackgroundColor(14, 0);
-		cout << "Nhap thong tin tai khoan" << endl;
 		userTemp->input();
 		userTemp->writeInfo(fileOut);
 		fileOut.close();

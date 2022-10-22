@@ -162,6 +162,7 @@
     <ClInclude Include="CAdministrator.h" />
     <ClInclude Include="CEmployee.h" />
     <ClInclude Include="CUser.h" />
+    <ClInclude Include="HandleMain.h" />
     <ClInclude Include="HandleMiscellaneous.h" />
     <ClInclude Include="UIHaveNoUX.h" />
   </ItemGroup>

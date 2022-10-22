@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "HandleMiscellaneous.h"
 
 using namespace std;
 

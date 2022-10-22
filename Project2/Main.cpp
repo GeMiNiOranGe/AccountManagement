@@ -1,9 +1,9 @@
-#include <iostream>
 #include "CUser.h"
 #include "CAdministrator.h"
 #include "CEmployee.h"
 #include "UIHaveNoUX.h"
 #include "HandleMiscellaneous.h"
+#include "HandleMain.h"
 
 using namespace std;
 
@@ -37,9 +37,7 @@ int main() {
 					g_bBreakLoop = false;
 				}
 				else chooseWrong("Sai tai khoan hoac mat khau!!!");
-				if (!g_bBreakLoop) {
-					break;
-				}
+				if (!g_bBreakLoop) break;
 			}
 			break;
 		case 50:

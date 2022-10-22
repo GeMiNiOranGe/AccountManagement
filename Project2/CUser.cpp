@@ -97,13 +97,23 @@ void CUser::DeleteFile(string fileName) {
 
 void CUser::input() {
 	cin.ignore();
+	textAndBackgroundColor(14, 0);
+	cout << "    Nhap thong tin tai khoan" << endl;
+	textAndBackgroundColor(11, 0);
 	cout << "\tNhap ho ten: ";
+	textAndBackgroundColor(15, 0);
 	getline(cin, this->fullName);
+	textAndBackgroundColor(11, 0);
 	cout << "\tNhap dia chi: ";
+	textAndBackgroundColor(15, 0);
 	getline(cin, this->address);
+	textAndBackgroundColor(11, 0);
 	cout << "\tNhap so dien thoai: ";
+	textAndBackgroundColor(15, 0);
 	getline(cin, this->phoneNumber);
+	textAndBackgroundColor(11, 0);
 	cout << "\tNhap dia chi email: ";
+	textAndBackgroundColor(15, 0);
 	getline(cin, this->emailAddress);
 }
 void CUser::output() {
