@@ -22,8 +22,8 @@ int main() {
 	//cout << "nhap thong tin" << endl;
 	//userTemp->input();
 	//userTemp->writeInfo(fileOut);
-	
-	if (checkUsername<CEmployee>(strUsernameTemp))
+
+	if (checkUsername<CEmployee>("Resources/Employees.txt", strUsernameTemp))
 		cout << "met moi";
 
 	//while (true) {

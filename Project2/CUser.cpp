@@ -75,7 +75,7 @@ void CUser::writeInfo(ofstream& fileOut) {
 }
 ofstream CUser::createFile(string & fileName) {
 	string filePath = fileName + ".txt";
-	ofstream fileTemp(fileName);
+	ofstream fileTemp(filePath);
 	return fileTemp;
 }
 void CUser::OpenFile(ifstream &fileIn, char* &fileName) {

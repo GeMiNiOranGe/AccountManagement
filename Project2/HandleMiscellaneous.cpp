@@ -62,3 +62,9 @@ void chooseWrong() {
 	system("pause");
 }
 
+char* convertStringToChar(string strInput) {
+	char* p_cOutput = new char[strInput.length() + 1];
+	strcpy_s(p_cOutput, strInput.length() + 1, strInput.c_str());
+	return p_cOutput;
+}
+
