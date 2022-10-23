@@ -78,23 +78,6 @@ void CUser::writeInfo(ofstream& fileOut) {
 	fileOut << this->emailAddress << endl;
 }
 
-ofstream CUser::createFile(string fileName) {
-	string filePath = "Resources/UserInfo/" + fileName + ".txt";
-	ofstream fileTemp(filePath);
-	return fileTemp;
-}
-ifstream CUser::openFile(string fileName) {
-	string filePath = "Resources/UserInfo/" + fileName + ".txt";
-	ifstream fileTemp(filePath);
-	return fileTemp;
-}
-void CUser::DeleteFile(string fileName) {
-	string filePath = "\"del " + fileName + ".txt\"";
-	char* strDelete = new char[filePath.length() + 1];
-	strcpy_s(strDelete, filePath.length() + 1, filePath.c_str());
-	system(strDelete);
-}
-
 void CUser::input() {
 	cin.ignore();
 	textAndBackgroundColor(14, 0);

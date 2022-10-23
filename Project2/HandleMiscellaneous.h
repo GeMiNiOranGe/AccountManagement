@@ -22,7 +22,7 @@ void encodePassword(string & strHandle);
 void textAndBackgroundColor(int textColor, int backgroundColor);
 void resizeConsole(int width, int height);
 void gotoXY(short x, short y);
-void chooseWrong(string strMessage);
+void warning(string strMessage);
 char* convertStringToChar(string strInput);
 
 

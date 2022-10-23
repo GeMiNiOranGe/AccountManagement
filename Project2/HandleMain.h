@@ -4,6 +4,14 @@
 
 #include <string>
 #include <fstream>
+#include "CUser.h"
+#include "Config.h"
+
+using namespace std;
+
+ofstream createFile(string fileName);
+ifstream openFile(string fileName);
+void deleteFile(string fileName);
 
 template <class T> bool hasAccount(string strSourceFile, string strUsername, string strPassword = "") {
 	ifstream fileIn;

@@ -42,10 +42,6 @@ public:
 	virtual void readInfo(ifstream&);
 	virtual void writeInfo(ofstream&);
 	
-	virtual ofstream createFile(string);
-	virtual ifstream openFile(string);
-	virtual void DeleteFile(string);
-
 	void input();
 	void output();
 private:

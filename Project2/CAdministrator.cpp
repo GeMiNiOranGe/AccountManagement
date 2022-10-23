@@ -16,7 +16,7 @@ void CAdministrator::addEmployee() {
 	cin >> strUsername;
 	//check strUsername exists in file Employees.txt
 	if (hasAccount<CEmployee>("Resources/Employees.txt", strUsername))
-		chooseWrong("Username da ton tai!!!");
+		warning("Username da ton tai!!!");
 	else {
 		//update file Employees.txt
 		ofstream fileUpdated;
@@ -24,7 +24,7 @@ void CAdministrator::addEmployee() {
 		fileUpdated << strUsername << "," << "111111" << endl;
 		//create a new file and add information to the newly created file
 		CUser *userTemp = new CAdministrator;
-		ofstream fileOut = userTemp->createFile(strUsername);
+		ofstream fileOut = createFile(strUsername);
 		userTemp->input();
 		userTemp->writeInfo(fileOut);
 		fileOut.close();

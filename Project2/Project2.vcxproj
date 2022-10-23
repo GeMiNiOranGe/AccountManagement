@@ -154,6 +154,7 @@
     <ClCompile Include="CAdministrator.cpp" />
     <ClCompile Include="CEmployee.cpp" />
     <ClCompile Include="CUser.cpp" />
+    <ClCompile Include="HandleMain.cpp" />
     <ClCompile Include="HandleMiscellaneous.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UIHaveNoUX.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="CAdministrator.h" />
     <ClInclude Include="CEmployee.h" />
     <ClInclude Include="CUser.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="HandleMain.h" />
     <ClInclude Include="HandleMiscellaneous.h" />
     <ClInclude Include="UIHaveNoUX.h" />

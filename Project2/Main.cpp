@@ -4,6 +4,7 @@
 #include "UIHaveNoUX.h"
 #include "HandleMiscellaneous.h"
 #include "HandleMain.h"
+#include "Config.h"
 
 using namespace std;
 
@@ -19,7 +20,8 @@ int main() {
 	string strUsernameTemp, strPasswordTemp;
 	//CUser *userTemp = new CAdministrator;
 	//cin >> strUsernameTemp;
-	//ifstream fileOut = userTemp->openFile(strUsernameTemp);
+	//deleteFile(strUsernameTemp);
+	//ifstream fileOut = openFile(strUsernameTemp);
 	//userTemp->readInfo(fileOut);
 	//userTemp->output();
 
@@ -32,19 +34,29 @@ int main() {
 				strUsernameTemp.clear();
 				strPasswordTemp.clear();
 				loginAdmin(strUsernameTemp, strPasswordTemp);
-				if (hasAccount<CAdministrator>("Resources/Admin.txt", strUsernameTemp, strPasswordTemp)) {
+				if (hasAccount<CAdministrator>(ADMINISTRATOR_FILE, strUsernameTemp, strPasswordTemp)) {
 					handleAdmin();
 					g_bBreakLoop = false;
 				}
-				else chooseWrong("Sai tai khoan hoac mat khau!!!");
+				else warning("Sai tai khoan hoac mat khau!!!");
 				if (!g_bBreakLoop) break;
 			}
 			break;
 		case 50:
-			handleEmployee();
+			while (true) {
+				strUsernameTemp.clear();
+				strPasswordTemp.clear();
+				loginAdmin(strUsernameTemp, strPasswordTemp);
+				if (hasAccount<CAdministrator>(EMPLOYEES_FILE, strUsernameTemp, strPasswordTemp)) {
+					handleEmployee();
+					g_bBreakLoop = false;
+				}
+				else warning("Sai tai khoan hoac mat khau!!!");
+				if (!g_bBreakLoop) break;
+			}
 			break;
 		default:
-			chooseWrong("Lua chon khong hop le!!!");
+			warning("Lua chon khong hop le!!!");
 			break;
 		}
 	}
@@ -81,13 +93,14 @@ void handleAdmin() {
 		case 54:
 			return;
 		default:
-			chooseWrong("Lua chon khong hop le!!!");
+			warning("Lua chon khong hop le!!!");
 			break;
 		}
 	}
 }
 
 void handleEmployee() {
+	CEmployee employee;
 	while (true) {
 		g_cCatchEvent = menuEmployee();
 		switch (g_cCatchEvent) {
@@ -96,9 +109,9 @@ void handleEmployee() {
 		case 50:
 			break;
 		case 51:
-			break;
+			return;
 		default:
-			chooseWrong("Lua chon khong hop le!!!");
+			warning("Lua chon khong hop le!!!");
 			break;
 		}
 	}

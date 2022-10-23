@@ -4,6 +4,18 @@
 Ex: ADMIN ==> size = 5
 for (0 ==> size) cout << '*'
 IDEA 2: make border can change style*/
+char chooseAdminOrEmployee() {
+	system("cls");
+	textAndBackgroundColor(12, 0);
+	cout << "\t+------------------------+" << endl;
+	cout << "\t| 1. Dang Nhap ADMIN     |" << endl;
+	cout << "\t| 2. Dang Nhap EMPLOYEES |" << endl;
+	cout << "\t+------------------------+" << endl;
+	textAndBackgroundColor(11, 0);
+	cout << "\tMoi ban chon" << endl;
+	return _getch();
+}
+
 void loginAdmin(string & strUsername, string & strPassword) {
 	system("cls");
 	textAndBackgroundColor(14, 0);
@@ -41,18 +53,6 @@ void loginEmployees(string & strUsername, string & strPassword) {
 	gotoXY(14, 4);
 	encodePassword(strPassword);
 	cout << endl;
-}
-
-char chooseAdminOrEmployee() {
-	system("cls");
-	textAndBackgroundColor(12, 0);
-	cout << "\t+------------------------+" << endl;
-	cout << "\t| 1. Dang Nhap ADMIN     |" << endl;
-	cout << "\t| 2. Dang Nhap EMPLOYEES |" << endl;
-	cout << "\t+------------------------+" << endl;
-	textAndBackgroundColor(11, 0);
-	cout << "\tMoi ban chon" << endl;
-	return _getch();
 }
 
 char menuAdmin() {

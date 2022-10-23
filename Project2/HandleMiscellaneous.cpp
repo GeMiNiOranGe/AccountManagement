@@ -42,7 +42,7 @@ void gotoXY(short x, short y) {
 	COORD pos = {x, y};
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
-void chooseWrong(string strMessage) {
+void warning(string strMessage) {
 	textAndBackgroundColor(7, 4);
 	cout << "\a\t" << strMessage << endl;
 	textAndBackgroundColor(7, 0);
