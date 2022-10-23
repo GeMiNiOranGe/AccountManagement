@@ -83,6 +83,7 @@ void handleAdmin() {
 			admin.addEmployee();
 			break;
 		case 50:
+			admin.eraseEmployee();
 			break;
 		case 51:
 			break;

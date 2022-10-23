@@ -4,6 +4,7 @@
 
 #include <string>
 
+const string EMPLOYEES_FILE_TEMP = "Resources\\EmployeesTemp.txt";
 const string EMPLOYEES_FILE = "Resources\\Employees.txt";
 const string ADMINISTRATOR_FILE = "Resources\\Admin.txt";
 const string USER_INFO_FOLDER = "Resources\\UserInfo\\";

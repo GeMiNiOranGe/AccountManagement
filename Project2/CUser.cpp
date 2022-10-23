@@ -62,8 +62,8 @@ void CUser::readAccount(ifstream& fileIn) {
 	getline(fileIn, this->password);
 }
 void CUser::writeAccount(ofstream& fileOut) {
-	fileOut << this->username;
-	fileOut << this->password;
+	fileOut << this->username << ',';
+	fileOut << this->password << endl;
 }
 void CUser::readInfo(ifstream& fileIn) {
 	getline(fileIn, this->fullName);
