@@ -57,9 +57,13 @@ void CUser::setEmailAddress(const string& _emailAddress) {
 	this->emailAddress = _emailAddress;
 }
 
-void CUser::readAccount(ifstream &fileIn) {
+void CUser::readAccount(ifstream& fileIn) {
 	getline(fileIn, this->username, ',');
 	getline(fileIn, this->password);
+}
+void CUser::writeAccount(ofstream& fileOut) {
+	fileOut << this->username;
+	fileOut << this->password;
 }
 void CUser::readInfo(ifstream& fileIn) {
 	getline(fileIn, this->fullName);
@@ -73,20 +77,16 @@ void CUser::writeInfo(ofstream& fileOut) {
 	fileOut << this->phoneNumber << endl;
 	fileOut << this->emailAddress << endl;
 }
-ofstream CUser::createFile(string & fileName) {
+
+ofstream CUser::createFile(string fileName) {
 	string filePath = "Resources/UserInfo/" + fileName + ".txt";
 	ofstream fileTemp(filePath);
 	return fileTemp;
 }
-void CUser::OpenFile(ifstream &fileIn, char* &fileName) {
-	string str = (string)fileName;
-	string filePath = str + ".TXT";
-	fileName = new char[filePath.length() + 1];
-	strcpy_s(fileName, filePath.length() + 1, filePath.c_str());
-	if (fileName != NULL) {
-		fileIn.open(fileName, ios_base::in);
-	}
-	delete[] fileName;
+ifstream CUser::openFile(string fileName) {
+	string filePath = "Resources/UserInfo/" + fileName + ".txt";
+	ifstream fileTemp(filePath);
+	return fileTemp;
 }
 void CUser::DeleteFile(string fileName) {
 	string filePath = "\"del " + fileName + ".txt\"";

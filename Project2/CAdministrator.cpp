@@ -4,7 +4,8 @@ CAdministrator::CAdministrator(string _username, string _password, string _fullN
 	:CUser(_username, _password, _fullName, _address, _phoneNumber, _emailAddress) {
 }
 
-void CAdministrator::addEmployee(string strUsername, string strPassword) {
+void CAdministrator::addEmployee() {
+	string strUsername;
 	textAndBackgroundColor(14, 0);
 	cout << endl << "<Them Employees>" << endl;
 	textAndBackgroundColor(12, 0);
@@ -19,7 +20,7 @@ void CAdministrator::addEmployee(string strUsername, string strPassword) {
 	else {
 		//update file Employees.txt
 		ofstream fileUpdated;
-		fileUpdated.open("Resources/Employees.txt");
+		fileUpdated.open("Resources/Employees.txt", ios_base::app);
 		fileUpdated << strUsername << "," << "111111" << endl;
 		//create a new file and add information to the newly created file
 		CUser *userTemp = new CAdministrator;
@@ -31,5 +32,9 @@ void CAdministrator::addEmployee(string strUsername, string strPassword) {
 		cout << "Them thanh cong!!!" << endl;
 		system("pause");
 	}
+}
+
+void CAdministrator::eraseEmployee() {
+
 }
 

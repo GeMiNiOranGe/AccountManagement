@@ -10,7 +10,7 @@ using namespace std;
 char g_cCatchEvent;
 bool g_bBreakLoop = true;
 
-void handleAdmin(string strUsernameTemp, string strPasswordTemp);
+void handleAdmin();
 void handleEmployee();
 
 int main() {
@@ -18,11 +18,11 @@ int main() {
 	resizeConsole(435, 475);
 	string strUsernameTemp, strPasswordTemp;
 	//CUser *userTemp = new CAdministrator;
-	//cin >> strUsernameTemp >> strPasswordTemp;
-	//ofstream fileOut = userTemp->createFile(strUsernameTemp);
-	//cout << "nhap thong tin" << endl;
-	//userTemp->input();
-	//userTemp->writeInfo(fileOut);
+	//cin >> strUsernameTemp;
+	//ifstream fileOut = userTemp->openFile(strUsernameTemp);
+	//userTemp->readInfo(fileOut);
+	//userTemp->output();
+
 	while (true) {
 		g_cCatchEvent = chooseAdminOrEmployee();
 		switch (g_cCatchEvent) {
@@ -33,7 +33,7 @@ int main() {
 				strPasswordTemp.clear();
 				loginAdmin(strUsernameTemp, strPasswordTemp);
 				if (hasAccount<CAdministrator>("Resources/Admin.txt", strUsernameTemp, strPasswordTemp)) {
-					handleAdmin(strUsernameTemp, strPasswordTemp);
+					handleAdmin();
 					g_bBreakLoop = false;
 				}
 				else chooseWrong("Sai tai khoan hoac mat khau!!!");
@@ -62,13 +62,13 @@ int main() {
 	return 0;
 }
 
-void handleAdmin(string strUsernameTemp, string strPasswordTemp) {
+void handleAdmin() {
 	CAdministrator admin;
 	while (true) {
 		g_cCatchEvent = menuAdmin();
 		switch (g_cCatchEvent) {
 		case 49:
-			admin.addEmployee(strUsernameTemp, strPasswordTemp);
+			admin.addEmployee();
 			break;
 		case 50:
 			break;

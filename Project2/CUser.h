@@ -38,10 +38,12 @@ public:
 	void setEmailAddress(const string&);
 
 	virtual void readAccount(ifstream&);
+	virtual void writeAccount(ofstream&);
 	virtual void readInfo(ifstream&);
 	virtual void writeInfo(ofstream&);
-	virtual ofstream createFile(string&);
-	virtual void OpenFile(ifstream&, char* &);
+	
+	virtual ofstream createFile(string);
+	virtual ifstream openFile(string);
 	virtual void DeleteFile(string);
 
 	void input();
