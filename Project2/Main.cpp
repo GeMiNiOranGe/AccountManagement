@@ -46,8 +46,8 @@ int main() {
 			while (true) {
 				strUsernameTemp.clear();
 				strPasswordTemp.clear();
-				loginAdmin(strUsernameTemp, strPasswordTemp);
-				if (hasAccount<CAdministrator>(EMPLOYEES_FILE, strUsernameTemp, strPasswordTemp)) {
+				loginEmployees(strUsernameTemp, strPasswordTemp);
+				if (hasAccount<CEmployee>(EMPLOYEES_FILE, strUsernameTemp, strPasswordTemp)) {
 					handleEmployee();
 					g_bBreakLoop = false;
 				}

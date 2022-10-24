@@ -43,6 +43,12 @@ void CAdministrator::eraseEmployee() {
 	cout << "    Nhap ten tai khoan muon xoa: ";
 	textAndBackgroundColor(15, 0);
 	cin >> strUsernameTemp;
+	/*IDEA: 
+	step 1: rename Employees.txt into EmployeesTemp.txt
+	step 2: create a new Employees.txt
+	step 3; write from EmployeesTemp.txt to Employees.txt
+	step 4: delete EmployeesTemp.txt */
+	int iCount = 0;
 	ifstream fileIn;
 	fileIn.open(EMPLOYEES_FILE);
 	ofstream fileOut(EMPLOYEES_FILE_TEMP);
@@ -52,6 +58,7 @@ void CAdministrator::eraseEmployee() {
 		if (userTemp->getUsername() != strUsernameTemp) {
 			userTemp->writeAccount(fileOut);
 		}
+		iCount++;
 	}
 	fileIn.close();
 	fileOut.close();
@@ -59,10 +66,15 @@ void CAdministrator::eraseEmployee() {
 	system(tempFilePath.c_str());
 	fileIn.open(EMPLOYEES_FILE_TEMP);
 	fileOut.open(EMPLOYEES_FILE);
-	while (!fileIn.eof()) {
+	while (iCount > 1) {
 		CUser *userTemp = new CAdministrator;
 		userTemp->readAccount(fileIn);
+		if (iCount == 3) {
+			userTemp->writeAccount(fileOut);
+			break;
+		}
 		userTemp->writeAccount(fileOut);
+		iCount--;
 	}
 	fileIn.close();
 	fileOut.close();

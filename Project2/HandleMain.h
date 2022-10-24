@@ -19,7 +19,8 @@ template <class T> bool hasAccount(string strSourceFile, string strUsername, str
 	while (!fileIn.eof()) {
 		CUser *pTempUser = new T;
 		pTempUser->readAccount(fileIn);
-		if (strUsername == pTempUser->getUsername() && strPassword == "" || strUsername == pTempUser->getUsername() && strPassword == pTempUser->getPassword()) {
+		if ((strUsername == pTempUser->getUsername() && strPassword == "" || strUsername == pTempUser->getUsername() && strPassword == pTempUser->getPassword())
+			&& pTempUser->getUsername() != "" && pTempUser->getPassword() != "") {
 			fileIn.close();
 			return true;
 		}
