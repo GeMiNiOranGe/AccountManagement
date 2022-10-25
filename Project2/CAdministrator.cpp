@@ -3,87 +3,44 @@
 CAdministrator::CAdministrator(string _username, string _password, string _fullName, string _address, string _phoneNumber, string _emailAddress)
 	:CUser(_username, _password, _fullName, _address, _phoneNumber, _emailAddress) {
 }
-
-void CAdministrator::addEmployee() {
-	string strUsernameTemp;
-	textAndBackgroundColor(14, 0);
-	cout << endl << "<Them Employees>" << endl;
-	textAndBackgroundColor(12, 0);
-	cout << "Ten tai khoan khong duoc co khoang cach" << endl;
-	textAndBackgroundColor(9, 0);
-	cout << "    Nhap ten tai khoan muon them: ";
-	textAndBackgroundColor(15, 0);
-	cin >> strUsernameTemp;
-	//check strUsername exists in file Employees.txt
-	if (hasAccount<CEmployee>(EMPLOYEES_FILE, strUsernameTemp))
-		warning("Username da ton tai!!!");
-	else {
-		//update file Employees.txt
-		ofstream fileUpdated;
-		fileUpdated.open(EMPLOYEES_FILE, ios_base::app);
-		fileUpdated << strUsernameTemp << "," << "111111" << endl;
-		//create a new file and add information to the newly created file
-		CUser *userTemp = new CAdministrator;
-		ofstream fileOut = createFile(strUsernameTemp);
-		userTemp->input();
-		userTemp->writeInfo(fileOut);
-		fileOut.close();
-		textAndBackgroundColor(12, 0);
-		cout << "Them thanh cong!!!" << endl;
-		system("pause");
-	}
+//Step 1: update file Employees.txt
+//Step 2: create a new file and add information to the newly created file
+void CAdministrator::addEmployee(string strUsername) {
+	//Step 1:
+	ofstream fileUpdated;
+	fileUpdated.open(EMPLOYEES_FILE, ios_base::app);
+	fileUpdated << strUsername << "," << "111111" << endl;
+	//Step 2: 
+	CUser userTemp;
+	ofstream fileOut = createFile(strUsername);
+	userTemp.input();
+	userTemp.writeInfo(fileOut);
+	fileOut.close();
 }
-void CAdministrator::eraseEmployee() {
-	string strUsernameTemp, tempFilePath;
-	textAndBackgroundColor(14, 0);
-	cout << endl << "<Xoa Employees>" << endl;
-	textAndBackgroundColor(12, 0);
-	cout << "Ten tai khoan khong duoc co khoang cach" << endl;
-	textAndBackgroundColor(9, 0);
-	cout << "    Nhap ten tai khoan muon xoa: ";
-	textAndBackgroundColor(15, 0);
-	cin >> strUsernameTemp;
-	/*IDEA: 
-	step 1: rename Employees.txt into EmployeesTemp.txt
-	step 2: create a new Employees.txt
-	step 3; write from EmployeesTemp.txt to Employees.txt
-	step 4: delete EmployeesTemp.txt */
-	int iCount = 0;
+//Step 1: rename Employees.txt into EmployeesTemp.txt
+//Step 2: create a new Employees.txt and open the file is renamed (EmployeesTemp.txt)
+//Step 3: write from the file is renamed (EmployeesTemp.txt) to Employees.txt and don't write the employee want to delete
+//Step 4: delete the file is renamed (delete EmployeesTemp.txt) and the employee you want to delete has been deleted
+void CAdministrator::eraseEmployee(string strUsername) {
+	//Step 1:
+	string employeeFileRenamed = EMPLOYEES_FILE;
+	rename(EMPLOYEES_FILE.c_str(), employeeFileRenamed.insert(employeeFileRenamed.size() - 4, "Temp").c_str());
+	//Step 2:
+	ofstream fileOut(EMPLOYEES_FILE);
 	ifstream fileIn;
-	fileIn.open(EMPLOYEES_FILE);
-	ofstream fileOut(EMPLOYEES_FILE_TEMP);
+	fileIn.open(employeeFileRenamed.c_str());
+	//Step 3:
 	while (!fileIn.eof()) {
-		CUser *userTemp = new CAdministrator;
-		userTemp->readAccount(fileIn);
-		if (userTemp->getUsername() != strUsernameTemp) {
-			userTemp->writeAccount(fileOut);
-		}
-		iCount++;
+		CUser userTemp;
+		userTemp.readAccount(fileIn);
+		if (userTemp.getUsername() != strUsername && userTemp.getUsername() != "")
+			userTemp.writeAccount(fileOut);
 	}
-	fileIn.close();
 	fileOut.close();
-	tempFilePath = "del " + EMPLOYEES_FILE;
-	system(tempFilePath.c_str());
-	fileIn.open(EMPLOYEES_FILE_TEMP);
-	fileOut.open(EMPLOYEES_FILE);
-	while (iCount > 1) {
-		CUser *userTemp = new CAdministrator;
-		userTemp->readAccount(fileIn);
-		if (iCount == 3) {
-			userTemp->writeAccount(fileOut);
-			break;
-		}
-		userTemp->writeAccount(fileOut);
-		iCount--;
-	}
 	fileIn.close();
-	fileOut.close();
-	deleteFile(strUsernameTemp);
-	tempFilePath = "del " + EMPLOYEES_FILE_TEMP;
-	system(tempFilePath.c_str());
-	textAndBackgroundColor(12, 0);
-	cout << "Xoa thanh cong!!!" << endl;
-	system("pause");
+	//Step 4:
+	deleteFile(strUsername);
+	system(employeeFileRenamed.insert(0, "del ").c_str());
 }
 void CAdministrator::searchEmployee() {
 }

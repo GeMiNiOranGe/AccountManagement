@@ -37,11 +37,11 @@ public:
 	void setPhoneNumber(const string&);
 	void setEmailAddress(const string&);
 
-	virtual void readAccount(ifstream&);
-	virtual void writeAccount(ofstream&);
-	virtual void readInfo(ifstream&);
-	virtual void writeInfo(ofstream&);
-	
+	void readAccount(ifstream&);
+	void writeAccount(ofstream&);
+	void readInfo(ifstream&);
+	void writeInfo(ofstream&);
+
 	void input();
 	void output();
 private:

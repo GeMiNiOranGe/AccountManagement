@@ -11,8 +11,8 @@ class CAdministrator:
 public:
 	CAdministrator(string = "", string = "111111", string = "", string = "", string = "", string = "");
 
-	void addEmployee();
-	void eraseEmployee();
+	void addEmployee(string strUsername);
+	void eraseEmployee(string strUsername);
 	void searchEmployee();
 	void updateEmployee();
 	void showInfoEmployee();

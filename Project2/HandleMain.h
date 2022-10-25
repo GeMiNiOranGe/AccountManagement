@@ -9,24 +9,11 @@
 
 using namespace std;
 
-ofstream createFile(string fileName);
-ifstream openFile(string fileName);
-void deleteFile(string fileName);
+ofstream createFile(string strUsername);
+ifstream openFile(string strUsername);
+void deleteFile(string strUsername);
 
-template <class T> bool hasAccount(string strSourceFile, string strUsername, string strPassword = "") {
-	ifstream fileIn;
-	fileIn.open(strSourceFile.c_str());
-	while (!fileIn.eof()) {
-		CUser *pTempUser = new T;
-		pTempUser->readAccount(fileIn);
-		if ((strUsername == pTempUser->getUsername() && strPassword == "" || strUsername == pTempUser->getUsername() && strPassword == pTempUser->getPassword())
-			&& pTempUser->getUsername() != "" && pTempUser->getPassword() != "") {
-			fileIn.close();
-			return true;
-		}
-	}
-	fileIn.close();
-	return false;
-}
+bool hasAccount(string strSourceFile, string strUsername);
+bool hasAccount(string strSourceFile, string strUsername, string strPassword);
 
 #endif

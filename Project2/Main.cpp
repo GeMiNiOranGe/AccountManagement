@@ -10,6 +10,7 @@ using namespace std;
 
 char g_cCatchEvent;
 bool g_bBreakLoop = true;
+string strUsernameTemp, strPasswordTemp;
 
 void handleAdmin();
 void handleEmployee();
@@ -17,7 +18,6 @@ void handleEmployee();
 int main() {
 	SetConsoleTitle(L"Employee manager - Group ProCoder");
 	resizeConsole(435, 475);
-	string strUsernameTemp, strPasswordTemp;
 	//CUser *userTemp = new CAdministrator;
 	//cin >> strUsernameTemp;
 	//deleteFile(strUsernameTemp);
@@ -34,7 +34,7 @@ int main() {
 				strUsernameTemp.clear();
 				strPasswordTemp.clear();
 				loginAdmin(strUsernameTemp, strPasswordTemp);
-				if (hasAccount<CAdministrator>(ADMINISTRATOR_FILE, strUsernameTemp, strPasswordTemp)) {
+				if (hasAccount(ADMINISTRATOR_FILE, strUsernameTemp, strPasswordTemp)) {
 					handleAdmin();
 					g_bBreakLoop = false;
 				}
@@ -47,7 +47,7 @@ int main() {
 				strUsernameTemp.clear();
 				strPasswordTemp.clear();
 				loginEmployees(strUsernameTemp, strPasswordTemp);
-				if (hasAccount<CEmployee>(EMPLOYEES_FILE, strUsernameTemp, strPasswordTemp)) {
+				if (hasAccount(EMPLOYEES_FILE, strUsernameTemp, strPasswordTemp)) {
 					handleEmployee();
 					g_bBreakLoop = false;
 				}
@@ -80,10 +80,42 @@ void handleAdmin() {
 		g_cCatchEvent = menuAdmin();
 		switch (g_cCatchEvent) {
 		case 49:
-			admin.addEmployee();
+			textAndBackgroundColor(14, 0);
+			cout << endl << "<Them Employees>" << endl;
+			textAndBackgroundColor(12, 0);
+			cout << "Ten tai khoan khong duoc co khoang cach" << endl;
+			textAndBackgroundColor(9, 0);
+			cout << "    Nhap ten tai khoan muon them: ";
+			textAndBackgroundColor(15, 0);
+			cin >> strUsernameTemp;
+			//check strUsername in file Employees.txt
+			if (hasAccount(EMPLOYEES_FILE, strUsernameTemp))
+				warning("Ten tai khoan da ton tai!!!");
+			else {
+				admin.addEmployee(strUsernameTemp);
+				textAndBackgroundColor(12, 0);
+				cout << "Them thanh cong!!!" << endl;
+				system("pause");
+			}
 			break;
 		case 50:
-			admin.eraseEmployee();
+			textAndBackgroundColor(14, 0);
+			cout << endl << "<Xoa Employees>" << endl;
+			textAndBackgroundColor(12, 0);
+			cout << "Ten tai khoan khong duoc co khoang cach" << endl;
+			textAndBackgroundColor(9, 0);
+			cout << "    Nhap ten tai khoan muon xoa: ";
+			textAndBackgroundColor(15, 0);
+			strUsernameTemp.clear();
+			cin >> strUsernameTemp;
+			if (hasAccount(EMPLOYEES_FILE, strUsernameTemp)) {
+				admin.eraseEmployee(strUsernameTemp);
+				textAndBackgroundColor(12, 0);
+				cout << "Xoa thanh cong!!!" << endl;
+				system("pause");
+			}
+			else 
+				warning("Khong tim thay \"" + strUsernameTemp + "\" de xoa!!!");
 			break;
 		case 51:
 			break;
