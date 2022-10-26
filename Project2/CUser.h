@@ -45,12 +45,12 @@ public:
 	void input();
 	void output();
 private:
-	string username;
-	string password;
-	string fullName;
-	string address;
-	string phoneNumber;
-	string emailAddress;
+	string strUsername;
+	string strPassword;
+	string strFullName;
+	string strAddress;
+	string strPhoneNumber;
+	string strEmailAddress;
 };
 
 #endif

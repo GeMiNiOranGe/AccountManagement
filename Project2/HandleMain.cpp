@@ -16,7 +16,15 @@ void deleteFile(string strUsernameFile) {
 	system(filePath.c_str());
 }
 
-bool hasAccount(string strSourceFile, string strUsername) {
+void showAccountInfo(string strUsername) {
+	CUser userTemp;
+	ifstream fileIn = openFile(strUsername);
+	userTemp.readInfo(fileIn);
+	userTemp.output();
+	fileIn.close();
+}
+
+bool hasUsername(string strSourceFile, string strUsername) {
 	ifstream fileIn;
 	fileIn.open(strSourceFile.c_str());
 	while (!fileIn.eof()) {
@@ -30,7 +38,6 @@ bool hasAccount(string strSourceFile, string strUsername) {
 	fileIn.close();
 	return false;
 }
-
 bool hasAccount(string strSourceFile, string strUsername, string strPassword) {
 	ifstream fileIn;
 	fileIn.open(strSourceFile.c_str());

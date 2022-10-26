@@ -13,46 +13,41 @@ bool g_bBreakLoop = true;
 string strUsernameTemp, strPasswordTemp;
 
 void handleAdmin();
-void handleEmployee();
+void handleEmployee(string strUsername, string strPassword);
 
 int main() {
 	SetConsoleTitle(L"Employee manager - Group ProCoder");
 	resizeConsole(435, 475);
-	//CUser *userTemp = new CAdministrator;
-	//cin >> strUsernameTemp;
-	//deleteFile(strUsernameTemp);
-	//ifstream fileOut = openFile(strUsernameTemp);
-	//userTemp->readInfo(fileOut);
-	//userTemp->output();
 
 	while (true) {
 		g_cCatchEvent = chooseAdminOrEmployee();
 		switch (g_cCatchEvent) {
 		case 49:
-			//TODO: should clear strPasswordTemp when re-login
+			g_bBreakLoop = false;
 			while (true) {
 				strUsernameTemp.clear();
 				strPasswordTemp.clear();
 				loginAdmin(strUsernameTemp, strPasswordTemp);
 				if (hasAccount(ADMINISTRATOR_FILE, strUsernameTemp, strPasswordTemp)) {
 					handleAdmin();
-					g_bBreakLoop = false;
+					g_bBreakLoop = true;
 				}
 				else warning("Sai tai khoan hoac mat khau!!!");
-				if (!g_bBreakLoop) break;
+				if (g_bBreakLoop) break;
 			}
 			break;
 		case 50:
+			g_bBreakLoop = false;
 			while (true) {
 				strUsernameTemp.clear();
 				strPasswordTemp.clear();
 				loginEmployees(strUsernameTemp, strPasswordTemp);
 				if (hasAccount(EMPLOYEES_FILE, strUsernameTemp, strPasswordTemp)) {
-					handleEmployee();
-					g_bBreakLoop = false;
+					handleEmployee(strUsernameTemp, strPasswordTemp);
+					g_bBreakLoop = true;
 				}
 				else warning("Sai tai khoan hoac mat khau!!!");
-				if (!g_bBreakLoop) break;
+				if (g_bBreakLoop) break;
 			}
 			break;
 		default:
@@ -89,7 +84,7 @@ void handleAdmin() {
 			textAndBackgroundColor(15, 0);
 			cin >> strUsernameTemp;
 			//check strUsername in file Employees.txt
-			if (hasAccount(EMPLOYEES_FILE, strUsernameTemp))
+			if (hasUsername(EMPLOYEES_FILE, strUsernameTemp))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
 				admin.addEmployee(strUsernameTemp);
@@ -108,7 +103,7 @@ void handleAdmin() {
 			textAndBackgroundColor(15, 0);
 			strUsernameTemp.clear();
 			cin >> strUsernameTemp;
-			if (hasAccount(EMPLOYEES_FILE, strUsernameTemp)) {
+			if (hasUsername(EMPLOYEES_FILE, strUsernameTemp)) {
 				admin.eraseEmployee(strUsernameTemp);
 				textAndBackgroundColor(12, 0);
 				cout << "Xoa thanh cong!!!" << endl;
@@ -118,10 +113,33 @@ void handleAdmin() {
 				warning("Khong tim thay \"" + strUsernameTemp + "\" de xoa!!!");
 			break;
 		case 51:
+			textAndBackgroundColor(14, 0);
+			cout << endl << "<Tim Employees>" << endl;
+			textAndBackgroundColor(12, 0);
+			cout << "Ten tai khoan khong duoc co khoang cach" << endl;
+			textAndBackgroundColor(9, 0);
+			cout << "    Nhap ten tai khoan muon tim: ";
+			textAndBackgroundColor(15, 0);
+			strUsernameTemp.clear();
+			cin >> strUsernameTemp;
+			if (hasUsername(EMPLOYEES_FILE, strUsernameTemp)) {
+				textAndBackgroundColor(14, 0);
+				cout << "    Thong tin Employee can tim: " << endl;
+				showAccountInfo(strUsernameTemp);
+				system("pause");
+			}
+			else
+				warning("Khong tim thay \"" + strUsernameTemp + "\"!!!"); 
 			break;
 		case 52:
+
 			break;
 		case 53:
+			textAndBackgroundColor(14, 0);
+			cout << endl << "<Hien thi thong tin Employees>" << endl;
+			textAndBackgroundColor(15, 0);
+			admin.showInfoAllEmployee();
+			system("pause"); 
 			break;
 		case 54:
 			return;
@@ -132,12 +150,16 @@ void handleAdmin() {
 	}
 }
 
-void handleEmployee() {
+void handleEmployee(string strUsername, string strPassword) {
 	CEmployee employee;
 	while (true) {
 		g_cCatchEvent = menuEmployee();
 		switch (g_cCatchEvent) {
 		case 49:
+			textAndBackgroundColor(14, 0);
+			cout << endl << "<Thong tin tai khoan>" << endl;
+			showAccountInfo(strUsername);
+			system("pause");
 			break;
 		case 50:
 			break;

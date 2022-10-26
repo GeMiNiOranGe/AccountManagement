@@ -1,10 +1,7 @@
 #include "CEmployee.h"
 
-CEmployee::CEmployee(string _username, string _password, string _fullName, string _address, string _phoneNumber, string _emailAddress)
-	:CUser(_username, _password, _fullName, _address, _phoneNumber, _emailAddress) {
-}
-
-void CEmployee::viewInfoAccount() {
+CEmployee::CEmployee(string _strUsername, string _strPassword, string _strFullName, string _strAddress, string _strPhoneNumber, string _strEmailAddress)
+	:CUser(_strUsername, _strPassword, _strFullName, _strAddress, _strPhoneNumber, _strEmailAddress) {
 }
 
 void CEmployee::changePassword() {

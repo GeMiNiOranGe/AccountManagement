@@ -13,7 +13,9 @@ ofstream createFile(string strUsername);
 ifstream openFile(string strUsername);
 void deleteFile(string strUsername);
 
-bool hasAccount(string strSourceFile, string strUsername);
+void showAccountInfo(string strUsername);
+
+bool hasUsername(string strSourceFile, string strUsername);
 bool hasAccount(string strSourceFile, string strUsername, string strPassword);
 
 #endif

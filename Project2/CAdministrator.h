@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CUser.h"
-#include "CEmployee.h"
 #include "HandleMain.h"
 
 class CAdministrator:
@@ -11,11 +10,11 @@ class CAdministrator:
 public:
 	CAdministrator(string = "", string = "111111", string = "", string = "", string = "", string = "");
 
-	void addEmployee(string strUsername);
-	void eraseEmployee(string strUsername);
-	void searchEmployee();
+	void addEmployee(string);
+	void eraseEmployee(string);
 	void updateEmployee();
-	void showInfoEmployee();
+	void showInfoAllEmployee();
 };
+
 
 #endif

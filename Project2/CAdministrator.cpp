@@ -1,7 +1,7 @@
 #include "CAdministrator.h"
 
-CAdministrator::CAdministrator(string _username, string _password, string _fullName, string _address, string _phoneNumber, string _emailAddress)
-	:CUser(_username, _password, _fullName, _address, _phoneNumber, _emailAddress) {
+CAdministrator::CAdministrator(string _strUsername, string _strPassword, string _strFullName, string _strAddress, string _strPhoneNumber, string _strEmailAddress)
+	:CUser(_strUsername, _strPassword, _strFullName, _strAddress, _strPhoneNumber, _strEmailAddress) {
 }
 //Step 1: update file Employees.txt
 //Step 2: create a new file and add information to the newly created file
@@ -42,9 +42,30 @@ void CAdministrator::eraseEmployee(string strUsername) {
 	deleteFile(strUsername);
 	system(employeeFileRenamed.insert(0, "del ").c_str());
 }
-void CAdministrator::searchEmployee() {
-}
 void CAdministrator::updateEmployee() {
+
 }
-void CAdministrator::showInfoEmployee() {
+//Step 1: load username and password into userTemp from file Employees.txt
+//Step 2: load information into userTemp from file [username].txt
+//Step 3: export information
+void CAdministrator::showInfoAllEmployee() {
+	ifstream fileIn;
+	fileIn.open(EMPLOYEES_FILE);
+	CUser userTemp;
+	while (!fileIn.eof()) {
+		//Step 1:
+		userTemp.readAccount(fileIn);
+		//Step 2:
+		ifstream fileUserInfoTemp = openFile(userTemp.getUsername());
+		userTemp.readInfo(fileUserInfoTemp);
+		//Step 3:
+		if (userTemp.getUsername() != "") {
+			cout << "Ten tai khoan: " << userTemp.getUsername() << endl;
+			userTemp.output();
+		}
+		fileUserInfoTemp.close();
+		cout << endl;
+	}
+	fileIn.close();
 }
+
