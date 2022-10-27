@@ -11,10 +11,9 @@ void CAdministrator::addEmployee(string strUsername) {
 	fileUpdated.open(EMPLOYEES_FILE, ios_base::app);
 	fileUpdated << strUsername << "," << "111111" << endl;
 	//Step 2: 
-	CUser userTemp;
 	ofstream fileOut = createFile(strUsername);
-	userTemp.input();
-	userTemp.writeInfo(fileOut);
+	input();
+	writeInfo(fileOut);
 	fileOut.close();
 }
 //Step 1: rename Employees.txt into EmployeesTemp.txt
@@ -31,10 +30,9 @@ void CAdministrator::eraseEmployee(string strUsername) {
 	fileIn.open(employeeFileRenamed.c_str());
 	//Step 3:
 	while (!fileIn.eof()) {
-		CUser userTemp;
-		userTemp.readAccount(fileIn);
-		if (userTemp.getUsername() != strUsername && userTemp.getUsername() != "")
-			userTemp.writeAccount(fileOut);
+		readAccount(fileIn);
+		if (getUsername() != strUsername && getUsername() != "")
+			writeAccount(fileOut);
 	}
 	fileOut.close();
 	fileIn.close();
@@ -42,8 +40,28 @@ void CAdministrator::eraseEmployee(string strUsername) {
 	deleteFile(strUsername);
 	system(employeeFileRenamed.insert(0, "del ").c_str());
 }
-void CAdministrator::updateEmployee() {
-
+//Step 1: load infomation from sourceUserFile
+//Step 2: re-open the sourceUserFile again
+//Step 3: change the data and overwrite the information from the userTemp
+void CAdministrator::updateInfoEmployee(string strSourceUserFile, string strInfoUpdated, char cOption) {
+	//Step 1:
+	ifstream fileIn = openFile(strSourceUserFile);
+	readInfo(fileIn);
+	fileIn.close();
+	//Step 2:
+	ofstream fileOut;
+	fileOut.open((USER_INFO_FOLDER + strSourceUserFile + ".txt").c_str());
+	//Step 3:
+	if (cOption == 49)
+		setFullName(strInfoUpdated);
+	if (cOption == 50)
+		setAddress(strInfoUpdated);
+	if (cOption == 51)
+		setPhoneNumber(strInfoUpdated);
+	if (cOption == 52)
+		setEmailAddress(strInfoUpdated);
+	writeInfo(fileOut);
+	fileOut.close();
 }
 //Step 1: load username and password into userTemp from file Employees.txt
 //Step 2: load information into userTemp from file [username].txt
@@ -51,20 +69,20 @@ void CAdministrator::updateEmployee() {
 void CAdministrator::showInfoAllEmployee() {
 	ifstream fileIn;
 	fileIn.open(EMPLOYEES_FILE);
-	CUser userTemp;
+	showAnEmployeeInfoElement(9,"Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
+	showAnEmployeeInfoElement(15,"-", "-", "-", "-", "-", "+-", '-');
 	while (!fileIn.eof()) {
 		//Step 1:
-		userTemp.readAccount(fileIn);
+		readAccount(fileIn);
 		//Step 2:
-		ifstream fileUserInfoTemp = openFile(userTemp.getUsername());
-		userTemp.readInfo(fileUserInfoTemp);
+		ifstream fileUserInfoTemp = openFile(getUsername());
+		readInfo(fileUserInfoTemp);
 		//Step 3:
-		if (userTemp.getUsername() != "") {
-			cout << "Ten tai khoan: " << userTemp.getUsername() << endl;
-			userTemp.output();
+		if (getUsername() != "") {
+			showAnEmployeeInfoElement(15, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
+			showAnEmployeeInfoElement(15, "-", "-", "-", "-", "-", "+-", '-');
 		}
 		fileUserInfoTemp.close();
-		cout << endl;
 	}
 	fileIn.close();
 }

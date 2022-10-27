@@ -17,10 +17,10 @@ void handleEmployee(string strUsername, string strPassword);
 
 int main() {
 	SetConsoleTitle(L"Employee manager - Group ProCoder");
-	resizeConsole(435, 475);
-
 	while (true) {
+		resizeConsole(370, 475);
 		g_cCatchEvent = chooseAdminOrEmployee();
+		resizeConsole(380, 475);
 		switch (g_cCatchEvent) {
 		case 49:
 			g_bBreakLoop = false;
@@ -29,6 +29,7 @@ int main() {
 				strPasswordTemp.clear();
 				loginAdmin(strUsernameTemp, strPasswordTemp);
 				if (hasAccount(ADMINISTRATOR_FILE, strUsernameTemp, strPasswordTemp)) {
+					resizeConsole(435, 475);
 					handleAdmin();
 					g_bBreakLoop = true;
 				}
@@ -43,6 +44,7 @@ int main() {
 				strPasswordTemp.clear();
 				loginEmployees(strUsernameTemp, strPasswordTemp);
 				if (hasAccount(EMPLOYEES_FILE, strUsernameTemp, strPasswordTemp)) {
+					resizeConsole(435, 475);
 					handleEmployee(strUsernameTemp, strPasswordTemp);
 					g_bBreakLoop = true;
 				}
@@ -71,6 +73,7 @@ int main() {
 
 void handleAdmin() {
 	CAdministrator admin;
+	string strInfoUpdated;
 	while (true) {
 		g_cCatchEvent = menuAdmin();
 		switch (g_cCatchEvent) {
@@ -109,7 +112,7 @@ void handleAdmin() {
 				cout << "Xoa thanh cong!!!" << endl;
 				system("pause");
 			}
-			else 
+			else
 				warning("Khong tim thay \"" + strUsernameTemp + "\" de xoa!!!");
 			break;
 		case 51:
@@ -129,17 +132,44 @@ void handleAdmin() {
 				system("pause");
 			}
 			else
-				warning("Khong tim thay \"" + strUsernameTemp + "\"!!!"); 
+				warning("Khong tim thay \"" + strUsernameTemp + "\"!!!");
 			break;
 		case 52:
-
+			textAndBackgroundColor(14, 0);
+			cout << endl << "<Cap nhat thong tin Employees>" << endl;
+			textAndBackgroundColor(9, 0);
+			cout << "Nhap ten tai khoan can cap nhat: ";
+			strUsernameTemp.clear();
+			cin >> strUsernameTemp;
+			if (hasUsername(EMPLOYEES_FILE, strUsernameTemp)) {
+				while (true) {
+					g_cCatchEvent = menuUpdateInfo();
+					if (48 < g_cCatchEvent && g_cCatchEvent < 53) {
+						cout << "Cap nhat thong tin o lua chon: " << g_cCatchEvent - 48 << endl;
+						cout << "Thong tin moi se duoc cap nhat: ";
+						cin.ignore();
+						getline(cin, strInfoUpdated);
+						admin.updateInfoEmployee(strUsernameTemp, strInfoUpdated, g_cCatchEvent);
+					}
+					else if (g_cCatchEvent == 27) {
+						break;
+					}
+					else
+						warning("Lua chon khong hop le!!!");
+				}
+			}
+			else
+				warning("Khong tim thay \"" + strUsernameTemp + "\"!!!");
 			break;
 		case 53:
+			system("cls");
+			resizeConsole(1200, 500);
 			textAndBackgroundColor(14, 0);
-			cout << endl << "<Hien thi thong tin Employees>" << endl;
+			cout << "<Hien thi thong tin toan bo Employees>" << endl;
 			textAndBackgroundColor(15, 0);
 			admin.showInfoAllEmployee();
-			system("pause"); 
+			system("pause");
+			resizeConsole(380, 475);
 			break;
 		case 54:
 			return;
@@ -158,6 +188,10 @@ void handleEmployee(string strUsername, string strPassword) {
 		case 49:
 			textAndBackgroundColor(14, 0);
 			cout << endl << "<Thong tin tai khoan>" << endl;
+			textAndBackgroundColor(6, 0);
+			cout << "Ten tai khoan: ";
+			textAndBackgroundColor(15, 0);
+			cout << strUsername << endl;
 			showAccountInfo(strUsername);
 			system("pause");
 			break;

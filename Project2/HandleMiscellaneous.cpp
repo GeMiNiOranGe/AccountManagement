@@ -44,9 +44,8 @@ void gotoXY(short x, short y) {
 }
 void warning(string strMessage) {
 	textAndBackgroundColor(7, 4);
-	cout << "\a\t" << strMessage << endl;
+	cout << "\a" << strMessage << endl;
 	textAndBackgroundColor(7, 0);
-	cout << "\t";
 	system("pause");
 }
 char* convertStringToChar(string strInput) {

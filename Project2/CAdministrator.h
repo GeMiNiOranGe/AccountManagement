@@ -4,6 +4,7 @@
 
 #include "CUser.h"
 #include "HandleMain.h"
+#include "UIHaveNoUX.h"
 
 class CAdministrator:
 	public CUser {
@@ -12,7 +13,7 @@ public:
 
 	void addEmployee(string);
 	void eraseEmployee(string);
-	void updateEmployee();
+	void updateInfoEmployee(string, string, char);
 	void showInfoAllEmployee();
 };
 
