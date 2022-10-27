@@ -59,7 +59,7 @@ void showAnEmployeeInfoElement(int textColor, string strUsername, string strFull
 	string endType, char fillType) {
 	int usernameSize = 15;
 	int fullNameSize = 30;
-	int addressSize = 50;
+	int addressSize = 60;
 	int phoneNumberSize = 15;
 	int emailAddressSize = 25;
 
@@ -117,12 +117,15 @@ char menuEmployee() {
 }
 
 char menuUpdateInfo() {
-	textAndBackgroundColor(10, 0);
-	cout << "Chon thong tin can cap nhat" << endl;
+	system("cls");
+	textAndBackgroundColor(14, 0);
+	cout << "<Chon thong tin can cap nhat>" << endl;
+	textAndBackgroundColor(15, 0);
 	cout << "1. Ho va ten " << endl;
 	cout << "2. Dia chi " << endl;
 	cout << "3. So dien thoai " << endl;
 	cout << "4. Dia chi email " << endl;
+	textAndBackgroundColor(10, 0);
 	cout << "<ESC> de huy bo" << endl;
 	return _getch();
 }

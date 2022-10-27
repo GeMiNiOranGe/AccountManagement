@@ -16,6 +16,27 @@ void deleteFile(string strUsernameFile) {
 	system(filePath.c_str());
 }
 
+void deleteAccount(string strSourceFile, string strUsername) {
+	CUser userTemp;
+	//Step 1:
+	string employeeFileRenamed = strSourceFile;
+	rename(strSourceFile.c_str(), employeeFileRenamed.insert(employeeFileRenamed.size() - 4, "Temp").c_str());
+	//Step 2:
+	ofstream fileOut(strSourceFile);
+	ifstream fileIn;
+	fileIn.open(employeeFileRenamed.c_str());
+	//Step 3:
+	while (!fileIn.eof()) {
+		userTemp.readAccount(fileIn);
+		if (userTemp.getUsername() != strUsername && userTemp.getUsername() != "")
+			userTemp.writeAccount(fileOut);
+	}
+	fileOut.close();
+	fileIn.close();
+	//Step 4:
+	system(employeeFileRenamed.insert(0, "del ").c_str());
+}
+
 void showAccountInfo(string strUsername) {
 	CUser userTemp;
 	ifstream fileIn = openFile(strUsername);

@@ -16,29 +16,9 @@ void CAdministrator::addEmployee(string strUsername) {
 	writeInfo(fileOut);
 	fileOut.close();
 }
-//Step 1: rename Employees.txt into EmployeesTemp.txt
-//Step 2: create a new Employees.txt and open the file is renamed (EmployeesTemp.txt)
-//Step 3: write from the file is renamed (EmployeesTemp.txt) to Employees.txt and don't write the employee want to delete
-//Step 4: delete the file is renamed (delete EmployeesTemp.txt) and the employee you want to delete has been deleted
 void CAdministrator::eraseEmployee(string strUsername) {
-	//Step 1:
-	string employeeFileRenamed = EMPLOYEES_FILE;
-	rename(EMPLOYEES_FILE.c_str(), employeeFileRenamed.insert(employeeFileRenamed.size() - 4, "Temp").c_str());
-	//Step 2:
-	ofstream fileOut(EMPLOYEES_FILE);
-	ifstream fileIn;
-	fileIn.open(employeeFileRenamed.c_str());
-	//Step 3:
-	while (!fileIn.eof()) {
-		readAccount(fileIn);
-		if (getUsername() != strUsername && getUsername() != "")
-			writeAccount(fileOut);
-	}
-	fileOut.close();
-	fileIn.close();
-	//Step 4:
+	deleteAccount(EMPLOYEES_FILE, strUsername);
 	deleteFile(strUsername);
-	system(employeeFileRenamed.insert(0, "del ").c_str());
 }
 //Step 1: load infomation from sourceUserFile
 //Step 2: re-open the sourceUserFile again
