@@ -35,7 +35,7 @@ void loginAdmin(string & strUsername, string & strPassword) {
 	encodePassword(strPassword);
 	cout << endl;
 }
-void loginEmployees(string & strUsername, string & strPassword) {
+void loginEmployees(string & strUsername, string & strPassword, int iMaxLogin) {
 	system("cls");
 	textAndBackgroundColor(14, 0);
 	cout << "\t***************************" << endl;
@@ -47,6 +47,7 @@ void loginEmployees(string & strUsername, string & strPassword) {
 	cout << "\t***************************" << endl;
 	cout << "\tUser: " << endl;
 	cout << "\tPass: " << endl;
+	cout << "So lan con khi dang nhap sai mat khau: " << iMaxLogin << endl;
 	textAndBackgroundColor(7, 0);
 	gotoXY(14, 3);
 	getline(cin, strUsername);
@@ -120,11 +121,15 @@ char menuUpdateInfo() {
 	system("cls");
 	textAndBackgroundColor(14, 0);
 	cout << "<Chon thong tin can cap nhat>" << endl;
+	textAndBackgroundColor(11, 0);
+	cout << "--------------------" << endl;
 	textAndBackgroundColor(15, 0);
-	cout << "1. Ho va ten " << endl;
-	cout << "2. Dia chi " << endl;
-	cout << "3. So dien thoai " << endl;
-	cout << "4. Dia chi email " << endl;
+	cout << "  1. Ho va ten" << endl;
+	cout << "  2. Dia chi" << endl;
+	cout << "  3. So dien thoai" << endl;
+	cout << "  4. Dia chi email" << endl;
+	textAndBackgroundColor(11, 0);
+	cout << "--------------------" << endl;
 	textAndBackgroundColor(10, 0);
 	cout << "<ESC> de huy bo" << endl;
 	return _getch();

@@ -43,7 +43,8 @@ int main() {
 				resizeConsole(380, 475);
 				strUsernameTemp.clear();
 				strPasswordTemp.clear();
-				loginEmployees(strUsernameTemp, strPasswordTemp);
+				loginEmployees(strUsernameTemp, strPasswordTemp, iEmployeeMaxLogin);
+				cout << endl;
 				if (hasAccount(EMPLOYEES_FILE, strUsernameTemp, strPasswordTemp) && iEmployeeMaxLogin != 0) {
 					if (strPasswordTemp == "111111") {
 						string strNewPass, strConfirmNewPass;
