@@ -29,10 +29,15 @@ void encodePassword(string & strPassword) {
 	}
 	while (cEvent != 13);
 }
-void textAndBackgroundColor(int textColor, int backgroundColor) {
-	int colorCode = backgroundColor * 16 + textColor;
+//void textAndBackgroundColor(int textColor, int backgroundColor) {
+//	int colorCode = backgroundColor * 16 + textColor;
+//	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
+//}
+void textAndBackgroundColor(color textColor, color backgroundColor) {
+	short colorCode = static_cast<short>(backgroundColor) * 16 + static_cast<short>(textColor);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
 }
+
 void resizeConsole(int width, int height) {
 	RECT r;
 	GetWindowRect(GetConsoleWindow(), &r);
@@ -43,9 +48,9 @@ void gotoXY(short x, short y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 void warning(string strMessage) {
-	textAndBackgroundColor(7, 4);
+	textAndBackgroundColor(color::White, color::Red);
 	cout << "\a" << strMessage << endl;
-	textAndBackgroundColor(7, 0);
+	textAndBackgroundColor(color::White, color::Black);
 	system("pause");
 }
 char* convertStringToChar(string strInput) {

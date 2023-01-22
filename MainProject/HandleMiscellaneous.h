@@ -9,6 +9,25 @@
 
 using namespace std;
 
+enum class color {
+	Black,
+	Blue,
+	Green,
+	Aqua,
+	Red,
+	Purple,
+	Yellow,
+	White,
+	Gray,
+	LightBlue,
+	LightGreen,
+	LightAqua,
+	LightRed,
+	LightPurple,
+	LightYellow,
+	BrightWhite,
+};
+
 //All functions below can be used in 4 projects of data structures
 void encodePassword(string & strHandle);
 // 0 = Black  |  8 = Gray
@@ -19,11 +38,12 @@ void encodePassword(string & strHandle);
 // 5 = Purple | 13 = Light Purple
 // 6 = Yellow | 14 = Light Yellow
 // 7 = White  | 15 = Bright White
-void textAndBackgroundColor(int textColor, int backgroundColor);
+//void textAndBackgroundColor(int textColor, int backgroundColor);
+void textAndBackgroundColor(color textColor, color backgroundColor);
 void resizeConsole(int width, int height);
 void gotoXY(short x, short y);
 void warning(string strMessage);
-char* convertStringToChar(string strInput);
+char * convertStringToChar(string strInput);
 
 
 #endif

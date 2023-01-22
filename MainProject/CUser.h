@@ -23,24 +23,24 @@ public:
 	Setter have "const", why ??? because i used reference for that function, and it can run faster.
 	I am not sure it can run faster or not =))))) */
 
-	const string& getUsername();
-	const string& getPassword();
-	const string& getFullName();
-	const string& getAddress();
-	const string& getPhoneNumber();
-	const string& getEmailAddress();
+	const string & getUsername();
+	const string & getPassword();
+	const string & getFullName();
+	const string & getAddress();
+	const string & getPhoneNumber();
+	const string & getEmailAddress();
 
-	void setUsername(const string&);
-	void setPassword(const string&);
-	void setFullName(const string&);
-	void setAddress(const string&);
-	void setPhoneNumber(const string&);
-	void setEmailAddress(const string&);
+	void setUsername(const string &);
+	void setPassword(const string &);
+	void setFullName(const string &);
+	void setAddress(const string &);
+	void setPhoneNumber(const string &);
+	void setEmailAddress(const string &);
 
-	void readAccount(ifstream&);
-	void writeAccount(ofstream&);
-	void readInfo(ifstream&);
-	void writeInfo(ofstream&);
+	void readAccount(ifstream &);
+	void writeAccount(ofstream &);
+	void readInfo(ifstream &);
+	void writeInfo(ofstream &);
 
 	void input();
 	void output();

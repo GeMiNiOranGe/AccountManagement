@@ -49,8 +49,8 @@ void CAdministrator::updateInfoEmployee(string strSourceUserFile, string strInfo
 void CAdministrator::showInfoAllEmployee() {
 	ifstream fileIn;
 	fileIn.open(EMPLOYEES_FILE);
-	showAnEmployeeInfoElement(9,"Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
-	showAnEmployeeInfoElement(15,"-", "-", "-", "-", "-", "+-", '-');
+	showAnEmployeeInfoElement(color::LightBlue,"Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
+	showAnEmployeeInfoElement(color::BrightWhite,"-", "-", "-", "-", "-", "+-", '-');
 	while (!fileIn.eof()) {
 		//Step 1:
 		readAccount(fileIn);
@@ -59,8 +59,8 @@ void CAdministrator::showInfoAllEmployee() {
 		readInfo(fileUserInfoTemp);
 		//Step 3:
 		if (getUsername() != "") {
-			showAnEmployeeInfoElement(15, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
-			showAnEmployeeInfoElement(15, "-", "-", "-", "-", "-", "+-", '-');
+			showAnEmployeeInfoElement(color::BrightWhite, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
+			showAnEmployeeInfoElement(color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
 		}
 		fileUserInfoTemp.close();
 	}

@@ -80,40 +80,40 @@ void CUser::writeInfo(ofstream& fileOut) {
 
 void CUser::input() {
 	cin.ignore();
-	textAndBackgroundColor(14, 0);
+	textAndBackgroundColor(color::LightYellow, color::Black);
 	cout << "    Nhap thong tin tai khoan" << endl;
-	textAndBackgroundColor(11, 0);
+	textAndBackgroundColor(color::LightAqua, color::Black);
 	cout << "\tNhap ho ten: ";
-	textAndBackgroundColor(15, 0);
+	textAndBackgroundColor(color::BrightWhite, color::Black);
 	getline(cin, this->strFullName);
-	textAndBackgroundColor(11, 0);
+	textAndBackgroundColor(color::LightAqua, color::Black);
 	cout << "\tNhap dia chi: ";
-	textAndBackgroundColor(15, 0);
+	textAndBackgroundColor(color::BrightWhite, color::Black);
 	getline(cin, this->strAddress);
-	textAndBackgroundColor(11, 0);
+	textAndBackgroundColor(color::LightAqua, color::Black);
 	cout << "\tNhap so dien thoai: ";
-	textAndBackgroundColor(15, 0);
+	textAndBackgroundColor(color::BrightWhite, color::Black);
 	getline(cin, this->strPhoneNumber);
-	textAndBackgroundColor(11, 0);
+	textAndBackgroundColor(color::LightAqua, color::Black);
 	cout << "\tNhap dia chi email: ";
-	textAndBackgroundColor(15, 0);
+	textAndBackgroundColor(color::BrightWhite, color::Black);
 	getline(cin, this->strEmailAddress);
 }
 void CUser::output() {
-	textAndBackgroundColor(11, 0);
+	textAndBackgroundColor(color::LightAqua, color::Black);
 	cout << "\tHo ten: ";
-	textAndBackgroundColor(15, 0);
+	textAndBackgroundColor(color::BrightWhite, color::Black);
 	cout << getFullName() << endl;
-	textAndBackgroundColor(11, 0);
+	textAndBackgroundColor(color::LightAqua, color::Black);
 	cout << "\tDia chi: ";
-	textAndBackgroundColor(15, 0);
+	textAndBackgroundColor(color::BrightWhite, color::Black);
 	cout << getAddress() << endl;
-	textAndBackgroundColor(11, 0);
+	textAndBackgroundColor(color::LightAqua, color::Black);
 	cout << "\tSo dien thoai: ";
-	textAndBackgroundColor(15, 0);
+	textAndBackgroundColor(color::BrightWhite, color::Black);
 	cout << getPhoneNumber() << endl;
-	textAndBackgroundColor(11, 0);
+	textAndBackgroundColor(color::LightAqua, color::Black);
 	cout << "\tDia chi email: ";
-	textAndBackgroundColor(15, 0);
+	textAndBackgroundColor(color::BrightWhite, color::Black);
 	cout << getEmailAddress() << endl;
 }
