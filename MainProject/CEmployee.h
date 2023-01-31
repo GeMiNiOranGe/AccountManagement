@@ -4,15 +4,14 @@
 
 #include "CUser.h"
 #include "HandleMain.h"
-#include "HandleMiscellaneous.h"
 #include "Config.h"
 
-class CEmployee:
+class CEmployee :
 	public CUser {
 public:
-	CEmployee(string = "", string = "111111", string = "", string = "", string = "", string = "");
+	CEmployee(std::string = "", std::string = "111111", std::string = "", std::string = "", std::string = "", std::string = "");
 
-	bool isSuccessChangePass(string, string, string, string);
+	bool isSuccessChangePass(std::string, std::string, std::string, std::string);
 };
 
 #endif

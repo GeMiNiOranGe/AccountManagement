@@ -7,8 +7,6 @@
 #include <conio.h>
 #include <string>
 
-using namespace std;
-
 enum class color {
 	Black,
 	Blue,
@@ -29,7 +27,7 @@ enum class color {
 };
 
 //All functions below can be used in 4 projects of data structures
-void encodePassword(string & strHandle);
+void encodePassword(std::string & strHandle);
 // 0 = Black  |  8 = Gray
 // 1 = Blue   |  9 = Light Blue
 // 2 = Green  | 10 = Light Green
@@ -38,12 +36,10 @@ void encodePassword(string & strHandle);
 // 5 = Purple | 13 = Light Purple
 // 6 = Yellow | 14 = Light Yellow
 // 7 = White  | 15 = Bright White
-//void textAndBackgroundColor(int textColor, int backgroundColor);
 void textAndBackgroundColor(color textColor, color backgroundColor);
 void resizeConsole(int width, int height);
 void gotoXY(short x, short y);
-void warning(string strMessage);
-char * convertStringToChar(string strInput);
-
+void warning(std::string strMessage);
+char * convertStringToChar(std::string strInput);
 
 #endif

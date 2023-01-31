@@ -7,11 +7,9 @@
 #include <string>
 #include "HandleMiscellaneous.h"
 
-using namespace std;
-
 class CUser {
 public:
-	CUser(string = "", string = "111111", string = "", string = "", string = "", string = "");
+	CUser(std::string = "", std::string = "111111", std::string = "", std::string = "", std::string = "", std::string = "");
 	CUser(const CUser &);
 	~CUser();
 
@@ -23,34 +21,35 @@ public:
 	Setter have "const", why ??? because i used reference for that function, and it can run faster.
 	I am not sure it can run faster or not =))))) */
 
-	const string & getUsername();
-	const string & getPassword();
-	const string & getFullName();
-	const string & getAddress();
-	const string & getPhoneNumber();
-	const string & getEmailAddress();
+	const std::string & getUsername();
+	const std::string & getPassword();
+	const std::string & getFullName();
+	const std::string & getAddress();
+	const std::string & getPhoneNumber();
+	const std::string & getEmailAddress();
 
-	void setUsername(const string &);
-	void setPassword(const string &);
-	void setFullName(const string &);
-	void setAddress(const string &);
-	void setPhoneNumber(const string &);
-	void setEmailAddress(const string &);
+	void setUsername(const std::string &);
+	void setPassword(const std::string &);
+	void setFullName(const std::string &);
+	void setAddress(const std::string &);
+	void setPhoneNumber(const std::string &);
+	void setEmailAddress(const std::string &);
 
-	void readAccount(ifstream &);
-	void writeAccount(ofstream &);
-	void readInfo(ifstream &);
-	void writeInfo(ofstream &);
+	void readAccount(std::ifstream &);
+	void writeAccount(std::ofstream &);
+	void readInfo(std::ifstream &);
+	void writeInfo(std::ofstream &);
 
 	void input();
 	void output();
+
 private:
-	string strUsername;
-	string strPassword;
-	string strFullName;
-	string strAddress;
-	string strPhoneNumber;
-	string strEmailAddress;
+	std::string strUsername;
+	std::string strPassword;
+	std::string strFullName;
+	std::string strAddress;
+	std::string strPhoneNumber;
+	std::string strEmailAddress;
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "CUser.h"
 
-CUser::CUser(string _strUsername, string _strPassword, string _strFullName, string _strAddress, string _strPhoneNumber, string _strEmailAddress) {
+CUser::CUser(std::string _strUsername, std::string _strPassword, std::string _strFullName,
+	std::string _strAddress, std::string _strPhoneNumber, std::string _strEmailAddress) {
 	this->strUsername = _strUsername;
 	this->strPassword = _strPassword;
 	this->strFullName = _strFullName;
@@ -19,101 +20,101 @@ CUser::CUser(const CUser & tempUser) {
 CUser::~CUser() {
 }
 
-const string& CUser::getUsername() {
+const std::string & CUser::getUsername() {
 	return this->strUsername;
 }
-const string& CUser::getPassword() {
+const std::string & CUser::getPassword() {
 	return this->strPassword;
 }
-const string& CUser::getFullName() {
+const std::string & CUser::getFullName() {
 	return this->strFullName;
 }
-const string& CUser::getAddress() {
+const std::string & CUser::getAddress() {
 	return this->strAddress;
 }
-const string& CUser::getPhoneNumber() {
+const std::string & CUser::getPhoneNumber() {
 	return this->strPhoneNumber;
 }
-const string& CUser::getEmailAddress() {
+const std::string & CUser::getEmailAddress() {
 	return this->strEmailAddress;
 }
 
-void CUser::setUsername(const string& _strUsername) {
+void CUser::setUsername(const std::string & _strUsername) {
 	this->strUsername = _strUsername;
 }
-void CUser::setPassword(const string& _strPassword) {
+void CUser::setPassword(const std::string & _strPassword) {
 	this->strPassword = _strPassword;
 }
-void CUser::setFullName(const string& _strFullName) {
+void CUser::setFullName(const std::string & _strFullName) {
 	this->strFullName = _strFullName;
 }
-void CUser::setAddress(const string& _strAddress) {
+void CUser::setAddress(const std::string & _strAddress) {
 	this->strAddress = _strAddress;
 }
-void CUser::setPhoneNumber(const string& _strPhoneNumber) {
+void CUser::setPhoneNumber(const std::string & _strPhoneNumber) {
 	this->strPhoneNumber = _strPhoneNumber;
 }
-void CUser::setEmailAddress(const string& _strEmailAddress) {
+void CUser::setEmailAddress(const std::string & _strEmailAddress) {
 	this->strEmailAddress = _strEmailAddress;
 }
 
-void CUser::readAccount(ifstream& fileIn) {
+void CUser::readAccount(std::ifstream & fileIn) {
 	getline(fileIn, this->strUsername, ',');
 	getline(fileIn, this->strPassword);
 }
-void CUser::writeAccount(ofstream& fileOut) {
+void CUser::writeAccount(std::ofstream & fileOut) {
 	fileOut << this->strUsername << ',';
-	fileOut << this->strPassword << endl;
+	fileOut << this->strPassword << std::endl;
 }
-void CUser::readInfo(ifstream& fileIn) {
+void CUser::readInfo(std::ifstream & fileIn) {
 	getline(fileIn, this->strFullName);
 	getline(fileIn, this->strAddress);
 	getline(fileIn, this->strPhoneNumber);
 	getline(fileIn, this->strEmailAddress);
 }
-void CUser::writeInfo(ofstream& fileOut) {
-	fileOut << this->strFullName << endl;
-	fileOut << this->strAddress << endl;
-	fileOut << this->strPhoneNumber << endl;
-	fileOut << this->strEmailAddress << endl;
+void CUser::writeInfo(std::ofstream & fileOut) {
+	fileOut << this->strFullName << std::endl;
+	fileOut << this->strAddress << std::endl;
+	fileOut << this->strPhoneNumber << std::endl;
+	fileOut << this->strEmailAddress << std::endl;
 }
 
 void CUser::input() {
-	cin.ignore();
+	std::cin.ignore();
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "    Nhap thong tin tai khoan" << endl;
+	std::cout << "    Nhap thong tin tai khoan" << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tNhap ho ten: ";
+	std::cout << "\tNhap ho ten: ";
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	getline(cin, this->strFullName);
+	getline(std::cin, this->strFullName);
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tNhap dia chi: ";
+	std::cout << "\tNhap dia chi: ";
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	getline(cin, this->strAddress);
+	getline(std::cin, this->strAddress);
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tNhap so dien thoai: ";
+	std::cout << "\tNhap so dien thoai: ";
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	getline(cin, this->strPhoneNumber);
+	getline(std::cin, this->strPhoneNumber);
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tNhap dia chi email: ";
+	std::cout << "\tNhap dia chi email: ";
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	getline(cin, this->strEmailAddress);
+	getline(std::cin, this->strEmailAddress);
 }
 void CUser::output() {
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tHo ten: ";
+	std::cout << "\tHo ten: ";
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << getFullName() << endl;
+	std::cout << getFullName() << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tDia chi: ";
+	std::cout << "\tDia chi: ";
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << getAddress() << endl;
+	std::cout << getAddress() << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tSo dien thoai: ";
+	std::cout << "\tSo dien thoai: ";
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << getPhoneNumber() << endl;
+	std::cout << getPhoneNumber() << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tDia chi email: ";
+	std::cout << "\tDia chi email: ";
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << getEmailAddress() << endl;
+	std::cout << getEmailAddress() << std::endl;
 }

@@ -1,29 +1,29 @@
 #include "HandleMain.h"
 
-ofstream createFile(string strUsernameFile) {
-	string filePath = USER_INFO_FOLDER + strUsernameFile + ".txt";
-	ofstream fileTemp(filePath);
+std::ofstream createFile(std::string strUsernameFile) {
+	std::string filePath = USER_INFO_FOLDER + strUsernameFile + ".txt";
+	std::ofstream fileTemp(filePath);
 	return fileTemp;
 }
-ifstream openFile(string strUsernameFile) {
-	string filePath = USER_INFO_FOLDER + strUsernameFile + ".txt";
-	ifstream fileTemp;
+std::ifstream openFile(std::string strUsernameFile) {
+	std::string filePath = USER_INFO_FOLDER + strUsernameFile + ".txt";
+	std::ifstream fileTemp;
 	fileTemp.open(filePath);
 	return fileTemp;
 }
-void deleteFile(string strUsernameFile) {
-	string filePath = "del " + USER_INFO_FOLDER + strUsernameFile + ".txt";
+void deleteFile(std::string strUsernameFile) {
+	std::string filePath = "del " + USER_INFO_FOLDER + strUsernameFile + ".txt";
 	system(filePath.c_str());
 }
 
-void deleteAccount(string strSourceFile, string strUsername) {
+void deleteAccount(std::string strSourceFile, std::string strUsername) {
 	CUser userTemp;
 	//Step 1:
-	string employeeFileRenamed = strSourceFile;
+	std::string employeeFileRenamed = strSourceFile;
 	rename(strSourceFile.c_str(), employeeFileRenamed.insert(employeeFileRenamed.size() - 4, "Temp").c_str());
 	//Step 2:
-	ofstream fileOut(strSourceFile);
-	ifstream fileIn;
+	std::ofstream fileOut(strSourceFile);
+	std::ifstream fileIn;
 	fileIn.open(employeeFileRenamed.c_str());
 	//Step 3:
 	while (!fileIn.eof()) {
@@ -37,16 +37,16 @@ void deleteAccount(string strSourceFile, string strUsername) {
 	system(employeeFileRenamed.insert(0, "del ").c_str());
 }
 
-void showAccountInfo(string strUsername) {
+void showAccountInfo(std::string strUsername) {
 	CUser userTemp;
-	ifstream fileIn = openFile(strUsername);
+	std::ifstream fileIn = openFile(strUsername);
 	userTemp.readInfo(fileIn);
 	userTemp.output();
 	fileIn.close();
 }
 
-bool hasUsername(string strSourceFile, string strUsername) {
-	ifstream fileIn;
+bool hasUsername(std::string strSourceFile, std::string strUsername) {
+	std::ifstream fileIn;
 	fileIn.open(strSourceFile.c_str());
 	while (!fileIn.eof()) {
 		CUser userTemp;
@@ -59,8 +59,8 @@ bool hasUsername(string strSourceFile, string strUsername) {
 	fileIn.close();
 	return false;
 }
-bool hasAccount(string strSourceFile, string strUsername, string strPassword) {
-	ifstream fileIn;
+bool hasAccount(std::string strSourceFile, std::string strUsername, std::string strPassword) {
+	std::ifstream fileIn;
 	fileIn.open(strSourceFile.c_str());
 	while (!fileIn.eof()) {
 		CUser userTemp;

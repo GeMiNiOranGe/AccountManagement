@@ -6,14 +6,14 @@
 #include "HandleMain.h"
 #include "UIHaveNoUX.h"
 
-class CAdministrator:
+class CAdministrator :
 	public CUser {
 public:
-	CAdministrator(string = "", string = "111111", string = "", string = "", string = "", string = "");
+	CAdministrator(std::string = "", std::string = "111111", std::string = "", std::string = "", std::string = "", std::string = "");
 
-	void addEmployee(string);
-	void eraseEmployee(string);
-	void updateInfoEmployee(string, string, char);
+	void addEmployee(std::string);
+	void eraseEmployee(std::string);
+	void updateInfoEmployee(std::string, std::string, char);
 	void showInfoAllEmployee();
 };
 

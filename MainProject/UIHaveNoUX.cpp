@@ -1,38 +1,39 @@
-#include "UIHaveNoUX.h"
+﻿#include "UIHaveNoUX.h"
 
-void formLogin(string & strUsername, string & strPassword) {
+std::string formLogin(std::string & strUsername, std::string & strPassword) {
 	//if (hasAccount(ADMINISTRATOR_FILE, strUsername, strPassword)) {
 	//	return "admin";
 	//}
-	//return string();
+	return std::string();
 	system("cls");
+	std::cout << std::endl;
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "\t********************************" << endl;
-	cout << "\t*            ";
+	std::cout << "\t********************************" << std::endl;
+	std::cout << "\t*            ";
 	textAndBackgroundColor(color::LightGreen, color::Black);
-	cout << "LOG IN            ";
+	std::cout << "LOG IN            ";
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "*" << endl;
-	cout << "\t********************************" << endl;
-	cout << "\tUser: " << endl;
-	cout << "\tPass: " << endl;
+	std::cout << "*" << std::endl;
+	std::cout << "\t********************************" << std::endl;
+	std::cout << "\tUser: " << std::endl;
+	std::cout << "\tPass: " << std::endl;
 	textAndBackgroundColor(color::White, color::Black);
 	gotoXY(14, 3);
-	getline(cin, strUsername);
+	getline(std::cin, strUsername);
 	gotoXY(14, 4);
 	encodePassword(strPassword);
-	cout << endl;
+	std::cout << std::endl;
 }
 
 char chooseAdminOrEmployee() {
 	system("cls");
 	textAndBackgroundColor(color::LightRed, color::Black);
-	cout << "\t+------------------------+" << endl;
-	cout << "\t| 1. Dang Nhap ADMIN     |" << endl;
-	cout << "\t| 2. Dang Nhap EMPLOYEES |" << endl;
-	cout << "\t+------------------------+" << endl;
+	std::cout << "\t+------------------------+" << std::endl;
+	std::cout << "\t| 1. Dang Nhap ADMIN     |" << std::endl;
+	std::cout << "\t| 2. Dang Nhap EMPLOYEES |" << std::endl;
+	std::cout << "\t+------------------------+" << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tMoi ban chon" << endl;
+	std::cout << "\tMoi ban chon" << std::endl;
 	return _getch();
 }
 
@@ -40,121 +41,121 @@ char chooseAdminOrEmployee() {
 Ex: ADMIN ==> size = 5
 for (0 ==> size) cout << '*'
 IDEA 2: make border can change style*/
-void loginAdmin(string & strUsername, string & strPassword) {
+void loginAdmin(std::string & strUsername, std::string & strPassword) {
 	system("cls");
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "\t***************************" << endl;
-	cout << "\t*     ";
+	std::cout << "\t***************************" << std::endl;
+	std::cout << "\t*     ";
 	textAndBackgroundColor(color::LightGreen, color::Black);
-	cout << "DANG NHAP ADMIN     ";
+	std::cout << "DANG NHAP ADMIN     ";
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "*" << endl;
-	cout << "\t***************************" << endl;
-	cout << "\tUser: " << endl;
-	cout << "\tPin: " << endl;
+	std::cout << "*" << std::endl;
+	std::cout << "\t***************************" << std::endl;
+	std::cout << "\tUser: " << std::endl;
+	std::cout << "\tPin: " << std::endl;
 	textAndBackgroundColor(color::White, color::Black);
 	gotoXY(14, 3);
-	getline(cin, strUsername);
+	getline(std::cin, strUsername);
 	gotoXY(14, 4);
 	encodePassword(strPassword);
-	cout << endl;
+	std::cout << std::endl;
 }
-void loginEmployees(string & strUsername, string & strPassword, int iMaxLogin) {
+void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin) {
 	system("cls");
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "\t***************************" << endl;
-	cout << "\t*   ";
+	std::cout << "\t***************************" << std::endl;
+	std::cout << "\t*   ";
 	textAndBackgroundColor(color::LightGreen, color::Black);
-	cout << "DANG NHAP EMPLOYEES   ";
+	std::cout << "DANG NHAP EMPLOYEES   ";
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "*" << endl;
-	cout << "\t***************************" << endl;
-	cout << "\tUser: " << endl;
-	cout << "\tPass: " << endl;
-	cout << "So lan con khi dang nhap sai mat khau: " << iMaxLogin << endl;
+	std::cout << "*" << std::endl;
+	std::cout << "\t***************************" << std::endl;
+	std::cout << "\tUser: " << std::endl;
+	std::cout << "\tPass: " << std::endl;
+	std::cout << "So lan con khi dang nhap sai mat khau: " << iMaxLogin << std::endl;
 	textAndBackgroundColor(color::White, color::Black);
 	gotoXY(14, 3);
-	getline(cin, strUsername);
+	getline(std::cin, strUsername);
 	gotoXY(14, 4);
 	encodePassword(strPassword);
-	cout << endl;
+	std::cout << std::endl;
 }
 
-void showAnEmployeeInfoElement(color textColor, string strUsername, string strFullName, string strAddress, string strPhoneNumber, string strEmailAddress,
-	string endType, char fillType) {
+void showAnEmployeeInfoElement(color textColor, std::string strUsername, std::string strFullName, std::string strAddress,
+	std::string strPhoneNumber, std::string strEmailAddress, std::string endType, char fillType) {
 	int usernameSize = 15;
 	int fullNameSize = 30;
 	int addressSize = 60;
 	int phoneNumberSize = 15;
 	int emailAddressSize = 25;
 
-	cout << setfill(fillType);
+	std::cout << std::setfill(fillType);
 	textAndBackgroundColor(textColor, color::Black);
-	cout << setw(usernameSize) << left << strUsername;
+	std::cout << std::setw(usernameSize) << std::left << strUsername;
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << endType;
+	std::cout << endType;
 	textAndBackgroundColor(textColor, color::Black);
-	cout << setw(fullNameSize) << left << strFullName;
+	std::cout << std::setw(fullNameSize) << std::left << strFullName;
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << endType;
+	std::cout << endType;
 	textAndBackgroundColor(textColor, color::Black);
-	cout << setw(addressSize) << left << strAddress;
+	std::cout << std::setw(addressSize) << std::left << strAddress;
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << endType;
+	std::cout << endType;
 	textAndBackgroundColor(textColor, color::Black);
-	cout << setw(phoneNumberSize) << left << strPhoneNumber;
+	std::cout << std::setw(phoneNumberSize) << std::left << strPhoneNumber;
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << endType;
+	std::cout << endType;
 	textAndBackgroundColor(textColor, color::Black);
-	cout << setw(emailAddressSize) << left << strEmailAddress;
+	std::cout << std::setw(emailAddressSize) << std::left << strEmailAddress;
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << endType.at(0);
-	cout << setfill(' ');
-	cout << endl;
+	std::cout << endType.at(0);
+	std::cout << std::setfill(' ');
+	std::cout << std::endl;
 }
 
 char menuAdmin() {
 	system("cls");
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "\t***************MENU***************" << endl;
-	cout << "\t  1. Them Employee                " << endl;
-	cout << "\t  2. Xoa Employee                 " << endl;
-	cout << "\t  3. Tim Employee                 " << endl;
-	cout << "\t  4. Cap nhat Employee            " << endl;
-	cout << "\t  5. Hien thi thong tin Employee  " << endl;
-	cout << "\t  6. Thoat                        " << endl;
-	cout << "\t**********************************" << endl;
+	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ—————————————<MENU>——————————————" << std::endl;
+	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖| 1. Them Employee                " << std::endl;
+	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  2. Xoa Employee                 " << std::endl;
+	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  3. Tim Employee                 " << std::endl;
+	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  4. Cap nhat Employee            " << std::endl;
+	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  5. Hien thi thong tin Employee  " << std::endl;
+	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  6. Thoat                        " << std::endl;
+	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖——————————————————————————————————" << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tMoi ban chon chuc nang" << endl;
+	std::cout << "\tMoi ban chon chuc nang" << std::endl;
 	return _getch();
 }
 char menuEmployee() {
 	system("cls");
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "\t**********MENU EMPLOYEE***********" << endl;
-	cout << "\t  1. Xem thong tin tai khoan      " << endl;
-	cout << "\t  2. Doi password                 " << endl;
-	cout << "\t  3. Thoat                        " << endl;
-	cout << "\t**********************************" << endl;
+	std::cout << "\t**********MENU EMPLOYEE***********" << std::endl;
+	std::cout << "\t  1. Xem thong tin tai khoan      " << std::endl;
+	std::cout << "\t  2. Doi password                 " << std::endl;
+	std::cout << "\t  3. Thoat                        " << std::endl;
+	std::cout << "\t**********************************" << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "\tMoi ban chon chuc nang" << endl;
+	std::cout << "\tMoi ban chon chuc nang" << std::endl;
 	return _getch();
 }
 
 char menuUpdateInfo() {
 	system("cls");
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	cout << "<Chon thong tin can cap nhat>" << endl;
+	std::cout << "<Chon thong tin can cap nhat>" << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "--------------------" << endl;
+	std::cout << "--------------------" << std::endl;
 	textAndBackgroundColor(color::BrightWhite, color::Black);
-	cout << "  1. Ho va ten" << endl;
-	cout << "  2. Dia chi" << endl;
-	cout << "  3. So dien thoai" << endl;
-	cout << "  4. Dia chi email" << endl;
+	std::cout << "  1. Ho va ten" << std::endl;
+	std::cout << "  2. Dia chi" << std::endl;
+	std::cout << "  3. So dien thoai" << std::endl;
+	std::cout << "  4. Dia chi email" << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
-	cout << "--------------------" << endl;
+	std::cout << "--------------------" << std::endl;
 	textAndBackgroundColor(color::LightGreen, color::Black);
-	cout << "<ESC> de huy bo" << endl;
+	std::cout << "<ESC> de huy bo" << std::endl;
 	return _getch();
 }

@@ -2,10 +2,8 @@
 #define CONFIG_H
 #pragma once
 
-#include <string>
-
-const string EMPLOYEES_FILE = "Resources\\Employees.txt";
-const string ADMINISTRATOR_FILE = "Resources\\Admin.txt";
-const string USER_INFO_FOLDER = "Resources\\UserInfo\\";
+const std::string EMPLOYEES_FILE = "Resources\\Employees.txt";
+const std::string ADMINISTRATOR_FILE = "Resources\\Admin.txt";
+const std::string USER_INFO_FOLDER = "Resources\\UserInfo\\";
 
 #endif

@@ -4,14 +4,22 @@
 
 #include <iomanip>
 #include "HandleMiscellaneous.h"
-#include "HandleMain.h"
+//#include "HandleMain.h"
 
-void formLogin(string & strUsername, string & strPassword);
+std::string formLogin(std::string & strUsername, std::string & strPassword);
 char chooseAdminOrEmployee();
-void loginAdmin(string & strUsername, string & strPassword);
-void loginEmployees(string & strUsername, string & strPassword, int iMaxLogin);
-void showAnEmployeeInfoElement(color textColor, string strUsername, string strFullName, string strAddress, string strPhoneNumber, string strEmailAddress,
-	string endType, char fillType = ' ');
+void loginAdmin(std::string & strUsername, std::string & strPassword);
+void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin);
+void showAnEmployeeInfoElement(
+	color textColor,
+	std::string strUsername,
+	std::string strFullName,
+	std::string strAddress,
+	std::string strPhoneNumber,
+	std::string strEmailAddress,
+	std::string endType,
+	char fillType = ' '
+);
 char menuAdmin();
 char menuEmployee();
 char menuUpdateInfo();

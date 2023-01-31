@@ -7,20 +7,18 @@
 #include "CUser.h"
 #include "Config.h"
 
-using namespace std;
-
-ofstream createFile(string strUsername);
-ifstream openFile(string strUsername);
-void deleteFile(string strUsername);
+std::ofstream createFile(std::string strUsername);
+std::ifstream openFile(std::string strUsername);
+void deleteFile(std::string strUsername);
 
 //Step 1: rename Employees.txt into EmployeesTemp.txt
 //Step 2: create a new Employees.txt and open the file is renamed (EmployeesTemp.txt)
 //Step 3: write from the file is renamed (EmployeesTemp.txt) to Employees.txt and don't write the employee want to delete
 //Step 4: delete the file is renamed (EmployeesTemp.txt)
-void deleteAccount(string strSourceFile, string strUsername);
-void showAccountInfo(string strUsername);
+void deleteAccount(std::string strSourceFile, std::string strUsername);
+void showAccountInfo(std::string strUsername);
 
-bool hasUsername(string strSourceFile, string strUsername);
-bool hasAccount(string strSourceFile, string strUsername, string strPassword);
+bool hasUsername(std::string strSourceFile, std::string strUsername);
+bool hasAccount(std::string strSourceFile, std::string strUsername, std::string strPassword);
 
 #endif

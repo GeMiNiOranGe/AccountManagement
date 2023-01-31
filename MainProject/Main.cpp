@@ -21,6 +21,14 @@ int main() {
 	//formLogin(strUsernameTemp, strPasswordTemp);
 	//cout << strUsernameTemp << endl;
 	//cout << strPasswordTemp << endl;
+
+	//while (true) {
+	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);
+	//	if (strTypeAccount == "admin") {
+
+	//	}
+	//}
+
 	while (true) {
 		resizeConsole(370, 475);
 		g_cCatchEvent = chooseAdminOrEmployee();
