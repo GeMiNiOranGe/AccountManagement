@@ -15,3 +15,10 @@ Build an employee management app with 2 types of users: administrator and employ
 	* Phone number.
 	* Email address.
 ### Administrator features include
+*	**After login**, the administrator is only allowed to access features such as:
+	*	Add employee account.
+	*	Delete employee account.
+	*	Find employee account.
+	*	Update employee account.
+	*	Display all information of all employee accounts.
+	*	Exit the program.
