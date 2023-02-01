@@ -1,2 +1,2 @@
-# Employee Management Console application
-## This project is coded by Visual Studio 2017 (i recomand
+# Employee Management Console application 
+this is the first version of this app, i recommand you use branch UpdateToVS2019
