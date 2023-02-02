@@ -14,6 +14,8 @@ This is the first version of this app, i recommend you use branch UpdateToVS2019
 		* [Change password](#Change-password)
 	* [Other requirements](#Other-requirements)
 
+
+
 ## Project content
 Build an employee management app with 2 types of users: administrator and employee. Users must log in to the system to use the features, the system can detect whether the logged in user is an administrator or an employee, The system can detect whether the logged in user is an administrator or an employee, and then go directly to the menu screen corresponding to each role.
 
@@ -70,5 +72,65 @@ Build an employee management app with 2 types of users: administrator and employ
 * In the event of an error, the system will notify the user of the error information, cancel the current function and allow the user to choose another function to execute or terminate the program.
 * Encrypt password with * sign when logging in.
 * Use color to design an easy-to-see interface.
-## 
+## Source code explanation
+Class CUser in `CUser.h`
+```cpp
+class CUser {
+public:
+	CUser(string = "", string = "111111", string = "", string = "", string = "", string = "");
+	CUser(const CUser &);
+	~CUser();
 
+	const string& getUsername();
+	const string& getPassword();
+	const string& getFullName();
+	const string& getAddress();
+	const string& getPhoneNumber();
+	const string& getEmailAddress();
+
+	void setUsername(const string&);
+	void setPassword(const string&);
+	void setFullName(const string&);
+	void setAddress(const string&);
+	void setPhoneNumber(const string&);
+	void setEmailAddress(const string&);
+
+	void readAccount(ifstream&);
+	void writeAccount(ofstream&);
+	void readInfo(ifstream&);
+	void writeInfo(ofstream&);
+
+	void input();
+	void output();
+private:
+	string strUsername;
+	string strPassword;
+	string strFullName;
+	string strAddress;
+	string strPhoneNumber;
+	string strEmailAddress;
+};
+```
+Class CAdministrator inherits class CUser in CAdministrator.h
+```cpp
+class CAdministrator:
+	public CUser {
+public:
+	CAdministrator(string = "", string = "111111", string = "", string = "", string = "", string = "");
+
+	void addEmployee(string);
+	void eraseEmployee(string);
+	void updateInfoEmployee(string, string, char);
+	void showInfoAllEmployee();
+};
+```
+Class CEmployee inherits class CUser in CEmployee.h
+```cpp
+class CEmployee:
+	public CUser {
+public:
+	CEmployee(string = "", string = "111111", string = "", string = "", string = "", string = "");
+
+	bool isSuccessChangePass(string, string, string, string);
+};
+```
