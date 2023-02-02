@@ -86,7 +86,7 @@ Build an employee management app with 2 types of users: administrator and employ
 
 ## Source code explanation
 ### Declaring Classes
-Class CUser in `CUser.h`
+Class `CUser` in [`CUser.h`](Project2/CUser.h#L12)
 ```cpp
 class CUser {
 public:
@@ -124,7 +124,7 @@ private:
 	string strEmailAddress;
 };
 ```
-Class CAdministrator inherits class CUser in `CAdministrator.h`
+Class `CAdministrator` inherits class CUser in [`CAdministrator.h`](Project2/CAdministrator.h#L9)
 ```cpp
 class CAdministrator:
 	public CUser {
@@ -137,7 +137,7 @@ public:
 	void showInfoAllEmployee();
 };
 ```
-Class CEmployee inherits class CUser in `CEmployee.h`
+Class `CEmployee` inherits class CUser in [`CEmployee.h`](Project2/CEmployee.h#L10)
 ```cpp
 class CEmployee:
 	public CUser {
@@ -151,7 +151,7 @@ public:
 ### Main functions
 Some important functions for main processing in the source code and the definition of the methods of the classes
 
-Important file path in `Config.h`
+Important file path in [`Config.h`](Project2/Config.h)
 ```cpp
 const string EMPLOYEES_FILE = "Resources\\Employees.txt";
 const string ADMINISTRATOR_FILE = "Resources\\Admin.txt";
@@ -162,7 +162,7 @@ Step 1. create a new variable `fileUpdated` to open the list of employees in `EM
 
 Step 2: create a new file [username].txt in `USER_INFO_FOLDER`.
 
-Source in `CAdministrator.h`
+Source code function `addEmployee` in [`CAdministrator.h`](Project2/CAdministrator.cpp#L8)
 ```cpp
 void CAdministrator::addEmployee(string strUsername) {
 	// Step 1
@@ -185,7 +185,7 @@ Step 3: write from the file is renamed (EmployeesTemp.txt) to Employees.txt and 
 
 Step 4: delete the file is renamed (EmployeesTemp.txt).
 
-Source in `HandleMain.h`
+Source code function `deleteAccount` in [`HandleMain.h`](Project2/HandleMain.cpp#L19)
 ```cpp
 void deleteAccount(string strSourceFile, string strUsername) {
 	CUser userTemp;
@@ -208,13 +208,14 @@ void deleteAccount(string strSourceFile, string strUsername) {
 	system(employeeFileRenamed.insert(0, "del ").c_str());
 }
 ```
+Source code function `deleteFile` in [`HandleMain.h`](Project2/HandleMain.cpp#L14)
 ```cpp
 void deleteFile(string strUsernameFile) {
 	string filePath = "del " + USER_INFO_FOLDER + strUsernameFile + ".txt";
 	system(filePath.c_str());
 }
 ```
-Source in `CAdministrator.h`
+Source code function `eraseEmployee` in [`CAdministrator.h`](Project2/CAdministrator.cpp#L19)
 ```cpp
 void CAdministrator::eraseEmployee(string strUsername) {
 	deleteAccount(EMPLOYEES_FILE, strUsername);
@@ -228,7 +229,7 @@ Step 2: re-open the sourceUserFile again
 
 Step 3: change the data and overwrite the information from the userTemp
 
-Source in `CAdministrator.h`
+Source code function `updateInfoEmployee` in [`CAdministrator.h`](Project2/CAdministrator.cpp#L26)
 ```cpp
 void CAdministrator::updateInfoEmployee(string strSourceUserFile, string strInfoUpdated, char cOption) {
 	//Step 1:
@@ -258,7 +259,7 @@ Step 2: load information into userTemp from file [username].txt
 
 Step 3: export information to console
 
-Source in [`CAdministrator.h`](Project2/CAdministrator.cpp)
+Source code function `showInfoAllEmployee` in [`CAdministrator.h`](Project2/CAdministrator.cpp#L49)
 ```cpp
 void CAdministrator::showInfoAllEmployee() {
 	ifstream fileIn;
