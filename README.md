@@ -162,7 +162,7 @@ Step 1. create a new variable `fileUpdated` to open the list of employees in `EM
 
 Step 2: create a new file [username].txt in `USER_INFO_FOLDER`.
 
-Source code function `addEmployee` in [`CAdministrator.h`](Project2/CAdministrator.cpp#L8)
+Source code function `addEmployee` in [`CAdministrator.cpp`](Project2/CAdministrator.cpp#L8)
 ```cpp
 void CAdministrator::addEmployee(string strUsername) {
 	// Step 1
@@ -185,7 +185,7 @@ Step 3: write from the file is renamed (EmployeesTemp.txt) to Employees.txt and 
 
 Step 4: delete the file is renamed (EmployeesTemp.txt).
 
-Source code function `deleteAccount` in [`HandleMain.h`](Project2/HandleMain.cpp#L19)
+Source code function `deleteAccount` in [`HandleMain.cpp`](Project2/HandleMain.cpp#L19)
 ```cpp
 void deleteAccount(string strSourceFile, string strUsername) {
 	CUser userTemp;
@@ -208,14 +208,14 @@ void deleteAccount(string strSourceFile, string strUsername) {
 	system(employeeFileRenamed.insert(0, "del ").c_str());
 }
 ```
-Source code function `deleteFile` in [`HandleMain.h`](Project2/HandleMain.cpp#L14)
+Source code function `deleteFile` in [`HandleMain.cpp`](Project2/HandleMain.cpp#L14)
 ```cpp
 void deleteFile(string strUsernameFile) {
 	string filePath = "del " + USER_INFO_FOLDER + strUsernameFile + ".txt";
 	system(filePath.c_str());
 }
 ```
-Source code function `eraseEmployee` in [`CAdministrator.h`](Project2/CAdministrator.cpp#L19)
+Source code function `eraseEmployee` in [`CAdministrator.cpp`](Project2/CAdministrator.cpp#L19)
 ```cpp
 void CAdministrator::eraseEmployee(string strUsername) {
 	deleteAccount(EMPLOYEES_FILE, strUsername);
@@ -229,7 +229,7 @@ Step 2: re-open the sourceUserFile again
 
 Step 3: change the data and overwrite the information from the userTemp
 
-Source code function `updateInfoEmployee` in [`CAdministrator.h`](Project2/CAdministrator.cpp#L26)
+Source code function `updateInfoEmployee` in [`CAdministrator.cpp`](Project2/CAdministrator.cpp#L26)
 ```cpp
 void CAdministrator::updateInfoEmployee(string strSourceUserFile, string strInfoUpdated, char cOption) {
 	//Step 1:
@@ -259,7 +259,7 @@ Step 2: load information into userTemp from file [username].txt
 
 Step 3: export information to console
 
-Source code function `showInfoAllEmployee` in [`CAdministrator.h`](Project2/CAdministrator.cpp#L49)
+Source code function `showInfoAllEmployee` in [`CAdministrator.cpp`](Project2/CAdministrator.cpp#L49)
 ```cpp
 void CAdministrator::showInfoAllEmployee() {
 	ifstream fileIn;
@@ -282,4 +282,44 @@ void CAdministrator::showInfoAllEmployee() {
 	fileIn.close();
 }
 ```
+#### Function `showAccountInfo`
+This function simply reads the account information from the given [username].txt, and outputs it to the console.
+
+Source code function `showAccountInfo` in [`HandleMain.cpp`](Project2/HandleMain.cpp#L40)
+```cpp
+void showAccountInfo(string strUsername) {
+	CUser userTemp;
+	ifstream fileIn = openFile(strUsername);
+	userTemp.readInfo(fileIn);
+	userTemp.output();
+	fileIn.close();
+}
+```
+#### Function `isSuccessChangePass`
+I dunno how to explain this source, because it still has bug =))))))) maybe, have fun
+
+Source code function `isSuccessChangePass` in [`CEmployee.cpp`](Project2/CEmployee.cpp#L7)
+```cpp
+bool CEmployee::isSuccessChangePass(string strUsername, string strCurrentPass, string strNewPass, string strConfirmNewPass) {
+	ifstream fileIn;
+	fileIn.open(EMPLOYEES_FILE.c_str());
+	while (!fileIn.eof()) {
+		readAccount(fileIn);
+		if (getUsername() == strUsername && getPassword() == strCurrentPass && strNewPass == strConfirmNewPass) {
+			setPassword(strNewPass);
+			fileIn.close();
+			deleteAccount(EMPLOYEES_FILE, strUsername);
+			ofstream fileOut;
+			fileOut.open(EMPLOYEES_FILE.c_str(), ios_base::app);
+			writeAccount(fileOut);
+			fileOut.close();
+			return true;
+		}
+	}
+	fileIn.close();
+	return false;
+}
+```
+
+
 
