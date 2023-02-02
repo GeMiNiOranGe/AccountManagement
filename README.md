@@ -258,7 +258,7 @@ Step 2: load information into userTemp from file [username].txt
 
 Step 3: export information to console
 
-Source in `[CAdministrator.h](Project2/CAdministrator.cpp)`
+Source in [`CAdministrator.h`](Project2/CAdministrator.cpp)
 ```cpp
 void CAdministrator::showInfoAllEmployee() {
 	ifstream fileIn;
