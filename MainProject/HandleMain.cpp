@@ -1,18 +1,18 @@
 #include "HandleMain.h"
 
 std::ofstream createFile(std::string strUsernameFile) {
-	std::string filePath = USER_INFO_FOLDER + strUsernameFile + ".txt";
+	std::string filePath = USERS_INFO_FOLDER + strUsernameFile + ".txt";
 	std::ofstream fileTemp(filePath);
 	return fileTemp;
 }
 std::ifstream openFile(std::string strUsernameFile) {
-	std::string filePath = USER_INFO_FOLDER + strUsernameFile + ".txt";
+	std::string filePath = USERS_INFO_FOLDER + strUsernameFile + ".txt";
 	std::ifstream fileTemp;
 	fileTemp.open(filePath);
 	return fileTemp;
 }
 void deleteFile(std::string strUsernameFile) {
-	std::string filePath = "del " + USER_INFO_FOLDER + strUsernameFile + ".txt";
+	std::string filePath = "del " + USERS_INFO_FOLDER + strUsernameFile + ".txt";
 	system(filePath.c_str());
 }
 

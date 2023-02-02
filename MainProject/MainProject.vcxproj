@@ -170,7 +170,7 @@
     <ClInclude Include="UIHaveNoUX.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resources\Admin.txt" />
+    <Text Include="Resources\Administrators.txt" />
     <Text Include="Resources\Employees.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

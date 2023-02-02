@@ -64,7 +64,7 @@
     <Text Include="Resources\Employees.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="Resources\Admin.txt">
+    <Text Include="Resources\Administrators.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

@@ -31,7 +31,7 @@ void CAdministrator::updateInfoEmployee(std::string strSourceUserFile, std::stri
 	fileIn.close();
 	//Step 2:
 	std::ofstream fileOut;
-	fileOut.open((USER_INFO_FOLDER + strSourceUserFile + ".txt").c_str());
+	fileOut.open((USERS_INFO_FOLDER + strSourceUserFile + ".txt").c_str());
 	//Step 3:
 	if (cOption == 49)
 		setFullName(strInfoUpdated);
