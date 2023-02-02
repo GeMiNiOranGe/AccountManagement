@@ -149,4 +149,77 @@ public:
 ```
 
 ### Main functions
-Some key functions to handle in source code and define methods in classes
+Some important functions for main processing in the source code and the definition of the methods of the classes
+
+Important file path in `Config.h`
+```cpp
+const string EMPLOYEES_FILE = "Resources\\Employees.txt";
+const string ADMINISTRATOR_FILE = "Resources\\Admin.txt";
+const string USER_INFO_FOLDER = "Resources\\UserInfo\\";
+```
+#### Function `addEmloyee`:
+Step 1. create a new variable `fileUpdated` to open the list of employees in `EMPLOYEES_FILE` and add the latest employee name at the end of the file with the default password of "111111".
+
+Step 2: create a new file [username].txt in `USER_INFO_FOLDER`.
+
+Source in `CAdministrator.h`
+```cpp
+void CAdministrator::addEmployee(string strUsername) {
+	// Step 1
+	ofstream fileUpdated;
+	fileUpdated.open(EMPLOYEES_FILE, ios_base::app);
+	fileUpdated << strUsername << "," << "111111" << endl;
+	// Step 2
+	ofstream fileOut = createFile(strUsername);
+	input();
+	writeInfo(fileOut);
+	fileOut.close();
+}
+```
+#### Function `eraseEmployee`:
+Step 1: rename Employees.txt into EmployeesTemp.txt
+
+Step 2: create a new Employees.txt and open the file is renamed (EmployeesTemp.txt)
+
+Step 3: write from the file is renamed (EmployeesTemp.txt) to Employees.txt and don't write the employee want to delete
+
+Step 4: delete the file is renamed (EmployeesTemp.txt)
+
+Source in `HandleMain.h`
+```cpp
+void deleteAccount(string strSourceFile, string strUsername) {
+	CUser userTemp;
+	//Step 1:
+	string employeeFileRenamed = strSourceFile;
+	rename(strSourceFile.c_str(), employeeFileRenamed.insert(employeeFileRenamed.size() - 4, "Temp").c_str());
+	//Step 2:
+	ofstream fileOut(strSourceFile);
+	ifstream fileIn;
+	fileIn.open(employeeFileRenamed.c_str());
+	//Step 3:
+	while (!fileIn.eof()) {
+		userTemp.readAccount(fileIn);
+		if (userTemp.getUsername() != strUsername && userTemp.getUsername() != "")
+			userTemp.writeAccount(fileOut);
+	}
+	fileOut.close();
+	fileIn.close();
+	//Step 4:
+	system(employeeFileRenamed.insert(0, "del ").c_str());
+}
+```
+```cpp
+void deleteFile(string strUsernameFile) {
+	string filePath = "del " + USER_INFO_FOLDER + strUsernameFile + ".txt";
+	system(filePath.c_str());
+}
+```
+Source in `CAdministrator.h`
+```cpp
+void CAdministrator::eraseEmployee(string strUsername) {
+	deleteAccount(EMPLOYEES_FILE, strUsername);
+	deleteFile(strUsername);
+}
+```
+
+
