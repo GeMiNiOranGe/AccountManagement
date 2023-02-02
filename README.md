@@ -86,8 +86,6 @@ Build an employee management app with 2 types of users: administrator and employ
 
 ## Source code explanation
 ### Declaring Classes
-We define classes with attributes and methods
-
 Class CUser in `CUser.h`
 ```cpp
 class CUser {
@@ -151,4 +149,4 @@ public:
 ```
 
 ### Main functions
-A few key functions to handle in the source code
+Some key functions to handle in source code and define methods in classes
