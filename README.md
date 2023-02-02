@@ -4,7 +4,6 @@ This is the first version of this app, i recommend you use branch UpdateToVS2019
 ## Table of Contents
 * [Project content](#Project-content)
 	* [Administrator features include](#Administrator-features-include)
-		* [Administrator features include](#Administrator-features-account)
 		* [Add an employee account](#Add-an-employee-account)
 		* [Delete an employee account](#Delete-an-employee-account)
 		* [Find an employee account](#Find-an-employee-account)
