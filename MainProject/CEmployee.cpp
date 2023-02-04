@@ -9,14 +9,14 @@ bool CEmployee::isSuccessChangePass(std::string strUsername, std::string strCurr
 	std::ifstream fileIn;
 	fileIn.open(EMPLOYEES_FILE.c_str());
 	while (!fileIn.eof()) {
-		readAccount(fileIn);
+		handleFile::read::account(*this, fileIn);
 		if (getUsername() == strUsername && getPassword() == strCurrentPass && strNewPass == strConfirmNewPass) {
 			setPassword(strNewPass);
 			fileIn.close();
 			deleteAccount(EMPLOYEES_FILE, strUsername);
 			std::ofstream fileOut;
 			fileOut.open(EMPLOYEES_FILE.c_str(), std::ios_base::app);
-			writeAccount(fileOut);
+			handleFile::write::account(*this, fileOut);
 			fileOut.close();
 			return true;
 		}

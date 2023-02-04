@@ -35,10 +35,10 @@ public:
 	void setPhoneNumber(const std::string &);
 	void setEmailAddress(const std::string &);
 
-	void readAccount(std::ifstream &);
-	void writeAccount(std::ofstream &);
-	void readInfo(std::ifstream &);
-	void writeInfo(std::ofstream &);
+	//void readAccount(std::ifstream &);
+	//void writeAccount(std::ofstream &);
+	//void readInfo(std::ifstream &);
+	//void writeInfo(std::ofstream &);
 
 	void input();
 	void output();

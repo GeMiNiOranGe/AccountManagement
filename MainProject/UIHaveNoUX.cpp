@@ -117,14 +117,15 @@ void showAnEmployeeInfoElement(color textColor, std::string strUsername, std::st
 char menuAdmin() {
 	system("cls");
 	textAndBackgroundColor(color::LightYellow, color::Black);
-	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ—————————————<MENU>——————————————" << std::endl;
-	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖| 1. Them Employee                " << std::endl;
-	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  2. Xoa Employee                 " << std::endl;
-	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  3. Tim Employee                 " << std::endl;
-	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  4. Cap nhat Employee            " << std::endl;
-	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  5. Hien thi thong tin Employee  " << std::endl;
-	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖  6. Thoat                        " << std::endl;
-	std::cout << "\tͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖——————————————————————————————————" << std::endl;
+	/*ͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ*/
+	std::cout << "\t——————————————<MENU>——————————————" << std::endl;
+	std::cout << "\t  1. Them Employee                " << std::endl;
+	std::cout << "\t  2. Xoa Employee                 " << std::endl;
+	std::cout << "\t  3. Tim Employee                 " << std::endl;
+	std::cout << "\t  4. Cap nhat Employee            " << std::endl;
+	std::cout << "\t  5. Hien thi thong tin Employee  " << std::endl;
+	std::cout << "\t  6. Thoat                        " << std::endl;
+	std::cout << "\t——————————————————————————————————" << std::endl;
 	textAndBackgroundColor(color::LightAqua, color::Black);
 	std::cout << "\tMoi ban chon chuc nang" << std::endl;
 	return _getch();

@@ -4,10 +4,10 @@
 
 #include "CUser.h"
 #include "HandleMain.h"
+#include "HandleFile.h"
 #include "UIHaveNoUX.h"
 
-class CAdministrator :
-	public CUser {
+class CAdministrator : public CUser {
 public:
 	CAdministrator(std::string = "", std::string = "111111", std::string = "", std::string = "", std::string = "", std::string = "");
 

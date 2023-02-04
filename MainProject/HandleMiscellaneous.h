@@ -28,6 +28,7 @@ enum class color {
 
 //All functions below can be used in 4 projects of data structures
 void encodePassword(std::string & strHandle);
+
 // 0 = Black  |  8 = Gray
 // 1 = Blue   |  9 = Light Blue
 // 2 = Green  | 10 = Light Green

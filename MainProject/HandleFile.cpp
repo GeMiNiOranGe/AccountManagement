@@ -1,0 +1,31 @@
+#include "HandleFile.h"
+
+void handleFile::read::account(CUser & userTemp, std::ifstream & fileIn) {
+	std::string _strUsername, _strPassword;
+	getline(fileIn, _strUsername, ',');
+	getline(fileIn, _strPassword);
+	userTemp.setUsername(_strUsername);
+	userTemp.setPassword(_strPassword);
+}
+void handleFile::read::info(CUser & userTemp, std::ifstream & fileIn) {
+	std::string _strFullName, _strAddress, _strPhoneNumber, _strEmailAddress;
+	getline(fileIn, _strFullName);
+	getline(fileIn, _strAddress);
+	getline(fileIn, _strPhoneNumber);
+	getline(fileIn, _strEmailAddress);
+	userTemp.setFullName(_strFullName);
+	userTemp.setAddress(_strAddress);
+	userTemp.setPhoneNumber(_strPhoneNumber);
+	userTemp.setEmailAddress(_strEmailAddress);
+}
+
+void handleFile::write::account(CUser & userTemp, std::ofstream & fileOut) {
+	fileOut << userTemp.getUsername() << ',';
+	fileOut << userTemp.getPassword() << std::endl;
+}
+void handleFile::write::info(CUser & userTemp, std::ofstream & fileOut) {
+	fileOut << userTemp.getFullName() << std::endl;
+	fileOut << userTemp.getAddress() << std::endl;
+	fileOut << userTemp.getPhoneNumber() << std::endl;
+	fileOut << userTemp.getEmailAddress() << std::endl;
+}

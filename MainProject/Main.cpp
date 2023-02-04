@@ -1,9 +1,9 @@
 #include "CUser.h"
 #include "CAdministrator.h"
 #include "CEmployee.h"
-#include "UIHaveNoUX.h"
-#include "HandleMiscellaneous.h"
 #include "HandleMain.h"
+#include "HandleMiscellaneous.h"
+#include "UIHaveNoUX.h"
 #include "Config.h"
 
 using namespace std;
@@ -41,7 +41,7 @@ int main() {
 				strUsernameTemp.clear();
 				strPasswordTemp.clear();
 				loginAdmin(strUsernameTemp, strPasswordTemp);
-				if (hasAccount(ADMINISTRATOR_FILE, strUsernameTemp, strPasswordTemp)) {
+				if (hasAccount(ADMINISTRATORS_FILE, strUsernameTemp, strPasswordTemp)) {
 					handleAdmin();
 					g_bBreakLoop = true;
 				}
