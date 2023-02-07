@@ -1,6 +1,9 @@
 ﻿#include "UIHaveNoUX.h"
 
 std::string formLogin(std::string & strUsername, std::string & strPassword) {
+	//
+	// TODO: add type in list admin and employee to combine frmAdminLogin and frmEmployeeLogin into frmLogin
+	// 
 	//if (hasAccount(ADMINISTRATOR_FILE, strUsername, strPassword)) {
 	//	return "admin";
 	//}

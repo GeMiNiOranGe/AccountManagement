@@ -58,27 +58,6 @@ void CUser::setEmailAddress(const std::string & _strEmailAddress) {
 	this->strEmailAddress = _strEmailAddress;
 }
 
-//void CUser::readAccount(std::ifstream & fileIn) {
-//	getline(fileIn, this->strUsername, ',');
-//	getline(fileIn, this->strPassword);
-//}
-//void CUser::writeAccount(std::ofstream & fileOut) {
-//	fileOut << this->strUsername << ',';
-//	fileOut << this->strPassword << std::endl;
-//}
-//void CUser::readInfo(std::ifstream & fileIn) {
-//	getline(fileIn, this->strFullName);
-//	getline(fileIn, this->strAddress);
-//	getline(fileIn, this->strPhoneNumber);
-//	getline(fileIn, this->strEmailAddress);
-//}
-//void CUser::writeInfo(std::ofstream & fileOut) {
-//	fileOut << this->strFullName << std::endl;
-//	fileOut << this->strAddress << std::endl;
-//	fileOut << this->strPhoneNumber << std::endl;
-//	fileOut << this->strEmailAddress << std::endl;
-//}
-
 void CUser::input() {
 	std::cin.ignore();
 	textAndBackgroundColor(color::LightYellow, color::Black);
