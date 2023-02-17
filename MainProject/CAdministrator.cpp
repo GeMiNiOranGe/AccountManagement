@@ -1,15 +1,17 @@
 #include "CAdministrator.h"
 
-CAdministrator::CAdministrator(std::string _strUsername, std::string _strPassword, std::string _strFullName,
-	std::string _strAddress, std::string _strPhoneNumber, std::string _strEmailAddress)
-	:CUser(_strUsername, _strPassword, _strFullName, _strAddress, _strPhoneNumber, _strEmailAddress) {
+CAdministrator::CAdministrator(
+	std::string _strUsername, std::string _strPassword, std::string _strId,
+	std::string _strFullName, std::string _strAddress,
+	std::string _strPhoneNumber, std::string _strEmailAddress
+) : CUser(_strUsername, _strPassword, _strId, _strFullName, _strAddress, _strPhoneNumber, _strEmailAddress) {
 }
 //Step 1: update file Employees.txt
 //Step 2: create a new file and add information to the newly created file
 void CAdministrator::addEmployee(std::string strUsername) {
 	//Step 1:
 	std::ofstream fileUpdated;
-	fileUpdated.open(EMPLOYEES_FILE, std::ios_base::app);
+	fileUpdated.open(ACCOUNTS_FILE, std::ios_base::app);
 	fileUpdated << strUsername << "," << "111111" << std::endl;
 	//Step 2: 
 	std::ofstream fileOut = createFile(strUsername);
@@ -18,7 +20,7 @@ void CAdministrator::addEmployee(std::string strUsername) {
 	fileOut.close();
 }
 void CAdministrator::eraseEmployee(std::string strUsername) {
-	deleteAccount(EMPLOYEES_FILE, strUsername);
+	deleteAccount(ACCOUNTS_FILE, strUsername);
 	deleteFile(strUsername);
 }
 //Step 1: load infomation from sourceUserFile
@@ -49,9 +51,9 @@ void CAdministrator::updateInfoEmployee(std::string strSourceUserFile, std::stri
 //Step 3: export information
 void CAdministrator::showInfoAllEmployee() {
 	std::ifstream fileIn;
-	fileIn.open(EMPLOYEES_FILE);
-	showAnEmployeeInfoElement(color::LightBlue, "Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
-	showAnEmployeeInfoElement(color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
+	fileIn.open(ACCOUNTS_FILE);
+	showAnEmployeeInfoElement(Color::LightBlue, "Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
+	showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
 	while (!fileIn.eof()) {
 		//Step 1:
 		handleFile::read::account(*this, fileIn);
@@ -60,8 +62,8 @@ void CAdministrator::showInfoAllEmployee() {
 		handleFile::read::info(*this, fileUserInfoTemp);
 		//Step 3:
 		if (getUsername() != "") {
-			showAnEmployeeInfoElement(color::BrightWhite, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
-			showAnEmployeeInfoElement(color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
+			showAnEmployeeInfoElement(Color::BrightWhite, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
+			showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
 		}
 		fileUserInfoTemp.close();
 	}

@@ -22,4 +22,5 @@ void showAccountInfo(std::string strUsername);
 bool hasUsername(std::string strSourceFile, std::string strUsername);
 bool hasAccount(std::string strSourceFile, std::string strUsername, std::string strPassword);
 
+std::string checkTypeAccount(std::string strUsername, std::string strPassword);
 #endif

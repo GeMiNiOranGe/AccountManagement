@@ -28,7 +28,7 @@ void encodePassword(std::string & strPassword) {
 		}
 	} while (cEvent != 13);
 }
-void textAndBackgroundColor(color textColor, color backgroundColor) {
+void textAndBackgroundColor(Color textColor, Color backgroundColor) {
 	short colorCode = static_cast<short>(backgroundColor) * 16 + static_cast<short>(textColor);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
 }
@@ -42,9 +42,9 @@ void gotoXY(short x, short y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 void warning(std::string strMessage) {
-	textAndBackgroundColor(color::White, color::Red);
+	textAndBackgroundColor(Color::White, Color::Red);
 	std::cout << "\a" << strMessage << std::endl;
-	textAndBackgroundColor(color::White, color::Black);
+	textAndBackgroundColor(Color::White, Color::Black);
 	system("pause");
 }
 char * convertStringToChar(std::string strInput) {

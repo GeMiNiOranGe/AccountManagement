@@ -7,35 +7,34 @@ std::string formLogin(std::string & strUsername, std::string & strPassword) {
 	//if (hasAccount(ADMINISTRATOR_FILE, strUsername, strPassword)) {
 	//	return "admin";
 	//}
-	return std::string();
 	system("cls");
-	std::cout << std::endl;
-	textAndBackgroundColor(color::LightYellow, color::Black);
-	std::cout << "\t********************************" << std::endl;
-	std::cout << "\t*            ";
-	textAndBackgroundColor(color::LightGreen, color::Black);
-	std::cout << "LOG IN            ";
-	textAndBackgroundColor(color::LightYellow, color::Black);
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
+	std::cout << "\t************************************" << std::endl;
+	std::cout << "\t*              ";
+	textAndBackgroundColor(Color::LightGreen, Color::Black);
+	std::cout << "LOG IN              ";
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	std::cout << "*" << std::endl;
-	std::cout << "\t********************************" << std::endl;
-	std::cout << "\tUser: " << std::endl;
-	std::cout << "\tPass: " << std::endl;
-	textAndBackgroundColor(color::White, color::Black);
-	gotoXY(14, 3);
+	std::cout << "\t************************************" << std::endl;
+	std::cout << "\tUsername: " << std::endl;
+	std::cout << "\tPassword: " << std::endl;
+	textAndBackgroundColor(Color::White, Color::Black);
+	gotoXY(18, 3);
 	getline(std::cin, strUsername);
-	gotoXY(14, 4);
+	gotoXY(18, 4);
 	encodePassword(strPassword);
-	std::cout << std::endl;
+
+	return std::string();
 }
 
 char chooseAdminOrEmployee() {
 	system("cls");
-	textAndBackgroundColor(color::LightRed, color::Black);
+	textAndBackgroundColor(Color::LightRed, Color::Black);
 	std::cout << "\t+------------------------+" << std::endl;
 	std::cout << "\t| 1. Dang Nhap ADMIN     |" << std::endl;
 	std::cout << "\t| 2. Dang Nhap EMPLOYEES |" << std::endl;
 	std::cout << "\t+------------------------+" << std::endl;
-	textAndBackgroundColor(color::LightAqua, color::Black);
+	textAndBackgroundColor(Color::LightAqua, Color::Black);
 	std::cout << "\tMoi ban chon" << std::endl;
 	return _getch();
 }
@@ -46,17 +45,17 @@ for (0 ==> size) cout << '*'
 IDEA 2: make border can change style*/
 void loginAdmin(std::string & strUsername, std::string & strPassword) {
 	system("cls");
-	textAndBackgroundColor(color::LightYellow, color::Black);
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	std::cout << "\t***************************" << std::endl;
 	std::cout << "\t*     ";
-	textAndBackgroundColor(color::LightGreen, color::Black);
+	textAndBackgroundColor(Color::LightGreen, Color::Black);
 	std::cout << "DANG NHAP ADMIN     ";
-	textAndBackgroundColor(color::LightYellow, color::Black);
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	std::cout << "*" << std::endl;
 	std::cout << "\t***************************" << std::endl;
 	std::cout << "\tUser: " << std::endl;
 	std::cout << "\tPin: " << std::endl;
-	textAndBackgroundColor(color::White, color::Black);
+	textAndBackgroundColor(Color::White, Color::Black);
 	gotoXY(14, 3);
 	getline(std::cin, strUsername);
 	gotoXY(14, 4);
@@ -65,18 +64,18 @@ void loginAdmin(std::string & strUsername, std::string & strPassword) {
 }
 void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin) {
 	system("cls");
-	textAndBackgroundColor(color::LightYellow, color::Black);
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	std::cout << "\t***************************" << std::endl;
 	std::cout << "\t*   ";
-	textAndBackgroundColor(color::LightGreen, color::Black);
+	textAndBackgroundColor(Color::LightGreen, Color::Black);
 	std::cout << "DANG NHAP EMPLOYEES   ";
-	textAndBackgroundColor(color::LightYellow, color::Black);
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	std::cout << "*" << std::endl;
 	std::cout << "\t***************************" << std::endl;
 	std::cout << "\tUser: " << std::endl;
 	std::cout << "\tPass: " << std::endl;
 	std::cout << "So lan con khi dang nhap sai mat khau: " << iMaxLogin << std::endl;
-	textAndBackgroundColor(color::White, color::Black);
+	textAndBackgroundColor(Color::White, Color::Black);
 	gotoXY(14, 3);
 	getline(std::cin, strUsername);
 	gotoXY(14, 4);
@@ -84,7 +83,7 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 	std::cout << std::endl;
 }
 
-void showAnEmployeeInfoElement(color textColor, std::string strUsername, std::string strFullName, std::string strAddress,
+void showAnEmployeeInfoElement(Color textColor, std::string strUsername, std::string strFullName, std::string strAddress,
 	std::string strPhoneNumber, std::string strEmailAddress, std::string endType, char fillType) {
 	int usernameSize = 15;
 	int fullNameSize = 30;
@@ -93,25 +92,25 @@ void showAnEmployeeInfoElement(color textColor, std::string strUsername, std::st
 	int emailAddressSize = 25;
 
 	std::cout << std::setfill(fillType);
-	textAndBackgroundColor(textColor, color::Black);
+	textAndBackgroundColor(textColor, Color::Black);
 	std::cout << std::setw(usernameSize) << std::left << strUsername;
-	textAndBackgroundColor(color::BrightWhite, color::Black);
+	textAndBackgroundColor(Color::BrightWhite, Color::Black);
 	std::cout << endType;
-	textAndBackgroundColor(textColor, color::Black);
+	textAndBackgroundColor(textColor, Color::Black);
 	std::cout << std::setw(fullNameSize) << std::left << strFullName;
-	textAndBackgroundColor(color::BrightWhite, color::Black);
+	textAndBackgroundColor(Color::BrightWhite, Color::Black);
 	std::cout << endType;
-	textAndBackgroundColor(textColor, color::Black);
+	textAndBackgroundColor(textColor, Color::Black);
 	std::cout << std::setw(addressSize) << std::left << strAddress;
-	textAndBackgroundColor(color::BrightWhite, color::Black);
+	textAndBackgroundColor(Color::BrightWhite, Color::Black);
 	std::cout << endType;
-	textAndBackgroundColor(textColor, color::Black);
+	textAndBackgroundColor(textColor, Color::Black);
 	std::cout << std::setw(phoneNumberSize) << std::left << strPhoneNumber;
-	textAndBackgroundColor(color::BrightWhite, color::Black);
+	textAndBackgroundColor(Color::BrightWhite, Color::Black);
 	std::cout << endType;
-	textAndBackgroundColor(textColor, color::Black);
+	textAndBackgroundColor(textColor, Color::Black);
 	std::cout << std::setw(emailAddressSize) << std::left << strEmailAddress;
-	textAndBackgroundColor(color::BrightWhite, color::Black);
+	textAndBackgroundColor(Color::BrightWhite, Color::Black);
 	std::cout << endType.at(0);
 	std::cout << std::setfill(' ');
 	std::cout << std::endl;
@@ -119,7 +118,7 @@ void showAnEmployeeInfoElement(color textColor, std::string strUsername, std::st
 
 char menuAdmin() {
 	system("cls");
-	textAndBackgroundColor(color::LightYellow, color::Black);
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	/*ͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ*/
 	std::cout << "\t——————————————<MENU>——————————————" << std::endl;
 	std::cout << "\t  1. Them Employee                " << std::endl;
@@ -129,37 +128,37 @@ char menuAdmin() {
 	std::cout << "\t  5. Hien thi thong tin Employee  " << std::endl;
 	std::cout << "\t  6. Thoat                        " << std::endl;
 	std::cout << "\t——————————————————————————————————" << std::endl;
-	textAndBackgroundColor(color::LightAqua, color::Black);
+	textAndBackgroundColor(Color::LightAqua, Color::Black);
 	std::cout << "\tMoi ban chon chuc nang" << std::endl;
 	return _getch();
 }
 char menuEmployee() {
 	system("cls");
-	textAndBackgroundColor(color::LightYellow, color::Black);
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	std::cout << "\t**********MENU EMPLOYEE***********" << std::endl;
 	std::cout << "\t  1. Xem thong tin tai khoan      " << std::endl;
 	std::cout << "\t  2. Doi password                 " << std::endl;
 	std::cout << "\t  3. Thoat                        " << std::endl;
 	std::cout << "\t**********************************" << std::endl;
-	textAndBackgroundColor(color::LightAqua, color::Black);
+	textAndBackgroundColor(Color::LightAqua, Color::Black);
 	std::cout << "\tMoi ban chon chuc nang" << std::endl;
 	return _getch();
 }
 
 char menuUpdateInfo() {
 	system("cls");
-	textAndBackgroundColor(color::LightYellow, color::Black);
+	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	std::cout << "<Chon thong tin can cap nhat>" << std::endl;
-	textAndBackgroundColor(color::LightAqua, color::Black);
+	textAndBackgroundColor(Color::LightAqua, Color::Black);
 	std::cout << "--------------------" << std::endl;
-	textAndBackgroundColor(color::BrightWhite, color::Black);
+	textAndBackgroundColor(Color::BrightWhite, Color::Black);
 	std::cout << "  1. Ho va ten" << std::endl;
 	std::cout << "  2. Dia chi" << std::endl;
 	std::cout << "  3. So dien thoai" << std::endl;
 	std::cout << "  4. Dia chi email" << std::endl;
-	textAndBackgroundColor(color::LightAqua, color::Black);
+	textAndBackgroundColor(Color::LightAqua, Color::Black);
 	std::cout << "--------------------" << std::endl;
-	textAndBackgroundColor(color::LightGreen, color::Black);
+	textAndBackgroundColor(Color::LightGreen, Color::Black);
 	std::cout << "<ESC> de huy bo" << std::endl;
 	return _getch();
 }

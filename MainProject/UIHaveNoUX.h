@@ -11,7 +11,7 @@ char chooseAdminOrEmployee();
 void loginAdmin(std::string & strUsername, std::string & strPassword);
 void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin);
 void showAnEmployeeInfoElement(
-	color textColor,
+	Color textColor,
 	std::string strUsername,
 	std::string strFullName,
 	std::string strAddress,

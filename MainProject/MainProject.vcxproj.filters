@@ -67,10 +67,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resources\Employees.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Resources\Administrators.txt">
+    <Text Include="Resources\Accounts.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

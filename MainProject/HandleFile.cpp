@@ -1,11 +1,13 @@
 #include "HandleFile.h"
 
 void handleFile::read::account(CUser & userTemp, std::ifstream & fileIn) {
-	std::string _strUsername, _strPassword;
+	std::string _strId, _strUsername, _strPassword;
+	getline(fileIn, _strId, ',');
 	getline(fileIn, _strUsername, ',');
 	getline(fileIn, _strPassword);
 	userTemp.setUsername(_strUsername);
 	userTemp.setPassword(_strPassword);
+	userTemp.setId(_strId);
 }
 void handleFile::read::info(CUser & userTemp, std::ifstream & fileIn) {
 	std::string _strFullName, _strAddress, _strPhoneNumber, _strEmailAddress;
@@ -20,8 +22,22 @@ void handleFile::read::info(CUser & userTemp, std::ifstream & fileIn) {
 }
 
 void handleFile::write::account(CUser & userTemp, std::ofstream & fileOut) {
-	fileOut << userTemp.getUsername() << ',';
-	fileOut << userTemp.getPassword() << std::endl;
+	fileOut << userTemp.getId() << ',' << userTemp.getUsername() << ',' << userTemp.getPassword() << std::endl;
+}
+
+void handleFile::write::account(CUser & userTemp, std::ofstream & fileOut, handleFile::AccountType _accountType) {
+	switch (_accountType) {
+	case handleFile::AccountType::Administrator:
+		fileOut << "AD," << userTemp.getUsername() << ',' << userTemp.getPassword() << std::endl;
+		break;
+	case handleFile::AccountType::Employee:
+		fileOut << "EM," << userTemp.getUsername() << ',' << userTemp.getPassword() << std::endl;
+		break;
+	//case handleFile::AccountType::None:
+	//	break;
+	//default:
+	//	break;
+	}
 }
 void handleFile::write::info(CUser & userTemp, std::ofstream & fileOut) {
 	fileOut << userTemp.getFullName() << std::endl;

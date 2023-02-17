@@ -3,13 +3,16 @@
 #pragma once
 
 #include <iostream>
-#include <fstream>
-#include <string>
 #include "HandleMiscellaneous.h"
+#include "Config.h"
 
 class CUser {
 public:
-	CUser(std::string = "", std::string = "111111", std::string = "", std::string = "", std::string = "", std::string = "");
+	CUser(
+		std::string _strUsername = "", std::string _strPassword = DEFAULT_PASSWORD, std::string _strId = "",
+		std::string _strFullName = "", std::string _strAddress = "",
+		std::string _strPhoneNumber = "", std::string _strEmailAddress = ""
+	);
 	CUser(const CUser &);
 	~CUser();
 
@@ -23,6 +26,7 @@ public:
 
 	const std::string & getUsername();
 	const std::string & getPassword();
+	const std::string & getId();
 	const std::string & getFullName();
 	const std::string & getAddress();
 	const std::string & getPhoneNumber();
@@ -30,6 +34,7 @@ public:
 
 	void setUsername(const std::string &);
 	void setPassword(const std::string &);
+	void setId(const std::string &);
 	void setFullName(const std::string &);
 	void setAddress(const std::string &);
 	void setPhoneNumber(const std::string &);
@@ -41,6 +46,7 @@ public:
 private:
 	std::string strUsername;
 	std::string strPassword;
+	std::string strId;
 	std::string strFullName;
 	std::string strAddress;
 	std::string strPhoneNumber;

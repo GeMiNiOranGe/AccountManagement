@@ -2,8 +2,8 @@
 #define CONFIG_H
 #pragma once
 
-const std::string EMPLOYEES_FILE = "Resources\\Employees.txt";
-const std::string ADMINISTRATORS_FILE = "Resources\\Administrators.txt";
+const std::string ACCOUNTS_FILE = "Resources\\Accounts.txt";
 const std::string USERS_INFO_FOLDER = "Resources\\UsersInfo\\";
+const std::string DEFAULT_PASSWORD = "111111";
 
 #endif

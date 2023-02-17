@@ -7,7 +7,7 @@
 #include <conio.h>
 #include <string>
 
-enum class color {
+enum class Color {
 	Black,
 	Blue,
 	Green,
@@ -37,7 +37,7 @@ void encodePassword(std::string & strHandle);
 // 5 = Purple | 13 = Light Purple
 // 6 = Yellow | 14 = Light Yellow
 // 7 = White  | 15 = Bright White
-void textAndBackgroundColor(color textColor, color backgroundColor);
+void textAndBackgroundColor(Color textColor, Color backgroundColor);
 void resizeConsole(int width, int height);
 void gotoXY(short x, short y);
 void warning(std::string strMessage);
