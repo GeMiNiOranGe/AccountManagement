@@ -15,14 +15,6 @@ public:
 	CUser(const CUser &);
 	~CUser();
 
-	/* If getter have no "const", it's a combination of setter and getter, this function can use like this.
-	Code:
-	CUser.getFullName() = "Some string";
-	cout << CUser.getFullName();
-	Also, it have "const", so it's just a normal getter.
-	Setter have "const", why ??? because i used reference for that function, and it can run faster.
-	I am not sure it can run faster or not =))))) */
-
 	const string& getUsername();
 	const string& getPassword();
 	const string& getFullName();

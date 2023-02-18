@@ -4,13 +4,6 @@ void encodePassword(string & strPassword) {
 	char cEvent;
 	do {
 		cEvent = _getch();
-		// ESC key
-		//if (cEvent == 27) {
-		//	exit(0);
-		//}
-		
-		//TODO: make erase a line with "ctrl + backspace" ascii: 127
-
 		// ENTER key
 		if (cEvent == 13) {
 			break;
@@ -53,4 +46,3 @@ char* convertStringToChar(string strInput) {
 	strcpy_s(p_cOutput, strInput.length() + 1, strInput.c_str());
 	return p_cOutput;
 }
-

@@ -25,5 +25,4 @@ void gotoXY(short x, short y);
 void warning(string strMessage);
 char* convertStringToChar(string strInput);
 
-
 #endif

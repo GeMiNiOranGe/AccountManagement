@@ -12,10 +12,6 @@ char chooseAdminOrEmployee() {
 	return _getch();
 }
 
-/*IDEA 1: make name login can resize
-Ex: ADMIN ==> size = 5
-for (0 ==> size) cout << '*'
-IDEA 2: make border can change style*/
 void loginAdmin(string & strUsername, string & strPassword) {
 	system("cls");
 	textAndBackgroundColor(14, 0);

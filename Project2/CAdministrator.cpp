@@ -3,6 +3,7 @@
 CAdministrator::CAdministrator(string _strUsername, string _strPassword, string _strFullName, string _strAddress, string _strPhoneNumber, string _strEmailAddress)
 	:CUser(_strUsername, _strPassword, _strFullName, _strAddress, _strPhoneNumber, _strEmailAddress) {
 }
+
 //Step 1: update file Employees.txt
 //Step 2: create a new file and add information to the newly created file
 void CAdministrator::addEmployee(string strUsername) {
@@ -66,4 +67,3 @@ void CAdministrator::showInfoAllEmployee() {
 	}
 	fileIn.close();
 }
-

@@ -17,18 +17,6 @@ void handleEmployee(string strUsername, string strPassword);
 
 int main() {
 	SetConsoleTitle(L"Employee manager - Group ProCoder");
-	//while (true) {
-	//	system("cls");
-	//	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	//	int columns, rows;
-	//	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-	//	columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-	//	rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-	//	cout << "columns: " << columns << endl;
-	//	cout << "rows: " << rows;
-	//	Sleep(500);
-	//}
-
 	while (true) {
 		resizeConsole(370, 475);
 		g_cCatchEvent = chooseAdminOrEmployee();
@@ -107,17 +95,6 @@ int main() {
 			break;
 		}
 	}
-
-	//char key_press;
-	//int ascii_value;
-	//cout << "\n\t\tNhap phim bat ky de kiem tra ma ASCII\n\t\t\An ESC de thoat\n\n\n";
-	//while (1) {
-	//	key_press = _getch();
-	//	ascii_value = key_press;
-	//	if (ascii_value == 27) // For ESC
-	//		break;
-	//	cout << "Ban nhap phim-> \" " << key_press << " \" Gia tri ASCII =  " << ascii_value << "\n";
-	//}
 	return 0;
 }
 
