@@ -26,6 +26,53 @@ std::string formLogin(std::string & strUsername, std::string & strPassword) {
 
 	return std::string();
 }
+void formInfo() {
+	std::wstring title = L"<Enter your information>"; //chan
+	wchar_t horizontalBreak = L'─'; //│┌─┐└┘├┤
+	wchar_t verticalBreak = L'│';// ⩴⫬═≕≔≖
+	wchar_t topRightCorner = L'┐';
+	wchar_t topLeftCorner = L'┌';
+	//wchar_t topUpperMiddle = L'┌';
+	wchar_t middleLeft = L'├';
+	wchar_t middleRight = L'┤';
+	wchar_t bottomRightCorner = L'┘';
+	wchar_t bottomLeftCorner = L'└';
+	short labelSize = 15;
+	short fillSize = 24;//chan
+	if ((labelSize + fillSize + title.size()) % 2 == 1) fillSize++;
+
+	//if (title.size() % 2 == 1) fillSize++;
+	short sumSize = labelSize + fillSize;
+	//if (fillSize % 2 == 1) sumSize++;
+	short alignMiddle = (sumSize + title.size() + [title]() {
+		return title.size() % 2 == 0 ? 0 : 1;
+		}()) / 2;
+	//if (alignMiddle % 2 == 0) alignMiddle--;
+	//else alignMiddle++;
+	std::wcout << topLeftCorner << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << topRightCorner << std::setfill(L' ') << std::endl;
+	std::wcout << verticalBreak << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << verticalBreak << std::endl;
+	std::wcout << middleLeft << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << middleRight << std::setfill(L' ') << std::endl;
+	std::wcout << verticalBreak << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << verticalBreak << std::endl;
+	std::wcout << middleLeft << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << middleRight << std::setfill(L' ') << std::endl;
+	std::wcout << verticalBreak << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << verticalBreak << std::endl;
+	std::wcout << middleLeft << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << middleRight << std::setfill(L' ') << std::endl;
+	std::wcout << verticalBreak << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << verticalBreak << std::endl;
+	std::wcout << middleLeft << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << middleRight << std::setfill(L' ') << std::endl;
+	std::wcout << verticalBreak << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << verticalBreak << std::endl;
+	std::wcout << bottomLeftCorner << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << bottomRightCorner << std::setfill(L' ') << std::endl;
+	/*form info can be like this (DEMO)
+	+-------------------------------+
+	|             Title             |
+	+-------------------------------+
+	|    name:                      |
+	+-------------------------------+
+	|   phone:                      |
+	+-------------------------------+
+	|    mail:                      |
+	+-------------------------------+
+	| address:                      |
+	+-------------------------------+ */
+}
 
 char chooseAdminOrEmployee() {
 	system("cls");
@@ -85,11 +132,11 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 
 void showAnEmployeeInfoElement(Color textColor, std::string strUsername, std::string strFullName, std::string strAddress,
 	std::string strPhoneNumber, std::string strEmailAddress, std::string endType, char fillType) {
-	int usernameSize = 15;
-	int fullNameSize = 30;
-	int addressSize = 60;
-	int phoneNumberSize = 15;
-	int emailAddressSize = 25;
+	short usernameSize = 15;
+	short fullNameSize = 30;
+	short addressSize = 60;
+	short phoneNumberSize = 15;
+	short emailAddressSize = 25;
 
 	std::cout << std::setfill(fillType);
 	textAndBackgroundColor(textColor, Color::Black);

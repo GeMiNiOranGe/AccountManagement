@@ -12,11 +12,11 @@ void CAdministrator::addEmployee(std::string strUsername) {
 	//Step 1:
 	std::ofstream fileUpdated;
 	fileUpdated.open(ACCOUNTS_FILE, std::ios_base::app);
-	fileUpdated << strUsername << "," << "111111" << std::endl;
+	fileUpdated << "EM," << strUsername << "," << "111111" << std::endl;
 	//Step 2: 
 	std::ofstream fileOut = createFile(strUsername);
 	input();
-	handleFile::write::info(*this, fileOut);
+	file::write::info(*this, fileOut);
 	fileOut.close();
 }
 void CAdministrator::eraseEmployee(std::string strUsername) {
@@ -29,7 +29,7 @@ void CAdministrator::eraseEmployee(std::string strUsername) {
 void CAdministrator::updateInfoEmployee(std::string strSourceUserFile, std::string strInfoUpdated, char cOption) {
 	//Step 1:
 	std::ifstream fileIn = openFile(strSourceUserFile);
-	handleFile::read::info(*this, fileIn);
+	file::read::info(*this, fileIn);
 	fileIn.close();
 	//Step 2:
 	std::ofstream fileOut;
@@ -43,7 +43,7 @@ void CAdministrator::updateInfoEmployee(std::string strSourceUserFile, std::stri
 		setPhoneNumber(strInfoUpdated);
 	if (cOption == 52)
 		setEmailAddress(strInfoUpdated);
-	handleFile::write::info(*this, fileOut);
+	file::write::info(*this, fileOut);
 	fileOut.close();
 }
 //Step 1: load username and password into userTemp from file Employees.txt
@@ -56,10 +56,10 @@ void CAdministrator::showInfoAllEmployee() {
 	showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
 	while (!fileIn.eof()) {
 		//Step 1:
-		handleFile::read::account(*this, fileIn);
+		file::read::account(*this, fileIn);
 		//Step 2:
 		std::ifstream fileUserInfoTemp = openFile(getUsername());
-		handleFile::read::info(*this, fileUserInfoTemp);
+		file::read::info(*this, fileUserInfoTemp);
 		//Step 3:
 		if (getUsername() != "") {
 			showAnEmployeeInfoElement(Color::BrightWhite, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");

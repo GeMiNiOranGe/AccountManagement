@@ -6,7 +6,7 @@
 #include <fstream>
 #include "CUser.h"
 #include "Config.h"
-#include "HandleFile.h"
+#include "HandleIO.h"
 
 std::ofstream createFile(std::string strUsername);
 std::ifstream openFile(std::string strUsername);

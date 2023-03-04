@@ -1,3 +1,5 @@
+#include <io.h>
+#include <fcntl.h>
 #include "CUser.h"
 #include "CAdministrator.h"
 #include "CEmployee.h"
@@ -15,6 +17,8 @@ void handleEmployee(std::string strUsername, std::string strPassword);
 
 int main() {
 	SetConsoleTitle(L"Employee manager");
+	_setmode(_fileno(stdout), _O_U16TEXT);
+
 	//resizeConsole(377, 300);// 377
 	//formLogin(strUsernameTemp, strPasswordTemp);
 	//cout << strUsernameTemp << endl;
@@ -27,23 +31,25 @@ int main() {
 	//	}
 	//}
 
-	while (true) {
-		resizeConsole(405, 300);
-		strUsernameTemp.clear();
-		strPasswordTemp.clear();
-		formLogin(strUsernameTemp, strPasswordTemp);
-		std::string strTypeAccount = checkTypeAccount(strUsernameTemp, strPasswordTemp);
-		if (strTypeAccount == "admin") {
-			handleAdmin();
-		}
-		if (strTypeAccount == "employee") {
-			handleEmployee(strUsernameTemp, strPasswordTemp);
-		}
-		if (strTypeAccount == "") {
-			std::cout << std::endl;
-			warning("Sai tai khoan hoac mat khau!!!");
-		}
-	}
+	formInfo();
+
+	//while (true) {
+	//	resizeConsole(405, 300);
+	//	strUsernameTemp.clear();
+	//	strPasswordTemp.clear();
+	//	formLogin(strUsernameTemp, strPasswordTemp);
+	//	std::string strTypeAccount = checkTypeAccount(strUsernameTemp, strPasswordTemp);
+	//	if (strTypeAccount == "admin") {
+	//		handleAdmin();
+	//	}
+	//	if (strTypeAccount == "employee") {
+	//		handleEmployee(strUsernameTemp, strPasswordTemp);
+	//	}
+	//	if (strTypeAccount == "") {
+	//		std::cout << std::endl;
+	//		warning("Sai tai khoan hoac mat khau!!!");
+	//	}
+	//}
 
 	//while (true) {
 	//	resizeConsole(370, 475);
