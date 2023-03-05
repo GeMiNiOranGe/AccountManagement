@@ -26,40 +26,41 @@ std::string formLogin(std::string & strUsername, std::string & strPassword) {
 
 	return std::string();
 }
-void formInfo() {
-	std::wstring title = L"<Enter your information>"; //chan
-	wchar_t horizontalBreak = L'─'; //│┌─┐└┘├┤
-	wchar_t verticalBreak = L'│';// ⩴⫬═≕≔≖
-	wchar_t topRightCorner = L'┐';
-	wchar_t topLeftCorner = L'┌';
-	//wchar_t topUpperMiddle = L'┌';
-	wchar_t middleLeft = L'├';
-	wchar_t middleRight = L'┤';
-	wchar_t bottomRightCorner = L'┘';
-	wchar_t bottomLeftCorner = L'└';
-	short labelSize = 15;
-	short fillSize = 24;//chan
-	if ((labelSize + fillSize + title.size()) % 2 == 1) fillSize++;
+void formInfo(short labelSize, short fillSize, std::wstring title) {
+	_setmode(_fileno(stdout), _O_U16TEXT);
+	//std::wstring title = L"<Enter your information>"; //le
+	//short labelSize = 15;
+	//short fillSize = 25;//le
+	wchar_t horizontal = L'─'; //│┌─┐└┘├┤┬┴┼
+	wchar_t vertical = L'│';// ⩴⫬═≕≔≖
 
-	//if (title.size() % 2 == 1) fillSize++;
+	wchar_t topLeft = L'┌';
+	wchar_t topMiddle = L'┬';
+	wchar_t topRight = L'┐';
+
+	wchar_t middleLeft = L'├';
+	wchar_t moddle = L'┼';
+	wchar_t middleRight = L'┤';
+
+	wchar_t bottomLeft = L'└';
+	wchar_t bottomMiddle = L'┴';
+	wchar_t bottomRight = L'┘';
+
+	if ((title.size() + labelSize + fillSize) % 2 == 1) fillSize++;
 	short sumSize = labelSize + fillSize;
-	//if (fillSize % 2 == 1) sumSize++;
-	short alignMiddle = (sumSize + title.size() + [title]() {
-		return title.size() % 2 == 0 ? 0 : 1;
-		}()) / 2;
-	//if (alignMiddle % 2 == 0) alignMiddle--;
-	//else alignMiddle++;
-	std::wcout << topLeftCorner << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << topRightCorner << std::setfill(L' ') << std::endl;
-	std::wcout << verticalBreak << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << verticalBreak << std::endl;
-	std::wcout << middleLeft << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << middleRight << std::setfill(L' ') << std::endl;
-	std::wcout << verticalBreak << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << verticalBreak << std::endl;
-	std::wcout << middleLeft << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << middleRight << std::setfill(L' ') << std::endl;
-	std::wcout << verticalBreak << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << verticalBreak << std::endl;
-	std::wcout << middleLeft << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << middleRight << std::setfill(L' ') << std::endl;
-	std::wcout << verticalBreak << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << verticalBreak << std::endl;
-	std::wcout << middleLeft << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << middleRight << std::setfill(L' ') << std::endl;
-	std::wcout << verticalBreak << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << verticalBreak << std::endl;
-	std::wcout << bottomLeftCorner << std::setfill(horizontalBreak) << std::setw(sumSize) << horizontalBreak << bottomRightCorner << std::setfill(L' ') << std::endl;
+	short alignMiddle = (sumSize + title.size()) / 2;
+	std::wcout << topLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << topRight << std::setfill(L' ') << std::endl;
+	std::wcout << vertical << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << vertical << std::endl;
+	std::wcout << middleLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << middleRight << std::setfill(L' ') << std::endl;
+	std::wcout << vertical << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << vertical << std::endl;
+	std::wcout << middleLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << middleRight << std::setfill(L' ') << std::endl;
+	std::wcout << vertical << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << vertical << std::endl;
+	std::wcout << middleLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << middleRight << std::setfill(L' ') << std::endl;
+	std::wcout << vertical << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << vertical << std::endl;
+	std::wcout << middleLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << middleRight << std::setfill(L' ') << std::endl;
+	std::wcout << vertical << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << vertical << std::endl;
+	std::wcout << bottomLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << bottomRight << std::setfill(L' ') << std::endl;
+	_setmode(_fileno(stdout), _O_TEXT);
 	/*form info can be like this (DEMO)
 	+-------------------------------+
 	|             Title             |

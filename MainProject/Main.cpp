@@ -1,5 +1,3 @@
-#include <io.h>
-#include <fcntl.h>
 #include "CUser.h"
 #include "CAdministrator.h"
 #include "CEmployee.h"
@@ -17,12 +15,29 @@ void handleEmployee(std::string strUsername, std::string strPassword);
 
 int main() {
 	SetConsoleTitle(L"Employee manager");
-	_setmode(_fileno(stdout), _O_U16TEXT);
 
 	//resizeConsole(377, 300);// 377
 	//formLogin(strUsernameTemp, strPasswordTemp);
 	//cout << strUsernameTemp << endl;
 	//cout << strPasswordTemp << endl;
+
+	std::cout << "le, le, chan" << std::endl;
+	formInfo(15, 25, L"<Enter your information>");
+	std::cout << "le, le, le" << std::endl;
+	formInfo(15, 25, L"<Enter your information");
+	std::cout << "le, chan, chan" << std::endl;
+	formInfo(15, 24, L"<Enter your information>");
+	std::cout << "le, chan, le" << std::endl;
+	formInfo(15, 24, L"<Enter your information");
+	
+	std::cout << "chan, le, chan" << std::endl;
+	formInfo(16, 25, L"<Enter your information>");
+	std::cout << "chan, le, le" << std::endl;
+	formInfo(16, 25, L"<Enter your information");
+	std::cout << "chan, chan, chan" << std::endl;
+	formInfo(16, 24, L"<Enter your information>");
+	std::cout << "chan, chan, le" << std::endl;
+	formInfo(16, 24, L"<Enter your information");
 
 	//while (true) {
 	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);
@@ -31,7 +46,6 @@ int main() {
 	//	}
 	//}
 
-	formInfo();
 
 	//while (true) {
 	//	resizeConsole(405, 300);
