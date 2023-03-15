@@ -162,6 +162,7 @@
     <ClCompile Include="UIHaveNoUX.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoxBorder.h" />
     <ClInclude Include="CAdministrator.h" />
     <ClInclude Include="CEmployee.h" />
     <ClInclude Include="CUser.h" />

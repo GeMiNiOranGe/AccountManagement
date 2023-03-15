@@ -31,35 +31,28 @@ void formInfo(short labelSize, short fillSize, std::wstring title) {
 	//std::wstring title = L"<Enter your information>"; //le
 	//short labelSize = 15;
 	//short fillSize = 25;//le
-	wchar_t horizontal = L'─'; //│┌─┐└┘├┤┬┴┼
-	wchar_t vertical = L'│';// ⩴⫬═≕≔≖
 
-	wchar_t topLeft = L'┌';
-	wchar_t topMiddle = L'┬';
-	wchar_t topRight = L'┐';
-
-	wchar_t middleLeft = L'├';
-	wchar_t moddle = L'┼';
-	wchar_t middleRight = L'┤';
-
-	wchar_t bottomLeft = L'└';
-	wchar_t bottomMiddle = L'┴';
-	wchar_t bottomRight = L'┘';
+	typedef BoxBorder<BorderStyle::Single> Border;
 
 	if ((title.size() + labelSize + fillSize) % 2 == 1) fillSize++;
 	short sumSize = labelSize + fillSize;
-	short alignMiddle = (sumSize + title.size()) / 2;
-	std::wcout << topLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << topRight << std::setfill(L' ') << std::endl;
-	std::wcout << vertical << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << vertical << std::endl;
-	std::wcout << middleLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << middleRight << std::setfill(L' ') << std::endl;
-	std::wcout << vertical << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << vertical << std::endl;
-	std::wcout << middleLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << middleRight << std::setfill(L' ') << std::endl;
-	std::wcout << vertical << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << vertical << std::endl;
-	std::wcout << middleLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << middleRight << std::setfill(L' ') << std::endl;
-	std::wcout << vertical << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << vertical << std::endl;
-	std::wcout << middleLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << middleRight << std::setfill(L' ') << std::endl;
-	std::wcout << vertical << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << vertical << std::endl;
-	std::wcout << bottomLeft << std::setfill(horizontal) << std::setw(sumSize) << horizontal << bottomRight << std::setfill(L' ') << std::endl;
+	short alignMiddle = static_cast<short>(sumSize + title.size()) / 2;
+	std::wcout << Border::Top::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Top::Right() << std::setfill(L' ') << std::endl;
+	std::wcout << Border::Vertical() << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << Border::Vertical() << std::endl;
+	
+	std::wcout << Border::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Right() << std::setfill(L' ') << std::endl;
+	std::wcout << Border::Vertical() << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << Border::Vertical() << std::endl;
+	
+	std::wcout << Border::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Right() << std::setfill(L' ') << std::endl;
+	std::wcout << Border::Vertical() << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << Border::Vertical() << std::endl;
+	
+	std::wcout << Border::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Right() << std::setfill(L' ') << std::endl;
+	std::wcout << Border::Vertical() << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << Border::Vertical() << std::endl;
+	
+	std::wcout << Border::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Right() << std::setfill(L' ') << std::endl;
+	std::wcout << Border::Vertical() << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << Border::Vertical() << std::endl;
+	
+	std::wcout << Border::Bottom::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Bottom::Right() << std::setfill(L' ') << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 	/*form info can be like this (DEMO)
 	+-------------------------------+
@@ -87,7 +80,7 @@ char chooseAdminOrEmployee() {
 	return _getch();
 }
 
-/*IDEA 1: make name login can resize
+/*IDEA 1: make name login can resize 
 Ex: ADMIN ==> size = 5
 for (0 ==> size) cout << '*'
 IDEA 2: make border can change style*/
@@ -131,37 +124,37 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 	std::cout << std::endl;
 }
 
-void showAnEmployeeInfoElement(Color textColor, std::string strUsername, std::string strFullName, std::string strAddress,
-	std::string strPhoneNumber, std::string strEmailAddress, std::string endType, char fillType) {
-	short usernameSize = 15;
-	short fullNameSize = 30;
-	short addressSize = 60;
-	short phoneNumberSize = 15;
-	short emailAddressSize = 25;
+void showInfoAnAccount(Color textColor, wchar_t fillType, std::tuple<short, std::string> arg) {
+	short ArgSize = static_cast<short>(std::get<0>(arg));
 
-	std::cout << std::setfill(fillType);
+	wchar_t horizontal = L'─';
+	wchar_t vertical = L'│';
+
+	wchar_t topLeft = L'┌';
+	wchar_t topMiddle = L'┬';
+	wchar_t topRight = L'┐';
+
+	wchar_t middleLeft = L'├';
+	wchar_t middle = L'┼';
+	wchar_t middleRight = L'┤';
+
+	wchar_t bottomLeft = L'└';
+	wchar_t bottomMiddle = L'┴';
+	wchar_t bottomRight = L'┘';
+
+	std::wstring wStrArg = convertToWString(std::get<1>(arg));
+	_setmode(_fileno(stdout), _O_U16TEXT);
+
+	std::wcout << std::setfill(fillType);
+
+	std::wcout << fillType;
 	textAndBackgroundColor(textColor, Color::Black);
-	std::cout << std::setw(usernameSize) << std::left << strUsername;
+	std::wcout << std::setw(ArgSize) << std::left << wStrArg;
 	textAndBackgroundColor(Color::BrightWhite, Color::Black);
-	std::cout << endType;
-	textAndBackgroundColor(textColor, Color::Black);
-	std::cout << std::setw(fullNameSize) << std::left << strFullName;
-	textAndBackgroundColor(Color::BrightWhite, Color::Black);
-	std::cout << endType;
-	textAndBackgroundColor(textColor, Color::Black);
-	std::cout << std::setw(addressSize) << std::left << strAddress;
-	textAndBackgroundColor(Color::BrightWhite, Color::Black);
-	std::cout << endType;
-	textAndBackgroundColor(textColor, Color::Black);
-	std::cout << std::setw(phoneNumberSize) << std::left << strPhoneNumber;
-	textAndBackgroundColor(Color::BrightWhite, Color::Black);
-	std::cout << endType;
-	textAndBackgroundColor(textColor, Color::Black);
-	std::cout << std::setw(emailAddressSize) << std::left << strEmailAddress;
-	textAndBackgroundColor(Color::BrightWhite, Color::Black);
-	std::cout << endType.at(0);
-	std::cout << std::setfill(' ');
-	std::cout << std::endl;
+	std::wcout << fillType << vertical;
+
+	std::wcout << std::setfill(L' ');
+	_setmode(_fileno(stdout), _O_TEXT);
 }
 
 char menuAdmin() {
@@ -209,4 +202,8 @@ char menuUpdateInfo() {
 	textAndBackgroundColor(Color::LightGreen, Color::Black);
 	std::cout << "<ESC> de huy bo" << std::endl;
 	return _getch();
+}
+
+std::wstring convertToWString(const std::string & _string) {
+	return std::wstring(_string.begin(), _string.end());
 }

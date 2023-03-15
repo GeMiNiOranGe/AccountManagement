@@ -52,8 +52,8 @@ void CAdministrator::updateInfoEmployee(std::string strSourceUserFile, std::stri
 void CAdministrator::showInfoAllEmployee() {
 	std::ifstream fileIn;
 	fileIn.open(ACCOUNTS_FILE);
-	showAnEmployeeInfoElement(Color::LightBlue, "Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
-	showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
+	//showAnEmployeeInfoElement(Color::LightBlue, "Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
+	//showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
 	while (!fileIn.eof()) {
 		//Step 1:
 		file::read::account(*this, fileIn);
@@ -62,8 +62,8 @@ void CAdministrator::showInfoAllEmployee() {
 		file::read::info(*this, fileUserInfoTemp);
 		//Step 3:
 		if (getUsername() != "") {
-			showAnEmployeeInfoElement(Color::BrightWhite, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
-			showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
+			//showAnEmployeeInfoElement(Color::BrightWhite, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
+			//showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
 		}
 		fileUserInfoTemp.close();
 	}
