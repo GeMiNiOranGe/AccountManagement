@@ -39,19 +39,19 @@ void formInfo(short labelSize, short fillSize, std::wstring title) {
 	short alignMiddle = static_cast<short>(sumSize + title.size()) / 2;
 	std::wcout << Border::Top::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Top::Right() << std::setfill(L' ') << std::endl;
 	std::wcout << Border::Vertical() << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << Border::Vertical() << std::endl;
-	
+
 	std::wcout << Border::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Right() << std::setfill(L' ') << std::endl;
 	std::wcout << Border::Vertical() << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << Border::Vertical() << std::endl;
-	
+
 	std::wcout << Border::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Right() << std::setfill(L' ') << std::endl;
 	std::wcout << Border::Vertical() << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << Border::Vertical() << std::endl;
-	
+
 	std::wcout << Border::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Right() << std::setfill(L' ') << std::endl;
 	std::wcout << Border::Vertical() << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << Border::Vertical() << std::endl;
-	
+
 	std::wcout << Border::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Right() << std::setfill(L' ') << std::endl;
 	std::wcout << Border::Vertical() << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << Border::Vertical() << std::endl;
-	
+
 	std::wcout << Border::Bottom::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Bottom::Right() << std::setfill(L' ') << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 	/*form info can be like this (DEMO)
@@ -80,7 +80,7 @@ char chooseAdminOrEmployee() {
 	return _getch();
 }
 
-/*IDEA 1: make name login can resize 
+/*IDEA 1: make name login can resize
 Ex: ADMIN ==> size = 5
 for (0 ==> size) cout << '*'
 IDEA 2: make border can change style*/
@@ -127,20 +127,7 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 void showInfoAnAccount(Color textColor, wchar_t fillType, std::tuple<short, std::string> arg) {
 	short ArgSize = static_cast<short>(std::get<0>(arg));
 
-	wchar_t horizontal = L'─';
-	wchar_t vertical = L'│';
-
-	wchar_t topLeft = L'┌';
-	wchar_t topMiddle = L'┬';
-	wchar_t topRight = L'┐';
-
-	wchar_t middleLeft = L'├';
-	wchar_t middle = L'┼';
-	wchar_t middleRight = L'┤';
-
-	wchar_t bottomLeft = L'└';
-	wchar_t bottomMiddle = L'┴';
-	wchar_t bottomRight = L'┘';
+	typedef BoxBorder<BorderStyle::Single> Border;
 
 	std::wstring wStrArg = convertToWString(std::get<1>(arg));
 	_setmode(_fileno(stdout), _O_U16TEXT);
@@ -151,10 +138,70 @@ void showInfoAnAccount(Color textColor, wchar_t fillType, std::tuple<short, std:
 	textAndBackgroundColor(textColor, Color::Black);
 	std::wcout << std::setw(ArgSize) << std::left << wStrArg;
 	textAndBackgroundColor(Color::BrightWhite, Color::Black);
-	std::wcout << fillType << vertical;
+	std::wcout << fillType << Border::Vertical();
 
 	std::wcout << std::setfill(L' ');
 	_setmode(_fileno(stdout), _O_TEXT);
+}
+
+void showInfoAllEmployee() {
+	std::string usernameTitle = "Username";
+	std::string fullNameTitle = "Full name";
+	std::string addressTitle = "Address";
+	std::string phoneNumberTitle = "Phone number";
+	std::string emailAddressTitle = "Email address";
+	int usernameMaxSize = usernameTitle.size();
+	int	fullNameMaxSize = fullNameTitle.size();
+	int	addressMaxSize = addressTitle.size();
+	int	phoneNumberMaxSize = phoneNumberTitle.size();
+	int	emailAddressMaxSize = emailAddressTitle.size();
+	std::ifstream fileIn;
+	fileIn.open(ACCOUNTS_FILE);
+	while (!fileIn.eof()) {
+		CUser _user;
+		file::read::account(_user, fileIn);
+		std::ifstream fileUserInfoTemp = openFile(_user.getUsername());
+		file::read::info(_user, fileUserInfoTemp);
+		if (_user.getUsername() != "") {
+			if (usernameMaxSize < _user.getUsername().size()) usernameMaxSize = _user.getUsername().size();
+			if (fullNameMaxSize < _user.getFullName().size()) fullNameMaxSize = _user.getFullName().size();
+			if (addressMaxSize < _user.getAddress().size()) addressMaxSize = _user.getAddress().size();
+			if (phoneNumberMaxSize < _user.getPhoneNumber().size()) phoneNumberMaxSize = _user.getPhoneNumber().size();
+			if (emailAddressMaxSize < _user.getEmailAddress().size()) emailAddressMaxSize = _user.getEmailAddress().size();
+		}
+	}
+	fileIn.clear();
+	fileIn.seekg(0, std::ios::beg);
+	showInfoAnAccount(
+		Color::LightYellow,
+		L' ',
+		std::make_tuple(usernameMaxSize, usernameTitle),
+		std::make_tuple(fullNameMaxSize, fullNameTitle),
+		std::make_tuple(addressMaxSize, addressTitle),
+		std::make_tuple(phoneNumberMaxSize, phoneNumberTitle),
+		std::make_tuple(emailAddressMaxSize, emailAddressTitle)
+	);
+	std::cout << std::endl;
+	while (!fileIn.eof()) {
+		CUser _user;
+		file::read::account(_user, fileIn);
+		std::ifstream fileUserInfoTemp = openFile(_user.getUsername());
+		file::read::info(_user, fileUserInfoTemp);
+		if (_user.getUsername() != "") {
+			showInfoAnAccount(
+				Color::LightBlue,
+				L' ',
+				std::make_tuple(usernameMaxSize, _user.getUsername()),
+				std::make_tuple(fullNameMaxSize, _user.getFullName()),
+				std::make_tuple(addressMaxSize, _user.getAddress()),
+				std::make_tuple(phoneNumberMaxSize, _user.getPhoneNumber()),
+				std::make_tuple(emailAddressMaxSize, _user.getEmailAddress())
+			);
+			std::cout << std::endl;
+		}
+		fileUserInfoTemp.close();
+	}
+	fileIn.close();
 }
 
 char menuAdmin() {

@@ -21,8 +21,8 @@ int main() {
 	//cout << strUsernameTemp << endl;
 	//cout << strPasswordTemp << endl;
 
-	std::cout << "le, le, chan" << std::endl;
-	formInfo(15, 25, L"<Enter your information>");
+	//std::cout << "le, le, chan" << std::endl;
+	//formInfo(15, 25, L"<Enter your information>");
 	//std::cout << "le, le, le" << std::endl;
 	//formInfo(15, 25, L"<Enter your information");
 	//std::cout << "le, chan, chan" << std::endl;
@@ -38,18 +38,20 @@ int main() {
 	//formInfo(16, 24, L"<Enter your information>");
 	//std::cout << "chan, chan, le" << std::endl;
 	//formInfo(16, 24, L"<Enter your information");
-	std::string s1 = "qwe";
-	std::string s2 = "asd";
-	std::string s3 = "hmm";
-	std::string s4 = "nahnah";
-	showInfoAnAccount(
-		Color::Blue,
-		L'─',
-		std::make_tuple(s1.size(), s1),
-		std::make_tuple(s2.size(), s2),
-		std::make_tuple(s3.size(), s3),
-		std::make_tuple(s4.size(), s4)
-	);
+	//std::string s1 = "qwe";
+	//std::string s2 = "asd";
+	//std::string s3 = "hmm";
+	//std::string s4 = "nahnah";
+	//showInfoAnAccount(
+	//	Color::Blue,
+	//	L'─',
+	//	std::make_tuple(s1.size(), s1),
+	//	std::make_tuple(s2.size(), s2),
+	//	std::make_tuple(s3.size(), s3),
+	//	std::make_tuple(s4.size(), s4)
+	//);
+
+	showInfoAllEmployee();
 
 	//while (true) {
 	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);

@@ -7,6 +7,8 @@
 #include <fcntl.h>
 #include <tuple>
 #include "BoxBorder.h"
+#include "HandleIO.h"
+#include "HandleMain.h"
 #include "HandleMiscellaneous.h"
 //#include "CUser.h"
 //#include "HandleMain.h"
@@ -29,6 +31,7 @@ void showInfoAnAccount(Color textColor, wchar_t fillType, std::tuple<short, std:
 	showInfoAnAccount(textColor, fillType, args...);
 }
 #pragma endregion
+void showInfoAllEmployee();
 
 char menuAdmin();
 char menuEmployee();
