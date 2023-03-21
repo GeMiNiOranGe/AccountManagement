@@ -144,42 +144,33 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //	_setmode(_fileno(stdout), _O_TEXT);
 //}
 
-void showBorder(std::vector<short> numberOfFill, std::string posBorder) {
+void showBorder(std::vector<short> numberOfFill, Position borderPos) {
+	typedef BoxBorder<BorderStyle::Single> Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	// ─│┌┐└┘├┤┬┴┼
 	// ═║╔╗╚╝╠╣╦╩╬
-	if (posBorder == "begin")
-		std::wcout << L'┌';
-	if (posBorder == "mid")
-		std::wcout << L'├';
-	if (posBorder == "end")
-		std::wcout << L'└';
+	if (borderPos == Position::First) std::wcout << Border::Top::Left();
+	if (borderPos == Position::Middle) std::wcout << Border::Left();
+	if (borderPos == Position::Last) std::wcout << Border::Bottom::Left();
 	std::wcout << L'─';
 	for (int i = 0; i < numberOfFill.size(); i++) {
 		std::wcout << L'─';
 		std::wcout << std::setfill(L'─');
 		std::wcout << std::setw(numberOfFill.at(i)) << L'─';
 		if (i != numberOfFill.size() - 1) {
-			if (posBorder == "begin")
-				std::wcout << L'┬';
-			if (posBorder == "mid")
-				std::wcout << L'┼';
-			if (posBorder == "end")
-				std::wcout << L'┴';
+			if (borderPos == Position::First) std::wcout << Border::Top();
+			if (borderPos == Position::Middle) std::wcout << Border::Middle();
+			if (borderPos == Position::Last) std::wcout << Border::Bottom();
 			std::wcout << L'─';
 		}
 	}
-	if (posBorder == "begin")
-		std::wcout << L'┐';
-	if (posBorder == "mid")
-		std::wcout << L'┤';
-	if (posBorder == "end")
-		std::wcout << L'┘';
-	std::wcout << std::endl;
+	if (borderPos == Position::First) std::wcout << Border::Top::Right();
+	if (borderPos == Position::Middle) std::wcout << Border::Right();
+	if (borderPos == Position::Last) std::wcout << Border::Bottom::Right();
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
-void showInfoAnAccount(std::vector<std::tuple<short, std::wstring>> _vector, Color textColor, wchar_t fillType) {
+void showInfoAccount(std::vector<std::tuple<short, std::wstring>> _vector, Color textColor, wchar_t fillType) {
 	typedef BoxBorder<BorderStyle::Single> Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	std::wcout << Border::Vertical();
@@ -194,7 +185,7 @@ void showInfoAnAccount(std::vector<std::tuple<short, std::wstring>> _vector, Col
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
-void showInfoAllEmployee() {
+void showInfoAccounts() {
 	std::string usernameTitle = "Username";
 	std::string fullNameTitle = "Full name";
 	std::string addressTitle = "Address";
@@ -238,9 +229,10 @@ void showInfoAllEmployee() {
 			phoneNumberMaxSize,
 			emailAddressMaxSize
 		},
-		"begin"
+		Position::First
 	);
-	showInfoAnAccount({
+	std::cout << std::endl;
+	showInfoAccount({
 			std::make_tuple(usernameMaxSize, convertToWString(usernameTitle)),
 			std::make_tuple(fullNameMaxSize, convertToWString(fullNameTitle)),
 			std::make_tuple(addressMaxSize, convertToWString(addressTitle)),
@@ -272,9 +264,10 @@ void showInfoAllEmployee() {
 					phoneNumberMaxSize,
 					emailAddressMaxSize
 				},
-				"mid"
+				Position::Middle
 			);
-			showInfoAnAccount({
+			std::cout << std::endl;
+			showInfoAccount({
 					std::make_tuple(usernameMaxSize, convertToWString(_user.getUsername())),
 					std::make_tuple(fullNameMaxSize, convertToWString(_user.getFullName())),
 					std::make_tuple(addressMaxSize, convertToWString(_user.getAddress())),
@@ -294,7 +287,7 @@ void showInfoAllEmployee() {
 		phoneNumberMaxSize,
 		emailAddressMaxSize
 		},
-		"end"
+		Position::Last
 	);
 	fileIn.close();
 }

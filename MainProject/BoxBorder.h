@@ -4,7 +4,8 @@
 
 enum class BorderStyle {
 	Single,
-	Double
+	Double,
+	DoubleOuterSingleInner
 };
 
 template<BorderStyle _borderStyle>
@@ -26,12 +27,20 @@ struct BoxBorder {
 	static wchar_t Middle();
 	// ─│┌┐└┘├┤┬┴┼
 	// ═║╔╗╚╝╠╣╦╩╬
+	//   ╒╕╘╛╞╡╤╧╪
+	//   ╓╖╙╜╟╢╥╨╫
 	// ⩴⫬═≕≔≖
 };
 
 #endif
 
 template<BorderStyle _borderStyle> inline wchar_t BoxBorder<_borderStyle>::Horizontal() {
+	//if (_borderStyle == BorderStyle::Single || 
+	//	_borderStyle == BorderStyle::DoubleOuterSingleInner) {
+	//	return L'─';
+	//}
+	//else
+	//	return L'\0';
 	switch (_borderStyle) {
 	case BorderStyle::Single:
 		return L'─';

@@ -15,6 +15,12 @@
 //#include "HandleMain.h"
 // if ((title.size() + fillSize) % 2 == 1) fillSize++; else sumSize++;
 
+enum class Position {
+	First,
+	Middle,
+	Last
+}; 
+
 std::string formLogin(std::string & strUsername, std::string & strPassword);
 void formInfo(short labelSize, short fillSize, std::wstring title);
 char chooseAdminOrEmployee();
@@ -32,9 +38,9 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //	showInfoAnAccount(textColor, fillType, args...);
 //}
 //#pragma endregion
-void showBorder(std::vector<short> numberOfFill, std::string posBorder);
-void showInfoAnAccount(std::vector<std::tuple<short, std::wstring>> _vector, Color textColor, wchar_t fillType = L' ');
-void showInfoAllEmployee();
+void showBorder(std::vector<short> numberOfFill, Position borderPos);
+void showInfoAccount(std::vector<std::tuple<short, std::wstring>> _vector, Color textColor, wchar_t fillType = L' ');
+void showInfoAccounts();
 
 char menuAdmin();
 char menuEmployee();

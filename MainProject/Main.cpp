@@ -13,6 +13,32 @@ std::string strUsernameTemp, strPasswordTemp;
 void handleAdmin();
 void handleEmployee(std::string strUsername, std::string strPassword);
 
+//void MoveWindow(int posx, int posy) {
+//	RECT rectClient, rectWindow;
+//	HWND hWnd = GetConsoleWindow();
+//	GetClientRect(hWnd, &rectClient);
+//	GetWindowRect(hWnd, &rectWindow);
+//	MoveWindow(hWnd, posx, posy, rectClient.right - rectClient.left, rectClient.bottom - rectClient.top, TRUE);
+//}
+//
+//void MoveCenter() {
+//	RECT rectClient, rectWindow;
+//	HWND hWnd = GetConsoleWindow();
+//	GetClientRect(hWnd, &rectClient);
+//	GetWindowRect(hWnd, &rectWindow);
+//	int posx, posy;
+//	posx = GetSystemMetrics(SM_CXSCREEN) / 2 - (rectWindow.right - rectWindow.left) / 2,
+//		posy = GetSystemMetrics(SM_CYSCREEN) / 2 - (rectWindow.bottom - rectWindow.top) / 2,
+//
+//		MoveWindow(hWnd, posx, posy, rectClient.right - rectClient.left, rectClient.bottom - rectClient.top, TRUE);
+//}
+//
+//int main(int argc, char * argv[]) {
+//	//MoveWindow(10, 10);
+//	MoveCenter();
+//	return 0;
+//}
+
 int main() {
 	SetConsoleTitle(L"Employee manager");
 
@@ -23,22 +49,7 @@ int main() {
 
 	//std::cout << "le, le, chan" << std::endl;
 	//formInfo(15, 25, L"<Enter your information>");
-	//std::cout << "le, le, le" << std::endl;
-	//formInfo(15, 25, L"<Enter your information");
-	//std::cout << "le, chan, chan" << std::endl;
-	//formInfo(15, 24, L"<Enter your information>");
-	//std::cout << "le, chan, le" << std::endl;
-	//formInfo(15, 24, L"<Enter your information");
-	//
-	//std::cout << "chan, le, chan" << std::endl;
-	//formInfo(16, 25, L"<Enter your information>");
-	//std::cout << "chan, le, le" << std::endl;
-	//formInfo(16, 25, L"<Enter your information");
-	//std::cout << "chan, chan, chan" << std::endl;
-	//formInfo(16, 24, L"<Enter your information>");
-	//std::cout << "chan, chan, le" << std::endl;
-	//formInfo(16, 24, L"<Enter your information");
-	//std::string s1 = "qwe";
+
 	//std::string s2 = "asd";
 	//std::string s3 = "hmm";
 	//std::string s4 = "nahnah";
@@ -51,7 +62,7 @@ int main() {
 	//	std::make_tuple(s4.size(), s4)
 	//);
 
-	showInfoAllEmployee();
+	showInfoAccounts();
 
 	//while (true) {
 	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);
