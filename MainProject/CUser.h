@@ -46,7 +46,8 @@ public:
 private:
 	std::string strUsername;
 	std::string strPassword;
-	std::string strId;
+	std::string strId; // e.g: Id: EM82Na5s7d, EM is Employee, 82Na5s7d is base64 code 
+	// TODO: add std::string strAccountType; and config in code
 	std::string strFullName;
 	std::string strAddress;
 	std::string strPhoneNumber;

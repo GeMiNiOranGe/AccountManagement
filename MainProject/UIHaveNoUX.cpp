@@ -170,15 +170,17 @@ void showBorder(std::vector<short> numberOfFill, Position borderPos) {
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
-void showInfoAccount(std::vector<std::tuple<short, std::wstring>> _vector, Color textColor, wchar_t fillType) {
+// Output to console in given format: 
+// Pair (maxSize: maximum cell size, wString: One sentence), BorderStyle: Single(customizable)
+void showInfoAccount(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType) {
 	typedef BoxBorder<BorderStyle::Single> Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	std::wcout << Border::Vertical();
-	for (int i = 0; i < _vector.size(); i++) {
-		short ArgSize = static_cast<short>(std::get<0>(_vector.at(i)));
+	for (int i = 0; i < maxSizeAndWStringPairs.size(); i++) {
+		short ArgSize = static_cast<short>(maxSizeAndWStringPairs.at(i).first);
 		std::wcout << std::setfill(fillType) << fillType;
 		textAndBackgroundColor(textColor, Color::Black);
-		std::wcout << std::setw(ArgSize) << std::left << std::get<1>(_vector.at(i));
+		std::wcout << std::setw(ArgSize) << std::left << maxSizeAndWStringPairs.at(i).second;
 		textAndBackgroundColor(Color::BrightWhite, Color::Black);
 		std::wcout << fillType << Border::Vertical() << std::setfill(L' ');
 	}
@@ -191,11 +193,11 @@ void showInfoAccounts() {
 	std::string addressTitle = "Address";
 	std::string phoneNumberTitle = "Phone number";
 	std::string emailAddressTitle = "Email address";
-	short usernameMaxSize = usernameTitle.size();
-	short fullNameMaxSize = fullNameTitle.size();
-	short addressMaxSize = addressTitle.size();
-	short phoneNumberMaxSize = phoneNumberTitle.size();
-	short emailAddressMaxSize = emailAddressTitle.size();
+	short usernameMaxSize = static_cast<short>(usernameTitle.size());
+	short fullNameMaxSize = static_cast<short>(fullNameTitle.size());
+	short addressMaxSize = static_cast<short>(addressTitle.size());
+	short phoneNumberMaxSize = static_cast<short>(phoneNumberTitle.size());
+	short emailAddressMaxSize = static_cast<short>(emailAddressTitle.size());
 	std::ifstream fileIn;
 	fileIn.open(ACCOUNTS_FILE);
 	while (!fileIn.eof()) {
@@ -204,11 +206,11 @@ void showInfoAccounts() {
 		std::ifstream fileUserInfoTemp = openFile(_user.getUsername());
 		file::read::info(_user, fileUserInfoTemp);
 		if (_user.getUsername() != "") {
-			if (usernameMaxSize < _user.getUsername().size()) usernameMaxSize = _user.getUsername().size();
-			if (fullNameMaxSize < _user.getFullName().size()) fullNameMaxSize = _user.getFullName().size();
-			if (addressMaxSize < _user.getAddress().size()) addressMaxSize = _user.getAddress().size();
-			if (phoneNumberMaxSize < _user.getPhoneNumber().size()) phoneNumberMaxSize = _user.getPhoneNumber().size();
-			if (emailAddressMaxSize < _user.getEmailAddress().size()) emailAddressMaxSize = _user.getEmailAddress().size();
+			if (usernameMaxSize < _user.getUsername().size()) usernameMaxSize = static_cast<short>(_user.getUsername().size());
+			if (fullNameMaxSize < _user.getFullName().size()) fullNameMaxSize = static_cast<short>(_user.getFullName().size());
+			if (addressMaxSize < _user.getAddress().size()) addressMaxSize = static_cast<short>(_user.getAddress().size());
+			if (phoneNumberMaxSize < _user.getPhoneNumber().size()) phoneNumberMaxSize = static_cast<short>(_user.getPhoneNumber().size());
+			if (emailAddressMaxSize < _user.getEmailAddress().size()) emailAddressMaxSize = static_cast<short>(_user.getEmailAddress().size());
 		}
 	}
 	fileIn.clear();
@@ -233,11 +235,11 @@ void showInfoAccounts() {
 	);
 	std::cout << std::endl;
 	showInfoAccount({
-			std::make_tuple(usernameMaxSize, convertToWString(usernameTitle)),
-			std::make_tuple(fullNameMaxSize, convertToWString(fullNameTitle)),
-			std::make_tuple(addressMaxSize, convertToWString(addressTitle)),
-			std::make_tuple(phoneNumberMaxSize, convertToWString(phoneNumberTitle)),
-			std::make_tuple(emailAddressMaxSize, convertToWString(emailAddressTitle))
+			std::make_pair(usernameMaxSize, convertToWString(usernameTitle)),
+			std::make_pair(fullNameMaxSize, convertToWString(fullNameTitle)),
+			std::make_pair(addressMaxSize, convertToWString(addressTitle)),
+			std::make_pair(phoneNumberMaxSize, convertToWString(phoneNumberTitle)),
+			std::make_pair(emailAddressMaxSize, convertToWString(emailAddressTitle))
 		},
 		Color::LightYellow
 	);
@@ -268,11 +270,11 @@ void showInfoAccounts() {
 			);
 			std::cout << std::endl;
 			showInfoAccount({
-					std::make_tuple(usernameMaxSize, convertToWString(_user.getUsername())),
-					std::make_tuple(fullNameMaxSize, convertToWString(_user.getFullName())),
-					std::make_tuple(addressMaxSize, convertToWString(_user.getAddress())),
-					std::make_tuple(phoneNumberMaxSize, convertToWString(_user.getPhoneNumber())),
-					std::make_tuple(emailAddressMaxSize, convertToWString(_user.getEmailAddress()))
+					std::make_pair(usernameMaxSize, convertToWString(_user.getUsername())),
+					std::make_pair(fullNameMaxSize, convertToWString(_user.getFullName())),
+					std::make_pair(addressMaxSize, convertToWString(_user.getAddress())),
+					std::make_pair(phoneNumberMaxSize, convertToWString(_user.getPhoneNumber())),
+					std::make_pair(emailAddressMaxSize, convertToWString(_user.getEmailAddress()))
 				},
 				Color::White
 			);

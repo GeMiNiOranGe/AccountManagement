@@ -6,7 +6,6 @@
 #include <io.h>
 #include <fcntl.h>
 #include <vector>
-#include <tuple>
 #include "BoxBorder.h"
 #include "HandleIO.h"
 #include "HandleMain.h"
@@ -39,7 +38,7 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //}
 //#pragma endregion
 void showBorder(std::vector<short> numberOfFill, Position borderPos);
-void showInfoAccount(std::vector<std::tuple<short, std::wstring>> _vector, Color textColor, wchar_t fillType = L' ');
+void showInfoAccount(std::vector<std::pair<short, std::wstring>> _vector, Color textColor, wchar_t fillType = L' ');
 void showInfoAccounts();
 
 char menuAdmin();
