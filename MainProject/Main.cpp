@@ -13,6 +13,7 @@ std::string strUsernameTemp, strPasswordTemp;
 void handleAdmin();
 void handleEmployee(std::string strUsername, std::string strPassword);
 
+//window-and-screen-buffer-size
 //void MoveWindow(int posx, int posy) {
 //	RECT rectClient, rectWindow;
 //	HWND hWnd = GetConsoleWindow();

@@ -7,7 +7,7 @@ CUser::CUser(
 ) {
 	this->strUsername = _strUsername;
 	this->strPassword = _strPassword;
-	this->strPassword = _strId;
+	this->strId = _strId;
 	this->strFullName = _strFullName;
 	this->strAddress = _strAddress;
 	this->strPhoneNumber = _strPhoneNumber;
@@ -16,7 +16,7 @@ CUser::CUser(
 CUser::CUser(const CUser & tempUser) {
 	this->strUsername = tempUser.strUsername;
 	this->strPassword = tempUser.strPassword;
-	this->strPassword = tempUser.strId;
+	this->strId = tempUser.strId;
 	this->strFullName = tempUser.strFullName;
 	this->strAddress = tempUser.strAddress;
 	this->strPhoneNumber = tempUser.strPhoneNumber;

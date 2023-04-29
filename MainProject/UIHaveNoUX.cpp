@@ -55,17 +55,17 @@ void formInfo(short labelSize, short fillSize, std::wstring title) {
 	std::wcout << Border::Bottom::Left() << std::setfill(Border::Horizontal()) << std::setw(sumSize) << Border::Horizontal() << Border::Bottom::Right() << std::setfill(L' ') << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 	/*form info can be like this (DEMO)
-	+-------------------------------+
-	|             Title             |
-	+-------------------------------+
-	|    name:                      |
-	+-------------------------------+
-	|   phone:                      |
-	+-------------------------------+
-	|    mail:                      |
-	+-------------------------------+
-	| address:                      |
-	+-------------------------------+ */
+	┌────────────────────────────────────────┐
+	│        <Enter your information>        │
+	├────────────────────────────────────────┤
+	│     Full name:                         │
+	├────────────────────────────────────────┤
+	│       Address:                         │
+	├────────────────────────────────────────┤
+	│  Phone number:                         │
+	├────────────────────────────────────────┤
+	│ Email address:                         │
+	└────────────────────────────────────────┘*/
 }
 
 char chooseAdminOrEmployee() {
@@ -175,15 +175,16 @@ void showBorder(std::vector<short> numberOfFill, Position borderPos) {
 void showInfoAccount(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType) {
 	typedef BoxBorder<BorderStyle::Single> Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
+	std::wcout << std::setfill(fillType);
 	std::wcout << Border::Vertical();
 	for (int i = 0; i < maxSizeAndWStringPairs.size(); i++) {
-		short ArgSize = static_cast<short>(maxSizeAndWStringPairs.at(i).first);
-		std::wcout << std::setfill(fillType) << fillType;
+		short sMaxSize = static_cast<short>(maxSizeAndWStringPairs.at(i).first);
 		textAndBackgroundColor(textColor, Color::Black);
-		std::wcout << std::setw(ArgSize) << std::left << maxSizeAndWStringPairs.at(i).second;
+		std::wcout << fillType << std::setw(sMaxSize) << std::left << maxSizeAndWStringPairs.at(i).second << fillType;
 		textAndBackgroundColor(Color::BrightWhite, Color::Black);
-		std::wcout << fillType << Border::Vertical() << std::setfill(L' ');
+		std::wcout << Border::Vertical();
 	}
+	std::wcout << std::setfill(L' ');
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
@@ -201,29 +202,26 @@ void showInfoAccounts() {
 	std::ifstream fileIn;
 	fileIn.open(ACCOUNTS_FILE);
 	while (!fileIn.eof()) {
-		CUser _user;
-		file::read::account(_user, fileIn);
-		std::ifstream fileUserInfoTemp = openFile(_user.getUsername());
-		file::read::info(_user, fileUserInfoTemp);
-		if (_user.getUsername() != "") {
-			if (usernameMaxSize < _user.getUsername().size()) usernameMaxSize = static_cast<short>(_user.getUsername().size());
-			if (fullNameMaxSize < _user.getFullName().size()) fullNameMaxSize = static_cast<short>(_user.getFullName().size());
-			if (addressMaxSize < _user.getAddress().size()) addressMaxSize = static_cast<short>(_user.getAddress().size());
-			if (phoneNumberMaxSize < _user.getPhoneNumber().size()) phoneNumberMaxSize = static_cast<short>(_user.getPhoneNumber().size());
-			if (emailAddressMaxSize < _user.getEmailAddress().size()) emailAddressMaxSize = static_cast<short>(_user.getEmailAddress().size());
+		CUser user;
+		file::read::account(user, fileIn);
+		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
+		file::read::info(user, fileUserInfoTemp);
+		if (user.getUsername() != "") {
+			if (usernameMaxSize < user.getUsername().size())
+				usernameMaxSize = static_cast<short>(user.getUsername().size());
+			if (fullNameMaxSize < user.getFullName().size())
+				fullNameMaxSize = static_cast<short>(user.getFullName().size());
+			if (addressMaxSize < user.getAddress().size())
+				addressMaxSize = static_cast<short>(user.getAddress().size());
+			if (phoneNumberMaxSize < user.getPhoneNumber().size())
+				phoneNumberMaxSize = static_cast<short>(user.getPhoneNumber().size());
+			if (emailAddressMaxSize < user.getEmailAddress().size())
+				emailAddressMaxSize = static_cast<short>(user.getEmailAddress().size());
 		}
 	}
 	fileIn.clear();
 	fileIn.seekg(0, std::ios::beg);
-	//showInfoAnAccount(
-	//	Color::LightYellow,
-	//	L' ',
-	//	std::make_tuple(usernameMaxSize, usernameTitle),
-	//	std::make_tuple(fullNameMaxSize, fullNameTitle),
-	//	std::make_tuple(addressMaxSize, addressTitle),
-	//	std::make_tuple(phoneNumberMaxSize, phoneNumberTitle),
-	//	std::make_tuple(emailAddressMaxSize, emailAddressTitle)
-	//);
+	std::cout << ' ';
 	showBorder({
 			usernameMaxSize,
 			fullNameMaxSize,
@@ -234,6 +232,7 @@ void showInfoAccounts() {
 		Position::First
 	);
 	std::cout << std::endl;
+	std::cout << ' ';
 	showInfoAccount({
 			std::make_pair(usernameMaxSize, convertToWString(usernameTitle)),
 			std::make_pair(fullNameMaxSize, convertToWString(fullNameTitle)),
@@ -244,21 +243,14 @@ void showInfoAccounts() {
 		Color::LightYellow
 	);
 	std::cout << std::endl;
+	std::cout << ' ';
 	while (!fileIn.eof()) {
-		CUser _user;
-		file::read::account(_user, fileIn);
-		std::ifstream fileUserInfoTemp = openFile(_user.getUsername());
-		file::read::info(_user, fileUserInfoTemp);
-		if (_user.getUsername() != "") {
-			//showInfoAnAccount(
-			//	Color::LightBlue,
-			//	L' ',
-			//	std::make_tuple(usernameMaxSize, _user.getUsername()),
-			//	std::make_tuple(fullNameMaxSize, _user.getFullName()),
-			//	std::make_tuple(addressMaxSize, _user.getAddress()),
-			//	std::make_tuple(phoneNumberMaxSize, _user.getPhoneNumber()),
-			//	std::make_tuple(emailAddressMaxSize, _user.getEmailAddress())
-			//);
+		CUser user;
+		//TODO: file::read::account(fileIn, user);
+		file::read::account(user, fileIn);
+		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
+		file::read::info(user, fileUserInfoTemp);
+		if (user.getUsername() != "") {
 			showBorder({
 					usernameMaxSize,
 					fullNameMaxSize,
@@ -269,25 +261,27 @@ void showInfoAccounts() {
 				Position::Middle
 			);
 			std::cout << std::endl;
+			std::cout << ' ';
 			showInfoAccount({
-					std::make_pair(usernameMaxSize, convertToWString(_user.getUsername())),
-					std::make_pair(fullNameMaxSize, convertToWString(_user.getFullName())),
-					std::make_pair(addressMaxSize, convertToWString(_user.getAddress())),
-					std::make_pair(phoneNumberMaxSize, convertToWString(_user.getPhoneNumber())),
-					std::make_pair(emailAddressMaxSize, convertToWString(_user.getEmailAddress()))
+					std::make_pair(usernameMaxSize, convertToWString(user.getUsername())),
+					std::make_pair(fullNameMaxSize, convertToWString(user.getFullName())),
+					std::make_pair(addressMaxSize, convertToWString(user.getAddress())),
+					std::make_pair(phoneNumberMaxSize, convertToWString(user.getPhoneNumber())),
+					std::make_pair(emailAddressMaxSize, convertToWString(user.getEmailAddress()))
 				},
 				Color::White
 			);
 			std::cout << std::endl;
+			std::cout << ' ';
 		}
 		fileUserInfoTemp.close();
 	}
 	showBorder({
-		usernameMaxSize,
-		fullNameMaxSize,
-		addressMaxSize,
-		phoneNumberMaxSize,
-		emailAddressMaxSize
+			usernameMaxSize,
+			fullNameMaxSize,
+			addressMaxSize,
+			phoneNumberMaxSize,
+			emailAddressMaxSize
 		},
 		Position::Last
 	);
