@@ -152,11 +152,10 @@ void showBorder(std::vector<short> numberOfFill, Position borderPos) {
 	if (borderPos == Position::First) std::wcout << Border::Top::Left();
 	if (borderPos == Position::Middle) std::wcout << Border::Left();
 	if (borderPos == Position::Last) std::wcout << Border::Bottom::Left();
+	std::wcout << std::setfill(L'─');
 	std::wcout << L'─';
 	for (int i = 0; i < numberOfFill.size(); i++) {
-		std::wcout << L'─';
-		std::wcout << std::setfill(L'─');
-		std::wcout << std::setw(numberOfFill.at(i)) << L'─';
+		std::wcout << L'─' << std::setw(numberOfFill.at(i)) << L'─';
 		if (i != numberOfFill.size() - 1) {
 			if (borderPos == Position::First) std::wcout << Border::Top();
 			if (borderPos == Position::Middle) std::wcout << Border::Middle();
@@ -207,16 +206,11 @@ void showInfoAccounts() {
 		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
 		file::read::info(user, fileUserInfoTemp);
 		if (user.getUsername() != "") {
-			if (usernameMaxSize < user.getUsername().size())
-				usernameMaxSize = static_cast<short>(user.getUsername().size());
-			if (fullNameMaxSize < user.getFullName().size())
-				fullNameMaxSize = static_cast<short>(user.getFullName().size());
-			if (addressMaxSize < user.getAddress().size())
-				addressMaxSize = static_cast<short>(user.getAddress().size());
-			if (phoneNumberMaxSize < user.getPhoneNumber().size())
-				phoneNumberMaxSize = static_cast<short>(user.getPhoneNumber().size());
-			if (emailAddressMaxSize < user.getEmailAddress().size())
-				emailAddressMaxSize = static_cast<short>(user.getEmailAddress().size());
+			if (usernameMaxSize < user.getUsername().size()) usernameMaxSize = static_cast<short>(user.getUsername().size());
+			if (fullNameMaxSize < user.getFullName().size()) fullNameMaxSize = static_cast<short>(user.getFullName().size());
+			if (addressMaxSize < user.getAddress().size()) addressMaxSize = static_cast<short>(user.getAddress().size());
+			if (phoneNumberMaxSize < user.getPhoneNumber().size()) phoneNumberMaxSize = static_cast<short>(user.getPhoneNumber().size());
+			if (emailAddressMaxSize < user.getEmailAddress().size()) emailAddressMaxSize = static_cast<short>(user.getEmailAddress().size());
 		}
 	}
 	fileIn.clear();

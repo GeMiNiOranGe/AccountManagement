@@ -25,6 +25,18 @@ CUser::CUser(const CUser & tempUser) {
 CUser::~CUser() {
 }
 
+std::string * CUser::getProperties() {
+	return new std::string[]{
+		this->strId,
+		this->strUsername,
+		this->strPassword,
+		this->strFullName,
+		this->strAddress,
+		this->strPhoneNumber,
+		this->strEmailAddress,
+	};
+}
+
 const std::string & CUser::getUsername() {
 	return this->strUsername;
 }

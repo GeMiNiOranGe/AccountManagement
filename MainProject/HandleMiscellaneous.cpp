@@ -47,9 +47,9 @@ void warning(std::string strMessage) {
 	textAndBackgroundColor(Color::White, Color::Black);
 	system("pause");
 }
-char * convertStringToChar(std::string strInput) {
-	char * p_cOutput = new char[strInput.length() + 1];
-	strcpy_s(p_cOutput, strInput.length() + 1, strInput.c_str());
-	return p_cOutput;
-}
+//char * convertStringToChar(std::string strInput) {
+//	char * p_cOutput = new char[strInput.length() + 1];
+//	strcpy_s(p_cOutput, strInput.length() + 1, strInput.c_str());
+//	return p_cOutput;
+//}
 

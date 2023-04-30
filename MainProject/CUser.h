@@ -16,6 +16,8 @@ public:
 	CUser(const CUser &);
 	~CUser();
 
+	std::string * getProperties();
+
 	/* If getter have no "const", it's a combination of setter and getter, this function can use like this.
 	Code:
 	CUser.getFullName() = "Some string";

@@ -14,26 +14,26 @@ namespace file {
 		//None,
 	};
 	namespace read {
-		void account(CUser & _user, std::ifstream & fileIn);
-		void info(CUser & _user, std::ifstream & fileIn);
+		void account(CUser & user, std::ifstream & fileIn);
+		void info(CUser & user, std::ifstream & fileIn);
 	} // namespace read
 	namespace write {
-		void account(CUser _user, std::ofstream & fileOut);
-		void account(CUser _user, std::ofstream & fileOut, AccountType _accountType);
-		void info(CUser _user, std::ofstream & fileOut);
+		void account(CUser user, std::ofstream & fileOut);
+		void account(CUser user, std::ofstream & fileOut, AccountType _accountType);
+		void info(CUser user, std::ofstream & fileOut);
 	} // namespace write
 } // namespace file
 
 namespace console {
 	namespace read {
-		void account(CUser & _user);
-		void info(CUser & _user);
-		void all(CUser & _user);
+		void account(CUser & user);
+		void info(CUser & user);
+		void all(CUser & user);
 	} // namespace read
 	namespace write {
-		void account(CUser _user);
-		void info(CUser _user);
-		void all(CUser _user);
+		void account(CUser user);
+		void info(CUser user);
+		void all(CUser user);
 	} // namespace write
 } // namespace console
 
