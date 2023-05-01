@@ -188,102 +188,93 @@ void showInfoAccount(std::vector<std::pair<short, std::wstring>> maxSizeAndWStri
 }
 
 void showInfoAccounts() {
-	std::string usernameTitle = "Username";
-	std::string fullNameTitle = "Full name";
-	std::string addressTitle = "Address";
-	std::string phoneNumberTitle = "Phone number";
-	std::string emailAddressTitle = "Email address";
-	short usernameMaxSize = static_cast<short>(usernameTitle.size());
-	short fullNameMaxSize = static_cast<short>(fullNameTitle.size());
-	short addressMaxSize = static_cast<short>(addressTitle.size());
-	short phoneNumberMaxSize = static_cast<short>(phoneNumberTitle.size());
-	short emailAddressMaxSize = static_cast<short>(emailAddressTitle.size());
+	std::string titles[] = {
+		"Id",
+		"Username",
+		"Password",
+		"Full name",
+		"Address",
+		"Phone number",
+		"Email address"
+	};
+	const int titlesSize = sizeof(titles) / sizeof(std::string);
+	std::vector<short> vecTitleMaxSizes(titlesSize);
+
+	// Initialize each element in titleMaxSizes with the string size of each element in titles
+	for (short i = 0; i < titlesSize; i++)
+		vecTitleMaxSizes[i] = titles[i].size();
+
 	std::ifstream fileIn;
 	fileIn.open(ACCOUNTS_FILE);
+
 	while (!fileIn.eof()) {
 		CUser user;
 		file::read::account(user, fileIn);
 		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
 		file::read::info(user, fileUserInfoTemp);
-		if (user.getUsername() != "") {
-			if (usernameMaxSize < user.getUsername().size()) usernameMaxSize = static_cast<short>(user.getUsername().size());
-			if (fullNameMaxSize < user.getFullName().size()) fullNameMaxSize = static_cast<short>(user.getFullName().size());
-			if (addressMaxSize < user.getAddress().size()) addressMaxSize = static_cast<short>(user.getAddress().size());
-			if (phoneNumberMaxSize < user.getPhoneNumber().size()) phoneNumberMaxSize = static_cast<short>(user.getPhoneNumber().size());
-			if (emailAddressMaxSize < user.getEmailAddress().size()) emailAddressMaxSize = static_cast<short>(user.getEmailAddress().size());
-		}
+
+		// Get all properties in class CUser
+		std::string * p_strCUserProperties = user.getProperties();
+
+		// Find the maximum size of each table cell, horizontally
+		if (user.getUsername() != "")
+			for (short i = 0; i < titlesSize; i++)
+				if (vecTitleMaxSizes[i] < p_strCUserProperties[i].size())
+					vecTitleMaxSizes[i] = p_strCUserProperties[i].size();
+
+		fileUserInfoTemp.close();
 	}
+
 	fileIn.clear();
 	fileIn.seekg(0, std::ios::beg);
+
 	std::cout << ' ';
-	showBorder({
-			usernameMaxSize,
-			fullNameMaxSize,
-			addressMaxSize,
-			phoneNumberMaxSize,
-			emailAddressMaxSize
-		},
-		Position::First
-	);
+	showBorder(vecTitleMaxSizes, Position::First);
 	std::cout << std::endl;
+
 	std::cout << ' ';
-	showInfoAccount({
-			std::make_pair(usernameMaxSize, convertToWString(usernameTitle)),
-			std::make_pair(fullNameMaxSize, convertToWString(fullNameTitle)),
-			std::make_pair(addressMaxSize, convertToWString(addressTitle)),
-			std::make_pair(phoneNumberMaxSize, convertToWString(phoneNumberTitle)),
-			std::make_pair(emailAddressMaxSize, convertToWString(emailAddressTitle))
-		},
-		Color::LightYellow
-	);
+	std::vector<std::pair<short, std::wstring>> pairs_titleMaxSizeAndTitle;
+	for (short i = 0; i < titlesSize; i++)
+		pairs_titleMaxSizeAndTitle.push_back(std::make_pair(vecTitleMaxSizes[i], convertToWString(titles[i])));
+	showInfoAccount(pairs_titleMaxSizeAndTitle, Color::LightYellow);
 	std::cout << std::endl;
-	std::cout << ' ';
+
 	while (!fileIn.eof()) {
 		CUser user;
 		//TODO: file::read::account(fileIn, user);
 		file::read::account(user, fileIn);
 		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
 		file::read::info(user, fileUserInfoTemp);
+
+		// Get all properties in class CUser
+		std::string * p_strCUserProperties = user.getProperties();
+
+		std::vector<std::pair<short, std::wstring>> pairs_titleMaxSizeAndCUserProperty;
+		for (short i = 0; i < titlesSize; i++)
+			pairs_titleMaxSizeAndCUserProperty.push_back(std::make_pair(vecTitleMaxSizes[i], convertToWString(p_strCUserProperties[i])));
+
+		// Show all account information
 		if (user.getUsername() != "") {
-			showBorder({
-					usernameMaxSize,
-					fullNameMaxSize,
-					addressMaxSize,
-					phoneNumberMaxSize,
-					emailAddressMaxSize
-				},
-				Position::Middle
-			);
-			std::cout << std::endl;
 			std::cout << ' ';
-			showInfoAccount({
-					std::make_pair(usernameMaxSize, convertToWString(user.getUsername())),
-					std::make_pair(fullNameMaxSize, convertToWString(user.getFullName())),
-					std::make_pair(addressMaxSize, convertToWString(user.getAddress())),
-					std::make_pair(phoneNumberMaxSize, convertToWString(user.getPhoneNumber())),
-					std::make_pair(emailAddressMaxSize, convertToWString(user.getEmailAddress()))
-				},
-				Color::White
-			);
+			showBorder(vecTitleMaxSizes, Position::Middle);
 			std::cout << std::endl;
+
 			std::cout << ' ';
+			showInfoAccount(pairs_titleMaxSizeAndCUserProperty, Color::White);
+			std::cout << std::endl;
 		}
+		
 		fileUserInfoTemp.close();
 	}
-	showBorder({
-			usernameMaxSize,
-			fullNameMaxSize,
-			addressMaxSize,
-			phoneNumberMaxSize,
-			emailAddressMaxSize
-		},
-		Position::Last
-	);
+	
+	std::cout << ' ';
+	showBorder(vecTitleMaxSizes, Position::Last);
+	
 	fileIn.close();
 }
 
 char menuAdmin() {
-	system("cls");
+	system("cls");	
 	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	/*ͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ*/
 	std::cout << "\t——————————————<MENU>——————————————" << std::endl;
