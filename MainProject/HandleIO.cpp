@@ -1,6 +1,6 @@
 #include "HandleIO.h"
 
-void file::read::account(CUser & user, std::ifstream & fileIn) {
+void file::read::account(std::ifstream & fileIn, CUser & user) {
 	std::string strId, strUsername, strPassword;
 	getline(fileIn, strId, ',');
 	getline(fileIn, strUsername, ',');
@@ -9,7 +9,7 @@ void file::read::account(CUser & user, std::ifstream & fileIn) {
 	user.setUsername(strUsername);
 	user.setPassword(strPassword);
 }
-void file::read::info(CUser & user, std::ifstream & fileIn) {
+void file::read::info(std::ifstream & fileIn, CUser & user) {
 	std::string strFullName, strAddress, strPhoneNumber, strEmailAddress;
 	getline(fileIn, strFullName);
 	getline(fileIn, strAddress);

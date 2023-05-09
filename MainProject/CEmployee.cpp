@@ -11,7 +11,7 @@ bool CEmployee::isSuccessChangePass(std::string strUsername, std::string strCurr
 	std::ifstream fileIn;
 	fileIn.open(ACCOUNTS_FILE.c_str());
 	while (!fileIn.eof()) {
-		file::read::account(*this, fileIn);
+		file::read::account(fileIn, *this);
 		if (getUsername() == strUsername && getPassword() == strCurrentPass && strNewPass == strConfirmNewPass) {
 			setPassword(strNewPass);
 			fileIn.close();

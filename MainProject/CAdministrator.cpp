@@ -29,7 +29,7 @@ void CAdministrator::eraseEmployee(std::string strUsername) {
 void CAdministrator::updateInfoEmployee(std::string strSourceUserFile, std::string strInfoUpdated, char cOption) {
 	//Step 1:
 	std::ifstream fileIn = openFile(strSourceUserFile);
-	file::read::info(*this, fileIn);
+	file::read::info(fileIn, *this);
 	fileIn.close();
 	//Step 2:
 	std::ofstream fileOut;
@@ -56,10 +56,10 @@ void CAdministrator::showInfoAllEmployee() {
 	//showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
 	while (!fileIn.eof()) {
 		//Step 1:
-		file::read::account(*this, fileIn);
+		file::read::account(fileIn, *this);
 		//Step 2:
 		std::ifstream fileUserInfoTemp = openFile(getUsername());
-		file::read::info(*this, fileUserInfoTemp);
+		file::read::info(fileUserInfoTemp, *this);
 		//Step 3:
 		if (getUsername() != "") {
 			//showAnEmployeeInfoElement(Color::BrightWhite, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");

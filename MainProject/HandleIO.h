@@ -14,8 +14,8 @@ namespace file {
 		//None,
 	};
 	namespace read {
-		void account(CUser & user, std::ifstream & fileIn);
-		void info(CUser & user, std::ifstream & fileIn);
+		void account(std::ifstream & fileIn, CUser & user);
+		void info(std::ifstream & fileIn, CUser & user);
 	} // namespace read
 	namespace write {
 		void account(CUser user, std::ofstream & fileOut);

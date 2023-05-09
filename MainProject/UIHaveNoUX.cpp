@@ -209,9 +209,9 @@ void showInfoAccounts() {
 
 	while (!fileIn.eof()) {
 		CUser user;
-		file::read::account(user, fileIn);
+		file::read::account(fileIn, user);
 		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
-		file::read::info(user, fileUserInfoTemp);
+		file::read::info(fileUserInfoTemp, user);
 
 		// Get all properties in class CUser
 		std::string * p_strCUserProperties = user.getProperties();
@@ -228,11 +228,9 @@ void showInfoAccounts() {
 	fileIn.clear();
 	fileIn.seekg(0, std::ios::beg);
 
-	std::cout << ' ';
 	showBorder(vecTitleMaxSizes, Position::First);
 	std::cout << std::endl;
 
-	std::cout << ' ';
 	std::vector<std::pair<short, std::wstring>> pairs_titleMaxSizeAndTitle;
 	for (short i = 0; i < titlesSize; i++)
 		pairs_titleMaxSizeAndTitle.push_back(std::make_pair(vecTitleMaxSizes[i], convertToWString(titles[i])));
@@ -242,9 +240,9 @@ void showInfoAccounts() {
 	while (!fileIn.eof()) {
 		CUser user;
 		//TODO: file::read::account(fileIn, user);
-		file::read::account(user, fileIn);
+		file::read::account(fileIn, user);
 		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
-		file::read::info(user, fileUserInfoTemp);
+		file::read::info(fileUserInfoTemp, user);
 
 		// Get all properties in class CUser
 		std::string * p_strCUserProperties = user.getProperties();
@@ -255,26 +253,23 @@ void showInfoAccounts() {
 
 		// Show all account information
 		if (user.getUsername() != "") {
-			std::cout << ' ';
 			showBorder(vecTitleMaxSizes, Position::Middle);
 			std::cout << std::endl;
 
-			std::cout << ' ';
 			showInfoAccount(pairs_titleMaxSizeAndCUserProperty, Color::White);
 			std::cout << std::endl;
 		}
-		
+
 		fileUserInfoTemp.close();
 	}
-	
-	std::cout << ' ';
+
 	showBorder(vecTitleMaxSizes, Position::Last);
-	
+
 	fileIn.close();
 }
 
 char menuAdmin() {
-	system("cls");	
+	system("cls");
 	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	/*ͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ*/
 	std::cout << "\t——————————————<MENU>——————————————" << std::endl;
