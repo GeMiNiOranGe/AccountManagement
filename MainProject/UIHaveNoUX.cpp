@@ -176,10 +176,10 @@ void showInfoAccount(std::vector<std::pair<short, std::wstring>> maxSizeAndWStri
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	std::wcout << std::setfill(fillType);
 	std::wcout << Border::Vertical();
-	for (int i = 0; i < maxSizeAndWStringPairs.size(); i++) {
-		short sMaxSize = static_cast<short>(maxSizeAndWStringPairs.at(i).first);
+	for (auto & element : maxSizeAndWStringPairs) {
+		short sMaxSize = static_cast<short>(element.first);
 		textAndBackgroundColor(textColor, Color::Black);
-		std::wcout << fillType << std::setw(sMaxSize) << std::left << maxSizeAndWStringPairs.at(i).second << fillType;
+		std::wcout << fillType << std::setw(sMaxSize) << std::left << element.second << fillType;
 		textAndBackgroundColor(Color::BrightWhite, Color::Black);
 		std::wcout << Border::Vertical();
 	}

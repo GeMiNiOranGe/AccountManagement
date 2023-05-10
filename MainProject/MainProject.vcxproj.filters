@@ -68,6 +68,9 @@
     <ClInclude Include="BoxBorder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HandleWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Accounts.txt">

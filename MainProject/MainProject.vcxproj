@@ -167,6 +167,7 @@
     <ClInclude Include="CEmployee.h" />
     <ClInclude Include="CUser.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="HandleWindow.h" />
     <ClInclude Include="HandleIO.h" />
     <ClInclude Include="HandleMain.h" />
     <ClInclude Include="HandleMiscellaneous.h" />

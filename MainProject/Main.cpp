@@ -3,6 +3,7 @@
 #include "CEmployee.h"
 #include "HandleMain.h"
 #include "HandleMiscellaneous.h"
+#include "HandleWindow.h"
 #include "UIHaveNoUX.h"
 #include "Config.h"
 
