@@ -146,21 +146,22 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 
 void showBorder(std::vector<short> numberOfFill, Position borderPos) {
 	typedef BoxBorder<BorderStyle::Single> Border;
+	wchar_t fillType = L'─';
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	// ─│┌┐└┘├┤┬┴┼
 	// ═║╔╗╚╝╠╣╦╩╬
 	if (borderPos == Position::First) std::wcout << Border::Top::Left();
 	if (borderPos == Position::Middle) std::wcout << Border::Left();
 	if (borderPos == Position::Last) std::wcout << Border::Bottom::Left();
-	std::wcout << std::setfill(L'─');
-	std::wcout << L'─';
-	for (int i = 0; i < numberOfFill.size(); i++) {
-		std::wcout << L'─' << std::setw(numberOfFill.at(i)) << L'─';
-		if (i != numberOfFill.size() - 1) {
+	std::wcout << std::setfill(fillType);
+	std::wcout << fillType;
+	for (auto & element : numberOfFill) {
+		std::wcout << fillType << std::setw(element) << fillType;
+		if (element != *(numberOfFill.end() - 1)) {
 			if (borderPos == Position::First) std::wcout << Border::Top();
 			if (borderPos == Position::Middle) std::wcout << Border::Middle();
 			if (borderPos == Position::Last) std::wcout << Border::Bottom();
-			std::wcout << L'─';
+			std::wcout << fillType;
 		}
 	}
 	if (borderPos == Position::First) std::wcout << Border::Top::Right();
@@ -197,21 +198,21 @@ void showInfoAccounts() {
 		"Phone number",
 		"Email address"
 	};
-	const int titlesSize = sizeof(titles) / sizeof(std::string);
-	std::vector<short> vecTitleMaxSizes(titlesSize);
+	const int titlesSize = sizeof(titles) / sizeof(titles[0]);
+	std::vector<short> vecTitleMaxSizes;
+	std::ifstream fileIn;
+	std::vector<std::pair<short, std::wstring>> pairs_titleMaxSizeAndTitle;
 
 	// Initialize each element in titleMaxSizes with the string size of each element in titles
-	for (short i = 0; i < titlesSize; i++)
-		vecTitleMaxSizes[i] = titles[i].size();
+	for (auto & title : titles) vecTitleMaxSizes.push_back(title.size());
 
-	std::ifstream fileIn;
 	fileIn.open(ACCOUNTS_FILE);
 
 	while (!fileIn.eof()) {
 		CUser user;
 		file::read::account(fileIn, user);
-		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
-		file::read::info(fileUserInfoTemp, user);
+		std::ifstream fileUserInfo = openFile(user.getUsername());
+		file::read::info(fileUserInfo, user);
 
 		// Get all properties in class CUser
 		std::string * p_strCUserProperties = user.getProperties();
@@ -222,27 +223,28 @@ void showInfoAccounts() {
 				if (vecTitleMaxSizes[i] < p_strCUserProperties[i].size())
 					vecTitleMaxSizes[i] = p_strCUserProperties[i].size();
 
-		fileUserInfoTemp.close();
+		fileUserInfo.close();
 	}
 
+	// Reset file pointer
 	fileIn.clear();
 	fileIn.seekg(0, std::ios::beg);
 
 	showBorder(vecTitleMaxSizes, Position::First);
 	std::cout << std::endl;
 
-	std::vector<std::pair<short, std::wstring>> pairs_titleMaxSizeAndTitle;
+	// Show titles
 	for (short i = 0; i < titlesSize; i++)
 		pairs_titleMaxSizeAndTitle.push_back(std::make_pair(vecTitleMaxSizes[i], convertToWString(titles[i])));
 	showInfoAccount(pairs_titleMaxSizeAndTitle, Color::LightYellow);
 	std::cout << std::endl;
 
+	// Show all account information
 	while (!fileIn.eof()) {
 		CUser user;
-		//TODO: file::read::account(fileIn, user);
 		file::read::account(fileIn, user);
-		std::ifstream fileUserInfoTemp = openFile(user.getUsername());
-		file::read::info(fileUserInfoTemp, user);
+		std::ifstream fileUserInfo = openFile(user.getUsername());
+		file::read::info(fileUserInfo, user);
 
 		// Get all properties in class CUser
 		std::string * p_strCUserProperties = user.getProperties();
@@ -251,7 +253,7 @@ void showInfoAccounts() {
 		for (short i = 0; i < titlesSize; i++)
 			pairs_titleMaxSizeAndCUserProperty.push_back(std::make_pair(vecTitleMaxSizes[i], convertToWString(p_strCUserProperties[i])));
 
-		// Show all account information
+		// Show current account information
 		if (user.getUsername() != "") {
 			showBorder(vecTitleMaxSizes, Position::Middle);
 			std::cout << std::endl;
@@ -260,7 +262,7 @@ void showInfoAccounts() {
 			std::cout << std::endl;
 		}
 
-		fileUserInfoTemp.close();
+		fileUserInfo.close();
 	}
 
 	showBorder(vecTitleMaxSizes, Position::Last);
@@ -270,30 +272,34 @@ void showInfoAccounts() {
 
 char menuAdmin() {
 	system("cls");
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	textAndBackgroundColor(Color::LightYellow, Color::Black);
 	/*ͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ*/
-	std::cout << "\t——————————————<MENU>——————————————" << std::endl;
-	std::cout << "\t  1. Them Employee                " << std::endl;
-	std::cout << "\t  2. Xoa Employee                 " << std::endl;
-	std::cout << "\t  3. Tim Employee                 " << std::endl;
-	std::cout << "\t  4. Cap nhat Employee            " << std::endl;
-	std::cout << "\t  5. Hien thi thong tin Employee  " << std::endl;
-	std::cout << "\t  6. Thoat                        " << std::endl;
-	std::cout << "\t——————————————————————————————————" << std::endl;
+	std::wcout << "┌─────────────<MENU>─────────────┐" << std::endl;
+	std::wcout << "│ 1. Them Employee               │" << std::endl;
+	std::wcout << "│ 2. Xoa Employee                │" << std::endl;
+	std::wcout << "│ 3. Tim Employee                │" << std::endl;
+	std::wcout << "│ 4. Cap nhat Employee           │" << std::endl;
+	std::wcout << "│ 5. Hien thi thong tin Employee │" << std::endl;
+	std::wcout << "│ 6. Thoat                       │" << std::endl;
+	std::wcout << "└────────────────────────────────┘" << std::endl;
 	textAndBackgroundColor(Color::LightAqua, Color::Black);
-	std::cout << "\tMoi ban chon chuc nang" << std::endl;
+	std::wcout << "\tMoi ban chon chuc nang" << std::endl;
+	_setmode(_fileno(stdout), _O_TEXT);
 	return _getch();
 }
 char menuEmployee() {
 	system("cls");
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	textAndBackgroundColor(Color::LightYellow, Color::Black);
-	std::cout << "\t**********MENU EMPLOYEE***********" << std::endl;
-	std::cout << "\t  1. Xem thong tin tai khoan      " << std::endl;
-	std::cout << "\t  2. Doi password                 " << std::endl;
-	std::cout << "\t  3. Thoat                        " << std::endl;
-	std::cout << "\t**********************************" << std::endl;
+	std::wcout << "┌───────<MENU EMPLOYEE>───────┐" << std::endl;
+	std::wcout << "│ 1. Xem thong tin tai khoan  │" << std::endl;
+	std::wcout << "│ 2. Doi password             │" << std::endl;
+	std::wcout << "│ 3. Thoat                    │" << std::endl;
+	std::wcout << "└─────────────────────────────┘" << std::endl;
 	textAndBackgroundColor(Color::LightAqua, Color::Black);
-	std::cout << "\tMoi ban chon chuc nang" << std::endl;
+	std::wcout << "\tMoi ban chon chuc nang" << std::endl;
+	_setmode(_fileno(stdout), _O_TEXT);
 	return _getch();
 }
 
@@ -313,8 +319,4 @@ char menuUpdateInfo() {
 	textAndBackgroundColor(Color::LightGreen, Color::Black);
 	std::cout << "<ESC> de huy bo" << std::endl;
 	return _getch();
-}
-
-std::wstring convertToWString(const std::string & _string) {
-	return std::wstring(_string.begin(), _string.end());
 }

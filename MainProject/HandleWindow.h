@@ -2,6 +2,9 @@
 #define HANDLEWINDOW_H
 #pragma once
 
+#include <Windows.h>
+
+//window-and-screen-buffer-size
 namespace window {
 	namespace moveTo {
 		void top();

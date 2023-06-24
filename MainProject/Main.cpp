@@ -14,33 +14,6 @@ std::string strUsernameTemp, strPasswordTemp;
 void handleAdmin();
 void handleEmployee(std::string strUsername, std::string strPassword);
 
-//window-and-screen-buffer-size
-//void MoveWindow(int posx, int posy) {
-//	RECT rectClient, rectWindow;
-//	HWND hWnd = GetConsoleWindow();
-//	GetClientRect(hWnd, &rectClient);
-//	GetWindowRect(hWnd, &rectWindow);
-//	MoveWindow(hWnd, posx, posy, rectClient.right - rectClient.left, rectClient.bottom - rectClient.top, TRUE);
-//}
-//
-//void MoveCenter() {
-//	RECT rectClient, rectWindow;
-//	HWND hWnd = GetConsoleWindow();
-//	GetClientRect(hWnd, &rectClient);
-//	GetWindowRect(hWnd, &rectWindow);
-//	int posx, posy;
-//	posx = GetSystemMetrics(SM_CXSCREEN) / 2 - (rectWindow.right - rectWindow.left) / 2,
-//		posy = GetSystemMetrics(SM_CYSCREEN) / 2 - (rectWindow.bottom - rectWindow.top) / 2,
-//
-//		MoveWindow(hWnd, posx, posy, rectClient.right - rectClient.left, rectClient.bottom - rectClient.top, TRUE);
-//}
-//
-//int main(int argc, char * argv[]) {
-//	//MoveWindow(10, 10);
-//	MoveCenter();
-//	return 0;
-//}
-
 int main() {
 	SetConsoleTitle(L"Employee manager");
 

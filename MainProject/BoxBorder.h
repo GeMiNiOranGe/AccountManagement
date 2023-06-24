@@ -35,14 +35,9 @@ struct BoxBorder {
 #endif
 
 template<BorderStyle _borderStyle> inline wchar_t BoxBorder<_borderStyle>::Horizontal() {
-	//if (_borderStyle == BorderStyle::Single || 
-	//	_borderStyle == BorderStyle::DoubleOuterSingleInner) {
-	//	return L'─';
-	//}
-	//else
-	//	return L'\0';
 	switch (_borderStyle) {
 	case BorderStyle::Single:
+	case BorderStyle::DoubleOuterSingleInner:
 		return L'─';
 	case BorderStyle::Double:
 		return L'═';
