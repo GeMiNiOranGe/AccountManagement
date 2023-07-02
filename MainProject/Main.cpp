@@ -38,11 +38,11 @@ int main() {
 	//);
 
 	showInfoAccounts();
-	window::moveTo::topLeft();
+	window::moveTo::leftTop();
 	Sleep(500);
 	window::moveTo::top();
 	Sleep(500);
-	window::moveTo::topRight();
+	window::moveTo::rightTop();
 	Sleep(500);
 	window::moveTo::right();
 	Sleep(500);
@@ -50,13 +50,13 @@ int main() {
 	Sleep(500);
 	window::moveTo::left();
 	Sleep(500);
-	window::moveTo::bottomLeft();
+	window::moveTo::leftBottom();
 	Sleep(500);
 	window::moveTo::bottom();
 	Sleep(500);
-	window::moveTo::bottomRight();
+	window::moveTo::rightBottom();
 	//window::moveToXY(-6,0);
-	 
+	
 	//while (true) {
 	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);
 	//	if (strTypeAccount == "admin") {
