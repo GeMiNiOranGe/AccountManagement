@@ -1,12 +1,8 @@
 #include "HandleWindow.h"
 
-short window::moveTo::offsetLeft = -6;
-short window::moveTo::offsetMiddle = 17;
-short window::moveTo::offsetRight = 40;
-
 #pragma region Left side of the screen
 void window::moveTo::leftTop() {
-	int posX = offsetleft,
+	int posX = offsetLeft,
 		posY = 0;
 	moveToXY(posX, posY);
 }
