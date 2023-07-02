@@ -38,7 +38,25 @@ int main() {
 	//);
 
 	showInfoAccounts();
-
+	window::moveTo::topLeft();
+	Sleep(500);
+	window::moveTo::top();
+	Sleep(500);
+	window::moveTo::topRight();
+	Sleep(500);
+	window::moveTo::right();
+	Sleep(500);
+	window::moveTo::center();
+	Sleep(500);
+	window::moveTo::left();
+	Sleep(500);
+	window::moveTo::bottomLeft();
+	Sleep(500);
+	window::moveTo::bottom();
+	Sleep(500);
+	window::moveTo::bottomRight();
+	//window::moveToXY(-6,0);
+	 
 	//while (true) {
 	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);
 	//	if (strTypeAccount == "admin") {
