@@ -6,22 +6,25 @@
 
 //window-and-screen-buffer-size
 namespace window {
-	class moveTo {
-	public:
-		static void leftTop();
-		static void left();
-		static void leftBottom();
-		static void top();
-		static void center();
-		static void bottom();
-		static void rightTop();
-		static void right();
-		static void rightBottom();
-	private:
-		static const short offsetLeft = -6;
-		static const short offsetMiddle = 17;
-		static const short offsetRight = 40;
+	namespace moveTo {
+		void leftTop();
+		void left();
+		void leftBottom();
+		void top();
+		void center();
+		void bottom();
+		void rightTop();
+		void right();
+		void rightBottom();
+		extern const short OFFSET_LEFT;
+		extern const short OFFSET_RIGHT;
+		extern const short OFFSET_MIDDLE;
+		extern const short OFFSET_BOTTOM;
+		extern const LONG WORK_AREA_CX;
+		extern const LONG WORK_AREA_CY;
 	};
+	int getTaskBarHeight();
+	SIZE getWorkAreaSize();
 	void moveToXY(short posX, short posY);
 	void resize(short width, short height);
 } // namespace window

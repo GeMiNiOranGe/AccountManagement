@@ -37,7 +37,8 @@ int main() {
 	//	std::make_tuple(s4.size(), s4)
 	//);
 
-	showInfoAccounts();
+	//showInfoAccounts();
+
 	window::moveTo::leftTop();
 	Sleep(500);
 	window::moveTo::top();
@@ -56,7 +57,7 @@ int main() {
 	Sleep(500);
 	window::moveTo::rightBottom();
 	//window::moveToXY(-6,0);
-	
+
 	//while (true) {
 	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);
 	//	if (strTypeAccount == "admin") {
