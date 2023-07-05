@@ -8,22 +8,22 @@
 #include <string>
 
 enum class Color {
-	Black,
-	Blue,
-	Green,
-	Aqua,
-	Red,
-	Purple,
-	Yellow,
-	White,
-	Gray,
-	LightBlue,
-	LightGreen,
-	LightAqua,
-	LightRed,
-	LightPurple,
-	LightYellow,
-	BrightWhite,
+	BLACK,
+	BLUE,
+	GREEN,
+	AQUA,
+	RED,
+	PURPLE,
+	YELLOW,
+	WHITE,
+	GRAY,
+	LIGHT_BLUE,
+	LIGHT_GREEN,
+	LIGHT_AQUA,
+	LIGHT_RED,
+	LIGHT_PURPLE,
+	LIGHT_YELLOW,
+	BRIGHT_WHITE,
 };
 
 //All functions below can be used in 4 projects of data structures
@@ -38,7 +38,7 @@ void encodePassword(std::string & strHandle);
 // 6 = Yellow | 14 = Light Yellow
 // 7 = White  | 15 = Bright White
 // TODO: overload function with default BG color is black
-void textAndBackgroundColor(Color textColor, Color backgroundColor = Color::Black);
+void textAndBackgroundColor(Color textColor, Color backgroundColor = Color::BLACK);
 void resizeConsole(int width, int height);
 void gotoXY(short x, short y);
 void warning(std::string strMessage);

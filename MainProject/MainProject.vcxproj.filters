@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CUser.cpp">
+    <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CAdministrator.cpp">
+    <ClCompile Include="Administrator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CEmployee.cpp">
+    <ClCompile Include="Employee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UIHaveNoUX.cpp">
@@ -44,13 +44,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CUser.h">
+    <ClInclude Include="User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CAdministrator.h">
+    <ClInclude Include="Administrator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CEmployee.h">
+    <ClInclude Include="Employee.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UIHaveNoUX.h">

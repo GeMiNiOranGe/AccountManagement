@@ -2,17 +2,17 @@
 #define CADMINISTRATOR_H
 #pragma once
 
-#include "CUser.h"
+#include "User.h"
 #include "HandleMain.h"
 #include "HandleIO.h"
 #include "UIHaveNoUX.h"
 
-class CAdministrator : public CUser {
+class Administrator : public User {
 public:
-	CAdministrator(
-		std::string _strUsername = "", std::string _strPassword = DEFAULT_PASSWORD, std::string _strId = "",
-		std::string _strFullName = "", std::string _strAddress = "",
-		std::string _strPhoneNumber = "", std::string _strEmailAddress = ""
+	Administrator(
+		std::string _username = "", std::string _password = DEFAULT_PASSWORD, std::string _id = "",
+		std::string _full_name = "", std::string _address = "",
+		std::string _phone_number = "", std::string _email_address = ""
 	);
 
 	void addEmployee(std::string);

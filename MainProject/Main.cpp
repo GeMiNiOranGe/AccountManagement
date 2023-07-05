@@ -1,6 +1,6 @@
-﻿#include "CUser.h"
-#include "CAdministrator.h"
-#include "CEmployee.h"
+﻿#include "User.h"
+#include "Administrator.h"
+#include "Employee.h"
 #include "HandleMain.h"
 #include "HandleMiscellaneous.h"
 #include "HandleWindow.h"
@@ -37,25 +37,25 @@ int main() {
 	//	std::make_tuple(s4.size(), s4)
 	//);
 
-	//showInfoAccounts();
+	showInfoAccounts();
 
-	window::moveTo::leftTop();
-	Sleep(500);
-	window::moveTo::top();
-	Sleep(500);
-	window::moveTo::rightTop();
-	Sleep(500);
-	window::moveTo::right();
-	Sleep(500);
-	window::moveTo::center();
-	Sleep(500);
-	window::moveTo::left();
-	Sleep(500);
-	window::moveTo::leftBottom();
-	Sleep(500);
-	window::moveTo::bottom();
-	Sleep(500);
-	window::moveTo::rightBottom();
+	//window::moveTo::leftTop();
+	//Sleep(500);
+	//window::moveTo::top();
+	//Sleep(500);
+	//window::moveTo::rightTop();
+	//Sleep(500);
+	//window::moveTo::right();
+	//Sleep(500);
+	//window::moveTo::center();
+	//Sleep(500);
+	//window::moveTo::left();
+	//Sleep(500);
+	//window::moveTo::leftBottom();
+	//Sleep(500);
+	//window::moveTo::bottom();
+	//Sleep(500);
+	//window::moveTo::rightBottom();
 	//window::moveToXY(-6,0);
 
 	//while (true) {
@@ -113,25 +113,25 @@ int main() {
 	//			if (hasAccount(ACCOUNTS_FILE, strUsernameTemp, strPasswordTemp) && iEmployeeMaxLogin != 0) {
 	//				if (strPasswordTemp == "111111") {
 	//					string strNewPass, strConfirmNewPass;
-	//					CEmployee employee;
+	//					Employee employee;
 	//					system("cls");
-	//					textAndBackgroundColor(Color::LightYellow, Color::Black);
+	//					textAndBackgroundColor(Color::LIGHT_YELLOW);
 	//					cout << "<Doi mat khau mac dinh>" << endl;
 	//					cout << "(Mat khau mac dinh la: 111111)" << endl;
-	//					textAndBackgroundColor(Color::LightBlue, Color::Black);
+	//					textAndBackgroundColor(Color::LIGHT_BLUE);
 	//					cout << "Nhap mat khau moi: ";
-	//					textAndBackgroundColor(Color::BrightWhite, Color::Black);
+	//					textAndBackgroundColor(Color::BRIGHT_WHITE);
 	//					encodePassword(strNewPass);
 	//					cout << endl;
-	//					textAndBackgroundColor(Color::LightBlue, Color::Black);
+	//					textAndBackgroundColor(Color::LIGHT_BLUE);
 	//					cout << "Nhap xac nhan mat khau moi: ";
-	//					textAndBackgroundColor(Color::BrightWhite, Color::Black);
+	//					textAndBackgroundColor(Color::BRIGHT_WHITE);
 	//					encodePassword(strConfirmNewPass);
 	//					cout << endl;
 	//					if (employee.isSuccessChangePass(strUsernameTemp, "111111", strNewPass, strConfirmNewPass)) {
 	//						strNewPass.clear();
 	//						strConfirmNewPass.clear();
-	//						textAndBackgroundColor(Color::LightRed, Color::Black);
+	//						textAndBackgroundColor(Color::LIGHT_RED);
 	//						cout << "Cap nhat thanh cong!!!" << endl;
 	//						system("pause");
 	//						handleEmployee(strUsernameTemp, strPasswordTemp);
@@ -175,7 +175,7 @@ int main() {
 }
 
 void handleAdmin() {
-	CAdministrator admin;
+	Administrator admin;
 	std::string strInfoUpdated;
 	while (true) {
 		resizeConsole(435, 475);
@@ -184,37 +184,37 @@ void handleAdmin() {
 		case 49:
 			system("cls");
 			resizeConsole(650, 475);
-			textAndBackgroundColor(Color::LightYellow, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Them Employees>" << std::endl;
-			textAndBackgroundColor(Color::LightRed, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_RED);
 			std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-			textAndBackgroundColor(Color::LightBlue, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon them: ";
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			std::cin >> strUsernameTemp;
 			if (hasUsername(ACCOUNTS_FILE, strUsernameTemp))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
 				admin.addEmployee(strUsernameTemp);
-				textAndBackgroundColor(Color::LightRed, Color::Black);
+				textAndBackgroundColor(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
 				system("pause");
 			}
 			break;
 		case 50:
 			system("cls");
-			textAndBackgroundColor(Color::LightYellow, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Xoa Employees>" << std::endl;
-			textAndBackgroundColor(Color::LightRed, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_RED);
 			std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-			textAndBackgroundColor(Color::LightBlue, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon xoa: ";
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			strUsernameTemp.clear();
 			std::cin >> strUsernameTemp;
 			if (hasUsername(ACCOUNTS_FILE, strUsernameTemp)) {
 				admin.eraseEmployee(strUsernameTemp);
-				textAndBackgroundColor(Color::LightRed, Color::Black);
+				textAndBackgroundColor(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
 				system("pause");
 			}
@@ -224,17 +224,17 @@ void handleAdmin() {
 		case 51:
 			system("cls");
 			resizeConsole(550, 475);
-			textAndBackgroundColor(Color::LightYellow, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Tim Employees>" << std::endl;
-			textAndBackgroundColor(Color::LightRed, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_RED);
 			std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-			textAndBackgroundColor(Color::LightBlue, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon tim: ";
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			strUsernameTemp.clear();
 			std::cin >> strUsernameTemp;
 			if (hasUsername(ACCOUNTS_FILE, strUsernameTemp)) {
-				textAndBackgroundColor(Color::LightYellow, Color::Black);
+				textAndBackgroundColor(Color::LIGHT_YELLOW);
 				std::cout << "    Thong tin Employee can tim: " << std::endl;
 				showAccountInfo(strUsernameTemp);
 				system("pause");
@@ -244,28 +244,28 @@ void handleAdmin() {
 			break;
 		case 52:
 			system("cls");
-			textAndBackgroundColor(Color::LightYellow, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Cap nhat thong tin Employees>" << std::endl;
-			textAndBackgroundColor(Color::LightBlue, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap ten tai khoan can cap nhat: ";
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			strUsernameTemp.clear();
 			std::cin >> strUsernameTemp;
 			if (hasUsername(ACCOUNTS_FILE, strUsernameTemp)) {
 				while (true) {
 					g_cCatchEvent = menuUpdateInfo();
 					if (48 < g_cCatchEvent && g_cCatchEvent < 53) {
-						textAndBackgroundColor(Color::LightBlue, Color::Black);
+						textAndBackgroundColor(Color::LIGHT_BLUE);
 						std::cout << "Cap nhat thong tin o lua chon: ";
-						textAndBackgroundColor(Color::BrightWhite, Color::Black);
+						textAndBackgroundColor(Color::BRIGHT_WHITE);
 						std::cout << g_cCatchEvent - 48 << std::endl;
-						textAndBackgroundColor(Color::LightBlue, Color::Black);
+						textAndBackgroundColor(Color::LIGHT_BLUE);
 						std::cout << "Thong tin moi se duoc cap nhat: ";
-						textAndBackgroundColor(Color::BrightWhite, Color::Black);
+						textAndBackgroundColor(Color::BRIGHT_WHITE);
 						std::cin.ignore();
 						getline(std::cin, strInfoUpdated);
 						admin.updateInfoEmployee(strUsernameTemp, strInfoUpdated, g_cCatchEvent);
-						textAndBackgroundColor(Color::LightRed, Color::Black);
+						textAndBackgroundColor(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
 						system("pause");
 					}
@@ -282,9 +282,9 @@ void handleAdmin() {
 		case 53:
 			system("cls");
 			resizeConsole(1275, 500);
-			textAndBackgroundColor(Color::LightYellow, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Hien thi thong tin toan bo Employees>" << std::endl;
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			admin.showInfoAllEmployee();
 			system("pause");
 			system("cls");
@@ -300,7 +300,7 @@ void handleAdmin() {
 
 void handleEmployee(std::string strUsername, std::string strPassword) {
 	std::string strCurrentPass, strNewPass, strConfirmNewPass;
-	CEmployee employee;
+	Employee employee;
 	while (true) {
 		resizeConsole(435, 475);
 		g_cCatchEvent = menuEmployee();
@@ -308,11 +308,11 @@ void handleEmployee(std::string strUsername, std::string strPassword) {
 		case 49:
 			resizeConsole(535, 475);
 			system("cls");
-			textAndBackgroundColor(Color::LightYellow, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Thong tin tai khoan>" << std::endl;
-			textAndBackgroundColor(Color::Yellow, Color::Black);
+			textAndBackgroundColor(Color::YELLOW);
 			std::cout << "    Ten tai khoan: ";
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			std::cout << strUsername << std::endl;
 			showAccountInfo(strUsername);
 			system("pause");
@@ -320,28 +320,28 @@ void handleEmployee(std::string strUsername, std::string strPassword) {
 			break;
 		case 50:
 			system("cls");
-			textAndBackgroundColor(Color::LightYellow, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Doi mat khau>" << std::endl;
-			textAndBackgroundColor(Color::LightBlue, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau hien tai: ";
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			encodePassword(strCurrentPass);
 			std::cout << std::endl;
-			textAndBackgroundColor(Color::LightBlue, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau moi: ";
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			encodePassword(strNewPass);
 			std::cout << std::endl;
-			textAndBackgroundColor(Color::LightBlue, Color::Black);
+			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap xac nhan mat khau moi: ";
-			textAndBackgroundColor(Color::BrightWhite, Color::Black);
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
 			encodePassword(strConfirmNewPass);
 			std::cout << std::endl;
 			if (employee.isSuccessChangePass(strUsername, strCurrentPass, strNewPass, strConfirmNewPass)) {
 				strCurrentPass.clear();
 				strNewPass.clear();
 				strConfirmNewPass.clear();
-				textAndBackgroundColor(Color::LightRed, Color::Black);
+				textAndBackgroundColor(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
 				system("pause");
 			}

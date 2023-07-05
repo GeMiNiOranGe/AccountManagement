@@ -17,7 +17,7 @@ void deleteFile(std::string strUsernameFile) {
 }
 
 void deleteAccount(std::string strSourceFile, std::string strUsername) {
-	CUser userTemp;
+	User userTemp;
 	//Step 1:
 	std::string employeeFileRenamed = strSourceFile;
 	rename(strSourceFile.c_str(), employeeFileRenamed.insert(employeeFileRenamed.size() - 4, "Temp").c_str());
@@ -28,7 +28,7 @@ void deleteAccount(std::string strSourceFile, std::string strUsername) {
 	//Step 3:
 	while (!fileIn.eof()) {
 		file::read::account(fileIn, userTemp);
-		if (userTemp.getUsername() != strUsername && userTemp.getUsername() != "")
+		if (userTemp.get_username() != strUsername && userTemp.get_username() != "")
 			file::write::account(userTemp, fileOut);
 	}
 	fileOut.close();
@@ -38,7 +38,7 @@ void deleteAccount(std::string strSourceFile, std::string strUsername) {
 }
 
 void showAccountInfo(std::string strUsername) {
-	CUser userTemp;
+	User userTemp;
 	std::ifstream fileIn = openFile(strUsername);
 	file::read::info(fileIn, userTemp);
 	userTemp.output();
@@ -49,9 +49,9 @@ bool hasUsername(std::string strSourceFile, std::string strUsername) {
 	std::ifstream fileIn;
 	fileIn.open(strSourceFile.c_str());
 	while (!fileIn.eof()) {
-		CUser userTemp;
+		User userTemp;
 		file::read::account(fileIn, userTemp);
-		if (strUsername == userTemp.getUsername()) {
+		if (strUsername == userTemp.get_username()) {
 			fileIn.close();
 			return true;
 		}
@@ -63,9 +63,9 @@ bool hasAccount(std::string strSourceFile, std::string strUsername, std::string 
 	std::ifstream fileIn;
 	fileIn.open(strSourceFile.c_str());
 	while (!fileIn.eof()) {
-		CUser userTemp;
+		User userTemp;
 		file::read::account(fileIn, userTemp);
-		if (strUsername == userTemp.getUsername() && strPassword == userTemp.getPassword() && userTemp.getUsername() != "" && userTemp.getPassword() != "") {
+		if (strUsername == userTemp.get_username() && strPassword == userTemp.get_password() && userTemp.get_username() != "" && userTemp.get_password() != "") {
 			fileIn.close();
 			return true;
 		}
@@ -78,13 +78,13 @@ std::string checkTypeAccount(std::string strUsername, std::string strPassword) {
 	std::ifstream fileIn;
 	fileIn.open(ACCOUNTS_FILE.c_str());
 	while (!fileIn.eof()) {
-		CUser userTemp;
+		User userTemp;
 		file::read::account(fileIn, userTemp);
-		if (userTemp.getId() == "AD" && userTemp.getUsername() == strUsername && userTemp.getPassword() == strPassword) {
+		if (userTemp.get_id() == "AD" && userTemp.get_username() == strUsername && userTemp.get_password() == strPassword) {
 			fileIn.close();
 			return "admin";
 		}
-		if (userTemp.getId() == "EM" && userTemp.getUsername() == strUsername && userTemp.getPassword() == strPassword) {
+		if (userTemp.get_id() == "EM" && userTemp.get_username() == strUsername && userTemp.get_password() == strPassword) {
 			fileIn.close();
 			return "employee";
 		}

@@ -1,5 +1,4 @@
-# Employee Management Console application 
-This is the first version of this app, i recommend you use branch UpdateToVS2019
+# Employee Management Console application
 
 ## Table of Contents
 * [Project content](#Project-content)
@@ -320,6 +319,3 @@ bool CEmployee::isSuccessChangePass(string strUsername, string strCurrentPass, s
 	return false;
 }
 ```
-
-
-

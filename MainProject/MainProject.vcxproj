@@ -152,9 +152,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CAdministrator.cpp" />
-    <ClCompile Include="CEmployee.cpp" />
-    <ClCompile Include="CUser.cpp" />
+    <ClCompile Include="Administrator.cpp" />
+    <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="User.cpp" />
     <ClCompile Include="HandleIO.cpp" />
     <ClCompile Include="HandleMain.cpp" />
     <ClCompile Include="HandleMiscellaneous.cpp" />
@@ -164,9 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxBorder.h" />
-    <ClInclude Include="CAdministrator.h" />
-    <ClInclude Include="CEmployee.h" />
-    <ClInclude Include="CUser.h" />
+    <ClInclude Include="Administrator.h" />
+    <ClInclude Include="Employee.h" />
+    <ClInclude Include="User.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="HandleWindow.h" />
     <ClInclude Include="HandleIO.h" />

@@ -31,6 +31,9 @@ void encodePassword(std::string & strPassword) {
 void textAndBackgroundColor(Color textColor, Color backgroundColor) {
 	short colorCode = static_cast<short>(backgroundColor) * 16 + static_cast<short>(textColor);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
+
+	//TODO: class ConsoleColor by singleton in namespace console
+	// getForeColor, getBackColor
 }
 void resizeConsole(int width, int height) {
 	RECT r;
@@ -42,9 +45,9 @@ void gotoXY(short x, short y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 void warning(std::string strMessage) {
-	textAndBackgroundColor(Color::White, Color::Red);
+	textAndBackgroundColor(Color::WHITE, Color::RED);
 	std::cout << "\a" << strMessage << std::endl;
-	textAndBackgroundColor(Color::White, Color::Black);
+	textAndBackgroundColor(Color::WHITE, Color::BLACK);
 	system("pause");
 }
 std::wstring convertToWString(const std::string & _string) {

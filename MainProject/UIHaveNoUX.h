@@ -15,9 +15,9 @@
 // if ((title.size() + fillSize) % 2 == 1) fillSize++; else sumSize++;
 
 enum class Position {
-	First,
-	Middle,
-	Last
+	FIRST,
+	MIDDLE,
+	LAST
 }; 
 
 std::string formLogin(std::string & strUsername, std::string & strPassword);
@@ -37,7 +37,7 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //	showInfoAnAccount(textColor, fillType, args...);
 //}
 //#pragma endregion
-void showBorder(std::vector<short> numberOfFill, Position borderPos);
+void show_border(std::vector<short> numberOfFill, Position borderPos);
 void showInfoAccount(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType = L' ');
 void showInfoAccounts();
 

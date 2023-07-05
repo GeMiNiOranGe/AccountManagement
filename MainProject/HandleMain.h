@@ -4,7 +4,7 @@
 
 #include <string>
 #include <fstream>
-#include "CUser.h"
+#include "User.h"
 #include "Config.h"
 #include "HandleIO.h"
 
