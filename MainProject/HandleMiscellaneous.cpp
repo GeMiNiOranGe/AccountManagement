@@ -50,7 +50,7 @@ void warning(std::string strMessage) {
 	textAndBackgroundColor(Color::WHITE, Color::BLACK);
 	system("pause");
 }
-std::wstring convertToWString(const std::string & _string) {
+std::wstring convert_to_wstring(const std::string & _string) {
 	return std::wstring(_string.begin(), _string.end());
 }
 //char * convertStringToChar(std::string strInput) {

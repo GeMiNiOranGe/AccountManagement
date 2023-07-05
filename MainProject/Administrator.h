@@ -15,9 +15,9 @@ public:
 		std::string _phone_number = "", std::string _email_address = ""
 	);
 
-	void addEmployee(std::string);
-	void eraseEmployee(std::string);
-	void updateInfoEmployee(std::string, std::string, char);
+	void add_employee(std::string);
+	void erase_employee(std::string);
+	void update_info_employee(std::string, std::string, char);
 	void showInfoAllEmployee();
 };
 

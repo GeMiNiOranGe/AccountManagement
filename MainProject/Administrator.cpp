@@ -8,25 +8,25 @@ Administrator::Administrator(
 }
 //Step 1: update file Employees.txt
 //Step 2: create a new file and add information to the newly created file
-void Administrator::addEmployee(std::string strUsername) {
+void Administrator::add_employee(std::string strUsername) {
 	//Step 1:
 	std::ofstream fileUpdated;
 	fileUpdated.open(ACCOUNTS_FILE, std::ios_base::app);
-	fileUpdated << "EM," << strUsername << "," << "111111" << std::endl;
+	fileUpdated << "EM," << strUsername << "," << DEFAULT_PASSWORD << std::endl;
 	//Step 2: 
 	std::ofstream fileOut = createFile(strUsername);
 	input();
 	file::write::info(*this, fileOut);
 	fileOut.close();
 }
-void Administrator::eraseEmployee(std::string strUsername) {
+void Administrator::erase_employee(std::string strUsername) {
 	deleteAccount(ACCOUNTS_FILE, strUsername);
 	deleteFile(strUsername);
 }
 //Step 1: load infomation from sourceUserFile
 //Step 2: re-open the sourceUserFile again
 //Step 3: change the data and overwrite the information from the userTemp
-void Administrator::updateInfoEmployee(std::string strSourceUserFile, std::string strInfoUpdated, char cOption) {
+void Administrator::update_info_employee(std::string strSourceUserFile, std::string strInfoUpdated, char cOption) {
 	//Step 1:
 	std::ifstream fileIn = openFile(strSourceUserFile);
 	file::read::info(fileIn, *this);

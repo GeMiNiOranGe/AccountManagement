@@ -38,8 +38,8 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //}
 //#pragma endregion
 void show_border(std::vector<short> numberOfFill, Position borderPos);
-void showInfoAccount(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType = L' ');
-void showInfoAccounts();
+void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType = L' ');
+void show_info_accounts();
 
 char menuAdmin();
 char menuEmployee();

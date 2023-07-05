@@ -37,7 +37,7 @@ int main() {
 	//	std::make_tuple(s4.size(), s4)
 	//);
 
-	showInfoAccounts();
+	show_info_accounts();
 
 	//window::moveTo::leftTop();
 	//Sleep(500);

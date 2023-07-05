@@ -6,16 +6,16 @@
 
 //window-and-screen-buffer-size
 namespace window {
-	namespace moveTo {
-		void leftTop();
+	namespace move_to {
+		void left_top();
 		void left();
-		void leftBottom();
+		void left_bottom();
 		void top();
 		void center();
 		void bottom();
-		void rightTop();
+		void right_top();
 		void right();
-		void rightBottom();
+		void right_bottom();
 		extern const short OFFSET_LEFT;
 		extern const short OFFSET_RIGHT;
 		extern const short OFFSET_MIDDLE;
@@ -23,9 +23,9 @@ namespace window {
 		extern const LONG WORK_AREA_CX;
 		extern const LONG WORK_AREA_CY;
 	};
-	int getTaskBarHeight();
-	SIZE getWorkAreaSize();
-	void moveToXY(short posX, short posY);
+	int get_taskbar_height();
+	SIZE get_work_area_size();
+	void move_to_xy(short posX, short posY);
 	void resize(short width, short height);
 } // namespace window
 
