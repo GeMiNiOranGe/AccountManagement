@@ -9,9 +9,9 @@
 
 namespace file {
 	enum class AccountType {
-		Administrator,
-		Employee,
-		//None,
+		ADMINISTRATOR,
+		EMPLOYEE,
+		//NONE,
 	};
 	namespace read {
 		void account(std::ifstream & fileIn, User & user);

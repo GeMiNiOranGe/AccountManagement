@@ -22,7 +22,7 @@ enum class Position {
 };
 
 std::string formLogin(std::string & strUsername, std::string & strPassword);
-void formInfo(short labelSize, short fillSize, std::wstring title, box::BorderStyle _style);
+void form_info(std::wstring title, std::vector<std::wstring> labels, box::BorderStyle _style = box::BorderStyle::SINGLE, short fill_size = 25);
 char chooseAdminOrEmployee();
 void loginAdmin(std::string & strUsername, std::string & strPassword);
 void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin);

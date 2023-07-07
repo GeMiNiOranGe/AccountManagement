@@ -18,7 +18,7 @@ bool Employee::isSuccessChangePass(std::string strUsername, std::string strCurre
 			deleteAccount(ACCOUNTS_FILE, strUsername);
 			std::ofstream fileOut;
 			fileOut.open(ACCOUNTS_FILE.c_str(), std::ios_base::app);
-			file::write::account(*this, fileOut, file::AccountType::Employee);
+			file::write::account(*this, fileOut, file::AccountType::EMPLOYEE);
 			fileOut.close();
 			return true;
 		}

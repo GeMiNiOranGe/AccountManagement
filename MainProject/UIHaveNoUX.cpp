@@ -26,46 +26,36 @@ std::string formLogin(std::string & strUsername, std::string & strPassword) {
 
 	return std::string();
 }
-void formInfo(short labelSize, short fillSize, std::wstring title, box::BorderStyle _style) {
+void form_info(std::wstring title, std::vector<std::wstring> labels, box::BorderStyle _style, short fill_size) {
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	//std::wstring title = L"<Enter your information>"; //le
-	//short labelSize = 15;
-	//short fillSize = 25;//le
-
 	typedef box::Border Border;
+	short label_size = 0;
+	wchar_t fill_style = ' ';
 
-	if ((title.size() + labelSize + fillSize) % 2 == 1) fillSize++;
-	short sumSize = labelSize + fillSize;
-	short alignMiddle = static_cast<short>(sumSize + title.size()) / 2;
-	std::wcout << Border::top_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::top_right(_style) << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical(_style) << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << Border::vertical(_style) << std::endl;
+	// Get max size of label
+	for (auto & element : labels)
+		if (element.size() > label_size)
+			label_size = static_cast<short>(element.size());
 
-	std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::right(_style) << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical(_style) << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << Border::vertical(_style) << std::endl;
+	// Make space for label
+	label_size++;
 
-	std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::right(_style) << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical(_style) << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << Border::vertical(_style) << std::endl;
+	// Calculation to put the header in the center of the table
+	if ((title.size() + label_size + fill_size) % 2 == 1) fill_size++;
+	short sum_size = label_size + fill_size;
+	short align_middle = static_cast<short>(sum_size + title.size()) / 2;
 
-	std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::right(_style) << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical(_style) << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << Border::vertical(_style) << std::endl;
+	// Show form
+	std::wcout << Border::top_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sum_size) << Border::horizontal(_style) << Border::top_right(_style) << std::setfill(fill_style) << std::endl;
+	std::wcout << Border::vertical(_style) << std::setw(align_middle) << std::right << title << std::setw(align_middle - title.size()) << fill_style << Border::vertical(_style) << std::endl;
 
-	std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::right(_style) << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical(_style) << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << Border::vertical(_style) << std::endl;
+	for (auto & element : labels) {
+		std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sum_size) << Border::horizontal(_style) << Border::right(_style) << std::setfill(fill_style) << std::endl;
+		std::wcout << Border::vertical(_style) << std::setw(label_size) << std::right << element << std::setw(fill_size) << fill_style << Border::vertical(_style) << std::endl;
+	}
 
-	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::bottom_right(_style) << std::setfill(L' ') << std::endl;
+	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sum_size) << Border::horizontal(_style) << Border::bottom_right(_style) << std::setfill(L' ') << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
-	/*form info can be like this (DEMO)
-	┌────────────────────────────────────────┐
-	│        <Enter your information>        │
-	├────────────────────────────────────────┤
-	│     Full name:                         │
-	├────────────────────────────────────────┤
-	│       Address:                         │
-	├────────────────────────────────────────┤
-	│  Phone number:                         │
-	├────────────────────────────────────────┤
-	│ Email address:                         │
-	└────────────────────────────────────────┘*/
 }
 
 char chooseAdminOrEmployee() {
@@ -144,10 +134,10 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //	_setmode(_fileno(stdout), _O_TEXT);
 //}
 
-void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style ) {
+void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style) {
 	typedef box::Border Border;
 
-	_setmode(_fileno(stdout), _O_U16TEXT);  
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	// ─│┌┐└┘├┤┬┴┼
 	// ═║╔╗╚╝╠╣╦╩╬
 	if (_position == Position::FIRST) std::wcout << Border::top_left(_style);

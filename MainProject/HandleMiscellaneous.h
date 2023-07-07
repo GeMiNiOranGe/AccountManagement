@@ -37,9 +37,7 @@ void encodePassword(std::string & strHandle);
 // 5 = Purple | 13 = Light Purple
 // 6 = Yellow | 14 = Light Yellow
 // 7 = White  | 15 = Bright White
-// TODO: overload function with default BG color is black
 void textAndBackgroundColor(Color textColor, Color backgroundColor = Color::BLACK);
-void resizeConsole(int width, int height);
 void gotoXY(short x, short y);
 void warning(std::string strMessage);
 

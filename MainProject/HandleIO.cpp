@@ -27,10 +27,10 @@ void file::write::account(User user, std::ofstream & fileOut) {
 
 void file::write::account(User user, std::ofstream & fileOut, file::AccountType _accountType) {
 	switch (_accountType) {
-	case file::AccountType::Administrator:
+	case file::AccountType::ADMINISTRATOR:
 		fileOut << "AD," << user.get_username() << ',' << user.get_password() << std::endl;
 		break;
-	case file::AccountType::Employee:
+	case file::AccountType::EMPLOYEE:
 		fileOut << "EM," << user.get_username() << ',' << user.get_password() << std::endl;
 		break;
 	//case file::AccountType::None:

@@ -28,21 +28,18 @@ void encodePassword(std::string & strPassword) {
 		}
 	} while (cEvent != 13);
 }
-void textAndBackgroundColor(Color textColor, Color backgroundColor) {
-	short colorCode = static_cast<short>(backgroundColor) * 16 + static_cast<short>(textColor);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
+void textAndBackgroundColor(Color text_color, Color background_color) {
+	short color_code = static_cast<short>(background_color) * 16 + static_cast<short>(text_color);
+	HANDLE handle_std_out = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(handle_std_out, color_code);
 
 	//TODO: class ConsoleColor by singleton in namespace console
 	// getForeColor, getBackColor
 }
-void resizeConsole(int width, int height) {
-	RECT r;
-	GetWindowRect(GetConsoleWindow(), &r);
-	MoveWindow(GetConsoleWindow(), r.left, r.top, width, height, TRUE);
-}
 void gotoXY(short x, short y) {
 	COORD pos = { x, y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+	HANDLE handle_std_out = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(handle_std_out, pos);
 }
 void warning(std::string strMessage) {
 	textAndBackgroundColor(Color::WHITE, Color::RED);
