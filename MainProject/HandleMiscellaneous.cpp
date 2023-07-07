@@ -50,12 +50,3 @@ void warning(std::string strMessage) {
 	textAndBackgroundColor(Color::WHITE, Color::BLACK);
 	system("pause");
 }
-std::wstring convert_to_wstring(const std::string & _string) {
-	return std::wstring(_string.begin(), _string.end());
-}
-//char * convertStringToChar(std::string strInput) {
-//	char * p_cOutput = new char[strInput.length() + 1];
-//	strcpy_s(p_cOutput, strInput.length() + 1, strInput.c_str());
-//	return p_cOutput;
-//}
-

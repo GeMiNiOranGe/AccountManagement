@@ -39,25 +39,6 @@ int main() {
 
 	show_info_accounts();
 
-	//window::moveTo::leftTop();
-	//Sleep(500);
-	//window::moveTo::top();
-	//Sleep(500);
-	//window::moveTo::rightTop();
-	//Sleep(500);
-	//window::moveTo::right();
-	//Sleep(500);
-	//window::moveTo::center();
-	//Sleep(500);
-	//window::moveTo::left();
-	//Sleep(500);
-	//window::moveTo::leftBottom();
-	//Sleep(500);
-	//window::moveTo::bottom();
-	//Sleep(500);
-	//window::moveTo::rightBottom();
-	//window::moveToXY(-6,0);
-
 	//while (true) {
 	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);
 	//	if (strTypeAccount == "admin") {
@@ -195,7 +176,7 @@ void handleAdmin() {
 			if (hasUsername(ACCOUNTS_FILE, strUsernameTemp))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
-				admin.addEmployee(strUsernameTemp);
+				admin.add_employee(strUsernameTemp);
 				textAndBackgroundColor(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
 				system("pause");
@@ -213,7 +194,7 @@ void handleAdmin() {
 			strUsernameTemp.clear();
 			std::cin >> strUsernameTemp;
 			if (hasUsername(ACCOUNTS_FILE, strUsernameTemp)) {
-				admin.eraseEmployee(strUsernameTemp);
+				admin.erase_employee(strUsernameTemp);
 				textAndBackgroundColor(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
 				system("pause");
@@ -264,7 +245,7 @@ void handleAdmin() {
 						textAndBackgroundColor(Color::BRIGHT_WHITE);
 						std::cin.ignore();
 						getline(std::cin, strInfoUpdated);
-						admin.updateInfoEmployee(strUsernameTemp, strInfoUpdated, g_cCatchEvent);
+						admin.update_info_employee(strUsernameTemp, strInfoUpdated, g_cCatchEvent);
 						textAndBackgroundColor(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
 						system("pause");

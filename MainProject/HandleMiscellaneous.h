@@ -42,7 +42,5 @@ void textAndBackgroundColor(Color textColor, Color backgroundColor = Color::BLAC
 void resizeConsole(int width, int height);
 void gotoXY(short x, short y);
 void warning(std::string strMessage);
-std::wstring convert_to_wstring(const std::string & _string);
-//char * convertStringToChar(std::string strInput);
 
 #endif

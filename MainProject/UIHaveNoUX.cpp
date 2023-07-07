@@ -26,33 +26,33 @@ std::string formLogin(std::string & strUsername, std::string & strPassword) {
 
 	return std::string();
 }
-void formInfo(short labelSize, short fillSize, std::wstring title) {
+void formInfo(short labelSize, short fillSize, std::wstring title, box::BorderStyle _style) {
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	//std::wstring title = L"<Enter your information>"; //le
 	//short labelSize = 15;
 	//short fillSize = 25;//le
 
-	typedef BoxBorder<BorderStyle::SINGLE> Border;
+	typedef box::Border Border;
 
 	if ((title.size() + labelSize + fillSize) % 2 == 1) fillSize++;
 	short sumSize = labelSize + fillSize;
 	short alignMiddle = static_cast<short>(sumSize + title.size()) / 2;
-	std::wcout << Border::top::left() << std::setfill(Border::horizontal()) << std::setw(sumSize) << Border::horizontal() << Border::top::right() << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical() << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << Border::vertical() << std::endl;
+	std::wcout << Border::top_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::top_right(_style) << std::setfill(L' ') << std::endl;
+	std::wcout << Border::vertical(_style) << std::setw(alignMiddle) << std::right << title << std::setw(alignMiddle - title.size()) << ' ' << Border::vertical(_style) << std::endl;
 
-	std::wcout << Border::left() << std::setfill(Border::horizontal()) << std::setw(sumSize) << Border::horizontal() << Border::right() << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical() << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << Border::vertical() << std::endl;
+	std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::right(_style) << std::setfill(L' ') << std::endl;
+	std::wcout << Border::vertical(_style) << std::setw(labelSize) << std::right << "Full name:" << std::setw(fillSize) << ' ' << Border::vertical(_style) << std::endl;
 
-	std::wcout << Border::left() << std::setfill(Border::horizontal()) << std::setw(sumSize) << Border::horizontal() << Border::right() << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical() << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << Border::vertical() << std::endl;
+	std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::right(_style) << std::setfill(L' ') << std::endl;
+	std::wcout << Border::vertical(_style) << std::setw(labelSize) << std::right << "Address:" << std::setw(fillSize) << ' ' << Border::vertical(_style) << std::endl;
 
-	std::wcout << Border::left() << std::setfill(Border::horizontal()) << std::setw(sumSize) << Border::horizontal() << Border::right() << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical() << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << Border::vertical() << std::endl;
+	std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::right(_style) << std::setfill(L' ') << std::endl;
+	std::wcout << Border::vertical(_style) << std::setw(labelSize) << std::right << "Phone number:" << std::setw(fillSize) << ' ' << Border::vertical(_style) << std::endl;
 
-	std::wcout << Border::left() << std::setfill(Border::horizontal()) << std::setw(sumSize) << Border::horizontal() << Border::right() << std::setfill(L' ') << std::endl;
-	std::wcout << Border::vertical() << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << Border::vertical() << std::endl;
+	std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::right(_style) << std::setfill(L' ') << std::endl;
+	std::wcout << Border::vertical(_style) << std::setw(labelSize) << std::right << "Email address:" << std::setw(fillSize) << ' ' << Border::vertical(_style) << std::endl;
 
-	std::wcout << Border::bottom::left() << std::setfill(Border::horizontal()) << std::setw(sumSize) << Border::horizontal() << Border::bottom::right() << std::setfill(L' ') << std::endl;
+	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sumSize) << Border::horizontal(_style) << Border::bottom_right(_style) << std::setfill(L' ') << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 	/*form info can be like this (DEMO)
 	┌────────────────────────────────────────┐
@@ -138,51 +138,55 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //	textAndBackgroundColor(textColor, Color::Black);
 //	std::wcout << std::setw(ArgSize) << std::left << wStrArg;
 //	textAndBackgroundColor(Color::BrightWhite, Color::Black);
-//	std::wcout << fillType << Border::vertical();
+//	std::wcout << fillType << Border::vertical(_style);
 //
 //	std::wcout << std::setfill(L' ');
 //	_setmode(_fileno(stdout), _O_TEXT);
 //}
 
-void show_border(std::vector<short> number_of_fill, Position _position) {
-	typedef BoxBorder<BorderStyle::SINGLE> Border;
-	_setmode(_fileno(stdout), _O_U16TEXT);
+void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style ) {
+	typedef box::Border Border;
+
+	_setmode(_fileno(stdout), _O_U16TEXT);  
 	// ─│┌┐└┘├┤┬┴┼
 	// ═║╔╗╚╝╠╣╦╩╬
-	if (_position == Position::FIRST) std::wcout << Border::top::left();
-	if (_position == Position::MIDDLE) std::wcout << Border::left();
-	if (_position == Position::LAST) std::wcout << Border::bottom::left();
-	std::wcout << std::setfill(Border::horizontal());
-	std::wcout << Border::horizontal();
+	if (_position == Position::FIRST) std::wcout << Border::top_left(_style);
+	if (_position == Position::MIDDLE) std::wcout << Border::left(_style);
+	if (_position == Position::LAST) std::wcout << Border::bottom_left(_style);
+
+	std::wcout << std::setfill(Border::horizontal(_style));
+	std::wcout << Border::horizontal(_style);
+
 	for (auto & element : number_of_fill) {
-		std::wcout << Border::horizontal() << std::setw(element) << Border::horizontal();
+		std::wcout << Border::horizontal(_style) << std::setw(element) << Border::horizontal(_style);
 		if (element != *(number_of_fill.end() - 1)) {
-			if (_position == Position::FIRST) std::wcout << Border::top();
-			if (_position == Position::MIDDLE) std::wcout << Border::middle();
-			if (_position == Position::LAST) std::wcout << Border::bottom();
-			std::wcout << Border::horizontal();
+			if (_position == Position::FIRST) std::wcout << Border::top(_style);
+			if (_position == Position::MIDDLE) std::wcout << Border::center(_style);
+			if (_position == Position::LAST) std::wcout << Border::bottom(_style);
+			std::wcout << Border::horizontal(_style);
 		}
 	}
-	if (_position == Position::FIRST) std::wcout << Border::top::right();
-	if (_position == Position::MIDDLE) std::wcout << Border::right();
-	if (_position == Position::LAST) std::wcout << Border::bottom::right();
+
+	if (_position == Position::FIRST) std::wcout << Border::top_right(_style);
+	if (_position == Position::MIDDLE) std::wcout << Border::right(_style);
+	if (_position == Position::LAST) std::wcout << Border::bottom_right(_style);
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
 // Output to console in given format: 
 // Pair (maxSize: maximum cell size, wString: One sentence), BorderStyle: Single(customizable)
-void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType) {
+void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType, box::BorderStyle _style) {
 	//TODO: make enum for fill type
-	typedef BoxBorder<BorderStyle::SINGLE> Border;
+	typedef box::Border Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	std::wcout << std::setfill(fillType);
-	std::wcout << Border::vertical();
+	std::wcout << Border::vertical(_style);
 	for (auto & element : maxSizeAndWStringPairs) {
 		short sMaxSize = static_cast<short>(element.first);
 		textAndBackgroundColor(textColor);
 		std::wcout << fillType << std::setw(sMaxSize) << std::left << element.second << fillType;
 		textAndBackgroundColor(Color::BRIGHT_WHITE);
-		std::wcout << Border::vertical();
+		std::wcout << Border::vertical(_style);
 	}
 	std::wcout << std::setfill(L' ');
 	_setmode(_fileno(stdout), _O_TEXT);
@@ -230,12 +234,12 @@ void show_info_accounts() {
 	fileIn.clear();
 	fileIn.seekg(0, std::ios::beg);
 
-	show_border(vecTitleMaxSizes, Position::FIRST);
+	show_a_part_border(vecTitleMaxSizes, Position::FIRST);
 	std::cout << std::endl;
 
 	// Show titles
 	for (short i = 0; i < titlesSize; i++)
-		pairs_titleMaxSizeAndTitle.push_back(std::make_pair(vecTitleMaxSizes[i], convert_to_wstring(titles[i])));
+		pairs_titleMaxSizeAndTitle.push_back(std::make_pair(vecTitleMaxSizes[i], Convert::to_wstring(titles[i])));
 	show_info_account(pairs_titleMaxSizeAndTitle, Color::LIGHT_YELLOW);
 	std::cout << std::endl;
 
@@ -251,11 +255,11 @@ void show_info_accounts() {
 
 		std::vector<std::pair<short, std::wstring>> title_max_size_user_property;
 		for (short i = 0; i < titlesSize; i++)
-			title_max_size_user_property.push_back(std::make_pair(vecTitleMaxSizes[i], convert_to_wstring(p_strCUserProperties[i])));
+			title_max_size_user_property.push_back(std::make_pair(vecTitleMaxSizes[i], Convert::to_wstring(p_strCUserProperties[i])));
 
 		// Show current account information
 		if (user.get_username() != "") {
-			show_border(vecTitleMaxSizes, Position::MIDDLE);
+			show_a_part_border(vecTitleMaxSizes, Position::MIDDLE);
 			std::cout << std::endl;
 
 			show_info_account(title_max_size_user_property, Color::WHITE);
@@ -265,7 +269,7 @@ void show_info_accounts() {
 		fileUserInfo.close();
 	}
 
-	show_border(vecTitleMaxSizes, Position::LAST);
+	show_a_part_border(vecTitleMaxSizes, Position::LAST);
 
 	fileIn.close();
 }

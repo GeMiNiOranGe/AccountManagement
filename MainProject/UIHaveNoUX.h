@@ -10,6 +10,7 @@
 #include "HandleIO.h"
 #include "HandleMain.h"
 #include "HandleMiscellaneous.h"
+#include "Convert.h"
 //#include "CUser.h"
 //#include "HandleMain.h"
 // if ((title.size() + fillSize) % 2 == 1) fillSize++; else sumSize++;
@@ -18,10 +19,10 @@ enum class Position {
 	FIRST,
 	MIDDLE,
 	LAST
-}; 
+};
 
 std::string formLogin(std::string & strUsername, std::string & strPassword);
-void formInfo(short labelSize, short fillSize, std::wstring title);
+void formInfo(short labelSize, short fillSize, std::wstring title, box::BorderStyle _style);
 char chooseAdminOrEmployee();
 void loginAdmin(std::string & strUsername, std::string & strPassword);
 void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin);
@@ -37,14 +38,18 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //	showInfoAnAccount(textColor, fillType, args...);
 //}
 //#pragma endregion
-void show_border(std::vector<short> numberOfFill, Position borderPos);
-void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType = L' ');
+void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style = box::BorderStyle::SINGLE);
+void show_info_account(
+	std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs,
+	Color textColor,
+	wchar_t fillType = L' ',
+	box::BorderStyle _style = box::BorderStyle::SINGLE);
 void show_info_accounts();
 
 char menuAdmin();
 char menuEmployee();
 char menuUpdateInfo();
 
-std::wstring convertToWString(const std::string & _string);
+std::wstring convert_to_wstring(const std::string & _string);
 
 #endif

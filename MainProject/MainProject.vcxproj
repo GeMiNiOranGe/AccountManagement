@@ -153,6 +153,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Administrator.cpp" />
+    <ClCompile Include="BoxBorder.cpp" />
+    <ClCompile Include="Convert.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="HandleIO.cpp" />
@@ -163,8 +165,10 @@
     <ClCompile Include="UIHaveNoUX.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Anchor.h" />
     <ClInclude Include="BoxBorder.h" />
     <ClInclude Include="Administrator.h" />
+    <ClInclude Include="Convert.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Config.h" />
