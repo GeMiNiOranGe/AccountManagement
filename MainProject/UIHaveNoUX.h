@@ -21,8 +21,8 @@ enum class Position {
 	LAST
 };
 
-std::string formLogin(std::string & strUsername, std::string & strPassword);
-void form_info(std::wstring title, std::vector<std::wstring> labels, box::BorderStyle _style = box::BorderStyle::SINGLE, short fill_size = 25);
+std::string form_login(std::string & username, std::string & password, box::BorderStyle style = box::BorderStyle::SINGLE);
+void form_info(std::wstring title, std::vector<std::wstring> labels, box::BorderStyle style = box::BorderStyle::SINGLE, short fill_size = 25);
 char chooseAdminOrEmployee();
 void loginAdmin(std::string & strUsername, std::string & strPassword);
 void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin);
@@ -38,18 +38,16 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //	showInfoAnAccount(textColor, fillType, args...);
 //}
 //#pragma endregion
-void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style = box::BorderStyle::SINGLE);
+void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle style = box::BorderStyle::SINGLE);
 void show_info_account(
 	std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs,
 	Color textColor,
 	wchar_t fillType = L' ',
-	box::BorderStyle _style = box::BorderStyle::SINGLE);
+	box::BorderStyle style = box::BorderStyle::SINGLE);
 void show_info_accounts();
 
 char menuAdmin();
 char menuEmployee();
 char menuUpdateInfo();
-
-std::wstring convert_to_wstring(const std::string & _string);
 
 #endif

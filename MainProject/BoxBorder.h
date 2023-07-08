@@ -6,6 +6,10 @@ namespace box {
 	enum class BorderStyle {
 		SINGLE,
 		DOUBLE,
+		CORNER_SINGLE,
+		CORNER_DOUBLE,
+		VERTICAL_DOUBLE,
+		HORIZONTAL_DOUBLE,
 		DOUBLE_OUTER_SINGLE_INNER
 	};
 

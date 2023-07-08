@@ -18,18 +18,25 @@ int main() {
 	SetConsoleTitle(L"Employee manager");
 
 	//window::resize(377, 300);// 377
-	//formLogin(strUsernameTemp, strPasswordTemp);
-	//cout << strUsernameTemp << endl;
-	//cout << strPasswordTemp << endl;
+	form_login(strUsernameTemp, strPasswordTemp);
+	std::cout << std::endl;
+	std::cout << strUsernameTemp << std::endl;
+	std::cout << strPasswordTemp << std::endl;
 
 	form_info(
-		L"<Enter your information>",
+		L"Enter your information",
 		{ L"Full name:",
 		  L"Address:",
 		  L"Phone number:",
-		  L"Email address:"
-		}
+		  L"Email address:" },
+		box::BorderStyle::CORNER_DOUBLE
 	);
+
+	//form_info(
+	//	L"Login",
+	//	{ L"Username:",
+	//	  L"Password:" }
+	//);
 
 	//std::string s2 = "asd";
 	//std::string s3 = "hmm";

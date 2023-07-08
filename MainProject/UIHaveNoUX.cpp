@@ -1,41 +1,62 @@
 ﻿#include "UIHaveNoUX.h"
 
-std::string formLogin(std::string & strUsername, std::string & strPassword) {
+std::string form_login(std::string & username, std::string & password, box::BorderStyle style) {
 	//
 	// TODO: add type in list admin and employee to combine frmAdminLogin and frmEmployeeLogin into frmLogin
 	// 
 	//if (hasAccount(ADMINISTRATOR_FILE, strUsername, strPassword)) {
 	//	return "admin";
 	//}
+	typedef box::Border Border;
+
+	std::string title = "Log in";
+	std::string username_title = "Username:";
+	std::string password_title = "Password:";
+	wchar_t fill_style = ' ';
+
+	short width = 40;
+	if (width % 2 == 1) width++;
+	short sum_size = width / 2;
+	short align_middle = sum_size - static_cast<short>(title.size() / 2);
+
 	system("cls");
-	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	std::cout << "\t************************************" << std::endl;
-	std::cout << "\t*              ";
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	textAndBackgroundColor(Color::LIGHT_GREEN);
-	std::cout << "LOG IN              ";
-	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	std::cout << "*" << std::endl;
-	std::cout << "\t************************************" << std::endl;
-	std::cout << "\tUsername: " << std::endl;
-	std::cout << "\tPassword: " << std::endl;
-	textAndBackgroundColor(Color::WHITE);
-	gotoXY(18, 3);
-	getline(std::cin, strUsername);
-	gotoXY(18, 4);
-	encodePassword(strPassword);
+	std::wcout << Border::top_left(style) << std::setfill(Border::horizontal(style)) << std::setw(width) << Border::top_right(style) << std::setfill(fill_style) << std::endl;
+	for (int i = 0; i < 3; i++)
+		std::wcout << Border::vertical(style) << std::setw(width) << Border::vertical(style) << std::endl;
+	std::wcout << Border::left(style) << std::setfill(Border::horizontal(style)) << std::setw(width) << Border::right(style) << std::setfill(fill_style) << std::endl;
+	for (int i = 0; i < 5; i++)
+		std::wcout << Border::vertical(style) << std::setw(width) << Border::vertical(style) << std::endl;
+	std::wcout << Border::bottom_left(style) << std::setfill(Border::horizontal(style)) << std::setw(width) << Border::bottom_right(style) << std::setfill(fill_style) << std::endl;
+	_setmode(_fileno(stdout), _O_TEXT);
+
+	textAndBackgroundColor(Color::LIGHT_AQUA);
+	gotoXY(align_middle, 2);
+	std::cout << title;
+	gotoXY(2, 6);
+	std::cout << username_title;
+	gotoXY(2, 8);
+	std::cout << password_title;
+
+	textAndBackgroundColor(Color::BRIGHT_WHITE);
+	gotoXY(12, 6);
+	getline(std::cin, username);
+	gotoXY(12, 8);
+	encodePassword(password);
 
 	return std::string();
 }
-void form_info(std::wstring title, std::vector<std::wstring> labels, box::BorderStyle _style, short fill_size) {
+void form_info(std::wstring title, std::vector<std::wstring> labels, box::BorderStyle style, short fill_size) {
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	typedef box::Border Border;
 	short label_size = 0;
 	wchar_t fill_style = ' ';
 
 	// Get max size of label
-	for (auto & element : labels)
-		if (element.size() > label_size)
-			label_size = static_cast<short>(element.size());
+	for (auto & label : labels)
+		if (label_size < label.size())
+			label_size = static_cast<short>(label.size());
 
 	// Make space for label
 	label_size++;
@@ -46,15 +67,15 @@ void form_info(std::wstring title, std::vector<std::wstring> labels, box::Border
 	short align_middle = static_cast<short>(sum_size + title.size()) / 2;
 
 	// Show form
-	std::wcout << Border::top_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sum_size) << Border::horizontal(_style) << Border::top_right(_style) << std::setfill(fill_style) << std::endl;
-	std::wcout << Border::vertical(_style) << std::setw(align_middle) << std::right << title << std::setw(align_middle - title.size()) << fill_style << Border::vertical(_style) << std::endl;
+	std::wcout << Border::top_left(style) << std::setfill(Border::horizontal(style)) << std::setw(sum_size) << Border::horizontal(style) << Border::top_right(style) << std::setfill(fill_style) << std::endl;
+	std::wcout << Border::vertical(style) << std::setw(align_middle) << std::right << title << std::setw(align_middle - title.size()) << fill_style << Border::vertical(style) << std::endl;
 
 	for (auto & element : labels) {
-		std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sum_size) << Border::horizontal(_style) << Border::right(_style) << std::setfill(fill_style) << std::endl;
-		std::wcout << Border::vertical(_style) << std::setw(label_size) << std::right << element << std::setw(fill_size) << fill_style << Border::vertical(_style) << std::endl;
+		std::wcout << Border::left(style) << std::setfill(Border::horizontal(style)) << std::setw(sum_size) << Border::horizontal(style) << Border::right(style) << std::setfill(fill_style) << std::endl;
+		std::wcout << Border::vertical(style) << std::setw(label_size) << std::right << element << std::setw(fill_size) << fill_style << Border::vertical(style) << std::endl;
 	}
 
-	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(sum_size) << Border::horizontal(_style) << Border::bottom_right(_style) << std::setfill(L' ') << std::endl;
+	std::wcout << Border::bottom_left(style) << std::setfill(Border::horizontal(style)) << std::setw(sum_size) << Border::horizontal(style) << Border::bottom_right(style) << std::setfill(L' ') << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
@@ -128,55 +149,55 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 //	textAndBackgroundColor(textColor, Color::Black);
 //	std::wcout << std::setw(ArgSize) << std::left << wStrArg;
 //	textAndBackgroundColor(Color::BrightWhite, Color::Black);
-//	std::wcout << fillType << Border::vertical(_style);
+//	std::wcout << fillType << Border::vertical(style);
 //
 //	std::wcout << std::setfill(L' ');
 //	_setmode(_fileno(stdout), _O_TEXT);
 //}
 
-void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style) {
+void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle style) {
 	typedef box::Border Border;
 
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	// ─│┌┐└┘├┤┬┴┼
 	// ═║╔╗╚╝╠╣╦╩╬
-	if (_position == Position::FIRST) std::wcout << Border::top_left(_style);
-	if (_position == Position::MIDDLE) std::wcout << Border::left(_style);
-	if (_position == Position::LAST) std::wcout << Border::bottom_left(_style);
+	if (_position == Position::FIRST) std::wcout << Border::top_left(style);
+	if (_position == Position::MIDDLE) std::wcout << Border::left(style);
+	if (_position == Position::LAST) std::wcout << Border::bottom_left(style);
 
-	std::wcout << std::setfill(Border::horizontal(_style));
-	std::wcout << Border::horizontal(_style);
+	std::wcout << std::setfill(Border::horizontal(style));
+	std::wcout << Border::horizontal(style);
 
 	for (auto & element : number_of_fill) {
-		std::wcout << Border::horizontal(_style) << std::setw(element) << Border::horizontal(_style);
+		std::wcout << Border::horizontal(style) << std::setw(element) << Border::horizontal(style);
 		if (element != *(number_of_fill.end() - 1)) {
-			if (_position == Position::FIRST) std::wcout << Border::top(_style);
-			if (_position == Position::MIDDLE) std::wcout << Border::center(_style);
-			if (_position == Position::LAST) std::wcout << Border::bottom(_style);
-			std::wcout << Border::horizontal(_style);
+			if (_position == Position::FIRST) std::wcout << Border::top(style);
+			if (_position == Position::MIDDLE) std::wcout << Border::center(style);
+			if (_position == Position::LAST) std::wcout << Border::bottom(style);
+			std::wcout << Border::horizontal(style);
 		}
 	}
 
-	if (_position == Position::FIRST) std::wcout << Border::top_right(_style);
-	if (_position == Position::MIDDLE) std::wcout << Border::right(_style);
-	if (_position == Position::LAST) std::wcout << Border::bottom_right(_style);
+	if (_position == Position::FIRST) std::wcout << Border::top_right(style);
+	if (_position == Position::MIDDLE) std::wcout << Border::right(style);
+	if (_position == Position::LAST) std::wcout << Border::bottom_right(style);
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
 // Output to console in given format: 
 // Pair (maxSize: maximum cell size, wString: One sentence), BorderStyle: Single(customizable)
-void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType, box::BorderStyle _style) {
+void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType, box::BorderStyle style) {
 	//TODO: make enum for fill type
 	typedef box::Border Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	std::wcout << std::setfill(fillType);
-	std::wcout << Border::vertical(_style);
+	std::wcout << Border::vertical(style);
 	for (auto & element : maxSizeAndWStringPairs) {
 		short sMaxSize = static_cast<short>(element.first);
 		textAndBackgroundColor(textColor);
 		std::wcout << fillType << std::setw(sMaxSize) << std::left << element.second << fillType;
 		textAndBackgroundColor(Color::BRIGHT_WHITE);
-		std::wcout << Border::vertical(_style);
+		std::wcout << Border::vertical(style);
 	}
 	std::wcout << std::setfill(L' ');
 	_setmode(_fileno(stdout), _O_TEXT);
