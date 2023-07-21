@@ -43,7 +43,7 @@ std::string form_login(std::string & username, std::string & password, box::Bord
 	gotoXY(12, 6);
 	getline(std::cin, username);
 	gotoXY(12, 8);
-	encodePassword(password);
+	encode_password(password);
 
 	return std::string();
 }
@@ -111,7 +111,7 @@ void loginAdmin(std::string & strUsername, std::string & strPassword) {
 	gotoXY(14, 3);
 	getline(std::cin, strUsername);
 	gotoXY(14, 4);
-	encodePassword(strPassword);
+	encode_password(strPassword);
 	std::cout << std::endl;
 }
 void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin) {
@@ -131,7 +131,7 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 	gotoXY(14, 3);
 	getline(std::cin, strUsername);
 	gotoXY(14, 4);
-	encodePassword(strPassword);
+	encode_password(strPassword);
 	std::cout << std::endl;
 }
 
@@ -186,16 +186,16 @@ void show_a_part_border(std::vector<short> number_of_fill, Position _position, b
 
 // Output to console in given format: 
 // Pair (maxSize: maximum cell size, wString: One sentence), BorderStyle: Single(customizable)
-void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color textColor, wchar_t fillType, box::BorderStyle style) {
+void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs, Color text_color, wchar_t fill_type, box::BorderStyle style) {
 	//TODO: make enum for fill type
 	typedef box::Border Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	std::wcout << std::setfill(fillType);
+	std::wcout << std::setfill(fill_type);
 	std::wcout << Border::vertical(style);
 	for (auto & element : maxSizeAndWStringPairs) {
-		short sMaxSize = static_cast<short>(element.first);
-		textAndBackgroundColor(textColor);
-		std::wcout << fillType << std::setw(sMaxSize) << std::left << element.second << fillType;
+		short max_size = static_cast<short>(element.first);
+		textAndBackgroundColor(text_color);
+		std::wcout << fill_type << std::setw(max_size) << std::left << element.second << fill_type;
 		textAndBackgroundColor(Color::BRIGHT_WHITE);
 		std::wcout << Border::vertical(style);
 	}
@@ -213,19 +213,19 @@ void show_info_accounts() {
 		"Phone number",
 		"Email address"
 	};
-	const int titlesSize = sizeof(titles) / sizeof(titles[0]);
+	const int titles_size = sizeof(titles) / sizeof(titles[0]);
 	std::vector<short> vecTitleMaxSizes;
-	std::ifstream fileIn;
+	std::ifstream file_in;
 	std::vector<std::pair<short, std::wstring>> pairs_titleMaxSizeAndTitle;
 
 	// Initialize each element in titleMaxSizes with the string size of each element in titles
 	for (auto & title : titles) vecTitleMaxSizes.push_back(title.size());
 
-	fileIn.open(ACCOUNTS_FILE);
+	file_in.open(ACCOUNTS_FILE);
 
-	while (!fileIn.eof()) {
+	while (!file_in.eof()) {
 		User user;
-		file::read::account(fileIn, user);
+		file::read::account(file_in, user);
 		std::ifstream fileUserInfo = openFile(user.get_username());
 		file::read::info(fileUserInfo, user);
 
@@ -234,7 +234,7 @@ void show_info_accounts() {
 
 		// Find the maximum size of each table cell, horizontally
 		if (user.get_username() != "")
-			for (short i = 0; i < titlesSize; i++)
+			for (short i = 0; i < titles_size; i++)
 				if (vecTitleMaxSizes[i] < p_strCUserProperties[i].size())
 					vecTitleMaxSizes[i] = p_strCUserProperties[i].size();
 
@@ -242,22 +242,22 @@ void show_info_accounts() {
 	}
 
 	// Reset file pointer
-	fileIn.clear();
-	fileIn.seekg(0, std::ios::beg);
+	file_in.clear();
+	file_in.seekg(0, std::ios::beg);
 
 	show_a_part_border(vecTitleMaxSizes, Position::FIRST);
 	std::cout << std::endl;
 
 	// Show titles
-	for (short i = 0; i < titlesSize; i++)
+	for (short i = 0; i < titles_size; i++)
 		pairs_titleMaxSizeAndTitle.push_back(std::make_pair(vecTitleMaxSizes[i], Convert::to_wstring(titles[i])));
 	show_info_account(pairs_titleMaxSizeAndTitle, Color::LIGHT_YELLOW);
 	std::cout << std::endl;
 
 	// Show all account information
-	while (!fileIn.eof()) {
+	while (!file_in.eof()) {
 		User user;
-		file::read::account(fileIn, user);
+		file::read::account(file_in, user);
 		std::ifstream fileUserInfo = openFile(user.get_username());
 		file::read::info(fileUserInfo, user);
 
@@ -265,7 +265,7 @@ void show_info_accounts() {
 		std::string * p_strCUserProperties = user.get_properties();
 
 		std::vector<std::pair<short, std::wstring>> title_max_size_user_property;
-		for (short i = 0; i < titlesSize; i++)
+		for (short i = 0; i < titles_size; i++)
 			title_max_size_user_property.push_back(std::make_pair(vecTitleMaxSizes[i], Convert::to_wstring(p_strCUserProperties[i])));
 
 		// Show current account information
@@ -282,24 +282,23 @@ void show_info_accounts() {
 
 	show_a_part_border(vecTitleMaxSizes, Position::LAST);
 
-	fileIn.close();
+	file_in.close();
 }
 
 char menuAdmin() {
 	system("cls");
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	/*ͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ*/
-	std::wcout << "┌─────────────<MENU>─────────────┐" << std::endl;
-	std::wcout << "│ 1. Them Employee               │" << std::endl;
-	std::wcout << "│ 2. Xoa Employee                │" << std::endl;
-	std::wcout << "│ 3. Tim Employee                │" << std::endl;
-	std::wcout << "│ 4. Cap nhat Employee           │" << std::endl;
-	std::wcout << "│ 5. Hien thi thong tin Employee │" << std::endl;
-	std::wcout << "│ 6. Thoat                       │" << std::endl;
-	std::wcout << "└────────────────────────────────┘" << std::endl;
+	std::wcout << L"┌─────────────<MENU>─────────────┐" << std::endl;
+	std::wcout << L"│ 1. Them Employee               │" << std::endl;
+	std::wcout << L"│ 2. Xoa Employee                │" << std::endl;
+	std::wcout << L"│ 3. Tim Employee                │" << std::endl;
+	std::wcout << L"│ 4. Cap nhat Employee           │" << std::endl;
+	std::wcout << L"│ 5. Hien thi thong tin Employee │" << std::endl;
+	std::wcout << L"│ 6. Thoat                       │" << std::endl;
+	std::wcout << L"└────────────────────────────────┘" << std::endl;
 	textAndBackgroundColor(Color::LIGHT_AQUA);
-	std::wcout << "\tMoi ban chon chuc nang" << std::endl;
+	std::wcout << "Moi ban chon chuc nang" << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 	return _getch();
 }
@@ -307,13 +306,13 @@ char menuEmployee() {
 	system("cls");
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	std::wcout << "┌───────<MENU EMPLOYEE>───────┐" << std::endl;
-	std::wcout << "│ 1. Xem thong tin tai khoan  │" << std::endl;
-	std::wcout << "│ 2. Doi password             │" << std::endl;
-	std::wcout << "│ 3. Thoat                    │" << std::endl;
-	std::wcout << "└─────────────────────────────┘" << std::endl;
+	std::wcout << L"┌───────<MENU EMPLOYEE>───────┐" << std::endl;
+	std::wcout << L"│ 1. Xem thong tin tai khoan  │" << std::endl;
+	std::wcout << L"│ 2. Doi password             │" << std::endl;
+	std::wcout << L"│ 3. Thoat                    │" << std::endl;
+	std::wcout << L"└─────────────────────────────┘" << std::endl;
 	textAndBackgroundColor(Color::LIGHT_AQUA);
-	std::wcout << "\tMoi ban chon chuc nang" << std::endl;
+	std::wcout << "Moi ban chon chuc nang" << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 	return _getch();
 }

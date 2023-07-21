@@ -1,32 +1,32 @@
 #include "HandleMiscellaneous.h"
 
-void encodePassword(std::string & strPassword) {
-	char cEvent;
+void encode_password(std::string & password) {
+	char event_key;
 	do {
-		cEvent = _getch();
+		event_key = _getch();
 		// ESC key
-		//if (cEvent == 27) {
-		//	exit(0);
-		//}
-
-		//TODO: make erase a line with "ctrl + backspace" ascii: 127
-
-		// ENTER key
-		if (cEvent == 13) {
-			break;
-		}
+		if (event_key == 27)
+			exit(0);
 		// BACKSPACE key
-		if (cEvent == 8 && !strPassword.empty()) {
+		if (event_key == 8 && !password.empty()) {
 			std::cout << "\b \b";
-			strPassword.pop_back();
+			password.pop_back();
 		}
-		else {
-			strPassword.push_back(cEvent);
-			std::cout << cEvent;
+		// Erase a line with "CTRL + BACKSPACE"
+		if (event_key == 127) {
+			for (int i = 0; i < password.size(); i++)
+				std::cout << "\b \b";
+			password.clear();
+		}
+		// Printable characters
+		if (isprint(event_key)) {
+			password.push_back(event_key);
+			std::cout << event_key;
 			Sleep(100);
 			std::cout << "\b \b*";
 		}
-	} while (cEvent != 13);
+		// Not the ENTER key
+	} while (event_key != 13);
 }
 void textAndBackgroundColor(Color text_color, Color background_color) {
 	short color_code = static_cast<short>(background_color) * 16 + static_cast<short>(text_color);

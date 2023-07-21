@@ -41,8 +41,8 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle style = box::BorderStyle::SINGLE);
 void show_info_account(
 	std::vector<std::pair<short, std::wstring>> maxSizeAndWStringPairs,
-	Color textColor,
-	wchar_t fillType = L' ',
+	Color text_color,
+	wchar_t fill_type = L' ',
 	box::BorderStyle style = box::BorderStyle::SINGLE);
 void show_info_accounts();
 

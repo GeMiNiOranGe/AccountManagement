@@ -13,41 +13,43 @@ std::string strUsernameTemp, strPasswordTemp;
 
 void handleAdmin();
 void handleEmployee(std::string strUsername, std::string strPassword);
-
+void ClientResize(HWND hWnd, int nWidth, int nHeight) {
+	RECT rcClient, rcWind;
+	POINT ptDiff;
+	GetClientRect(hWnd, &rcClient);
+	GetWindowRect(hWnd, &rcWind);
+	// tim phan bu them vao man hinh (x = 33, y = 39) giong offset dat mac dinh
+	ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
+	ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
+	MoveWindow(hWnd, rcWind.left, rcWind.top, nWidth + ptDiff.x, nHeight + ptDiff.y, TRUE);
+}
 int main() {
-	SetConsoleTitle(L"Employee manager");
+	SetConsoleTitle(L"Employee management");
+	
+	//ClientResize(GetConsoleWindow(), 1920, 1080);
 
-	//window::resize(377, 300);// 377
-	form_login(strUsernameTemp, strPasswordTemp);
-	std::cout << std::endl;
-	std::cout << strUsernameTemp << std::endl;
+	//window::resize(1953, 1119);// 377
+	window::move_to::center();
+	//form_login(strUsernameTemp, strPasswordTemp);
+	//std::cout << std::endl;
+	//std::cout << strUsernameTemp << std::endl;
+	std::cout << "Password: ";
+	encode_password(strPasswordTemp);
 	std::cout << strPasswordTemp << std::endl;
 
-	form_info(
-		L"Enter your information",
-		{ L"Full name:",
-		  L"Address:",
-		  L"Phone number:",
-		  L"Email address:" },
-		box::BorderStyle::CORNER_DOUBLE
-	);
+	//form_info(
+	//	L"Enter your information",
+	//	{ L"Full name:",
+	//	  L"Address:",
+	//	  L"Phone number:",
+	//	  L"Email address:" },
+	//	box::BorderStyle::CORNER_DOUBLE
+	//);
 
 	//form_info(
 	//	L"Login",
 	//	{ L"Username:",
 	//	  L"Password:" }
-	//);
-
-	//std::string s2 = "asd";
-	//std::string s3 = "hmm";
-	//std::string s4 = "nahnah";
-	//showInfoAnAccount(
-	//	Color::Blue,
-	//	L'─',
-	//	std::make_tuple(s1.size(), s1),
-	//	std::make_tuple(s2.size(), s2),
-	//	std::make_tuple(s3.size(), s3),
-	//	std::make_tuple(s4.size(), s4)
 	//);
 
 	//show_info_accounts();
@@ -103,30 +105,30 @@ int main() {
 	//			strUsernameTemp.clear();
 	//			strPasswordTemp.clear();
 	//			loginEmployees(strUsernameTemp, strPasswordTemp, iEmployeeMaxLogin);
-	//			cout << endl;
+	//			std::cout << std::endl;
 	//			if (hasAccount(ACCOUNTS_FILE, strUsernameTemp, strPasswordTemp) && iEmployeeMaxLogin != 0) {
 	//				if (strPasswordTemp == "111111") {
-	//					string strNewPass, strConfirmNewPass;
+	//					std::string strNewPass, strConfirmNewPass;
 	//					Employee employee;
 	//					system("cls");
 	//					textAndBackgroundColor(Color::LIGHT_YELLOW);
-	//					cout << "<Doi mat khau mac dinh>" << endl;
-	//					cout << "(Mat khau mac dinh la: 111111)" << endl;
+	//					std::cout << "<Doi mat khau mac dinh>" << std::endl;
+	//					std::cout << "(Mat khau mac dinh la: 111111)" << std::endl;
 	//					textAndBackgroundColor(Color::LIGHT_BLUE);
-	//					cout << "Nhap mat khau moi: ";
+	//					std::cout << "Nhap mat khau moi: ";
 	//					textAndBackgroundColor(Color::BRIGHT_WHITE);
 	//					encodePassword(strNewPass);
-	//					cout << endl;
+	//					std::cout << std::endl;
 	//					textAndBackgroundColor(Color::LIGHT_BLUE);
-	//					cout << "Nhap xac nhan mat khau moi: ";
+	//					std::cout << "Nhap xac nhan mat khau moi: ";
 	//					textAndBackgroundColor(Color::BRIGHT_WHITE);
 	//					encodePassword(strConfirmNewPass);
-	//					cout << endl;
+	//					std::cout << std::endl;
 	//					if (employee.isSuccessChangePass(strUsernameTemp, "111111", strNewPass, strConfirmNewPass)) {
 	//						strNewPass.clear();
 	//						strConfirmNewPass.clear();
 	//						textAndBackgroundColor(Color::LIGHT_RED);
-	//						cout << "Cap nhat thanh cong!!!" << endl;
+	//						std::cout << "Cap nhat thanh cong!!!" << std::endl;
 	//						system("pause");
 	//						handleEmployee(strUsernameTemp, strPasswordTemp);
 	//					}
@@ -279,7 +281,7 @@ void handleAdmin() {
 			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Hien thi thong tin toan bo Employees>" << std::endl;
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			admin.showInfoAllEmployee();
+			show_info_accounts();
 			system("pause");
 			system("cls");
 			break;
@@ -319,17 +321,17 @@ void handleEmployee(std::string strUsername, std::string strPassword) {
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau hien tai: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			encodePassword(strCurrentPass);
+			encode_password(strCurrentPass);
 			std::cout << std::endl;
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau moi: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			encodePassword(strNewPass);
+			encode_password(strNewPass);
 			std::cout << std::endl;
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap xac nhan mat khau moi: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			encodePassword(strConfirmNewPass);
+			encode_password(strConfirmNewPass);
 			std::cout << std::endl;
 			if (employee.isSuccessChangePass(strUsername, strCurrentPass, strNewPass, strConfirmNewPass)) {
 				strCurrentPass.clear();

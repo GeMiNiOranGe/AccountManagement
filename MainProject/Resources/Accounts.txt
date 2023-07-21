@@ -1,6 +1,5 @@
 AD,admin1,123
 AD,admin2,123456
-AD,admin3,123456789
 EM,AthisAthat,111111
 EM,ThanhNguyen,qwe
 EM,narotu,qwe
