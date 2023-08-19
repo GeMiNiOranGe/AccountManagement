@@ -156,6 +156,7 @@
     <ClCompile Include="BoxBorder.cpp" />
     <ClCompile Include="Convert.cpp" />
     <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="HandleConsole.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="HandleIO.cpp" />
     <ClCompile Include="HandleMain.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Administrator.h" />
     <ClInclude Include="Convert.h" />
     <ClInclude Include="Employee.h" />
+    <ClInclude Include="HandleConsole.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="HandleWindow.h" />

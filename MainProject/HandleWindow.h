@@ -26,7 +26,6 @@ namespace window {
 	int get_taskbar_height();
 	SIZE get_work_area_size();
 	void move_to_xy(short posX, short posY);
-	void resize(short width, short height);
 } // namespace window
 
 #endif // end HANDLEWINDOW_H

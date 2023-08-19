@@ -21,6 +21,8 @@ enum class Position {
 	LAST
 };
 
+short get_max_size_of_label(std::vector<std::wstring>);
+
 std::string form_login(std::string & username, std::string & password, box::BorderStyle style = box::BorderStyle::SINGLE);
 void form_info(std::wstring title, std::vector<std::wstring> labels, box::BorderStyle style = box::BorderStyle::SINGLE, short fill_size = 25);
 char chooseAdminOrEmployee();
@@ -45,6 +47,8 @@ void show_info_account(
 	wchar_t fill_type = L' ',
 	box::BorderStyle style = box::BorderStyle::SINGLE);
 void show_info_accounts();
+
+char menu_options(std::wstring, std::vector<std::wstring>, box::BorderStyle = box::BorderStyle::SINGLE);
 
 char menuAdmin();
 char menuEmployee();

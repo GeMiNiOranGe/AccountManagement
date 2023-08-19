@@ -110,10 +110,3 @@ void window::move_to_xy(short pos_x, short pos_y) {
 	GetWindowRect(hwnd, &rect_window);
 	MoveWindow(hwnd, pos_x, pos_y, rect_window.right - rect_window.left, rect_window.bottom - rect_window.top, TRUE);
 }
-
-void window::resize(short width, short height) {
-	RECT rect_window;
-	HWND hwnd = GetConsoleWindow();
-	GetWindowRect(hwnd, &rect_window);
-	MoveWindow(hwnd, rect_window.left, rect_window.top, width, height, TRUE);
-}

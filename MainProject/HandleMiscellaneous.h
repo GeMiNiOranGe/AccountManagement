@@ -40,4 +40,11 @@ void textAndBackgroundColor(Color textColor, Color backgroundColor = Color::BLAC
 void gotoXY(short x, short y);
 void warning(std::string strMessage);
 
+template<typename data_type> bool is_even(data_type value) {
+	return (value % 2) == 0;
+}
+template<typename data_type> bool is_odd(data_type value) {
+	return (value % 2) != 0;
+}
+
 #endif

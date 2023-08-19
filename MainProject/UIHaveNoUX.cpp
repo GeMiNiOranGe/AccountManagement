@@ -1,5 +1,13 @@
 ﻿#include "UIHaveNoUX.h"
 
+short get_max_size_of_label(std::vector<std::wstring> labels) {
+	short label_size = 0;
+	for (auto & label : labels)
+		if (label_size < label.size())
+			label_size = static_cast<short>(label.size());
+	return label_size;
+}
+
 std::string form_login(std::string & username, std::string & password, box::BorderStyle style) {
 	//
 	// TODO: add type in list admin and employee to combine frmAdminLogin and frmEmployeeLogin into frmLogin
@@ -14,10 +22,11 @@ std::string form_login(std::string & username, std::string & password, box::Bord
 	std::string password_title = "Password:";
 	wchar_t fill_style = ' ';
 
-	short width = 40;
-	if (width % 2 == 1) width++;
-	short sum_size = width / 2;
-	short align_middle = sum_size - static_cast<short>(title.size() / 2);
+	short temp = 10;
+	short width = title.size() + temp;
+	if (is_odd(title.size() + temp)) temp++;
+	short sum_size = title.size() + temp;
+	short align_middle = static_cast<short>(sum_size + title.size()) / 2;
 
 	system("cls");
 	_setmode(_fileno(stdout), _O_U16TEXT);
@@ -50,13 +59,10 @@ std::string form_login(std::string & username, std::string & password, box::Bord
 void form_info(std::wstring title, std::vector<std::wstring> labels, box::BorderStyle style, short fill_size) {
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	typedef box::Border Border;
-	short label_size = 0;
 	wchar_t fill_style = ' ';
 
 	// Get max size of label
-	for (auto & label : labels)
-		if (label_size < label.size())
-			label_size = static_cast<short>(label.size());
+	short label_size = get_max_size_of_label(labels);
 
 	// Make space for label
 	label_size++;
@@ -219,7 +225,7 @@ void show_info_accounts() {
 	std::vector<std::pair<short, std::wstring>> pairs_titleMaxSizeAndTitle;
 
 	// Initialize each element in titleMaxSizes with the string size of each element in titles
-	for (auto & title : titles) vecTitleMaxSizes.push_back(title.size());
+	for (auto & title : titles) vecTitleMaxSizes.push_back(static_cast<short>(title.size()));
 
 	file_in.open(ACCOUNTS_FILE);
 
@@ -230,13 +236,14 @@ void show_info_accounts() {
 		file::read::info(fileUserInfo, user);
 
 		// Get all properties in class User
+		// TODO: convert to vector
 		std::string * p_strCUserProperties = user.get_properties();
 
 		// Find the maximum size of each table cell, horizontally
 		if (user.get_username() != "")
 			for (short i = 0; i < titles_size; i++)
 				if (vecTitleMaxSizes[i] < p_strCUserProperties[i].size())
-					vecTitleMaxSizes[i] = p_strCUserProperties[i].size();
+					vecTitleMaxSizes[i] = static_cast<short>(p_strCUserProperties[i].size());
 
 		fileUserInfo.close();
 	}
@@ -283,6 +290,27 @@ void show_info_accounts() {
 	show_a_part_border(vecTitleMaxSizes, Position::LAST);
 
 	file_in.close();
+}
+
+char menu_options(std::wstring title, std::vector<std::wstring> options, box::BorderStyle style) {
+	short label_size = get_max_size_of_label(options);
+	typedef box::Border Border;
+
+	system("cls");
+	_setmode(_fileno(stdout), _O_U16TEXT);
+	textAndBackgroundColor(Color::LIGHT_YELLOW);
+	std::wcout << L"┌─────────────<MENU>─────────────┐" << std::endl;
+	std::wcout << L"│ 1. Them Employee               │" << std::endl;
+	std::wcout << L"│ 2. Xoa Employee                │" << std::endl;
+	std::wcout << L"│ 3. Tim Employee                │" << std::endl;
+	std::wcout << L"│ 4. Cap nhat Employee           │" << std::endl;
+	std::wcout << L"│ 5. Hien thi thong tin Employee │" << std::endl;
+	std::wcout << L"│ 6. Thoat                       │" << std::endl;
+	std::wcout << L"└────────────────────────────────┘" << std::endl;
+	textAndBackgroundColor(Color::LIGHT_AQUA);
+	std::wcout << "Moi ban chon chuc nang" << std::endl;
+	_setmode(_fileno(stdout), _O_TEXT);
+	return _getch();
 }
 
 char menuAdmin() {
