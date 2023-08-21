@@ -166,6 +166,7 @@
     <ClCompile Include="UIHaveNoUX.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AccountType.h" />
     <ClInclude Include="Anchor.h" />
     <ClInclude Include="BoxBorder.h" />
     <ClInclude Include="Administrator.h" />

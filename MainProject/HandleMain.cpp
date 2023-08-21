@@ -74,20 +74,21 @@ bool hasAccount(std::string strSourceFile, std::string strUsername, std::string 
 	return false;
 }
 
-std::string checkTypeAccount(std::string strUsername, std::string strPassword) {
-	std::ifstream fileIn;
-	fileIn.open(ACCOUNTS_FILE.c_str());
-	while (!fileIn.eof()) {
-		User userTemp;
-		file::read::account(fileIn, userTemp);
-		if (userTemp.get_id() == "AD" && userTemp.get_username() == strUsername && userTemp.get_password() == strPassword) {
-			fileIn.close();
-			return "admin";
+AccountType check_account_type(std::string username, std::string password) {
+	std::ifstream file_in;
+	file_in.open(ACCOUNTS_FILE.c_str());
+	while (!file_in.eof()) {
+		User _user;
+		file::read::account(file_in, _user);
+		if (_user.get_id() == "AD" && _user.get_username() == username && _user.get_password() == password) {
+			file_in.close();
+			return AccountType::ADMINISTRATOR;
 		}
-		if (userTemp.get_id() == "EM" && userTemp.get_username() == strUsername && userTemp.get_password() == strPassword) {
-			fileIn.close();
-			return "employee";
+		if (_user.get_id() == "EM" && _user.get_username() == username && _user.get_password() == password) {
+			file_in.close();
+			return AccountType::EMPLOYEE;
 		}
 	}
-	return "";
+	file_in.close();
+	return AccountType::NONE;
 }

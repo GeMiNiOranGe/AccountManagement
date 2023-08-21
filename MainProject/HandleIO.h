@@ -4,15 +4,11 @@
 
 #include <fstream>
 #include "User.h"
+#include "AccountType.h"
 
 // TODO: create 2 new functions, 1 scan and 1 print on console
 
 namespace file {
-	enum class AccountType {
-		ADMINISTRATOR,
-		EMPLOYEE,
-		//NONE,
-	};
 	namespace read {
 		void account(std::ifstream & fileIn, User & user);
 		void info(std::ifstream & fileIn, User & user);

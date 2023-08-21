@@ -7,6 +7,7 @@
 #include "User.h"
 #include "Config.h"
 #include "HandleIO.h"
+#include "AccountType.h"
 
 std::ofstream createFile(std::string strUsername);
 std::ifstream openFile(std::string strUsername);
@@ -22,5 +23,5 @@ void showAccountInfo(std::string strUsername);
 bool hasUsername(std::string strSourceFile, std::string strUsername);
 bool hasAccount(std::string strSourceFile, std::string strUsername, std::string strPassword);
 
-std::string checkTypeAccount(std::string strUsername, std::string strPassword);
+AccountType check_account_type(std::string strUsername, std::string strPassword);
 #endif

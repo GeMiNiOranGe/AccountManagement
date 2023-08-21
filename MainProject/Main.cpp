@@ -18,7 +18,7 @@ void handleEmployee(std::string strUsername, std::string strPassword);
 int main() {
 	SetConsoleTitle(L"Employee management");
 	console::resize(1920, 1080);// 377
-	window::move_to::center();
+	console::move_to::center();
 	//form_login(strUsernameTemp, strPasswordTemp);
 	//std::cout << std::endl;
 	//std::cout << strUsernameTemp << std::endl;
@@ -38,28 +38,25 @@ int main() {
 	//show_info_accounts();
 
 	//while (true) {
-	//	string strTypeAccount = formLogin(strUsernameTemp, strPasswordTemp);
-	//	if (strTypeAccount == "admin") {
+	//	console::resize(450, 550);
+	//	console::move_to::center();
+	//	strUsernameTemp.clear();
+	//	strPasswordTemp.clear();
+	//	form_login(strUsernameTemp, strPasswordTemp);
+	//	AccountType account_type = check_account_type(strUsernameTemp, strPasswordTemp);
+	//	switch (account_type) {
+	//	case AccountType::ADMINISTRATOR:
+	//		handleAdmin();
+	//		break;
+	//	case AccountType::EMPLOYEE:
+	//		handleEmployee(strUsernameTemp, strPasswordTemp);
+	//		break;
+	//	default:
+	//		std::cout << std::endl;
+	//		warning("Sai tai khoan hoac mat khau!!!");
+	//		break;
 	//	}
 	//}
-
-	while (true) {
-		console::resize(405, 300);
-		strUsernameTemp.clear();
-		strPasswordTemp.clear();
-		form_login(strUsernameTemp, strPasswordTemp);
-		std::string strTypeAccount = checkTypeAccount(strUsernameTemp, strPasswordTemp);
-		if (strTypeAccount == "admin") {
-			handleAdmin();
-		}
-		if (strTypeAccount == "employee") {
-			handleEmployee(strUsernameTemp, strPasswordTemp);
-		}
-		if (strTypeAccount == "") {
-			std::cout << std::endl;
-			warning("Sai tai khoan hoac mat khau!!!");
-		}
-	}
 
 	//while (true) {
 	//	console::resize(370, 475);
