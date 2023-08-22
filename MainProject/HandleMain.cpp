@@ -38,11 +38,11 @@ void deleteAccount(std::string strSourceFile, std::string strUsername) {
 }
 
 void showAccountInfo(std::string strUsername) {
-	User userTemp;
-	std::ifstream fileIn = openFile(strUsername);
-	file::read::info(fileIn, userTemp);
-	userTemp.output();
-	fileIn.close();
+	User _user;
+	std::ifstream file_in = openFile(strUsername);
+	file::read::info(file_in, _user);
+	console::write::info(_user);
+	file_in.close();
 }
 
 bool hasUsername(std::string strSourceFile, std::string strUsername) {

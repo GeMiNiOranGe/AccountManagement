@@ -6,7 +6,8 @@
 #include <fstream>
 #include "User.h"
 #include "Config.h"
-#include "HandleIO.h"
+#include "FileIO.h"
+#include "ConsoleIO.h"
 #include "AccountType.h"
 
 std::ofstream createFile(std::string strUsername);

@@ -17,8 +17,8 @@ void handleEmployee(std::string strUsername, std::string strPassword);
 
 int main() {
 	SetConsoleTitle(L"Employee management");
-	console::resize(1920, 1080);// 377
-	console::move_to::center();
+	//console::resize(1920, 1080);// 377
+	//console::move_to::center();
 	//form_login(strUsernameTemp, strPasswordTemp);
 	//std::cout << std::endl;
 	//std::cout << strUsernameTemp << std::endl;
@@ -37,26 +37,26 @@ int main() {
 
 	//show_info_accounts();
 
-	//while (true) {
-	//	console::resize(450, 550);
-	//	console::move_to::center();
-	//	strUsernameTemp.clear();
-	//	strPasswordTemp.clear();
-	//	form_login(strUsernameTemp, strPasswordTemp);
-	//	AccountType account_type = check_account_type(strUsernameTemp, strPasswordTemp);
-	//	switch (account_type) {
-	//	case AccountType::ADMINISTRATOR:
-	//		handleAdmin();
-	//		break;
-	//	case AccountType::EMPLOYEE:
-	//		handleEmployee(strUsernameTemp, strPasswordTemp);
-	//		break;
-	//	default:
-	//		std::cout << std::endl;
-	//		warning("Sai tai khoan hoac mat khau!!!");
-	//		break;
-	//	}
-	//}
+	while (true) {
+		console::resize(450, 500);
+		console::move_to::center();
+		strUsernameTemp.clear();
+		strPasswordTemp.clear();
+		form_login(strUsernameTemp, strPasswordTemp);
+		AccountType account_type = check_account_type(strUsernameTemp, strPasswordTemp);
+		switch (account_type) {
+		case AccountType::ADMINISTRATOR:
+			handleAdmin();
+			break;
+		case AccountType::EMPLOYEE:
+			handleEmployee(strUsernameTemp, strPasswordTemp);
+			break;
+		default:
+			std::cout << std::endl;
+			warning("Sai tai khoan hoac mat khau!!!");
+			break;
+		}
+	}
 
 	//while (true) {
 	//	console::resize(370, 475);
@@ -154,12 +154,12 @@ void handleAdmin() {
 	Administrator admin;
 	std::string strInfoUpdated;
 	while (true) {
-		console::resize(435, 475);
+		console::resize(500, 500);
+		console::move_to::center();
 		g_cCatchEvent = menuAdmin();
 		switch (g_cCatchEvent) {
 		case 49:
 			system("cls");
-			console::resize(650, 475);
 			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Them Employees>" << std::endl;
 			textAndBackgroundColor(Color::LIGHT_RED);
@@ -199,7 +199,6 @@ void handleAdmin() {
 			break;
 		case 51:
 			system("cls");
-			console::resize(550, 475);
 			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Tim Employees>" << std::endl;
 			textAndBackgroundColor(Color::LIGHT_RED);
@@ -257,7 +256,8 @@ void handleAdmin() {
 			break;
 		case 53:
 			system("cls");
-			console::resize(1275, 500);
+			console::resize(1275, 750);
+			console::move_to::center();
 			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Hien thi thong tin toan bo Employees>" << std::endl;
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
@@ -278,11 +278,11 @@ void handleEmployee(std::string strUsername, std::string strPassword) {
 	std::string strCurrentPass, strNewPass, strConfirmNewPass;
 	Employee employee;
 	while (true) {
-		console::resize(435, 475);
+		console::resize(500, 500);
+		console::move_to::center();
 		g_cCatchEvent = menuEmployee();
 		switch (g_cCatchEvent) {
 		case 49:
-			console::resize(535, 475);
 			system("cls");
 			textAndBackgroundColor(Color::LIGHT_YELLOW);
 			std::cout << "<Thong tin tai khoan>" << std::endl;

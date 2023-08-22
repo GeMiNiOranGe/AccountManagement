@@ -42,9 +42,6 @@ public:
 	void set_phone_number(const std::string &);
 	void set_email_address(const std::string &);
 
-	void input();
-	void output();
-
 private:
 	std::string username;
 	std::string password;

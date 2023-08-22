@@ -15,7 +15,7 @@ void Administrator::add_employee(std::string strUsername) {
 	fileUpdated << "EM," << strUsername << "," << DEFAULT_PASSWORD << std::endl;
 	//Step 2: 
 	std::ofstream fileOut = createFile(strUsername);
-	input();
+	console::read::info(*this);
 	file::write::info(*this, fileOut);
 	fileOut.close();
 }
@@ -46,27 +46,3 @@ void Administrator::update_info_employee(std::string strSourceUserFile, std::str
 	file::write::info(*this, fileOut);
 	fileOut.close();
 }
-//Step 1: load username and password into userTemp from file Employees.txt
-//Step 2: load information into userTemp from file [username].txt
-//Step 3: export information
-void Administrator::showInfoAllEmployee() {
-	std::ifstream fileIn;
-	fileIn.open(ACCOUNTS_FILE);
-	//showAnEmployeeInfoElement(Color::LightBlue, "Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
-	//showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
-	while (!fileIn.eof()) {
-		//Step 1:
-		file::read::account(fileIn, *this);
-		//Step 2:
-		std::ifstream fileUserInfoTemp = openFile(User::get_username());
-		file::read::info(fileUserInfoTemp, *this);
-		//Step 3:
-		if (User::get_username() != "") {
-			//showAnEmployeeInfoElement(Color::BrightWhite, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
-			//showAnEmployeeInfoElement(Color::BrightWhite, "-", "-", "-", "-", "-", "+-", '-');
-		}
-		fileUserInfoTemp.close();
-	}
-	fileIn.close();
-}
-

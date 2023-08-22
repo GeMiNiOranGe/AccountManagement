@@ -4,8 +4,9 @@
 
 #include "User.h"
 #include "HandleMain.h"
-#include "HandleIO.h"
+#include "FileIO.h"
 #include "UIHaveNoUX.h"
+#include "ConsoleIO.h"
 
 class Administrator : public User {
 public:
@@ -18,7 +19,6 @@ public:
 	void add_employee(std::string);
 	void erase_employee(std::string);
 	void update_info_employee(std::string, std::string, char);
-	void showInfoAllEmployee();
 };
 
 #endif

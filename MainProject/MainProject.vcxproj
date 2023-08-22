@@ -154,11 +154,12 @@
   <ItemGroup>
     <ClCompile Include="Administrator.cpp" />
     <ClCompile Include="BoxBorder.cpp" />
+    <ClCompile Include="ConsoleIO.cpp" />
     <ClCompile Include="Convert.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="HandleConsole.cpp" />
     <ClCompile Include="User.cpp" />
-    <ClCompile Include="HandleIO.cpp" />
+    <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="HandleMain.cpp" />
     <ClCompile Include="HandleMiscellaneous.cpp" />
     <ClCompile Include="HandleWindow.cpp" />
@@ -170,13 +171,14 @@
     <ClInclude Include="Anchor.h" />
     <ClInclude Include="BoxBorder.h" />
     <ClInclude Include="Administrator.h" />
+    <ClInclude Include="ConsoleIO.h" />
     <ClInclude Include="Convert.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="HandleConsole.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="HandleWindow.h" />
-    <ClInclude Include="HandleIO.h" />
+    <ClInclude Include="FileIO.h" />
     <ClInclude Include="HandleMain.h" />
     <ClInclude Include="HandleMiscellaneous.h" />
     <ClInclude Include="UIHaveNoUX.h" />

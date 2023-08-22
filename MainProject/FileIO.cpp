@@ -1,4 +1,4 @@
-#include "HandleIO.h"
+#include "FileIO.h"
 
 void file::read::account(std::ifstream & fileIn, User & user) {
 	std::string strId, strUsername, strPassword;
@@ -33,10 +33,6 @@ void file::write::account(User user, std::ofstream & fileOut, AccountType _accou
 	case AccountType::EMPLOYEE:
 		fileOut << "EM," << user.get_username() << ',' << user.get_password() << std::endl;
 		break;
-	//case AccountType::None:
-	//	break;
-	//default:
-	//	break;
 	}
 }
 void file::write::info(User user, std::ofstream & fileOut) {
