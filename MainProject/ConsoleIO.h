@@ -8,16 +8,11 @@
 #include "HandleMiscellaneous.h"
 
 namespace console {
-	namespace read {
-		void account(User & user);
-		void info(User & user);
-		void all(User & user);
-	} // namespace read
-	namespace write {
-		void account(User user);
-		void info(User user);
-		void all(User user);
-	} // namespace write
+	void read_account(User &_user);
+	void read_info(User &_user);
+	
+	void write_account(User _user);
+	void write_info(User _user);
 } // namespace console
 
 #endif // end CONSOLEIO_HPP

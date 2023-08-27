@@ -175,6 +175,8 @@
     <ClInclude Include="Convert.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="HandleConsole.h" />
+    <ClInclude Include="LoginStatus.h" />
+    <ClInclude Include="Position.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="HandleWindow.h" />

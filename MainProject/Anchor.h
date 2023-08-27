@@ -1,6 +1,6 @@
-#ifndef ANCHOR_H
-#define ANCHOR_H
 #pragma once
+#ifndef ANCHOR_HPP
+#define ANCHOR_HPP
 
 enum class Anchor {
 	TOP_LEFT,
@@ -14,4 +14,4 @@ enum class Anchor {
 	BOTTOM_RIGHT
 };
 
-#endif // end ANCHOR_H
+#endif // end ANCHOR_HPP

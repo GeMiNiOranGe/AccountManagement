@@ -1,6 +1,6 @@
-#ifndef ACCOUNTTYPE_H
-#define ACCOUNTTYPE_H
 #pragma once
+#ifndef ACCOUNTTYPE_HPP
+#define ACCOUNTTYPE_HPP
 
 enum class AccountType {
 	ADMINISTRATOR,
@@ -8,4 +8,4 @@ enum class AccountType {
 	NONE,
 };
 
-#endif 
+#endif // end ACCOUNTTYPE_HPP

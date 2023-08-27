@@ -1,21 +1,20 @@
-#ifndef HANDLEIO_H
-#define HANDLEIO_H
 #pragma once
+#ifndef FILEIO_HPP
+#define FILEIO_HPP
 
-#include <fstream>
-#include "User.h"
 #include "AccountType.h"
+#include "User.h"
+#include <fstream>
 
-namespace file {
-	namespace read {
-		void account(std::ifstream & fileIn, User & user);
-		void info(std::ifstream & fileIn, User & user);
-	} // namespace read
-	namespace write {
-		void account(User user, std::ofstream & fileOut);
-		void account(User user, std::ofstream & fileOut, AccountType _accountType);
-		void info(User user, std::ofstream & fileOut);
-	} // namespace write
-} // namespace file
+namespace io {
+	class File {
+	public:
+		static void read_account_from(std::ifstream &_fin, User &_user);
+		static void read_info_from(std::ifstream &_fin, User &_user);
+		
+		static void write_account_from(User _user, std::ofstream &_fout);
+		static void write_info_from(User _user, std::ofstream &_fout);
+	};
+} // namespace io
 
-#endif 
+#endif // end FILEIO_HPP

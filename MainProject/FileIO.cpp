@@ -1,43 +1,32 @@
 #include "FileIO.h"
 
-void file::read::account(std::ifstream & fileIn, User & user) {
-	std::string strId, strUsername, strPassword;
-	getline(fileIn, strId, ',');
-	getline(fileIn, strUsername, ',');
-	getline(fileIn, strPassword);
-	user.set_id(strId);
-	user.set_username(strUsername);
-	user.set_password(strPassword);
+void io::File::read_account_from(std::ifstream & _fin, User & _user) {
+	std::string id, username, password;
+	getline(_fin, id, ',');
+	getline(_fin, username, ',');
+	getline(_fin, password);
+	_user.set_id(id);
+	_user.set_username(username);
+	_user.set_password(password);
 }
-void file::read::info(std::ifstream & fileIn, User & user) {
-	std::string strFullName, strAddress, strPhoneNumber, strEmailAddress;
-	getline(fileIn, strFullName);
-	getline(fileIn, strAddress);
-	getline(fileIn, strPhoneNumber);
-	getline(fileIn, strEmailAddress);
-	user.set_full_name(strFullName);
-	user.set_address(strAddress);
-	user.set_phone_number(strPhoneNumber);
-	user.set_email_address(strEmailAddress);
-}
-
-void file::write::account(User user, std::ofstream & fileOut) {
-	fileOut << user.get_id() << ',' << user.get_username() << ',' << user.get_password() << std::endl;
+void io::File::read_info_from(std::ifstream & _fin, User & _user) {
+	std::string full_name, address, phone_number, email_address;
+	getline(_fin, full_name);
+	getline(_fin, address);
+	getline(_fin, phone_number);
+	getline(_fin, email_address);
+	_user.set_full_name(full_name);
+	_user.set_address(address);
+	_user.set_phone_number(phone_number);
+	_user.set_email_address(email_address);
 }
 
-void file::write::account(User user, std::ofstream & fileOut, AccountType _accountType) {
-	switch (_accountType) {
-	case AccountType::ADMINISTRATOR:
-		fileOut << "AD," << user.get_username() << ',' << user.get_password() << std::endl;
-		break;
-	case AccountType::EMPLOYEE:
-		fileOut << "EM," << user.get_username() << ',' << user.get_password() << std::endl;
-		break;
-	}
+void io::File::write_account_from(User _user, std::ofstream &_fout) {
+	_fout << _user.get_id() << ',' << _user.get_username() << ',' << _user.get_password() << std::endl;
 }
-void file::write::info(User user, std::ofstream & fileOut) {
-	fileOut << user.get_full_name() << std::endl;
-	fileOut << user.get_address() << std::endl;
-	fileOut << user.get_phone_number() << std::endl;
-	fileOut << user.get_email_address() << std::endl;
+void io::File::write_info_from(User _user, std::ofstream &_fout) {
+	_fout << _user.get_full_name() << std::endl;
+	_fout << _user.get_address() << std::endl;
+	_fout << _user.get_phone_number() << std::endl;
+	_fout << _user.get_email_address() << std::endl;
 }

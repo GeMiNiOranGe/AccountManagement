@@ -2,8 +2,7 @@
 #define CUSER_H
 #pragma once
 
-#include <iostream>
-#include "HandleMiscellaneous.h"
+#include <string>
 #include "Config.h"
 
 class User {

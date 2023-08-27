@@ -1,6 +1,6 @@
-﻿#ifndef BOXBORDER_H
-#define BOXBORDER_H
-#pragma once
+﻿#pragma once
+#ifndef BOXBORDER_HPP
+#define BOXBORDER_HPP
 
 namespace box {
 	enum class BorderStyle {
@@ -13,7 +13,8 @@ namespace box {
 		DOUBLE_OUTER_SINGLE_INNER
 	};
 
-	struct Border {
+	class Border {
+	public:
 		static wchar_t horizontal(BorderStyle _style);
 		static wchar_t vertical(BorderStyle _style);
 
@@ -36,4 +37,5 @@ namespace box {
 		//ͰΤ⫟⫞⊦⊢⊤⌜⌌⌍⌏⌎◜◞⌊⌈|⨽⨼⫠⫥⫭⫪⫬Τ—−––--−−——⌈‖Τ
 	};
 } // namespace box
-#endif
+
+#endif // end BOXBORDER_HPP

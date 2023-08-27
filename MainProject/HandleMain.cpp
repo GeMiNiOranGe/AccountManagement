@@ -1,94 +1,95 @@
 #include "HandleMain.h"
 
-std::ofstream createFile(std::string strUsernameFile) {
-	std::string filePath = USERS_INFO_FOLDER + strUsernameFile + ".txt";
-	std::ofstream fileTemp(filePath);
-	return fileTemp;
+std::ofstream create_file(std::string _username) {
+	std::string path = USERS_INFO_FOLDER + _username + ".txt";
+	std::ofstream new_file(path);
+	return new_file;
 }
-std::ifstream openFile(std::string strUsernameFile) {
-	std::string filePath = USERS_INFO_FOLDER + strUsernameFile + ".txt";
-	std::ifstream fileTemp;
-	fileTemp.open(filePath);
-	return fileTemp;
+std::ifstream open_file(std::string _username) {
+	std::string path = USERS_INFO_FOLDER + _username + ".txt";
+	std::ifstream fin;
+	fin.open(path);
+	return fin;
 }
-void deleteFile(std::string strUsernameFile) {
-	std::string filePath = "del " + USERS_INFO_FOLDER + strUsernameFile + ".txt";
-	system(filePath.c_str());
-}
-
-void deleteAccount(std::string strSourceFile, std::string strUsername) {
-	User userTemp;
-	//Step 1:
-	std::string employeeFileRenamed = strSourceFile;
-	rename(strSourceFile.c_str(), employeeFileRenamed.insert(employeeFileRenamed.size() - 4, "Temp").c_str());
-	//Step 2:
-	std::ofstream fileOut(strSourceFile);
-	std::ifstream fileIn;
-	fileIn.open(employeeFileRenamed.c_str());
-	//Step 3:
-	while (!fileIn.eof()) {
-		file::read::account(fileIn, userTemp);
-		if (userTemp.get_username() != strUsername && userTemp.get_username() != "")
-			file::write::account(userTemp, fileOut);
-	}
-	fileOut.close();
-	fileIn.close();
-	//Step 4:
-	system(employeeFileRenamed.insert(0, "del ").c_str());
+void delete_file(std::string _username) {
+	std::string command = "del " + USERS_INFO_FOLDER + _username + ".txt";
+	system(command.c_str());
 }
 
-void showAccountInfo(std::string strUsername) {
+void delete_account(std::string _source_file, std::string _username) {
 	User _user;
-	std::ifstream file_in = openFile(strUsername);
-	file::read::info(file_in, _user);
-	console::write::info(_user);
-	file_in.close();
+	// Rename Employees.txt into EmployeesTemp.txt
+	std::string accounts_file_temp = _source_file;
+	rename(_source_file.c_str(), accounts_file_temp.insert(accounts_file_temp.size() - 4, "Temp").c_str());
+	// Create a new Employees.txt and open the file is renamed (EmployeesTemp.txt)
+	std::ofstream fout(_source_file);
+	std::ifstream fin;
+	fin.open(accounts_file_temp.c_str());
+	// Write from the file is renamed (EmployeesTemp.txt) to Employees.txt
+	// and don't write the employee want to delete
+	while (!fin.eof()) {
+		io::File::read_account_from(fin, _user);
+		if (_user.get_username() != _username && _user.get_username() != "")
+			io::File::write_account_from(_user, fout);
+	}
+	fout.close();
+	fin.close();
+	// Delete the file is renamed (EmployeesTemp.txt)
+	system(accounts_file_temp.insert(0, "del ").c_str());
 }
 
-bool hasUsername(std::string strSourceFile, std::string strUsername) {
-	std::ifstream fileIn;
-	fileIn.open(strSourceFile.c_str());
-	while (!fileIn.eof()) {
-		User userTemp;
-		file::read::account(fileIn, userTemp);
-		if (strUsername == userTemp.get_username()) {
-			fileIn.close();
-			return true;
-		}
-	}
-	fileIn.close();
-	return false;
-}
-bool hasAccount(std::string strSourceFile, std::string strUsername, std::string strPassword) {
-	std::ifstream fileIn;
-	fileIn.open(strSourceFile.c_str());
-	while (!fileIn.eof()) {
-		User userTemp;
-		file::read::account(fileIn, userTemp);
-		if (strUsername == userTemp.get_username() && strPassword == userTemp.get_password() && userTemp.get_username() != "" && userTemp.get_password() != "") {
-			fileIn.close();
-			return true;
-		}
-	}
-	fileIn.close();
-	return false;
+void show_account_info(std::string _username) {
+	User _user;
+	std::ifstream fin = open_file(_username);
+	io::File::read_info_from(fin, _user);
+	console::write_info(_user);
+	fin.close();
 }
 
-AccountType check_account_type(std::string username, std::string password) {
-	std::ifstream file_in;
-	file_in.open(ACCOUNTS_FILE.c_str());
-	while (!file_in.eof()) {
+bool has_username(std::string _username) {
+	std::ifstream fin;
+	fin.open(ACCOUNTS_FILE.c_str());
+	while (!fin.eof()) {
 		User _user;
-		file::read::account(file_in, _user);
-		if (_user.get_id() == "AD" && _user.get_username() == username && _user.get_password() == password) {
-			file_in.close();
+		io::File::read_account_from(fin, _user);
+		if (_username == _user.get_username()) {
+			fin.close();
+			return true;
+		}
+	}
+	fin.close();
+	return false;
+}
+bool has_account(std::string _username, std::string _password) {
+	std::ifstream fin;
+	fin.open(ACCOUNTS_FILE.c_str());
+	while (!fin.eof()) {
+		User _user;
+		io::File::read_account_from(fin, _user);
+		if (_username == _user.get_username() && _password == _user.get_password() && _user.get_username() != "" && _user.get_password() != "") {
+			fin.close();
+			return true;
+		}
+	}
+	fin.close();
+	return false;
+}
+
+AccountType get_account_type(std::string _username, std::string _password) {
+	std::ifstream fin;
+	fin.open(ACCOUNTS_FILE.c_str());
+	while (!fin.eof()) {
+		User _user;
+		io::File::read_account_from(fin, _user);
+		if (_user.get_id() == "AD" && _user.get_username() == _username && _user.get_password() == _password) {
+			fin.close();
 			return AccountType::ADMINISTRATOR;
 		}
-		if (_user.get_id() == "EM" && _user.get_username() == username && _user.get_password() == password) {
-			file_in.close();
+		if (_user.get_id() == "EM" && _user.get_username() == _username && _user.get_password() == _password) {
+			fin.close();
 			return AccountType::EMPLOYEE;
 		}
 	}
-	file_in.close();
+	fin.close();
 	return AccountType::NONE;
 }

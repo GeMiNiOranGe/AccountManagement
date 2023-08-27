@@ -1,6 +1,6 @@
-#ifndef HANDLEMAIN_H
-#define HANDLEMAIN_H
 #pragma once
+#ifndef HANDLEMAIN_HPP
+#define HANDLEMAIN_HPP
 
 #include <string>
 #include <fstream>
@@ -9,20 +9,18 @@
 #include "FileIO.h"
 #include "ConsoleIO.h"
 #include "AccountType.h"
+#include "LoginStatus.h"
 
-std::ofstream createFile(std::string strUsername);
-std::ifstream openFile(std::string strUsername);
-void deleteFile(std::string strUsername);
+std::ofstream create_file(std::string _username);
+std::ifstream open_file(std::string _username);
+void delete_file(std::string _username);
 
-//Step 1: rename Employees.txt into EmployeesTemp.txt
-//Step 2: create a new Employees.txt and open the file is renamed (EmployeesTemp.txt)
-//Step 3: write from the file is renamed (EmployeesTemp.txt) to Employees.txt and don't write the employee want to delete
-//Step 4: delete the file is renamed (EmployeesTemp.txt)
-void deleteAccount(std::string strSourceFile, std::string strUsername);
-void showAccountInfo(std::string strUsername);
+void delete_account(std::string _source_file, std::string _username);
+void show_account_info(std::string _username);
 
-bool hasUsername(std::string strSourceFile, std::string strUsername);
-bool hasAccount(std::string strSourceFile, std::string strUsername, std::string strPassword);
+bool has_username(std::string _username);
+bool has_account(std::string _username, std::string _password);
 
-AccountType check_account_type(std::string strUsername, std::string strPassword);
-#endif
+AccountType get_account_type(std::string _username, std::string _password);
+
+#endif // end HANDLEMAIN_HPP

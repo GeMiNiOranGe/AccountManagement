@@ -1,6 +1,6 @@
-#ifndef CADMINISTRATOR_H
-#define CADMINISTRATOR_H
 #pragma once
+#ifndef ADMINISTRATOR_HPP
+#define ADMINISTRATOR_HPP
 
 #include "User.h"
 #include "HandleMain.h"
@@ -16,9 +16,9 @@ public:
 		std::string _phone_number = "", std::string _email_address = ""
 	);
 
-	void add_employee(std::string);
-	void erase_employee(std::string);
-	void update_info_employee(std::string, std::string, char);
+	void add_employee(std::string _username);
+	void erase_employee(std::string _username);
+	void update_info_employee(std::string _username, std::string _info_updated, char _option);
 };
 
-#endif
+#endif // end ADMINISTRATOR_HPP

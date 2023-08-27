@@ -101,6 +101,12 @@
     <ClInclude Include="ConsoleIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LoginStatus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Accounts.txt">

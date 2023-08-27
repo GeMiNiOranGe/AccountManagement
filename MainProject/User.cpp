@@ -26,7 +26,7 @@ User::~User() {
 }
 
 std::string * User::get_properties() {
-	return new std::string[]{
+	return new std::string[7]{
 		this->id,
 		this->username,
 		this->password,
