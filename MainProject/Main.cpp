@@ -47,7 +47,7 @@ int main() {
 			handleAdmin();
 			break;
 		case AccountType::EMPLOYEE:
-			handleEmployee(strUsernameTemp, strPasswordTemp);
+			handleEmployee(account.first, account.second);
 			break;
 		default:
 			std::cout << std::endl;
@@ -56,81 +56,81 @@ int main() {
 		}
 	}
 
-	// while (true) {
-	// 	bool is_break = false;
-	// 	console::resize(350, 400);
-	// 	console::move_to::center();
-	// 	g_cCatchEvent = chooseAdminOrEmployee();
-	// 	int number_of_login = 3;
-	// 	switch (g_cCatchEvent) {
-	// 	case 49:
-	// 		while (true) {
-	// 			console::resize(380, 475);
-	// 			strUsernameTemp.clear();
-	// 			strPasswordTemp.clear();
-	// 			loginAdmin(strUsernameTemp, strPasswordTemp);
-	// 			if (has_account(strUsernameTemp, strPasswordTemp)) {
-	// 				handleAdmin();
-	// 				is_break = true;
-	// 			}
-	// 			else warning("Sai tai khoan hoac mat khau!!!");
-	// 			if (is_break) break;
-	// 		}
-	// 		break;
-	// 	case 50:
-	// 		while (true) {
-	// 			console::resize(380, 475);
-	// 			strUsernameTemp.clear();
-	// 			strPasswordTemp.clear();
-	// 			loginEmployees(strUsernameTemp, strPasswordTemp, number_of_login);
-	// 			std::cout << std::endl;
-	// 			if (has_account(strUsernameTemp, strPasswordTemp) && number_of_login != 0) {
-	// 				if (strPasswordTemp == DEFAULT_PASSWORD) {
-	// 					std::string strNewPass, strConfirmNewPass;
-	// 					Employee employee;
-	// 					system("cls");
-	// 					textAndBackgroundColor(Color::LIGHT_YELLOW);
-	// 					std::cout << "<Doi mat khau mac dinh>" << std::endl;
-	// 					std::cout << "(Mat khau mac dinh la: " + DEFAULT_PASSWORD + ")" << std::endl;
-	// 					textAndBackgroundColor(Color::LIGHT_BLUE);
-	// 					std::cout << "Nhap mat khau moi: ";
-	// 					textAndBackgroundColor(Color::BRIGHT_WHITE);
-	// 					encode_password(strNewPass);
-	// 					std::cout << std::endl;
-	// 					textAndBackgroundColor(Color::LIGHT_BLUE);
-	// 					std::cout << "Nhap xac nhan mat khau moi: ";
-	// 					textAndBackgroundColor(Color::BRIGHT_WHITE);
-	// 					encode_password(strConfirmNewPass);
-	// 					std::cout << std::endl;
-	// 					if (employee.isSuccessChangePass(strUsernameTemp, DEFAULT_PASSWORD, strNewPass, strConfirmNewPass)) {
-	// 						strNewPass.clear();
-	// 						strConfirmNewPass.clear();
-	// 						textAndBackgroundColor(Color::LIGHT_RED);
-	// 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
-	// 						system("pause");
-	// 						handleEmployee(strUsernameTemp, strPasswordTemp);
-	// 					}
-	// 					else
-	// 						warning("Sai thong tin!!!");
-	// 				}
-	// 				else
-	// 					handleEmployee(strUsernameTemp, strPasswordTemp);
-	// 				is_break = true;
-	// 			}
-	// 			else {
-	// 				number_of_login--;
-	// 				warning("Sai tai khoan hoac mat khau!!!");
-	// 				if (number_of_login == 0)
-	// 					break;
-	// 			}
-	// 			if (is_break) break;
-	// 		}
-	// 		break;
-	// 	default:
-	// 		warning("Lua chon khong hop le!!!");
-	// 		break;
-	// 	}
-	// }
+	while (true) {
+		bool is_break = false;
+		console::resize(350, 400);
+		console::move_to::center();
+		g_cCatchEvent = chooseAdminOrEmployee();
+		int number_of_login = 3;
+		switch (g_cCatchEvent) {
+		case 49:
+			while (true) {
+				console::resize(380, 475);
+				strUsernameTemp.clear();
+				strPasswordTemp.clear();
+				loginAdmin(strUsernameTemp, strPasswordTemp);
+				if (has_account(strUsernameTemp, strPasswordTemp)) {
+					handleAdmin();
+					is_break = true;
+				}
+				else warning("Sai tai khoan hoac mat khau!!!");
+				if (is_break) break;
+			}
+			break;
+		case 50:
+			while (true) {
+				console::resize(380, 475);
+				strUsernameTemp.clear();
+				strPasswordTemp.clear();
+				loginEmployees(strUsernameTemp, strPasswordTemp, number_of_login);
+				std::cout << std::endl;
+				if (has_account(strUsernameTemp, strPasswordTemp) && number_of_login != 0) {
+					if (strPasswordTemp == DEFAULT_PASSWORD) {
+						std::string strNewPass, strConfirmNewPass;
+						Employee employee;
+						system("cls");
+						textAndBackgroundColor(Color::LIGHT_YELLOW);
+						std::cout << "<Doi mat khau mac dinh>" << std::endl;
+						std::cout << "(Mat khau mac dinh la: " + DEFAULT_PASSWORD + ")" << std::endl;
+						textAndBackgroundColor(Color::LIGHT_BLUE);
+						std::cout << "Nhap mat khau moi: ";
+						textAndBackgroundColor(Color::BRIGHT_WHITE);
+						encode_password(strNewPass);
+						std::cout << std::endl;
+						textAndBackgroundColor(Color::LIGHT_BLUE);
+						std::cout << "Nhap xac nhan mat khau moi: ";
+						textAndBackgroundColor(Color::BRIGHT_WHITE);
+						encode_password(strConfirmNewPass);
+						std::cout << std::endl;
+						if (employee.isSuccessChangePass(strUsernameTemp, DEFAULT_PASSWORD, strNewPass, strConfirmNewPass)) {
+							strNewPass.clear();
+							strConfirmNewPass.clear();
+							textAndBackgroundColor(Color::LIGHT_RED);
+							std::cout << "Cap nhat thanh cong!!!" << std::endl;
+							system("pause");
+							handleEmployee(strUsernameTemp, strPasswordTemp);
+						}
+						else
+							warning("Sai thong tin!!!");
+					}
+					else
+						handleEmployee(strUsernameTemp, strPasswordTemp);
+					is_break = true;
+				}
+				else {
+					number_of_login--;
+					warning("Sai tai khoan hoac mat khau!!!");
+					if (number_of_login == 0)
+						break;
+				}
+				if (is_break) break;
+			}
+			break;
+		default:
+			warning("Lua chon khong hop le!!!");
+			break;
+		}
+	}
 
 	//char key_press;
 	//int ascii_value;

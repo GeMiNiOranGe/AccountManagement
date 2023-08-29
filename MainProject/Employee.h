@@ -1,11 +1,13 @@
-#ifndef CEMPLOYEE_H
-#define CEMPLOYEE_H
 #pragma once
+#ifndef EMPLOYEE_HPP
+#define EMPLOYEE_HPP
 
 #include "User.h"
 #include "HandleMain.h"
 #include "FileIO.h"
+#include "Convert.h"
 
+// TODO: change class Employee into class Account
 class Employee : public User {
 public:
 	Employee(
@@ -14,7 +16,12 @@ public:
 		std::string _phone_number = "", std::string _email_address = ""
 	);
 
-	bool isSuccessChangePass(std::string, std::string, std::string, std::string);
+	bool isSuccessChangePass(
+		std::string _username,
+		std::string _current_password,
+		std::string _new_password,
+		std::string _confirm_new_password
+	);
 };
 
-#endif
+#endif // end EMPLOYEE_HPP

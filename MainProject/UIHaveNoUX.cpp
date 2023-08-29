@@ -70,12 +70,12 @@ void form_info(std::wstring _title, std::vector<std::wstring> _labels, box::Bord
 	// Show form
 	std::wcout << Border::top_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(new_sum_size) << Border::top_right(_style) << std::setfill(fill_style) << std::endl;
 	std::wcout << Border::vertical(_style) << std::setw(new_sum_size) << Border::vertical(_style) << std::endl;
-	std::wcout << Border::vertical(_style) << std::setw(align_middle + _title.size()) << std::right << _title << std::setw(static_cast<short>(align_middle + 1)) << Border::vertical(_style) << std::endl;
+	std::wcout << Border::vertical(_style) << std::right << std::setw(align_middle + _title.size()) << _title << std::setw(align_middle + static_cast<short>(1)) << Border::vertical(_style) << std::endl;
 	std::wcout << Border::vertical(_style) << std::setw(new_sum_size) << Border::vertical(_style) << std::endl;
 
 	for (auto & element : _labels) {
 		std::wcout << Border::left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(new_sum_size) << Border::right(_style) << std::setfill(fill_style) << std::endl;
-		std::wcout << Border::vertical(_style) << std::setw(label_size) << std::right << element << std::setw(static_cast<short>(fill_size + 1)) << Border::vertical(_style) << std::endl;
+		std::wcout << Border::vertical(_style) << std::right << std::setw(label_size) << element << std::setw(fill_size + static_cast<short>(1)) << Border::vertical(_style) << std::endl;
 		std::wcout << Border::vertical(_style) << std::setw(new_sum_size) << Border::vertical(_style) << std::endl;
 	}
 
@@ -197,8 +197,8 @@ void show_info_accounts() {
 	};
 	const int titles_size = sizeof(titles) / sizeof(titles[0]);
 	std::vector<short> vecTitleMaxSizes;
-	std::ifstream file_in;
 	std::vector<std::pair<short, std::wstring>> pairs_titleMaxSizeAndTitle;
+	std::ifstream file_in;
 
 	// Initialize each element in titleMaxSizes with the string size of each element in titles
 	for (auto & title : titles) vecTitleMaxSizes.push_back(static_cast<short>(title.size()));
@@ -283,14 +283,14 @@ char menu_options(std::wstring _title, std::vector<std::wstring> _options, box::
 		std::wstring index = fill_style + std::to_wstring(i + 1) + L'.' + fill_style;
 		std::wcout << Border::vertical(_style);
 		textAndBackgroundColor(Color::LIGHT_GREEN);
-		_options.size() < 10 ? std::wcout << index : std::wcout << std::setw(index_size) << std::right << index;
+		_options.size() < 10 ? std::wcout << index : std::wcout << std::right << std::setw(index_size) << index;
 		textAndBackgroundColor(Color::BRIGHT_WHITE);
 		std::wcout << _options[i];
 		textAndBackgroundColor(Color::LIGHT_YELLOW);
-		std::wcout << std::setw(label_size - _options[i].size() + 1) << Border::vertical(_style) << std::endl;
+		std::wcout << std::right << std::setw(label_size - _options[i].size() + 1) << Border::vertical(_style) << std::endl;
 	}
 	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(width + 1) << Border::bottom_right(_style) << std::setfill(fill_style) << std::endl;
+	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(width + static_cast<short>(1)) << Border::bottom_right(_style) << std::setfill(fill_style) << std::endl;
 	textAndBackgroundColor(Color::LIGHT_AQUA);
 	std::wcout << "Moi ban chon chuc nang" << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);

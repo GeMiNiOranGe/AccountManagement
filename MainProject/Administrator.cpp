@@ -19,7 +19,7 @@ void Administrator::add_employee(std::string _username) {
 	fout.close();
 }
 void Administrator::erase_employee(std::string _username) {
-	delete_account(ACCOUNTS_FILE, _username);
+	delete_account(_username);
 	delete_file(_username);
 }
 void Administrator::update_info_employee(std::string _username, std::string _info_updated, char _option) {
