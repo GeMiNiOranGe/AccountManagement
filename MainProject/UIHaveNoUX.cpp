@@ -141,28 +141,35 @@ void loginEmployees(std::string & strUsername, std::string & strPassword, int iM
 
 void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style) {
 	typedef box::Border Border;
+	std::wcout << std::setfill(Border::horizontal(_style)) << std::right;
 
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	if (_position == Position::FIRST) std::wcout << Border::top_left(_style);
-	if (_position == Position::MIDDLE) std::wcout << Border::left(_style);
-	if (_position == Position::LAST) std::wcout << Border::bottom_left(_style);
-
-	std::wcout << std::setfill(Border::horizontal(_style));
-	std::wcout << Border::horizontal(_style);
+	if (_position == Position::FIRST)
+		std::wcout << Border::top_left(_style);
+	else if (_position == Position::MIDDLE)
+		std::wcout << Border::left(_style);
+	else if (_position == Position::LAST)
+		std::wcout << Border::bottom_left(_style);
 
 	for (auto & element : number_of_fill) {
-		std::wcout << Border::horizontal(_style) << std::setw(element) << Border::horizontal(_style);
+		short string_with_space = element + 2;
+		std::wcout << Border::horizontal(_style) << std::setw(string_with_space);
 		if (element != *(number_of_fill.end() - 1)) {
-			if (_position == Position::FIRST) std::wcout << Border::top(_style);
-			if (_position == Position::MIDDLE) std::wcout << Border::center(_style);
-			if (_position == Position::LAST) std::wcout << Border::bottom(_style);
-			std::wcout << Border::horizontal(_style);
+			if (_position == Position::FIRST)
+				std::wcout << Border::top(_style);
+			else if (_position == Position::MIDDLE)
+				std::wcout << Border::center(_style);
+			else if (_position == Position::LAST)
+				std::wcout << Border::bottom(_style);
 		}
 	}
 
-	if (_position == Position::FIRST) std::wcout << Border::top_right(_style);
-	if (_position == Position::MIDDLE) std::wcout << Border::right(_style);
-	if (_position == Position::LAST) std::wcout << Border::bottom_right(_style);
+	if (_position == Position::FIRST)
+		std::wcout << Border::top_right(_style);
+	else if (_position == Position::MIDDLE)
+		std::wcout << Border::right(_style);
+	else if (_position == Position::LAST)
+		std::wcout << Border::bottom_right(_style);
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
@@ -172,12 +179,12 @@ void show_info_account(std::vector<std::pair<short, std::wstring>> maxSizeAndWSt
 	//TODO: make enum for fill type
 	typedef box::Border Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	std::wcout << std::setfill(fill_type);
 	std::wcout << Border::vertical(_style);
+	std::wcout << std::setfill(fill_type) << std::left;
 	for (auto & element : maxSizeAndWStringPairs) {
 		short max_size = static_cast<short>(element.first);
 		textAndBackgroundColor(text_color);
-		std::wcout << fill_type << std::setw(max_size) << std::left << element.second << fill_type;
+		std::wcout << fill_type << std::setw(max_size) << element.second << fill_type;
 		textAndBackgroundColor(Color::BRIGHT_WHITE);
 		std::wcout << Border::vertical(_style);
 	}
@@ -270,7 +277,10 @@ char menu_options(std::wstring _title, std::vector<std::wstring> _options, box::
 	typedef box::Border Border;
 	wchar_t fill_style = ' ';
 	short index_size = 4;
+	short title_size = static_cast<short>(_title.size());
 	short label_size = get_max_size_of_labels(_options) + 1;
+
+	if (title_size > label_size) label_size = title_size;
 
 	if (_options.size() > 9) index_size++;
 	short width = index_size + label_size;
@@ -291,6 +301,9 @@ char menu_options(std::wstring _title, std::vector<std::wstring> _options, box::
 	}
 	textAndBackgroundColor(Color::LIGHT_YELLOW);
 	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(width + static_cast<short>(1)) << Border::bottom_right(_style) << std::setfill(fill_style) << std::endl;
+
+	// TODO: add event handling outside of menu
+
 	textAndBackgroundColor(Color::LIGHT_AQUA);
 	std::wcout << "Moi ban chon chuc nang" << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
@@ -300,6 +313,13 @@ char menu_options(std::wstring _title, std::vector<std::wstring> _options, box::
 
 char menuUpdateInfo() {
 	system("cls");
+	// menu_options(
+	// 	L"< Select the information to edit >",
+	// 	{ L"Full name",
+	// 	  L"Address",
+	// 	  L"Phone number",
+	// 	  L"Email address" }
+	// );
 	textAndBackgroundColor(Color::LIGHT_YELLOW);
 	std::cout << "<Chon thong tin can cap nhat>" << std::endl;
 	textAndBackgroundColor(Color::LIGHT_AQUA);
