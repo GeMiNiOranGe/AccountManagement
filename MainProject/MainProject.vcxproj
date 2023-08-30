@@ -171,6 +171,7 @@
     <ClInclude Include="Anchor.h" />
     <ClInclude Include="BoxBorder.h" />
     <ClInclude Include="Administrator.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="ConsoleIO.h" />
     <ClInclude Include="Convert.h" />
     <ClInclude Include="Employee.h" />

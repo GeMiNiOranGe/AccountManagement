@@ -83,62 +83,6 @@ void form_info(std::wstring _title, std::vector<std::wstring> _labels, box::Bord
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
-char chooseAdminOrEmployee() {
-	system("cls");
-	textAndBackgroundColor(Color::LIGHT_RED);
-	std::cout << "\t+------------------------+" << std::endl;
-	std::cout << "\t| 1. Dang Nhap ADMIN     |" << std::endl;
-	std::cout << "\t| 2. Dang Nhap EMPLOYEES |" << std::endl;
-	std::cout << "\t+------------------------+" << std::endl;
-	textAndBackgroundColor(Color::LIGHT_AQUA);
-	std::cout << "\tMoi ban chon" << std::endl;
-	return _getch();
-}
-
-/*IDEA 1: make name login can resize
-Ex: ADMIN ==> size = 5
-for (0 ==> size) cout << '*'
-IDEA 2: make border can change _style*/
-void loginAdmin(std::string & strUsername, std::string & strPassword) {
-	system("cls");
-	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	std::cout << "\t***************************" << std::endl;
-	std::cout << "\t*     ";
-	textAndBackgroundColor(Color::LIGHT_GREEN);
-	std::cout << "DANG NHAP ADMIN     ";
-	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	std::cout << "*" << std::endl;
-	std::cout << "\t***************************" << std::endl;
-	std::cout << "\tUser: " << std::endl;
-	std::cout << "\tPin: " << std::endl;
-	textAndBackgroundColor(Color::WHITE);
-	gotoXY(14, 3);
-	getline(std::cin, strUsername);
-	gotoXY(14, 4);
-	encode_password(strPassword);
-	std::cout << std::endl;
-}
-void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin) {
-	system("cls");
-	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	std::cout << "\t***************************" << std::endl;
-	std::cout << "\t*   ";
-	textAndBackgroundColor(Color::LIGHT_GREEN);
-	std::cout << "DANG NHAP EMPLOYEES   ";
-	textAndBackgroundColor(Color::LIGHT_YELLOW);
-	std::cout << "*" << std::endl;
-	std::cout << "\t***************************" << std::endl;
-	std::cout << "\tUser: " << std::endl;
-	std::cout << "\tPass: " << std::endl;
-	std::cout << "So lan con khi dang nhap sai mat khau: " << iMaxLogin << std::endl;
-	textAndBackgroundColor(Color::WHITE);
-	gotoXY(14, 3);
-	getline(std::cin, strUsername);
-	gotoXY(14, 4);
-	encode_password(strPassword);
-	std::cout << std::endl;
-}
-
 void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style) {
 	typedef box::Border Border;
 	std::wcout << std::setfill(Border::horizontal(_style)) << std::right;

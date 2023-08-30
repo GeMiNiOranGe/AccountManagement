@@ -18,9 +18,6 @@ short get_max_size_of_labels(std::vector<std::wstring> _labels);
 
 std::pair<std::string, std::string> form_login(box::BorderStyle _style = box::BorderStyle::SINGLE);
 void form_info(std::wstring title, std::vector<std::wstring> _labels, box::BorderStyle _style = box::BorderStyle::SINGLE, short fill_size = 30);
-char chooseAdminOrEmployee();
-void loginAdmin(std::string & strUsername, std::string & strPassword);
-void loginEmployees(std::string & strUsername, std::string & strPassword, int iMaxLogin);
 
 void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style = box::BorderStyle::SINGLE);
 void show_info_account(
