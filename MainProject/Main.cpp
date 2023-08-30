@@ -9,11 +9,8 @@
 #include "Config.h"
 #include <tuple>
 
-char g_cCatchEvent;
-std::string strUsernameTemp, strPasswordTemp;
-
-void handleAdmin();
-void handleEmployee(std::string strUsername, std::string strPassword);
+void administrator_interface();
+void employee_interface(std::string _username, std::string _password);
 
 int main() {
 	SetConsoleTitle(L"Employee management");
@@ -73,10 +70,10 @@ int main() {
 		if (is_logged_in)
 			switch (account_type) {
 			case AccountType::ADMINISTRATOR:
-				handleAdmin();
+				administrator_interface();
 				break;
 			case AccountType::EMPLOYEE:
-				handleEmployee(account.first, account.second);
+				employee_interface(account.first, account.second);
 				break;
 			default:
 				number_of_login--;
@@ -88,82 +85,6 @@ int main() {
 
 		if (number_of_login == 0)
 			break;
-	}
-
-	while (true) {
-		bool is_break = false;
-		console::resize(350, 400);
-		console::move_to::center();
-		g_cCatchEvent = chooseAdminOrEmployee();
-		int number_of_login = 3;
-		switch (g_cCatchEvent) {
-		case 49:
-			while (true) {
-				console::resize(380, 475);
-				strUsernameTemp.clear();
-				strPasswordTemp.clear();
-				loginAdmin(strUsernameTemp, strPasswordTemp);
-				if (has_account(strUsernameTemp, strPasswordTemp)) {
-					handleAdmin();
-					is_break = true;
-				}
-				else warning("Sai tai khoan hoac mat khau!!!");
-				if (is_break) break;
-			}
-			break;
-		case 50:
-			while (true) {
-				console::resize(380, 475);
-				strUsernameTemp.clear();
-				strPasswordTemp.clear();
-				loginEmployees(strUsernameTemp, strPasswordTemp, number_of_login);
-				std::cout << std::endl;
-				if (has_account(strUsernameTemp, strPasswordTemp) && number_of_login != 0) {
-					if (strPasswordTemp == DEFAULT_PASSWORD) {
-						std::string strNewPass, strConfirmNewPass;
-						Employee employee;
-						system("cls");
-						textAndBackgroundColor(Color::LIGHT_YELLOW);
-						std::cout << "<Doi mat khau mac dinh>" << std::endl;
-						std::cout << "(Mat khau mac dinh la: " + DEFAULT_PASSWORD + ")" << std::endl;
-						textAndBackgroundColor(Color::LIGHT_BLUE);
-						std::cout << "Nhap mat khau moi: ";
-						textAndBackgroundColor(Color::BRIGHT_WHITE);
-						encode_password(strNewPass);
-						std::cout << std::endl;
-						textAndBackgroundColor(Color::LIGHT_BLUE);
-						std::cout << "Nhap xac nhan mat khau moi: ";
-						textAndBackgroundColor(Color::BRIGHT_WHITE);
-						encode_password(strConfirmNewPass);
-						std::cout << std::endl;
-						if (employee.isSuccessChangePass(strUsernameTemp, DEFAULT_PASSWORD, strNewPass, strConfirmNewPass)) {
-							strNewPass.clear();
-							strConfirmNewPass.clear();
-							textAndBackgroundColor(Color::LIGHT_RED);
-							std::cout << "Cap nhat thanh cong!!!" << std::endl;
-							system("pause");
-							handleEmployee(strUsernameTemp, strPasswordTemp);
-						}
-						else
-							warning("Sai thong tin!!!");
-					}
-					else
-						handleEmployee(strUsernameTemp, strPasswordTemp);
-					is_break = true;
-				}
-				else {
-					number_of_login--;
-					warning("Sai tai khoan hoac mat khau!!!");
-					if (number_of_login == 0)
-						break;
-				}
-				if (is_break) break;
-			}
-			break;
-		default:
-			warning("Lua chon khong hop le!!!");
-			break;
-		}
 	}
 
 	//char key_press;
@@ -179,13 +100,14 @@ int main() {
 	return 0;
 }
 
-void handleAdmin() {
+void administrator_interface() {
 	Administrator admin;
-	std::string strInfoUpdated;
+	std::string strInfoUpdated, username;
+	char event;
 	while (true) {
 		console::resize(500, 500);
 		console::move_to::center();
-		g_cCatchEvent = menu_options(
+		event = menu_options(
 			L"< MENU ADMINISTRATOR >",
 			{ L"Add employee account",
 			  L"Delete employee account",
@@ -195,7 +117,7 @@ void handleAdmin() {
 			  L"Log out" }
 		);
 
-		switch (g_cCatchEvent) {
+		switch (event) {
 		case 49:
 			system("cls");
 			textAndBackgroundColor(Color::LIGHT_YELLOW);
@@ -205,11 +127,11 @@ void handleAdmin() {
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon them: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			std::cin >> strUsernameTemp;
-			if (has_username(strUsernameTemp))
+			std::cin >> username;
+			if (has_username(username))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
-				admin.add_employee(strUsernameTemp);
+				admin.add_employee(username);
 				textAndBackgroundColor(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
 				system("pause");
@@ -224,16 +146,16 @@ void handleAdmin() {
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon xoa: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			strUsernameTemp.clear();
-			std::cin >> strUsernameTemp;
-			if (has_username(strUsernameTemp)) {
-				admin.erase_employee(strUsernameTemp);
+			username.clear();
+			std::cin >> username;
+			if (has_username(username)) {
+				admin.erase_employee(username);
 				textAndBackgroundColor(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
 				system("pause");
 			}
 			else
-				warning("Khong tim thay \"" + strUsernameTemp + "\" de xoa!!!");
+				warning("Khong tim thay \"" + username + "\" de xoa!!!");
 			break;
 		case 51:
 			system("cls");
@@ -244,16 +166,16 @@ void handleAdmin() {
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon tim: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			strUsernameTemp.clear();
-			std::cin >> strUsernameTemp;
-			if (has_username(strUsernameTemp)) {
+			username.clear();
+			std::cin >> username;
+			if (has_username(username)) {
 				textAndBackgroundColor(Color::LIGHT_YELLOW);
 				std::cout << "    Thong tin Employee can tim: " << std::endl;
-				show_account_info(strUsernameTemp);
+				show_account_info(username);
 				system("pause");
 			}
 			else
-				warning("Khong tim thay \"" + strUsernameTemp + "\"!!!");
+				warning("Khong tim thay \"" + username + "\"!!!");
 			break;
 		case 52:
 			system("cls");
@@ -262,35 +184,34 @@ void handleAdmin() {
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap ten tai khoan can cap nhat: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			strUsernameTemp.clear();
-			std::cin >> strUsernameTemp;
-			if (has_username(strUsernameTemp)) {
+			username.clear();
+			std::cin >> username;
+			if (has_username(username)) {
 				while (true) {
-					g_cCatchEvent = menuUpdateInfo();
-					if (48 < g_cCatchEvent && g_cCatchEvent < 53) {
+					event = menuUpdateInfo();
+					if (48 < event && event < 53) {
 						textAndBackgroundColor(Color::LIGHT_BLUE);
 						std::cout << "Cap nhat thong tin o lua chon: ";
 						textAndBackgroundColor(Color::BRIGHT_WHITE);
-						std::cout << g_cCatchEvent - 48 << std::endl;
+						std::cout << event - 48 << std::endl;
 						textAndBackgroundColor(Color::LIGHT_BLUE);
 						std::cout << "Thong tin moi se duoc cap nhat: ";
 						textAndBackgroundColor(Color::BRIGHT_WHITE);
 						std::cin.ignore();
 						getline(std::cin, strInfoUpdated);
-						admin.update_info_employee(strUsernameTemp, strInfoUpdated, g_cCatchEvent);
+						admin.update_info_employee(username, strInfoUpdated, event);
 						textAndBackgroundColor(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
 						system("pause");
 					}
-					else if (g_cCatchEvent == 27) {
+					else if (event == 27)
 						break;
-					}
 					else
 						warning("Lua chon khong hop le!!!");
 				}
 			}
 			else
-				warning("Khong tim thay \"" + strUsernameTemp + "\"!!!");
+				warning("Khong tim thay \"" + username + "\"!!!");
 			break;
 		case 53:
 			system("cls");
@@ -312,20 +233,21 @@ void handleAdmin() {
 	}
 }
 
-void handleEmployee(std::string strUsername, std::string strPassword) {
-	std::string strCurrentPass, strNewPass, strConfirmNewPass;
+void employee_interface(std::string _username, std::string _password) {
+	std::string current_password, new_password, current_new_password;
 	Employee employee;
+	char event;
 	while (true) {
 		console::resize(500, 500);
 		console::move_to::center();
-		g_cCatchEvent = menu_options(
+		event = menu_options(
 			L"< MENU EMPLOYEE >",
 			{ L"View account information",
 			  L"Change password",
 			  L"Log out" }
 		);
 
-		switch (g_cCatchEvent) {
+		switch (event) {
 		case 49:
 			system("cls");
 			textAndBackgroundColor(Color::LIGHT_YELLOW);
@@ -333,8 +255,8 @@ void handleEmployee(std::string strUsername, std::string strPassword) {
 			textAndBackgroundColor(Color::YELLOW);
 			std::cout << "    Ten tai khoan: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			std::cout << strUsername << std::endl;
-			show_account_info(strUsername);
+			std::cout << _username << std::endl;
+			show_account_info(_username);
 			system("pause");
 			system("cls");
 			break;
@@ -345,22 +267,22 @@ void handleEmployee(std::string strUsername, std::string strPassword) {
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau hien tai: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			encode_password(strCurrentPass);
+			encode_password(current_password);
 			std::cout << std::endl;
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau moi: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			encode_password(strNewPass);
+			encode_password(new_password);
 			std::cout << std::endl;
 			textAndBackgroundColor(Color::LIGHT_BLUE);
 			std::cout << "Nhap xac nhan mat khau moi: ";
 			textAndBackgroundColor(Color::BRIGHT_WHITE);
-			encode_password(strConfirmNewPass);
+			encode_password(current_new_password);
 			std::cout << std::endl;
-			if (employee.isSuccessChangePass(strUsername, strCurrentPass, strNewPass, strConfirmNewPass)) {
-				strCurrentPass.clear();
-				strNewPass.clear();
-				strConfirmNewPass.clear();
+			if (employee.isSuccessChangePass(_username, current_password, new_password, current_new_password)) {
+				current_password.clear();
+				new_password.clear();
+				current_new_password.clear();
 				textAndBackgroundColor(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
 				system("pause");
