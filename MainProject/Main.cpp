@@ -19,12 +19,6 @@ int main() {
 	SetConsoleTitle(L"Employee management");
 	//console::resize(1920, 1080);// 377
 	//console::move_to::center();
-	//form_login(strUsernameTemp, strPasswordTemp);
-	//std::cout << std::endl;
-	//std::cout << strUsernameTemp << std::endl;
-	//std::cout << "Password: ";
-	//encode_password(strPasswordTemp);
-	//std::cout << strPasswordTemp << std::endl;
 
 	// form_info(
 	// 	L"Enter your information",
@@ -35,26 +29,59 @@ int main() {
 	// 	box::BorderStyle::CORNER_DOUBLE
 	// );
 
-	show_info_accounts();
+	//show_info_accounts();
 
-	//while (true) {
-	//	console::resize(350, 400);
-	//	console::move_to::center();
-	//	auto account = form_login();
-	//	AccountType account_type = get_account_type(account.first, account.second);
-	//	switch (account_type) {
-	//	case AccountType::ADMINISTRATOR:
-	//		handleAdmin();
-	//		break;
-	//	case AccountType::EMPLOYEE:
-	//		handleEmployee(account.first, account.second);
-	//		break;
-	//	default:
-	//		std::cout << std::endl;
-	//		warning("Sai tai khoan hoac mat khau!!!");
-	//		break;
-	//	}
-	//}
+	while (true) {
+		console::resize(350, 400);
+		console::move_to::center();
+		auto account = form_login();
+		AccountType account_type = get_account_type(account.first, account.second);
+		bool is_logged_in = true;
+
+		if (is_default_password(account.first, account.second)) {
+			std::string new_password, confirm_new_password;
+			Employee employee;
+			system("cls");
+			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			std::cout << "<Doi mat khau mac dinh>" << std::endl;
+			std::cout << "(Mat khau mac dinh la: " + DEFAULT_PASSWORD + ")" << std::endl;
+			textAndBackgroundColor(Color::LIGHT_BLUE);
+			std::cout << "Nhap mat khau moi: ";
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			encode_password(new_password);
+			std::cout << std::endl;
+			textAndBackgroundColor(Color::LIGHT_BLUE);
+			std::cout << "Nhap xac nhan mat khau moi: ";
+			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			encode_password(confirm_new_password);
+			std::cout << std::endl;
+			if (employee.isSuccessChangePass(account.first, DEFAULT_PASSWORD, new_password, confirm_new_password)) {
+				new_password.clear();
+				confirm_new_password.clear();
+				textAndBackgroundColor(Color::LIGHT_RED);
+				std::cout << "Cap nhat thanh cong!!!" << std::endl;
+				system("pause");
+			}
+			else {
+				warning("Sai thong tin!!!");
+				is_logged_in = false;
+			}
+		}
+
+		if (is_logged_in)
+			switch (account_type) {
+			case AccountType::ADMINISTRATOR:
+				handleAdmin();
+				break;
+			case AccountType::EMPLOYEE:
+				handleEmployee(account.first, account.second);
+				break;
+			default:
+				std::cout << std::endl;
+				warning("Sai tai khoan hoac mat khau!!!");
+				break;
+			}
+	}
 
 	//while (true) {
 	//	bool is_break = false;
@@ -156,7 +183,7 @@ void handleAdmin() {
 			{ L"Add employee account",
 			  L"Delete employee account",
 			  L"Search employee account",
-			  L"Update employee account",
+			  L"Edit employee account",
 			  L"Display employee account information",
 			  L"Log out" }
 		);

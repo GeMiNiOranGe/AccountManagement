@@ -29,6 +29,7 @@ bool Employee::isSuccessChangePass(std::string _username, std::string _current_p
 		return false;
 	}
 
+	bool is_successful = false;
 	// Write from the file is renamed (AccountsTemp.txt) to Accounts.txt
 	// And update password the account want to update
 	while (!fin.eof()) {
@@ -37,6 +38,7 @@ bool Employee::isSuccessChangePass(std::string _username, std::string _current_p
 			if (User::get_username() == _username && User::get_password() == _current_password && _new_password == _confirm_new_password) {
 				User::set_password(_new_password);
 				io::File::write_account_from(*this, fout);
+				is_successful = true;
 			}		
 			else
 				io::File::write_account_from(*this, fout);
@@ -49,5 +51,5 @@ bool Employee::isSuccessChangePass(std::string _username, std::string _current_p
 		std::cerr << "Failed to remove file" << std::endl;
 		return false;
 	}
-	return true;
+	return is_successful;
 }

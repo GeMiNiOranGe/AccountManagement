@@ -109,3 +109,18 @@ AccountType get_account_type(std::string _username, std::string _password) {
 	fin.close();
 	return AccountType::NONE;
 }
+
+bool is_default_password(std::string _username, std::string _password) {
+	std::ifstream fin;
+	fin.open(ACCOUNTS_FILE.c_str());
+	while (!fin.eof()) {
+		User user;
+		io::File::read_account_from(fin, user);
+		if (_username == user.get_username() && _password == user.get_password() && user.get_password() == DEFAULT_PASSWORD && user.get_username() != "" && user.get_password() != "") {
+			fin.close();
+			return true;
+		}
+	}
+	fin.close();
+	return false;
+}
