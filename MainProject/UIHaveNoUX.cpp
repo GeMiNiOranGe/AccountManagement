@@ -46,7 +46,7 @@ std::pair<std::string, std::string> form_login(box::BorderStyle _style) {
 	getline(std::cin, username);
 	gotoXY(static_cast<short>(password_label.size()) + 2, 8);
 	encode_password(password);
-	gotoXY(0, 10);
+	gotoXY(0, 11);
 
 	return std::make_pair(username, password);
 }
