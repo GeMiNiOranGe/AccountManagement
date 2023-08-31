@@ -1,4 +1,4 @@
-﻿#include "BoxBorder.h"
+﻿#include "BoxBorder.hpp"
 
 wchar_t box::Border::horizontal(BorderStyle _style) {
 	switch (_style) {

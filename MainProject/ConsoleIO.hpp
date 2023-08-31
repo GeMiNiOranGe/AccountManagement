@@ -2,8 +2,8 @@
 #ifndef CONSOLEIO_HPP
 #define CONSOLEIO_HPP
 
-#include "User.h"
-#include "HandleMiscellaneous.h"
+#include "User.hpp"
+#include "HandleMiscellaneous.hpp"
 
 namespace console {
 	void read_account(User &_user);

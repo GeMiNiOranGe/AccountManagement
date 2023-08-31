@@ -167,24 +167,24 @@
     <ClCompile Include="UIHaveNoUX.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AccountType.h" />
-    <ClInclude Include="Anchor.h" />
-    <ClInclude Include="BoxBorder.h" />
-    <ClInclude Include="Administrator.h" />
-    <ClInclude Include="Color.h" />
-    <ClInclude Include="ConsoleIO.h" />
-    <ClInclude Include="Convert.h" />
-    <ClInclude Include="Employee.h" />
-    <ClInclude Include="HandleConsole.h" />
-    <ClInclude Include="LoginStatus.h" />
-    <ClInclude Include="Position.h" />
-    <ClInclude Include="User.h" />
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="HandleWindow.h" />
-    <ClInclude Include="FileIO.h" />
-    <ClInclude Include="HandleMain.h" />
-    <ClInclude Include="HandleMiscellaneous.h" />
-    <ClInclude Include="UIHaveNoUX.h" />
+    <ClInclude Include="AccountType.hpp" />
+    <ClInclude Include="Anchor.hpp" />
+    <ClInclude Include="BoxBorder.hpp" />
+    <ClInclude Include="Administrator.hpp" />
+    <ClInclude Include="Color.hpp" />
+    <ClInclude Include="ConsoleIO.hpp" />
+    <ClInclude Include="Convert.hpp" />
+    <ClInclude Include="Employee.hpp" />
+    <ClInclude Include="HandleConsole.hpp" />
+    <ClInclude Include="LoginStatus.hpp" />
+    <ClInclude Include="Position.hpp" />
+    <ClInclude Include="User.hpp" />
+    <ClInclude Include="Config.hpp" />
+    <ClInclude Include="HandleWindow.hpp" />
+    <ClInclude Include="FileIO.hpp" />
+    <ClInclude Include="HandleMain.hpp" />
+    <ClInclude Include="HandleMiscellaneous.hpp" />
+    <ClInclude Include="UIHaveNoUX.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Accounts.txt" />

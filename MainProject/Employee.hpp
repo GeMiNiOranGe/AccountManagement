@@ -3,8 +3,8 @@
 #define EMPLOYEE_HPP
 
 #include <iostream>
-#include "User.h"
-#include "FileIO.h"
+#include "User.hpp"
+#include "FileIO.hpp"
 
 // TODO: change class Employee into class Account
 class Employee : public User {

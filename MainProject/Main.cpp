@@ -1,7 +1,7 @@
-﻿#include "Administrator.h"
-#include "Employee.h"
-#include "HandleConsole.h"
-#include "UIHaveNoUX.h"
+﻿#include "Administrator.hpp"
+#include "Employee.hpp"
+#include "HandleConsole.hpp"
+#include "UIHaveNoUX.hpp"
 
 void administrator_interface();
 void employee_interface(std::string _username, std::string _password);

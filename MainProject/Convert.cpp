@@ -1,4 +1,4 @@
-#include "Convert.h"
+#include "Convert.hpp"
 
 std::wstring Convert::to_wstring(const std::string _string) {
 	return std::wstring(_string.begin(), _string.end());

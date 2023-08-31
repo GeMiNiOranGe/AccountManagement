@@ -1,4 +1,4 @@
-#include "HandleWindow.h"
+#include "HandleWindow.hpp"
 
 int window::get_taskbar_height() {
 	RECT rect;

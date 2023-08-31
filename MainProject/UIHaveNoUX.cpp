@@ -1,4 +1,4 @@
-﻿#include "UIHaveNoUX.h"
+﻿#include "UIHaveNoUX.hpp"
 
 short get_max_size_of_labels(std::vector<std::wstring> _labels) {
 	short label_size = 0;

@@ -1,4 +1,4 @@
-#include "Administrator.h"
+#include "Administrator.hpp"
 
 Administrator::Administrator(
 	std::string _username, std::string _password, std::string _id,

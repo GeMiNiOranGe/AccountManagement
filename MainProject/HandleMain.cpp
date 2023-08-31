@@ -1,4 +1,4 @@
-#include "HandleMain.h"
+#include "HandleMain.hpp"
 
 std::ofstream create_file(std::string _username) {
 	std::string path = USERS_INFO_FOLDER + _username + ".txt";

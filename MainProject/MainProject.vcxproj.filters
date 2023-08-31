@@ -56,58 +56,58 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="User.h">
+    <ClInclude Include="User.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Administrator.h">
+    <ClInclude Include="Administrator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Employee.h">
+    <ClInclude Include="Employee.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UIHaveNoUX.h">
+    <ClInclude Include="UIHaveNoUX.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HandleMiscellaneous.h">
+    <ClInclude Include="HandleMiscellaneous.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HandleMain.h">
+    <ClInclude Include="HandleMain.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
+    <ClInclude Include="Config.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileIO.h">
+    <ClInclude Include="FileIO.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoxBorder.h">
+    <ClInclude Include="BoxBorder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HandleWindow.h">
+    <ClInclude Include="HandleWindow.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Anchor.h">
+    <ClInclude Include="Anchor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Convert.h">
+    <ClInclude Include="Convert.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HandleConsole.h">
+    <ClInclude Include="HandleConsole.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AccountType.h">
+    <ClInclude Include="AccountType.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleIO.h">
+    <ClInclude Include="ConsoleIO.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoginStatus.h">
+    <ClInclude Include="LoginStatus.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Position.h">
+    <ClInclude Include="Position.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Color.h">
+    <ClInclude Include="Color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

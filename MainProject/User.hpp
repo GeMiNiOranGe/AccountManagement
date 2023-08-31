@@ -3,7 +3,7 @@
 #define USER_HPP
 
 #include <string>
-#include "Config.h"
+#include "Config.hpp"
 
 class User {
 public:

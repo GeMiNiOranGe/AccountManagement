@@ -1,4 +1,4 @@
-#include "HandleConsole.h"
+#include "HandleConsole.hpp"
 
 const short console::move_to::OFFSET_MIDDLE_COLUMN = 8;
 const short console::move_to::OFFSET_RIGHT = 16;

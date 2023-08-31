@@ -6,7 +6,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <string>
-#include "Color.h"
+#include "Color.hpp"
 
 void encode_password(std::string & _password);
 

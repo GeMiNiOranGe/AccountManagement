@@ -23,10 +23,10 @@ Build an employee management app with 2 types of users: administrator and employ
 1. Administrators.txt: store a list of administrators (with at least 3 managers) including:
 	* Username.
 	* Password.
-2. Employees.txt: store a list of employees including:
+1. Employees.txt: store a list of employees including:
 	* Username.
 	* Password.
-3. [username].txt: store information of each user including
+1. [username].txt: store information of each user including
 	* Full name.
 	* Address.
 	* Phone number.

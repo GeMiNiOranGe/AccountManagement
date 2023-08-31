@@ -3,8 +3,8 @@
 #define FILEIO_HPP
 
 #include <fstream>
-#include "AccountType.h"
-#include "User.h"
+#include "AccountType.hpp"
+#include "User.hpp"
 
 namespace io {
 	class File {

@@ -6,10 +6,10 @@
 #include <io.h>
 #include <fcntl.h>
 #include <vector>
-#include "BoxBorder.h"
-#include "HandleMain.h"
-#include "Convert.h"
-#include "Position.h"
+#include "BoxBorder.hpp"
+#include "HandleMain.hpp"
+#include "Convert.hpp"
+#include "Position.hpp"
 
 short get_max_size_of_labels(std::vector<std::wstring> _labels);
 

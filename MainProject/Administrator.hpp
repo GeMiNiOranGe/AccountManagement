@@ -2,8 +2,8 @@
 #ifndef ADMINISTRATOR_HPP
 #define ADMINISTRATOR_HPP
 
-#include "User.h"
-#include "HandleMain.h"
+#include "User.hpp"
+#include "HandleMain.hpp"
 
 class Administrator : public User {
 public:

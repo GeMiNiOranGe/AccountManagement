@@ -2,7 +2,7 @@
 #ifndef HANDLECONSOLE_HPP
 #define HANDLECONSOLE_HPP
 
-#include "HandleWindow.h"
+#include "HandleWindow.hpp"
 
 namespace console {
 	namespace move_to {
