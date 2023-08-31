@@ -1,12 +1,7 @@
-﻿#include "User.h"
-#include "Administrator.h"
+﻿#include "Administrator.h"
 #include "Employee.h"
-#include "HandleMain.h"
-#include "HandleMiscellaneous.h"
-#include "HandleWindow.h"
 #include "HandleConsole.h"
 #include "UIHaveNoUX.h"
-#include "Config.h"
 
 void administrator_interface();
 void employee_interface(std::string _username, std::string _password);
@@ -40,23 +35,23 @@ int main() {
 			std::string new_password, confirm_new_password;
 			Employee employee;
 			system("cls");
-			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Doi mat khau mac dinh>" << std::endl;
 			std::cout << "(Mat khau mac dinh la: " + DEFAULT_PASSWORD + ")" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau moi: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			encode_password(new_password);
 			std::cout << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "Nhap xac nhan mat khau moi: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			encode_password(confirm_new_password);
 			std::cout << std::endl;
-			if (employee.isSuccessChangePass(account.first, DEFAULT_PASSWORD, new_password, confirm_new_password)) {
+			if (employee.is_success_change_pass(account.first, DEFAULT_PASSWORD, new_password, confirm_new_password)) {
 				new_password.clear();
 				confirm_new_password.clear();
-				textAndBackgroundColor(Color::LIGHT_RED);
+				set_color(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
 				system("pause");
 			}
@@ -119,37 +114,37 @@ void administrator_interface() {
 		switch (event) {
 		case 49:
 			system("cls");
-			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Them Employees>" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_RED);
+			set_color(Color::LIGHT_RED);
 			std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon them: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			std::cin >> username;
 			if (has_username(username))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
 				admin.add_employee(username);
-				textAndBackgroundColor(Color::LIGHT_RED);
+				set_color(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
 				system("pause");
 			}
 			break;
 		case 50:
 			system("cls");
-			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Xoa Employees>" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_RED);
+			set_color(Color::LIGHT_RED);
 			std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon xoa: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			username.clear();
 			std::cin >> username;
 			if (has_username(username)) {
 				admin.erase_employee(username);
-				textAndBackgroundColor(Color::LIGHT_RED);
+				set_color(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
 				system("pause");
 			}
@@ -158,17 +153,17 @@ void administrator_interface() {
 			break;
 		case 51:
 			system("cls");
-			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Tim Employees>" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_RED);
+			set_color(Color::LIGHT_RED);
 			std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "    Nhap ten tai khoan muon tim: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			username.clear();
 			std::cin >> username;
 			if (has_username(username)) {
-				textAndBackgroundColor(Color::LIGHT_YELLOW);
+				set_color(Color::LIGHT_YELLOW);
 				std::cout << "    Thong tin Employee can tim: " << std::endl;
 				show_account_info(username);
 				system("pause");
@@ -178,28 +173,36 @@ void administrator_interface() {
 			break;
 		case 52:
 			system("cls");
-			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Cap nhat thong tin Employees>" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "Nhap ten tai khoan can cap nhat: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			username.clear();
 			std::cin >> username;
 			if (has_username(username)) {
 				while (true) {
-					event = menuUpdateInfo();
+					event = menu_options(
+						L"< Select the information to edit >",
+						{ L"Full name",
+						  L"Address",
+						  L"Phone number",
+						  L"Email address" },
+						{ L"<ESC> de huy bo" }
+					);
+
 					if (48 < event && event < 53) {
-						textAndBackgroundColor(Color::LIGHT_BLUE);
+						set_color(Color::LIGHT_BLUE);
 						std::cout << "Cap nhat thong tin o lua chon: ";
-						textAndBackgroundColor(Color::BRIGHT_WHITE);
+						set_color(Color::BRIGHT_WHITE);
 						std::cout << event - 48 << std::endl;
-						textAndBackgroundColor(Color::LIGHT_BLUE);
+						set_color(Color::LIGHT_BLUE);
 						std::cout << "Thong tin moi se duoc cap nhat: ";
-						textAndBackgroundColor(Color::BRIGHT_WHITE);
+						set_color(Color::BRIGHT_WHITE);
 						std::cin.ignore();
 						getline(std::cin, strInfoUpdated);
 						admin.update_info_employee(username, strInfoUpdated, event);
-						textAndBackgroundColor(Color::LIGHT_RED);
+						set_color(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
 						system("pause");
 					}
@@ -216,9 +219,9 @@ void administrator_interface() {
 			system("cls");
 			console::resize(1275, 750);
 			console::move_to::center();
-			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Hien thi thong tin toan bo Employees>" << std::endl;
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			show_info_accounts();
 			system("pause");
 			system("cls");
@@ -249,11 +252,11 @@ void employee_interface(std::string _username, std::string _password) {
 		switch (event) {
 		case 49:
 			system("cls");
-			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Thong tin tai khoan>" << std::endl;
-			textAndBackgroundColor(Color::YELLOW);
+			set_color(Color::YELLOW);
 			std::cout << "    Ten tai khoan: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			std::cout << _username << std::endl;
 			show_account_info(_username);
 			system("pause");
@@ -261,28 +264,28 @@ void employee_interface(std::string _username, std::string _password) {
 			break;
 		case 50:
 			system("cls");
-			textAndBackgroundColor(Color::LIGHT_YELLOW);
+			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Doi mat khau>" << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau hien tai: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			encode_password(current_password);
 			std::cout << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "Nhap mat khau moi: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			encode_password(new_password);
 			std::cout << std::endl;
-			textAndBackgroundColor(Color::LIGHT_BLUE);
+			set_color(Color::LIGHT_BLUE);
 			std::cout << "Nhap xac nhan mat khau moi: ";
-			textAndBackgroundColor(Color::BRIGHT_WHITE);
+			set_color(Color::BRIGHT_WHITE);
 			encode_password(current_new_password);
 			std::cout << std::endl;
-			if (employee.isSuccessChangePass(_username, current_password, new_password, current_new_password)) {
+			if (employee.is_success_change_pass(_username, current_password, new_password, current_new_password)) {
 				current_password.clear();
 				new_password.clear();
 				current_new_password.clear();
-				textAndBackgroundColor(Color::LIGHT_RED);
+				set_color(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
 				system("pause");
 			}

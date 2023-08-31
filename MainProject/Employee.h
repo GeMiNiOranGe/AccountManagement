@@ -2,10 +2,9 @@
 #ifndef EMPLOYEE_HPP
 #define EMPLOYEE_HPP
 
+#include <iostream>
 #include "User.h"
-#include "HandleMain.h"
 #include "FileIO.h"
-#include "Convert.h"
 
 // TODO: change class Employee into class Account
 class Employee : public User {
@@ -16,7 +15,7 @@ public:
 		std::string _phone_number = "", std::string _email_address = ""
 	);
 
-	bool isSuccessChangePass(
+	bool is_success_change_pass(
 		std::string _username,
 		std::string _current_password,
 		std::string _new_password,

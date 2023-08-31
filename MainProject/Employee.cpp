@@ -7,7 +7,7 @@ Employee::Employee(
 ) : User(_username, _password, _id, _full_name, _address, _phone_number, _email_address) {
 }
 
-bool Employee::isSuccessChangePass(std::string _username, std::string _current_password, std::string _new_password, std::string _confirm_new_password) {
+bool Employee::is_success_change_pass(std::string _username, std::string _current_password, std::string _new_password, std::string _confirm_new_password) {
 	const std::string accounts = ACCOUNTS_FILE;
 	std::string accounts_temp = accounts;
 

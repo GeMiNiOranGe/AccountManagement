@@ -2,9 +2,7 @@
 #ifndef CONSOLEIO_HPP
 #define CONSOLEIO_HPP
 
-#include <string>
 #include "User.h"
-#include "AccountType.h"
 #include "HandleMiscellaneous.h"
 
 namespace console {

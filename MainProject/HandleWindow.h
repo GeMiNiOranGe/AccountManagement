@@ -1,6 +1,6 @@
-#ifndef HANDLEWINDOW_H
-#define HANDLEWINDOW_H
 #pragma once
+#ifndef HANDLEWINDOW_HPP
+#define HANDLEWINDOW_HPP
 
 #include <Windows.h>
 
@@ -10,4 +10,4 @@ namespace window {
 	SIZE get_work_area_size();
 } // namespace window
 
-#endif // end HANDLEWINDOW_H
+#endif // end HANDLEWINDOW_HPP

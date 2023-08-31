@@ -1,8 +1,7 @@
-#ifndef HANDLECONSOLE_H
-#define HANDLECONSOLE_H
 #pragma once
+#ifndef HANDLECONSOLE_HPP
+#define HANDLECONSOLE_HPP
 
-#include <Windows.h>
 #include "HandleWindow.h"
 
 namespace console {
@@ -26,4 +25,4 @@ namespace console {
 	void resize(short width, short height);
 } // namespace console
 
-#endif // end HANDLECONSOLE_H
+#endif // end HANDLECONSOLE_HPP

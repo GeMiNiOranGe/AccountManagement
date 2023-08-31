@@ -2,9 +2,9 @@
 #ifndef FILEIO_HPP
 #define FILEIO_HPP
 
+#include <fstream>
 #include "AccountType.h"
 #include "User.h"
-#include <fstream>
 
 namespace io {
 	class File {

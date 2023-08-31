@@ -2,14 +2,10 @@
 #ifndef HANDLEMAIN_HPP
 #define HANDLEMAIN_HPP
 
-#include <string>
-#include <fstream>
 #include "User.h"
-#include "Config.h"
 #include "FileIO.h"
 #include "ConsoleIO.h"
 #include "AccountType.h"
-#include "LoginStatus.h"
 
 std::ofstream create_file(std::string _username);
 std::ifstream open_file(std::string _username);

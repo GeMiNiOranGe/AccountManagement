@@ -28,7 +28,7 @@ void encode_password(std::string & _password) {
 		// Not the ENTER key
 	} while (event_key != 13);
 }
-void textAndBackgroundColor(Color text_color, Color background_color) {
+void set_color(Color text_color, Color background_color) {
 	short color_code = static_cast<short>(background_color) * 16 + static_cast<short>(text_color);
 	HANDLE handle_std_out = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(handle_std_out, color_code);
@@ -36,14 +36,14 @@ void textAndBackgroundColor(Color text_color, Color background_color) {
 	//TODO: class ConsoleColor by singleton in namespace console
 	// getForeColor, getBackColor
 }
-void gotoXY(short x, short y) {
+void go_to_xy(short x, short y) {
 	COORD pos = { x, y };
 	HANDLE handle_std_out = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleCursorPosition(handle_std_out, pos);
 }
 void warning(std::string _message) {
-	textAndBackgroundColor(Color::WHITE, Color::RED);
+	set_color(Color::WHITE, Color::RED);
 	std::cout << "\a" << _message << std::endl;
-	textAndBackgroundColor(Color::WHITE, Color::BLACK);
+	set_color(Color::WHITE, Color::BLACK);
 	system("pause");
 }

@@ -1,6 +1,6 @@
-#ifndef CUSER_H
-#define CUSER_H
 #pragma once
+#ifndef USER_HPP
+#define USER_HPP
 
 #include <string>
 #include "Config.h"
@@ -52,4 +52,4 @@ private:
 	std::string email_address;
 };
 
-#endif
+#endif // end USER_HPP

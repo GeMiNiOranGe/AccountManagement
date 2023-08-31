@@ -1,6 +1,6 @@
-#ifndef CONVERT_H
-#define CONVERT_H
 #pragma once
+#ifndef CONVERT_HPP
+#define CONVERT_HPP
 
 #include <string>
 
@@ -10,4 +10,4 @@ public:
 	static char * to_char(const std::string);
 };
 
-#endif // end CONVERT_H
+#endif // end CONVERT_HPP
