@@ -236,10 +236,10 @@ void administrator_interface() {
 }
 
 void employee_interface(std::string _username, std::string _password) {
-	std::string current_password, new_password, current_new_password;
-	Employee employee;
 	char event;
 	while (true) {
+		std::string current_password, new_password, current_new_password;
+		Employee employee;
 		console::resize(500, 500);
 		console::move_to::center();
 		event = menu_options(
@@ -282,9 +282,6 @@ void employee_interface(std::string _username, std::string _password) {
 			encode_password(current_new_password);
 			std::cout << std::endl;
 			if (employee.is_success_change_pass(_username, current_password, new_password, current_new_password)) {
-				current_password.clear();
-				new_password.clear();
-				current_new_password.clear();
 				set_color(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
 				system("pause");
