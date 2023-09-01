@@ -12,7 +12,7 @@
 		* [View account information](#View-account-information)
 		* [Change password](#Change-password)
 	* [Other requirements](#Other-requirements)
-* [Source code explanation](#Source-code-explanation)
+* [Code showcase](#Sode-showcase)
 	* [Declaring Classes](#Declaring-Classes)
 	* [Main functions](#Main-functions)
 
@@ -83,239 +83,334 @@ Build an employee management app with 2 types of users: administrator and employ
 * Encrypt password with * sign when logging in.
 * Use color to design an easy-to-see interface.
 
-## Source code explanation
+## Code showcase
 ### Declaring Classes
-Class `CUser` in [`CUser.h`](Project2/CUser.h#L12)
+Class `User` in [`User.hpp`](MainProject/User.hpp#L8)
 ```cpp
-class CUser {
+class User {
 public:
-	CUser(string = "", string = "111111", string = "", string = "", string = "", string = "");
-	CUser(const CUser &);
-	~CUser();
+	User(
+		std::string _username = "", std::string _password = DEFAULT_PASSWORD, std::string _id = "",
+		std::string _full_name = "", std::string _address = "",
+		std::string _phone_number = "", std::string _email_address = ""
+	);
+	User(const User &);
+	~User();
 
-	const string& getUsername();
-	const string& getPassword();
-	const string& getFullName();
-	const string& getAddress();
-	const string& getPhoneNumber();
-	const string& getEmailAddress();
+	std::string * get_properties();
 
-	void setUsername(const string&);
-	void setPassword(const string&);
-	void setFullName(const string&);
-	void setAddress(const string&);
-	void setPhoneNumber(const string&);
-	void setEmailAddress(const string&);
+	const std::string & get_username();
+	const std::string & get_password();
+	const std::string & get_id();
+	const std::string & get_full_name();
+	const std::string & get_address();
+	const std::string & get_phone_number();
+	const std::string & get_email_address();
 
-	void readAccount(ifstream&);
-	void writeAccount(ofstream&);
-	void readInfo(ifstream&);
-	void writeInfo(ofstream&);
+	void set_username(const std::string &);
+	void set_password(const std::string &);
+	void set_id(const std::string &);
+	void set_full_name(const std::string &);
+	void set_address(const std::string &);
+	void set_phone_number(const std::string &);
+	void set_email_address(const std::string &);
 
-	void input();
-	void output();
 private:
-	string strUsername;
-	string strPassword;
-	string strFullName;
-	string strAddress;
-	string strPhoneNumber;
-	string strEmailAddress;
+	std::string username;
+	std::string password;
+	std::string id;
+	std::string full_name;
+	std::string address;
+	std::string phone_number;
+	std::string email_address;
 };
 ```
-Class `CAdministrator` inherits class CUser in [`CAdministrator.h`](Project2/CAdministrator.h#L9)
+Class `Administrator` inherits class CUser in [`Administrator.hpp`](MainProject/Administrator.hpp#L8)
 ```cpp
-class CAdministrator:
-	public CUser {
+class Administrator : public User {
 public:
-	CAdministrator(string = "", string = "111111", string = "", string = "", string = "", string = "");
+	Administrator(
+		std::string _username = "", std::string _password = DEFAULT_PASSWORD, std::string _id = "",
+		std::string _full_name = "", std::string _address = "",
+		std::string _phone_number = "", std::string _email_address = ""
+	);
 
-	void addEmployee(string);
-	void eraseEmployee(string);
-	void updateInfoEmployee(string, string, char);
-	void showInfoAllEmployee();
+	void add_employee(std::string _username);
+	void erase_employee(std::string _username);
+	void update_info_employee(std::string _username, std::string _info_updated, char _option);
 };
 ```
-Class `CEmployee` inherits class CUser in [`CEmployee.h`](Project2/CEmployee.h#L10)
+Class `Employee` inherits class CUser in [`Employee.hpp`](MainProject/Employee.hpp#L10)
 ```cpp
-class CEmployee:
-	public CUser {
+class Employee : public User {
 public:
-	CEmployee(string = "", string = "111111", string = "", string = "", string = "", string = "");
+	Employee(
+		std::string _username = "", std::string _password = DEFAULT_PASSWORD, std::string _id = "",
+		std::string _full_name = "", std::string _address = "",
+		std::string _phone_number = "", std::string _email_address = ""
+	);
 
-	bool isSuccessChangePass(string, string, string, string);
+	bool is_success_change_pass(
+		std::string _username,
+		std::string _current_password,
+		std::string _new_password,
+		std::string _confirm_new_password
+	);
 };
 ```
 
 ### Main functions
 Some important functions for main processing in the source code and the definition of the methods of the classes
 
-Important file path in [`Config.h`](Project2/Config.h)
+Important file path in [`Config.hpp`](MainProject/Config.hpp)
 ```cpp
-const string EMPLOYEES_FILE = "Resources\\Employees.txt";
-const string ADMINISTRATOR_FILE = "Resources\\Admin.txt";
-const string USER_INFO_FOLDER = "Resources\\UserInfo\\";
+const std::string ACCOUNTS_FILE = "Resources\\Accounts.txt";
+const std::string USERS_INFO_FOLDER = "Resources\\UsersInfo\\";
+const std::string DEFAULT_PASSWORD = "111111";
 ```
-#### Function `addEmloyee`:
-Step 1. create a new variable `fileUpdated` to open the list of employees in `EMPLOYEES_FILE` and add the latest employee name at the end of the file with the default password of "111111".
-
-Step 2: create a new file [username].txt in `USER_INFO_FOLDER`.
-
-Source code function `addEmployee` in [`CAdministrator.cpp`](Project2/CAdministrator.cpp#L8)
+#### Function `add_employee`:
+Source code function `add_employee` in [`Administrator.cpp`](MainProject/Administrator.cpp#L10)
 ```cpp
-void CAdministrator::addEmployee(string strUsername) {
-	// Step 1
-	ofstream fileUpdated;
-	fileUpdated.open(EMPLOYEES_FILE, ios_base::app);
-	fileUpdated << strUsername << "," << "111111" << endl;
-	// Step 2
-	ofstream fileOut = createFile(strUsername);
-	input();
-	writeInfo(fileOut);
-	fileOut.close();
+void Administrator::add_employee(std::string _username) {
+	// Update file Accounts.txt
+	std::ofstream account_list;
+	account_list.open(ACCOUNTS_FILE, std::ios_base::app);
+	account_list << "EM," << _username << ',' << DEFAULT_PASSWORD << std::endl;
+	// Create a new file and add information to the newly created file
+	std::ofstream fout = create_file(_username);
+	console::read_info(*this);
+	io::File::write_info_from(*this, fout);
+	fout.close();
 }
 ```
-#### Function `eraseEmployee`:
-Step 1: rename Employees.txt into EmployeesTemp.txt.
-
-Step 2: create a new Employees.txt and open the file is renamed (EmployeesTemp.txt).
-
-Step 3: write from the file is renamed (EmployeesTemp.txt) to Employees.txt and don't write the employee want to delete.
-
-Step 4: delete the file is renamed (EmployeesTemp.txt).
-
-Source code function `deleteAccount` in [`HandleMain.cpp`](Project2/HandleMain.cpp#L19)
+#### Function `erase_employee`:
+Source code function `delete_account` in [`HandleMain.cpp`](MainProject/HandleMain.cpp#L19)
 ```cpp
-void deleteAccount(string strSourceFile, string strUsername) {
-	CUser userTemp;
-	//Step 1:
-	string employeeFileRenamed = strSourceFile;
-	rename(strSourceFile.c_str(), employeeFileRenamed.insert(employeeFileRenamed.size() - 4, "Temp").c_str());
-	//Step 2:
-	ofstream fileOut(strSourceFile);
-	ifstream fileIn;
-	fileIn.open(employeeFileRenamed.c_str());
-	//Step 3:
-	while (!fileIn.eof()) {
-		userTemp.readAccount(fileIn);
-		if (userTemp.getUsername() != strUsername && userTemp.getUsername() != "")
-			userTemp.writeAccount(fileOut);
+void delete_account(std::string _username) {
+	const std::string accounts = ACCOUNTS_FILE;
+	std::string accounts_temp = accounts;
+	User user;
+
+	// Rename Accounts.txt into AccountsTemp.txt
+	accounts_temp.insert(accounts_temp.size() - 4, "Temp");
+	if (rename(accounts.c_str(), accounts_temp.c_str()) != 0) {
+		std::cerr << "Error renaming file" << std::endl;
+		return;
 	}
-	fileOut.close();
-	fileIn.close();
-	//Step 4:
-	system(employeeFileRenamed.insert(0, "del ").c_str());
+
+	// Automatically create a new Accounts.txt
+	std::ofstream fout(accounts);
+	std::ifstream fin;
+	// And open the file is renamed (AccountsTemp.txt)
+	fin.open(accounts_temp.c_str());
+
+	if (!fin.is_open() || !fout.is_open()) {
+		std::cerr << "Failed to open files" << std::endl;
+		return;
+	}
+
+	// Write from the file is renamed (AccountsTemp.txt) to Accounts.txt
+	// And don't write the employee want to delete
+	while (!fin.eof()) {
+		io::File::read_account_from(fin, user);
+		if (!user.get_username().empty() && user.get_username() != _username)
+			io::File::write_account_from(user, fout);
+	}
+	fout.close();
+	fin.close();
+	if (remove(accounts_temp.c_str()) != 0) {
+		std::cerr << "Failed to remove file" << std::endl;
+		return;
+	}
 }
 ```
-Source code function `deleteFile` in [`HandleMain.cpp`](Project2/HandleMain.cpp#L14)
+Source code function `delete_file` in [`HandleMain.cpp`](MainProject/HandleMain.cpp#L14)
 ```cpp
-void deleteFile(string strUsernameFile) {
-	string filePath = "del " + USER_INFO_FOLDER + strUsernameFile + ".txt";
-	system(filePath.c_str());
+void delete_file(std::string _username) {
+	std::string command = "del " + USERS_INFO_FOLDER + _username + ".txt";
+	system(command.c_str());
 }
 ```
-Source code function `eraseEmployee` in [`CAdministrator.cpp`](Project2/CAdministrator.cpp#L19)
+Source code function `erase_employee` in [`Administrator.cpp`](MainProject/Administrator.cpp#L21)
 ```cpp
-void CAdministrator::eraseEmployee(string strUsername) {
-	deleteAccount(EMPLOYEES_FILE, strUsername);
-	deleteFile(strUsername);
+void Administrator::erase_employee(std::string _username) {
+	delete_account(_username);
+	delete_file(_username);
 }
 ```
-#### Function `updateInfoEmployee`
-Step 1: load infomation from sourceUserFile
-
-Step 2: re-open the sourceUserFile again
-
-Step 3: change the data and overwrite the information from the userTemp
-
-Source code function `updateInfoEmployee` in [`CAdministrator.cpp`](Project2/CAdministrator.cpp#L26)
+#### Function `update_info_employee`
+Source code function `update_info_employee` in [`Administrator.cpp`](MainProject/Administrator.cpp#L25)
 ```cpp
-void CAdministrator::updateInfoEmployee(string strSourceUserFile, string strInfoUpdated, char cOption) {
-	//Step 1:
-	ifstream fileIn = openFile(strSourceUserFile);
-	readInfo(fileIn);
-	fileIn.close();
-	//Step 2:
-	ofstream fileOut;
-	fileOut.open((USER_INFO_FOLDER + strSourceUserFile + ".txt").c_str());
-	//Step 3:
-	if (cOption == 49)
-		setFullName(strInfoUpdated);
-	if (cOption == 50)
-		setAddress(strInfoUpdated);
-	if (cOption == 51)
-		setPhoneNumber(strInfoUpdated);
-	if (cOption == 52)
-		setEmailAddress(strInfoUpdated);
-	writeInfo(fileOut);
-	fileOut.close();
+void Administrator::update_info_employee(std::string _username, std::string _info_updated, char _option) {
+	// Load infomation from _username file
+	std::ifstream fin = open_file(_username);
+	io::File::read_info_from(fin, *this);
+	fin.close();
+	// Re-open the _username file again
+	std::ofstream fout;
+	fout.open((USERS_INFO_FOLDER + _username + ".txt").c_str());
+	// Change the data and overwrite the information from the userTemp
+	if (_option == 49)
+		User::set_full_name(_info_updated);
+	if (_option == 50)
+		User::set_address(_info_updated);
+	if (_option == 51)
+		User::set_phone_number(_info_updated);
+	if (_option == 52)
+		User::set_email_address(_info_updated);
+	io::File::write_info_from(*this, fout);
+	fout.close();
 }
 ```
-#### Function `showInfoAllEmployee`
-Step 1: load username and password into userTemp from file Employees.txt
+#### Function `show_info_accounts`
+This code is the shortest I could write. Basically, this function will find the longest string size in each column and set it for each column cell in the table. Conclusion, it will respond to the longest string size.
 
-Step 2: load information into userTemp from file [username].txt
-
-Step 3: export information to console
-
-Source code function `showInfoAllEmployee` in [`CAdministrator.cpp`](Project2/CAdministrator.cpp#L49)
+Source code function `show_info_accounts` in [`UIHaveNoUX.cpp`](MainProject/UIHaveNoUX.cpp#L139)
 ```cpp
-void CAdministrator::showInfoAllEmployee() {
-	ifstream fileIn;
-	fileIn.open(EMPLOYEES_FILE);
-	showAnEmployeeInfoElement(9,"Ten tai khoan", "Ho va ten", "Dia chi", "So dien thoai", "Dia chi email", "| ");
-	showAnEmployeeInfoElement(15,"-", "-", "-", "-", "-", "+-", '-');
-	while (!fileIn.eof()) {
-		//Step 1:
-		readAccount(fileIn);
-		//Step 2:
-		ifstream fileUserInfoTemp = openFile(getUsername());
-		readInfo(fileUserInfoTemp);
-		//Step 3:
-		if (getUsername() != "") {
-			showAnEmployeeInfoElement(15, getUsername(), getFullName(), getAddress(), getPhoneNumber(), getEmailAddress(), "| ");
-			showAnEmployeeInfoElement(15, "-", "-", "-", "-", "-", "+-", '-');
+void show_info_accounts() {
+	std::string titles[] = {
+		"Id",
+		"Username",
+		"Password",
+		"Full name",
+		"Address",
+		"Phone number",
+		"Email address"
+	};
+	const int titles_size = sizeof(titles) / sizeof(titles[0]);
+	std::vector<short> title_max_sizes;
+	std::vector<std::pair<short, std::wstring>> vec_title_max_size_and_title;
+	std::ifstream file_in;
+
+	// Initialize each element in title_max_sizes with the string size of each element in titles
+	for (auto & title : titles) title_max_sizes.push_back(static_cast<short>(title.size()));
+
+	file_in.open(ACCOUNTS_FILE);
+
+	while (!file_in.eof()) {
+		User user;
+		io::File::read_account_from(file_in, user);
+		std::ifstream file_info = open_file(user.get_username());
+		io::File::read_info_from(file_info, user);
+		// Get all properties in class User
+		// TODO: convert to vector
+		std::string * ptr_user_properties = user.get_properties();
+
+		// Find the maximum size of each table cell, horizontally
+		if (user.get_username() != "")
+			for (short i = 0; i < titles_size; i++)
+				if (title_max_sizes[i] < ptr_user_properties[i].size())
+					title_max_sizes[i] = static_cast<short>(ptr_user_properties[i].size());
+
+		file_info.close();
+	}
+
+	// Reset file pointer
+	file_in.clear();
+	file_in.seekg(0, std::ios::beg);
+
+	show_a_part_border(title_max_sizes, Position::FIRST);
+	std::cout << std::endl;
+
+	// Show titles
+	for (short i = 0; i < titles_size; i++)
+		vec_title_max_size_and_title.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(titles[i])));
+	show_info_account(vec_title_max_size_and_title, Color::LIGHT_YELLOW);
+	std::cout << std::endl;
+
+	// Show all account information
+	while (!file_in.eof()) {
+		User user;
+		io::File::read_account_from(file_in, user);
+		std::ifstream file_info = open_file(user.get_username());
+		io::File::read_info_from(file_info, user);
+		// Get all properties in class User
+		std::string * ptr_user_properties = user.get_properties();
+
+		std::vector<std::pair<short, std::wstring>> title_max_size_user_property;
+		for (short i = 0; i < titles_size; i++)
+			title_max_size_user_property.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(ptr_user_properties[i])));
+
+		// Show current account information
+		if (user.get_username() != "") {
+			show_a_part_border(title_max_sizes, Position::MIDDLE);
+			std::cout << std::endl;
+
+			show_info_account(title_max_size_user_property, Color::WHITE);
+			std::cout << std::endl;
 		}
-		fileUserInfoTemp.close();
+
+		file_info.close();
 	}
-	fileIn.close();
+
+	show_a_part_border(title_max_sizes, Position::LAST);
+
+	file_in.close();
 }
+
 ```
-#### Function `showAccountInfo`
+#### Function `show_account_info`
 This function simply reads the account information from the given [username].txt, and outputs it to the console.
 
-Source code function `showAccountInfo` in [`HandleMain.cpp`](Project2/HandleMain.cpp#L40)
+Source code function `show_account_info` in [`HandleMain.cpp`](MainProject/HandleMain.cpp#L57)
 ```cpp
-void showAccountInfo(string strUsername) {
-	CUser userTemp;
-	ifstream fileIn = openFile(strUsername);
-	userTemp.readInfo(fileIn);
-	userTemp.output();
-	fileIn.close();
+void show_account_info(std::string _username) {
+	User user;
+	std::ifstream fin = open_file(_username);
+	io::File::read_info_from(fin, user);
+	console::write_info(user);
+	fin.close();
 }
 ```
-#### Function `isSuccessChangePass`
-I dunno how to explain this source, because it still has bug =))))))) maybe, have fun
-
-Source code function `isSuccessChangePass` in [`CEmployee.cpp`](Project2/CEmployee.cpp#L7)
+#### Function `is_success_change_pass`
+Source code function `is_success_change_pass` in [`Employee.cpp`](MainProject/Employee.cpp#L10)
 ```cpp
-bool CEmployee::isSuccessChangePass(string strUsername, string strCurrentPass, string strNewPass, string strConfirmNewPass) {
-	ifstream fileIn;
-	fileIn.open(EMPLOYEES_FILE.c_str());
-	while (!fileIn.eof()) {
-		readAccount(fileIn);
-		if (getUsername() == strUsername && getPassword() == strCurrentPass && strNewPass == strConfirmNewPass) {
-			setPassword(strNewPass);
-			fileIn.close();
-			deleteAccount(EMPLOYEES_FILE, strUsername);
-			ofstream fileOut;
-			fileOut.open(EMPLOYEES_FILE.c_str(), ios_base::app);
-			writeAccount(fileOut);
-			fileOut.close();
-			return true;
+bool Employee::is_success_change_pass(std::string _username, std::string _current_password, std::string _new_password, std::string _confirm_new_password) {
+	bool is_successful = false;
+	if (_current_password != _new_password && _new_password == _confirm_new_password) {
+		const std::string accounts = ACCOUNTS_FILE;
+		std::string accounts_temp = accounts;
+
+		// Rename Accounts.txt into AccountsTemp.txt
+		accounts_temp.insert(accounts_temp.size() - 4, "Temp");
+		if (rename(accounts.c_str(), accounts_temp.c_str()) != 0) {
+			std::cerr << "Error renaming file" << std::endl;
+			return false;
+		}
+
+		// Automatically create a new Accounts.txt
+		std::ofstream fout(accounts);
+		std::ifstream fin;
+		// And open the file is renamed (AccountsTemp.txt)
+		fin.open(accounts_temp.c_str());
+
+		if (!fin.is_open() || !fout.is_open()) {
+			std::cerr << "Failed to open files" << std::endl;
+			return false;
+		}
+
+		// Write from the file is renamed (AccountsTemp.txt) to Accounts.txt
+		// And update password the account want to update
+		while (!fin.eof()) {
+			io::File::read_account_from(fin, *this);
+			if (!User::get_username().empty()) {
+				if (User::get_username() == _username && User::get_password() == _current_password) {
+					User::set_password(_new_password);
+					io::File::write_account_from(*this, fout);
+					is_successful = true;
+				}
+				else
+					io::File::write_account_from(*this, fout);
+			}
+		}
+
+		fout.close();
+		fin.close();
+		if (remove(accounts_temp.c_str()) != 0) {
+			std::cerr << "Failed to remove file" << std::endl;
+			return false;
 		}
 	}
-	fileIn.close();
-	return false;
+	return is_successful;
 }
 ```
