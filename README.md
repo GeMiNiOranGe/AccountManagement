@@ -12,7 +12,7 @@
 		* [View account information](#View-account-information)
 		* [Change password](#Change-password)
 	* [Other requirements](#Other-requirements)
-* [Code showcase](#Sode-showcase)
+* [Code showcase](#Code-showcase)
 	* [Declaring Classes](#Declaring-Classes)
 	* [Main functions](#Main-functions)
 
