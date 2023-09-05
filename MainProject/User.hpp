@@ -17,14 +17,6 @@ public:
 
 	std::string * get_properties();
 
-	/* If getter have no "const", it's a combination of setter and getter, this function can use like this.
-	Code:
-	User.getFullName() = "Some string";
-	cout << User.getFullName();
-	Also, it have "const", so it's just a normal getter.
-	Setter have "const", why ??? because i used reference for that function, and it can run faster.
-	I am not sure it can run faster or not =))))) */
-
 	const std::string & get_username();
 	const std::string & get_password();
 	const std::string & get_id();
