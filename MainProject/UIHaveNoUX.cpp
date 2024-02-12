@@ -159,9 +159,9 @@ void show_info_accounts() {
 	while (!file_in.eof()) {
 		User user;
 		Account account;
-		io::File::read_account_from(file_in, account);
+		account.read_file(file_in);
 		std::ifstream file_info = open_file(account.get_username());
-		io::File::read_info_from(file_info, user);
+		user.read_file(file_info);
 		// Get all properties in class User
 		// TODO: convert to vector
 		std::string * ptr_user_properties = user.get_properties();
@@ -192,9 +192,9 @@ void show_info_accounts() {
 	while (!file_in.eof()) {
 		User user;
 		Account account;
-		io::File::read_account_from(file_in, account);
+		account.read_file(file_in);
 		std::ifstream file_info = open_file(account.get_username());
-		io::File::read_info_from(file_info, user);
+		user.read_file(file_info);
 		// Get all properties in class User
 		std::string * ptr_user_properties = user.get_properties();
 

@@ -36,9 +36,6 @@
     <ClCompile Include="HandleMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileIO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HandleWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Config.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FileIO.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BoxBorder.hpp">

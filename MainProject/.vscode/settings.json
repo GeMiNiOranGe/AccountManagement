@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"*.module": "php",
-		"iosfwd": "cpp"
+		"iosfwd": "cpp",
+		"xstring": "cpp"
 	}
 }

@@ -1,11 +1,10 @@
 #pragma once
-#ifndef EMPLOYEE_HPP
-#define EMPLOYEE_HPP
+#ifndef ACCOUNT_HPP
+#define ACCOUNT_HPP
 
 #include <iostream>
 #include <fstream>
 #include <string>
-//#include "FileIO.hpp"
 #include "Config.hpp"
 
 class Account {
@@ -33,6 +32,7 @@ private:
 	std::string id;
 	std::string password;
 	std::string username;
+	// TODO: add std::string strAccountType; and config in code
 };
 
-#endif // end EMPLOYEE_HPP
+#endif // end ACCOUNT_HPP

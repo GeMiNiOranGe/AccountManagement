@@ -42,9 +42,9 @@ void delete_account(std::string _username) {
 	// Write from the file is renamed (AccountsTemp.txt) to Accounts.txt
 	// And don't write the employee want to delete
 	while (!fin.eof()) {
-		io::File::read_account_from(fin, account);
+		account.read_file(fin);
 		if (!account.get_username().empty() && account.get_username() != _username)
-			io::File::write_account_from(account, fout);
+			account.write_file(fout);
 	}
 	fout.close();
 	fin.close();
@@ -57,7 +57,7 @@ void delete_account(std::string _username) {
 void show_account_info(std::string _username) {
 	User user;
 	std::ifstream fin = open_file(_username);
-	io::File::read_info_from(fin, user);
+	user.read_file(fin);
 	console::write_info(user);
 	fin.close();
 }
@@ -67,7 +67,7 @@ bool has_username(std::string _username) {
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
-		io::File::read_account_from(fin, account);
+		account.read_file(fin);
 		if (_username == account.get_username()) {
 			fin.close();
 			return true;
@@ -81,7 +81,7 @@ bool has_account(std::string _username, std::string _password) {
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
-		io::File::read_account_from(fin, account);
+		account.read_file(fin);
 		if (_username == account.get_username() && _password == account.get_password() && account.get_username() != "" && account.get_password() != "") {
 			fin.close();
 			return true;
@@ -96,7 +96,7 @@ AccountType get_account_type(std::string _username, std::string _password) {
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
-		io::File::read_account_from(fin, account);
+		account.read_file(fin);
 		if (account.get_id() == "AD" && account.get_username() == _username && account.get_password() == _password) {
 			fin.close();
 			return AccountType::ADMINISTRATOR;
@@ -115,7 +115,7 @@ bool is_default_password(std::string _username, std::string _password) {
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
-		io::File::read_account_from(fin, account);
+		account.read_file(fin);
 		if (_username == account.get_username() && _password == account.get_password() && account.get_password() == DEFAULT_PASSWORD && account.get_username() != "" && account.get_password() != "") {
 			fin.close();
 			return true;

@@ -159,7 +159,6 @@
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="HandleConsole.cpp" />
     <ClCompile Include="User.cpp" />
-    <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="HandleMain.cpp" />
     <ClCompile Include="HandleMiscellaneous.cpp" />
     <ClCompile Include="HandleWindow.cpp" />
@@ -181,7 +180,6 @@
     <ClInclude Include="User.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="HandleWindow.hpp" />
-    <ClInclude Include="FileIO.hpp" />
     <ClInclude Include="HandleMain.hpp" />
     <ClInclude Include="HandleMiscellaneous.hpp" />
     <ClInclude Include="UIHaveNoUX.hpp" />
