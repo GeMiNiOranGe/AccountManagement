@@ -24,7 +24,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Employee.cpp">
+    <ClCompile Include="Account.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UIHaveNoUX.cpp">
@@ -62,7 +62,7 @@
     <ClInclude Include="Administrator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Employee.hpp">
+    <ClInclude Include="Account.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UIHaveNoUX.hpp">

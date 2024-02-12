@@ -158,15 +158,16 @@ void show_info_accounts() {
 
 	while (!file_in.eof()) {
 		User user;
-		io::File::read_account_from(file_in, user);
-		std::ifstream file_info = open_file(user.get_username());
+		Account account;
+		io::File::read_account_from(file_in, account);
+		std::ifstream file_info = open_file(account.get_username());
 		io::File::read_info_from(file_info, user);
 		// Get all properties in class User
 		// TODO: convert to vector
 		std::string * ptr_user_properties = user.get_properties();
 
 		// Find the maximum size of each table cell, horizontally
-		if (user.get_username() != "")
+		if (account.get_username() != "")
 			for (short i = 0; i < titles_size; i++)
 				if (title_max_sizes[i] < ptr_user_properties[i].size())
 					title_max_sizes[i] = static_cast<short>(ptr_user_properties[i].size());
@@ -190,8 +191,9 @@ void show_info_accounts() {
 	// Show all account information
 	while (!file_in.eof()) {
 		User user;
-		io::File::read_account_from(file_in, user);
-		std::ifstream file_info = open_file(user.get_username());
+		Account account;
+		io::File::read_account_from(file_in, account);
+		std::ifstream file_info = open_file(account.get_username());
 		io::File::read_info_from(file_info, user);
 		// Get all properties in class User
 		std::string * ptr_user_properties = user.get_properties();
@@ -201,7 +203,7 @@ void show_info_accounts() {
 			title_max_size_user_property.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(ptr_user_properties[i])));
 
 		// Show current account information
-		if (user.get_username() != "") {
+		if (account.get_username() != "") {
 			show_a_part_border(title_max_sizes, Position::MIDDLE);
 			std::cout << std::endl;
 

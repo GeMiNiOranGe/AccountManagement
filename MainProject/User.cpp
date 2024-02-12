@@ -1,12 +1,12 @@
 #include "User.hpp"
 
 User::User(
-	std::string _username, std::string _password, std::string _id, 
+	/*std::string _username, std::string _password,*/ std::string _id, 
 	std::string _full_name, std::string _address, 
 	std::string _phone_number, std::string _email_address
 ) {
-	this->username = _username;
-	this->password = _password;
+	//this->username = _username;
+	//this->password = _password;
 	this->id = _id;
 	this->full_name = _full_name;
 	this->address = _address;
@@ -14,8 +14,8 @@ User::User(
 	this->email_address = _email_address;
 }
 User::User(const User & _user) {
-	this->username = _user.username;
-	this->password = _user.password;
+	//this->username = _user.username;
+	//this->password = _user.password;
 	this->id = _user.id;
 	this->full_name = _user.full_name;
 	this->address = _user.address;
@@ -28,8 +28,8 @@ User::~User() {
 std::string * User::get_properties() {
 	return new std::string[7]{
 		this->id,
-		this->username,
-		this->password,
+		//this->username,
+		//this->password,
 		this->full_name,
 		this->address,
 		this->phone_number,
@@ -37,12 +37,6 @@ std::string * User::get_properties() {
 	};
 }
 
-const std::string & User::get_username() {
-	return this->username;
-}
-const std::string & User::get_password() {
-	return this->password;
-}
 const std::string & User::get_id() {
 	return this->id;
 }
@@ -59,12 +53,6 @@ const std::string & User::get_email_address() {
 	return this->email_address;
 }
 
-void User::set_username(const std::string & _username) {
-	this->username = _username;
-}
-void User::set_password(const std::string & _password) {
-	this->password = _password;
-}
 void User::set_id(const std::string & _id) {
 	this->id = _id;
 }

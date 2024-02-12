@@ -1,10 +1,10 @@
 #include "Administrator.hpp"
 
 Administrator::Administrator(
-	std::string _username, std::string _password, std::string _id,
+	/*std::string _username, std::string _password, */std::string _id,
 	std::string _full_name, std::string _address,
 	std::string _phone_number, std::string _email_address
-) : User(_username, _password, _id, _full_name, _address, _phone_number, _email_address) {
+) : User(/*_username, _password, */_id, _full_name, _address, _phone_number, _email_address) {
 }
 
 void Administrator::add_employee(std::string _username) {

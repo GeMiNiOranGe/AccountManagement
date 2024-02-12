@@ -156,7 +156,7 @@
     <ClCompile Include="BoxBorder.cpp" />
     <ClCompile Include="ConsoleIO.cpp" />
     <ClCompile Include="Convert.cpp" />
-    <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="Account.cpp" />
     <ClCompile Include="HandleConsole.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="FileIO.cpp" />
@@ -174,7 +174,7 @@
     <ClInclude Include="Color.hpp" />
     <ClInclude Include="ConsoleIO.hpp" />
     <ClInclude Include="Convert.hpp" />
-    <ClInclude Include="Employee.hpp" />
+    <ClInclude Include="Account.hpp" />
     <ClInclude Include="HandleConsole.hpp" />
     <ClInclude Include="LoginStatus.hpp" />
     <ClInclude Include="Position.hpp" />

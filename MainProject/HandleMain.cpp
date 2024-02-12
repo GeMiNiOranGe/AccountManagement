@@ -19,7 +19,7 @@ void delete_file(std::string _username) {
 void delete_account(std::string _username) {
 	const std::string accounts = ACCOUNTS_FILE;
 	std::string accounts_temp = accounts;
-	User user;
+	Account account;
 
 	// Rename Accounts.txt into AccountsTemp.txt
 	accounts_temp.insert(accounts_temp.size() - 4, "Temp");
@@ -42,9 +42,9 @@ void delete_account(std::string _username) {
 	// Write from the file is renamed (AccountsTemp.txt) to Accounts.txt
 	// And don't write the employee want to delete
 	while (!fin.eof()) {
-		io::File::read_account_from(fin, user);
-		if (!user.get_username().empty() && user.get_username() != _username)
-			io::File::write_account_from(user, fout);
+		io::File::read_account_from(fin, account);
+		if (!account.get_username().empty() && account.get_username() != _username)
+			io::File::write_account_from(account, fout);
 	}
 	fout.close();
 	fin.close();
@@ -66,9 +66,9 @@ bool has_username(std::string _username) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
-		User user;
-		io::File::read_account_from(fin, user);
-		if (_username == user.get_username()) {
+		Account account;
+		io::File::read_account_from(fin, account);
+		if (_username == account.get_username()) {
 			fin.close();
 			return true;
 		}
@@ -80,9 +80,9 @@ bool has_account(std::string _username, std::string _password) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
-		User user;
-		io::File::read_account_from(fin, user);
-		if (_username == user.get_username() && _password == user.get_password() && user.get_username() != "" && user.get_password() != "") {
+		Account account;
+		io::File::read_account_from(fin, account);
+		if (_username == account.get_username() && _password == account.get_password() && account.get_username() != "" && account.get_password() != "") {
 			fin.close();
 			return true;
 		}
@@ -95,13 +95,13 @@ AccountType get_account_type(std::string _username, std::string _password) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
-		User user;
-		io::File::read_account_from(fin, user);
-		if (user.get_id() == "AD" && user.get_username() == _username && user.get_password() == _password) {
+		Account account;
+		io::File::read_account_from(fin, account);
+		if (account.get_id() == "AD" && account.get_username() == _username && account.get_password() == _password) {
 			fin.close();
 			return AccountType::ADMINISTRATOR;
 		}
-		if (user.get_id() == "EM" && user.get_username() == _username && user.get_password() == _password) {
+		if (account.get_id() == "EM" && account.get_username() == _username && account.get_password() == _password) {
 			fin.close();
 			return AccountType::EMPLOYEE;
 		}
@@ -114,9 +114,9 @@ bool is_default_password(std::string _username, std::string _password) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
-		User user;
-		io::File::read_account_from(fin, user);
-		if (_username == user.get_username() && _password == user.get_password() && user.get_password() == DEFAULT_PASSWORD && user.get_username() != "" && user.get_password() != "") {
+		Account account;
+		io::File::read_account_from(fin, account);
+		if (_username == account.get_username() && _password == account.get_password() && account.get_password() == DEFAULT_PASSWORD && account.get_username() != "" && account.get_password() != "") {
 			fin.close();
 			return true;
 		}

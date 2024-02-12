@@ -8,7 +8,7 @@
 class Administrator : public User {
 public:
 	Administrator(
-		std::string _username = "", std::string _password = DEFAULT_PASSWORD, std::string _id = "",
+		/*std::string _username = "", std::string _password = DEFAULT_PASSWORD, */std::string _id = "",
 		std::string _full_name = "", std::string _address = "",
 		std::string _phone_number = "", std::string _email_address = ""
 	);
