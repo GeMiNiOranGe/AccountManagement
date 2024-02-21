@@ -157,14 +157,18 @@ void show_info_accounts() {
 	file_in.open(ACCOUNTS_FILE);
 
 	while (!file_in.eof()) {
-		User user;
+		//User user;
+		UserManagement user;
 		Account account;
 		account.read_file(file_in);
 		std::ifstream file_info = open_file(account.get_username());
+
 		user.read_file(file_info);
+		
 		// Get all properties in class User
 		// TODO: convert to vector
-		std::string * ptr_user_properties = user.get_properties();
+		User user_pros = user.get_user();
+		std::string * ptr_user_properties = user_pros.get_properties();
 
 		// Find the maximum size of each table cell, horizontally
 		if (account.get_username() != "")
@@ -190,13 +194,18 @@ void show_info_accounts() {
 
 	// Show all account information
 	while (!file_in.eof()) {
-		User user;
+		//User user;
+		UserManagement user;
 		Account account;
 		account.read_file(file_in);
 		std::ifstream file_info = open_file(account.get_username());
-		user.read_file(file_info);
+		// user.read_file(file_info);
+
+		 user.read_file(file_info);
+		
 		// Get all properties in class User
-		std::string * ptr_user_properties = user.get_properties();
+		 User user_pros = user.get_user();
+		std::string * ptr_user_properties = user_pros.get_properties();
 
 		std::vector<std::pair<short, std::wstring>> title_max_size_user_property;
 		for (short i = 0; i < titles_size; i++)

@@ -1,4 +1,4 @@
-﻿#include "Administrator.hpp"
+﻿#include "UserManagement.hpp"
 #include "Account.hpp"
 #include "HandleConsole.hpp"
 #include "UIHaveNoUX.hpp"
@@ -95,8 +95,8 @@ int main() {
 }
 
 void administrator_interface() {
-	Administrator admin;
-	std::string strInfoUpdated, username;
+	UserManagement admin;
+	std::string infoUpdated, username;
 	char event;
 	while (true) {
 		console::resize(500, 500);
@@ -125,7 +125,7 @@ void administrator_interface() {
 			if (has_username(username))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
-				admin.add_employee(username);
+				admin.create_account(username);
 				set_color(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
 				system("pause");
@@ -143,7 +143,7 @@ void administrator_interface() {
 			username.clear();
 			std::cin >> username;
 			if (has_username(username)) {
-				admin.erase_employee(username);
+				admin.delete_account(username);
 				set_color(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
 				system("pause");
@@ -200,8 +200,8 @@ void administrator_interface() {
 						std::cout << "Thong tin moi se duoc cap nhat: ";
 						set_color(Color::BRIGHT_WHITE);
 						std::cin.ignore();
-						getline(std::cin, strInfoUpdated);
-						admin.update_info_employee(username, strInfoUpdated, event);
+						getline(std::cin, infoUpdated);
+						admin.update_information_user(username, infoUpdated, event);
 						set_color(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
 						system("pause");

@@ -2,8 +2,8 @@
 #ifndef HANDLEMAIN_HPP
 #define HANDLEMAIN_HPP
 
-#include "User.hpp"
-#include "FileIO.hpp"
+#include "UserManagement.hpp"
+#include "Account.hpp"
 #include "ConsoleIO.hpp"
 #include "AccountType.hpp"
 
@@ -11,7 +11,6 @@ std::ofstream create_file(std::string _username);
 std::ifstream open_file(std::string _username);
 void delete_file(std::string _username);
 
-void delete_account(std::string _username);
 void show_account_info(std::string _username);
 
 bool has_username(std::string _username);

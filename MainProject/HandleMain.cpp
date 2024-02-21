@@ -1,64 +1,32 @@
 #include "HandleMain.hpp"
 
 std::ofstream create_file(std::string _username) {
-	std::string path = USERS_INFO_FOLDER + _username + ".txt";
+	std::string path = USERS_INFO_DIRECTORY + _username + ".txt";
 	std::ofstream new_file(path);
 	return new_file;
 }
 std::ifstream open_file(std::string _username) {
-	std::string path = USERS_INFO_FOLDER + _username + ".txt";
+	std::string path = USERS_INFO_DIRECTORY + _username + ".txt";
 	std::ifstream fin;
 	fin.open(path);
 	return fin;
 }
 void delete_file(std::string _username) {
-	std::string command = "del " + USERS_INFO_FOLDER + _username + ".txt";
+	std::string command = "del " + USERS_INFO_DIRECTORY + _username + ".txt";
 	system(command.c_str());
 }
 
-void delete_account(std::string _username) {
-	const std::string accounts = ACCOUNTS_FILE;
-	std::string accounts_temp = accounts;
-	Account account;
-
-	// Rename Accounts.txt into AccountsTemp.txt
-	accounts_temp.insert(accounts_temp.size() - 4, "Temp");
-	if (rename(accounts.c_str(), accounts_temp.c_str()) != 0) {
-		std::cerr << "Error renaming file" << std::endl;
-		return;
-	}
-
-	// Automatically create a new Accounts.txt
-	std::ofstream fout(accounts);
-	std::ifstream fin;
-	// And open the file is renamed (AccountsTemp.txt)
-	fin.open(accounts_temp.c_str());
-
-	if (!fin.is_open() || !fout.is_open()) {
-		std::cerr << "Failed to open files" << std::endl;
-		return;
-	}
-
-	// Write from the file is renamed (AccountsTemp.txt) to Accounts.txt
-	// And don't write the employee want to delete
-	while (!fin.eof()) {
-		account.read_file(fin);
-		if (!account.get_username().empty() && account.get_username() != _username)
-			account.write_file(fout);
-	}
-	fout.close();
-	fin.close();
-	if (remove(accounts_temp.c_str()) != 0) {
-		std::cerr << "Failed to remove file" << std::endl;
-		return;
-	}
-}
-
 void show_account_info(std::string _username) {
-	User user;
+	// User user;
+	// std::ifstream fin = open_file(_username);
+	// user.read_file(fin);
+	// console::write_info(user);
+	// fin.close();
+
+	UserManagement user_manager;
 	std::ifstream fin = open_file(_username);
-	user.read_file(fin);
-	console::write_info(user);
+	user_manager.read_file(fin);
+	console::write_info(user_manager.get_user());
 	fin.close();
 }
 

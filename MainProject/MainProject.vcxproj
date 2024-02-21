@@ -152,7 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Administrator.cpp" />
+    <ClCompile Include="UserManagement.cpp" />
     <ClCompile Include="BoxBorder.cpp" />
     <ClCompile Include="ConsoleIO.cpp" />
     <ClCompile Include="Convert.cpp" />
@@ -169,12 +169,14 @@
     <ClInclude Include="AccountType.hpp" />
     <ClInclude Include="Anchor.hpp" />
     <ClInclude Include="BoxBorder.hpp" />
-    <ClInclude Include="Administrator.hpp" />
+    <ClInclude Include="UserManagement.hpp" />
     <ClInclude Include="Color.hpp" />
     <ClInclude Include="ConsoleIO.hpp" />
     <ClInclude Include="Convert.hpp" />
     <ClInclude Include="Account.hpp" />
     <ClInclude Include="HandleConsole.hpp" />
+    <ClInclude Include="IReader.hpp" />
+    <ClInclude Include="IWriter.hpp" />
     <ClInclude Include="LoginStatus.hpp" />
     <ClInclude Include="Position.hpp" />
     <ClInclude Include="User.hpp" />

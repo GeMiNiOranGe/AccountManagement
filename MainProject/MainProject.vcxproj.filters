@@ -18,7 +18,7 @@
     <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Administrator.cpp">
+    <ClCompile Include="UserManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
@@ -56,7 +56,7 @@
     <ClInclude Include="User.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Administrator.hpp">
+    <ClInclude Include="UserManagement.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Account.hpp">
@@ -102,6 +102,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Color.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IReader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IWriter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
