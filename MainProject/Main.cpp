@@ -33,7 +33,7 @@ int main() {
 
 		if (is_default_password(account.first, account.second)) {
 			std::string new_password, confirm_new_password;
-			Account employee;
+			AccountManagement employee;
 			system("cls");
 			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Doi mat khau mac dinh>" << std::endl;
@@ -239,7 +239,7 @@ void employee_interface(std::string _username, std::string _password) {
 	char event;
 	while (true) {
 		std::string current_password, new_password, current_new_password;
-		Account employee;
+		AccountManagement employee;
 		console::resize(500, 500);
 		console::move_to::center();
 		event = menu_options(

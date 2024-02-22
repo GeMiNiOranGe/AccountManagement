@@ -27,7 +27,9 @@ void UserManagement::write_file(std::ofstream &_fout) {
 }
 
 void UserManagement::create_account(std::string _username) {
-	Account::create_a_new(_username);
+	//Account::create_a_new(_username);
+	AccountManagement account_manager;
+	account_manager.create_a_new(_username);
 	// Create a new file and add information to the newly created file
 	std::ofstream fout = create_file(_username);
 	// User user;
@@ -40,7 +42,11 @@ void UserManagement::create_account(std::string _username) {
 	fout.close();
 }
 void UserManagement::delete_account(std::string _username) {
-	Account::delete_by(_username);
+	//Account::delete_by(_username);
+
+	AccountManagement account_manager;
+	account_manager.delete_by(_username);
+
 	delete_file(_username);
 }
 void UserManagement::update_information_user(std::string _username, std::string _info_updated, char _option) {

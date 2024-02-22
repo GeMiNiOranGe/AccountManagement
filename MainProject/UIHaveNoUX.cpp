@@ -159,9 +159,9 @@ void show_info_accounts() {
 	while (!file_in.eof()) {
 		//User user;
 		UserManagement user;
-		Account account;
+		AccountManagement account;
 		account.read_file(file_in);
-		std::ifstream file_info = open_file(account.get_username());
+		std::ifstream file_info = open_file(account.get_account().get_username());
 
 		user.read_file(file_info);
 		
@@ -171,7 +171,7 @@ void show_info_accounts() {
 		std::string * ptr_user_properties = user_pros.get_properties();
 
 		// Find the maximum size of each table cell, horizontally
-		if (account.get_username() != "")
+		if (account.get_account().get_username() != "")
 			for (short i = 0; i < titles_size; i++)
 				if (title_max_sizes[i] < ptr_user_properties[i].size())
 					title_max_sizes[i] = static_cast<short>(ptr_user_properties[i].size());
@@ -196,9 +196,9 @@ void show_info_accounts() {
 	while (!file_in.eof()) {
 		//User user;
 		UserManagement user;
-		Account account;
+		AccountManagement account;
 		account.read_file(file_in);
-		std::ifstream file_info = open_file(account.get_username());
+		std::ifstream file_info = open_file(account.get_account().get_username());
 		// user.read_file(file_info);
 
 		 user.read_file(file_info);
@@ -212,7 +212,7 @@ void show_info_accounts() {
 			title_max_size_user_property.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(ptr_user_properties[i])));
 
 		// Show current account information
-		if (account.get_username() != "") {
+		if (account.get_account().get_username() != "") {
 			show_a_part_border(title_max_sizes, Position::MIDDLE);
 			std::cout << std::endl;
 
