@@ -160,9 +160,9 @@ void show_info_accounts() {
 		User user;
 		Account account;
 
-		FileManager::read_file(fin, account);
-		std::ifstream file_info = FileManager::open_file(account.get_username());
-		FileManager::read_file(file_info, user);
+		AccountFileManager::read_file(fin, account);
+		std::ifstream file_info = UserFileManager::open_file(account.get_username());
+		UserFileManager::read_file(file_info, user);
 
 		// Get all properties in class User
 		// TODO: convert to vector
@@ -195,9 +195,9 @@ void show_info_accounts() {
 		User user;
 		Account account;
 
-		FileManager::read_file(fin, account);
-		std::ifstream file_info = FileManager::open_file(account.get_username());
-		FileManager::read_file(file_info, user);
+		AccountFileManager::read_file(fin, account);
+		std::ifstream file_info = UserFileManager::open_file(account.get_username());
+		UserFileManager::read_file(file_info, user);
 
 		// Get all properties in class User
 		std::string * ptr_user_properties = user.get_properties();

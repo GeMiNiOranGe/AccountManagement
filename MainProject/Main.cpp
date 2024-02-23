@@ -1,16 +1,14 @@
-﻿#include "UserManagement.hpp"
-#include "Account.hpp"
-#include "HandleConsole.hpp"
+﻿#include "HandleConsole.hpp"
 #include "UIHaveNoUX.hpp"
 
 void show_administrator_form();
 void show_employee_form(std::string _username, std::string _password);
 
-class UserConsoleIO {
-public:
-    User read_user_from_console();
-    void write_user_to_console(const User& user);
-};
+// class UserConsoleIO {
+// public:
+//     User read_user_from_console();
+//     void write_user_to_console(const User& user);
+// };
 
 int main() {
 	SetConsoleTitle(L"Employee management");

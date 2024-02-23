@@ -5,7 +5,7 @@ bool has_username(std::string _username) {
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
-		FileManager::read_file(fin, account);
+		AccountFileManager::read_file(fin, account);
 		if (_username == account.get_username()) {
 			fin.close();
 			return true;
@@ -19,7 +19,7 @@ bool has_account(std::string _username, std::string _password) {
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
-		FileManager::read_file(fin, account);
+		AccountFileManager::read_file(fin, account);
 		if (account.get_username() == _username &&
 			account.get_password() == _password &&
 			account.get_username() != "" &&
@@ -37,7 +37,7 @@ AccountType get_account_type(std::string _username, std::string _password) {
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
-		FileManager::read_file(fin, account);
+		AccountFileManager::read_file(fin, account);
 		// TODO: account.get_username() == _username if outer, account.get_id() == "AD" if inner
 		if (account.get_id() == "AD" && account.get_username() == _username && account.get_password() == _password) {
 			fin.close();
@@ -57,7 +57,7 @@ bool is_default_password(std::string _username, std::string _password) {
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
-		FileManager::read_file(fin, account);
+		AccountFileManager::read_file(fin, account);
 		if (account.get_username() == _username &&
 			account.get_password() == _password &&
 			account.get_password() == DEFAULT_PASSWORD &&

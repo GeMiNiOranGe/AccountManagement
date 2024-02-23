@@ -2,8 +2,7 @@
 #ifndef USERMANAGEMENT_HPP
 #define USERMANAGEMENT_HPP
 
-#include "User.hpp"
-#include "FileManager.hpp"
+#include "UserFileManager.hpp"
 #include "ConsoleIO.hpp"
 
 class UserManagement {

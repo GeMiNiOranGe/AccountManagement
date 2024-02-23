@@ -13,8 +13,8 @@ void UserManagement::set_user(const User &_user) {
 }
 
 void UserManagement::show_user(std::string _username) {
-	std::ifstream fin = FileManager::open_file(_username);
-	FileManager::read_file(fin, this->user);
+	std::ifstream fin = UserFileManager::open_file(_username);
+	UserFileManager::read_file(fin, this->user);
 	console::write_info(this->user);
 	fin.close();
 }
@@ -25,7 +25,7 @@ void UserManagement::create_user(std::string _username) {
 	fout.open(PATH);
 
 	console::read_info(this->user);
-	FileManager::write_file(this->user, fout);
+	UserFileManager::write_file(this->user, fout);
 
 	fout.close();
 }
@@ -36,8 +36,8 @@ void UserManagement::delete_user(std::string _username) {
 }
 void UserManagement::update_user(std::string _username, std::string _info_updated, char _option) {
 	// Load infomation from _username file
-	std::ifstream fin = FileManager::open_file(_username);
-	FileManager::read_file(fin, this->user);
+	std::ifstream fin = UserFileManager::open_file(_username);
+	UserFileManager::read_file(fin, this->user);
 	fin.close();
 
 	// Re-open the _username file again
@@ -54,6 +54,6 @@ void UserManagement::update_user(std::string _username, std::string _info_update
 	if (_option == 52)
 		this->user.set_email_address(_info_updated);
 	
-	FileManager::write_file(this->user, fout);
+	UserFileManager::write_file(this->user, fout);
 	fout.close();
 }

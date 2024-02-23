@@ -11,20 +11,6 @@ void AccountManagement::set_account(const Account &_account) {
 	this->account = _account;
 }
 
-// void AccountManagement::read_file(std::ifstream & _fin) {
-// 	std::string _id, _username, _password;
-// 	getline(_fin, _id, ',');
-// 	getline(_fin, _username, ',');
-// 	getline(_fin, _password);
-// 	this->account.set_id(_id);
-// 	this->account.set_username(_username);
-// 	this->account.set_password(_password);
-// }
-// void AccountManagement::write_file(std::ofstream & _fout) {
-// 	_fout << this->account.get_id() << ',' << this->account.get_username() << ',' << this->account.get_password() << std::endl;
-// }
-
-
 bool AccountManagement::is_success_change_pass(std::string _username, std::string _current_password, std::string _new_password, std::string _confirm_new_password) {
 	bool is_successful = false;
 	if (_current_password != _new_password && _new_password == _confirm_new_password) {
@@ -52,15 +38,15 @@ bool AccountManagement::is_success_change_pass(std::string _username, std::strin
 		// Write from the file is renamed (AccountsTemp.txt) to Accounts.txt
 		// And update password the account want to update
 		while (!fin.eof()) {
-			FileManager::read_file(fin, this->account);
+			AccountFileManager::read_file(fin, this->account);
 			if (!this->account.get_username().empty()) {
 				if (this->account.get_username() == _username && this->account.get_password() == _current_password) {
 					this->account.set_password(_new_password);
-					FileManager::write_file(this->account, fout);
+					AccountFileManager::write_file(this->account, fout);
 					is_successful = true;
 				}
 				else
-					FileManager::write_file(this->account, fout);
+					AccountFileManager::write_file(this->account, fout);
 			}
 		}
 
@@ -82,7 +68,7 @@ void AccountManagement::create_account(std::string _username) {
 	this->account.set_id("EM");
 	this->account.set_username(_username);
 
-	FileManager::write_file(this->account, fout);
+	AccountFileManager::write_file(this->account, fout);
 }
 void AccountManagement::delete_account(std::string _username) {
 	std::ofstream fout;
@@ -107,9 +93,9 @@ void AccountManagement::delete_account(std::string _username) {
 
 	// Write from the file is renamed (AccountsNew.txt) to Accounts.txt, and don't write the employee want to delete
 	while (!fin.eof()) {
-		FileManager::read_file(fin, this->account);
+		AccountFileManager::read_file(fin, this->account);
 		if (!this->account.get_username().empty() && this->account.get_username() != _username)
-			FileManager::write_file(this->account, fout);
+			AccountFileManager::write_file(this->account, fout);
 	}
 
 	fout.close();

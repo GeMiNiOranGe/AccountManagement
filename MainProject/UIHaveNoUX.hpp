@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "UserManagement.hpp"
+#include "AccountManagement.hpp"
 #include "BoxBorder.hpp"
 #include "HandleMain.hpp"
 #include "Convert.hpp"

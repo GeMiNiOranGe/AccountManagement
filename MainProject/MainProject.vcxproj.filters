@@ -54,7 +54,10 @@
     <ClCompile Include="AccountManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileManager.cpp">
+    <ClCompile Include="AccountFileManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserFileManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,7 +122,10 @@
     <ClInclude Include="AccountManagement.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileManager.hpp">
+    <ClInclude Include="AccountFileManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserFileManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
