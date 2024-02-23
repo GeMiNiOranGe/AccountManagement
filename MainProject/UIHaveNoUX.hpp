@@ -6,6 +6,8 @@
 #include <io.h>
 #include <fcntl.h>
 #include <vector>
+
+#include "UserManagement.hpp"
 #include "BoxBorder.hpp"
 #include "HandleMain.hpp"
 #include "Convert.hpp"

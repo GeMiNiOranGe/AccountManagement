@@ -3,8 +3,8 @@
 #include "HandleConsole.hpp"
 #include "UIHaveNoUX.hpp"
 
-void administrator_interface();
-void employee_interface(std::string _username, std::string _password);
+void show_administrator_form();
+void show_employee_form(std::string _username, std::string _password);
 
 int main() {
 	SetConsoleTitle(L"Employee management");
@@ -64,10 +64,10 @@ int main() {
 		if (is_logged_in)
 			switch (account_type) {
 			case AccountType::ADMINISTRATOR:
-				administrator_interface();
+				show_administrator_form();
 				break;
 			case AccountType::EMPLOYEE:
-				employee_interface(account.first, account.second);
+				show_employee_form(account.first, account.second);
 				break;
 			default:
 				number_of_login--;
@@ -94,9 +94,10 @@ int main() {
 	return 0;
 }
 
-void administrator_interface() {
-	UserManagement admin;
-	std::string infoUpdated, username;
+void show_administrator_form() {
+	AccountManagement account_manager;
+	UserManagement user_manager;
+	std::string info_updated, username;
 	char event;
 	while (true) {
 		console::resize(500, 500);
@@ -125,7 +126,8 @@ void administrator_interface() {
 			if (has_username(username))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
-				admin.create_account(username);
+				account_manager.create_account(username);
+				user_manager.create_user(username);
 				set_color(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
 				system("pause");
@@ -143,7 +145,8 @@ void administrator_interface() {
 			username.clear();
 			std::cin >> username;
 			if (has_username(username)) {
-				admin.delete_account(username);
+				account_manager.delete_account(username);
+				user_manager.delete_user(username);
 				set_color(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
 				system("pause");
@@ -165,7 +168,7 @@ void administrator_interface() {
 			if (has_username(username)) {
 				set_color(Color::LIGHT_YELLOW);
 				std::cout << "    Thong tin Employee can tim: " << std::endl;
-				show_account_info(username);
+				user_manager.show_user(username);
 				system("pause");
 			}
 			else
@@ -200,8 +203,8 @@ void administrator_interface() {
 						std::cout << "Thong tin moi se duoc cap nhat: ";
 						set_color(Color::BRIGHT_WHITE);
 						std::cin.ignore();
-						getline(std::cin, infoUpdated);
-						admin.update_information_user(username, infoUpdated, event);
+						getline(std::cin, info_updated);
+						user_manager.update_user(username, info_updated, event);
 						set_color(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
 						system("pause");
@@ -235,11 +238,12 @@ void administrator_interface() {
 	}
 }
 
-void employee_interface(std::string _username, std::string _password) {
+void show_employee_form(std::string _username, std::string _password) {
 	char event;
 	while (true) {
 		std::string current_password, new_password, current_new_password;
 		AccountManagement employee;
+		UserManagement user_manager;
 		console::resize(500, 500);
 		console::move_to::center();
 		event = menu_options(
@@ -258,7 +262,7 @@ void employee_interface(std::string _username, std::string _password) {
 			std::cout << "    Ten tai khoan: ";
 			set_color(Color::BRIGHT_WHITE);
 			std::cout << _username << std::endl;
-			show_account_info(_username);
+			user_manager.show_user(_username);
 			system("pause");
 			system("cls");
 			break;

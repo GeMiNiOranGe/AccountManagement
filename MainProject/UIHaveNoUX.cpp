@@ -149,29 +149,30 @@ void show_info_accounts() {
 	const int titles_size = sizeof(titles) / sizeof(titles[0]);
 	std::vector<short> title_max_sizes;
 	std::vector<std::pair<short, std::wstring>> vec_title_max_size_and_title;
-	std::ifstream file_in;
+	std::ifstream fin;
 
 	// Initialize each element in title_max_sizes with the string size of each element in titles
 	for (auto & title : titles) title_max_sizes.push_back(static_cast<short>(title.size()));
 
-	file_in.open(ACCOUNTS_FILE);
+	fin.open(ACCOUNTS_FILE);
 
-	while (!file_in.eof()) {
-		//User user;
-		UserManagement user;
-		AccountManagement account;
-		account.read_file(file_in);
-		std::ifstream file_info = open_file(account.get_account().get_username());
+	while (!fin.eof()) {
+		UserManagement user_manager;
+		AccountManagement account_manager;
 
-		user.read_file(file_info);
-		
+		account_manager.read_file(fin);
+
+		std::ifstream file_info = FileManager::open_file(account_manager.get_account().get_username());
+
+		user_manager.read_file(file_info);
+
 		// Get all properties in class User
 		// TODO: convert to vector
-		User user_pros = user.get_user();
+		User user_pros = user_manager.get_user();
 		std::string * ptr_user_properties = user_pros.get_properties();
 
 		// Find the maximum size of each table cell, horizontally
-		if (account.get_account().get_username() != "")
+		if (account_manager.get_account().get_username() != "")
 			for (short i = 0; i < titles_size; i++)
 				if (title_max_sizes[i] < ptr_user_properties[i].size())
 					title_max_sizes[i] = static_cast<short>(ptr_user_properties[i].size());
@@ -180,8 +181,8 @@ void show_info_accounts() {
 	}
 
 	// Reset file pointer
-	file_in.clear();
-	file_in.seekg(0, std::ios::beg);
+	fin.clear();
+	fin.seekg(0, std::ios::beg);
 
 	show_a_part_border(title_max_sizes, Position::FIRST);
 	std::cout << std::endl;
@@ -193,18 +194,18 @@ void show_info_accounts() {
 	std::cout << std::endl;
 
 	// Show all account information
-	while (!file_in.eof()) {
+	while (!fin.eof()) {
 		//User user;
 		UserManagement user;
 		AccountManagement account;
-		account.read_file(file_in);
-		std::ifstream file_info = open_file(account.get_account().get_username());
+		account.read_file(fin);
+		std::ifstream file_info = FileManager::open_file(account.get_account().get_username());
 		// user.read_file(file_info);
 
-		 user.read_file(file_info);
-		
+		user.read_file(file_info);
+
 		// Get all properties in class User
-		 User user_pros = user.get_user();
+		User user_pros = user.get_user();
 		std::string * ptr_user_properties = user_pros.get_properties();
 
 		std::vector<std::pair<short, std::wstring>> title_max_size_user_property;
@@ -225,7 +226,7 @@ void show_info_accounts() {
 
 	show_a_part_border(title_max_sizes, Position::LAST);
 
-	file_in.close();
+	fin.close();
 }
 
 char menu_options(std::wstring _title, std::vector<std::wstring> _options, std::vector<std::wstring> _sub_options, box::BorderStyle _style) {

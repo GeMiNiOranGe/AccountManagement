@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccountManagement.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="UserManagement.cpp" />
     <ClCompile Include="BoxBorder.cpp" />
     <ClCompile Include="ConsoleIO.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="AccountType.hpp" />
     <ClInclude Include="Anchor.hpp" />
     <ClInclude Include="BoxBorder.hpp" />
+    <ClInclude Include="FileManager.hpp" />
     <ClInclude Include="UserManagement.hpp" />
     <ClInclude Include="Color.hpp" />
     <ClInclude Include="ConsoleIO.hpp" />

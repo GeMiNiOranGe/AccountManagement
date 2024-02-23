@@ -3,9 +3,8 @@
 #define USERMANAGEMENT_HPP
 
 #include "User.hpp"
-#include "AccountManagement.hpp"
 #include "HandleMain.hpp"
-#include "Config.hpp"
+#include "FileManager.hpp"
 // #include "ConsoleIO.hpp"
 #include "IReader.hpp"
 #include "IWriter.hpp"
@@ -19,12 +18,14 @@ public:
 
 	const User & get_user();
 
+	void show_user(std::string _username);
+
 	void read_file(std::ifstream & _fin) override;
 	void write_file(std::ofstream & _fout) override;
 
-	void create_account(std::string _username);
-	void delete_account(std::string _username);
-	void update_information_user(std::string _username, std::string _info_updated, char _option);
+	void create_user(std::string _username);
+	void delete_user(std::string _username);
+	void update_user(std::string _username, std::string _info_updated, char _option);
 };
 
 #endif // end USERMANAGEMENT_HPP

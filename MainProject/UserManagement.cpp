@@ -8,6 +8,13 @@ const User &UserManagement::get_user() {
     return this->user;
 }
 
+void UserManagement::show_user(std::string _username) {
+	std::ifstream fin = FileManager::open_file(_username);
+	this->read_file(fin);
+	console::write_info(this->user);
+	fin.close();
+}
+
 void UserManagement::read_file(std::ifstream &_fin) {
     std::string full_name, address, phone_number, email_address;
 	getline(_fin, full_name);
@@ -26,41 +33,31 @@ void UserManagement::write_file(std::ofstream &_fout) {
 	_fout << this->user.get_email_address() << std::endl;
 }
 
-void UserManagement::create_account(std::string _username) {
-	//Account::create_a_new(_username);
-	AccountManagement account_manager;
-	account_manager.create_a_new(_username);
-	// Create a new file and add information to the newly created file
-	std::ofstream fout = create_file(_username);
-	// User user;
-	// console::read_info(user);
-	// user.write_file(fout);
+void UserManagement::create_user(std::string _username) {
+	const std::string PATH = USERS_DIRECTORY + _username + ".txt";
+	std::ofstream fout;
+	fout.open(PATH);
 
 	console::read_info(this->user);
 	this->write_file(fout);
-	
+
 	fout.close();
 }
-void UserManagement::delete_account(std::string _username) {
-	//Account::delete_by(_username);
-
-	AccountManagement account_manager;
-	account_manager.delete_by(_username);
-
-	delete_file(_username);
+void UserManagement::delete_user(std::string _username) {
+	std::string command = "del " + USERS_DIRECTORY + _username + ".txt";
+	// TODO: use remove funcion
+	system(command.c_str());
 }
-void UserManagement::update_information_user(std::string _username, std::string _info_updated, char _option) {
+void UserManagement::update_user(std::string _username, std::string _info_updated, char _option) {
 	// Load infomation from _username file
-	std::ifstream fin = open_file(_username);
-	// User user;
-	// user.read_file(fin);
-
+	std::ifstream fin = FileManager::open_file(_username);
 	this->read_file(fin);
-
 	fin.close();
+
 	// Re-open the _username file again
 	std::ofstream fout;
-	fout.open((USERS_INFO_DIRECTORY + _username + ".txt").c_str());
+	fout.open((USERS_DIRECTORY + _username + ".txt").c_str());
+
 	// Change the data and overwrite the information from the userTemp
 	if (_option == 49)
 		this->user.set_full_name(_info_updated);
@@ -70,9 +67,7 @@ void UserManagement::update_information_user(std::string _username, std::string 
 		this->user.set_phone_number(_info_updated);
 	if (_option == 52)
 		this->user.set_email_address(_info_updated);
-	// user.write_file(fout);
-
-	this->write_file(fout);
 	
+	this->write_file(fout);
 	fout.close();
 }

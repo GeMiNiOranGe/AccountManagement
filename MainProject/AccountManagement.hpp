@@ -24,8 +24,8 @@ public:
 		std::string _confirm_new_password
 	);
 
-	void create_a_new(std::string _username);
-	void delete_by(std::string _username);
+	void create_account(std::string _username);
+	void delete_account(std::string _username);
 };
 
 #endif // end ACCOUNTMANAGEMENT_HPP
