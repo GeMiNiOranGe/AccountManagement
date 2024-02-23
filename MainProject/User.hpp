@@ -12,11 +12,11 @@ public:
 
 	std::string * get_properties();
 
-	const std::string & get_id();
-	const std::string & get_full_name();
-	const std::string & get_address();
-	const std::string & get_phone_number();
-	const std::string & get_email_address();
+	const std::string & get_id() const;
+	const std::string & get_full_name() const;
+	const std::string & get_address() const;
+	const std::string & get_phone_number() const;
+	const std::string & get_email_address() const;
 
 	void set_id(const std::string &);
 	void set_full_name(const std::string &);

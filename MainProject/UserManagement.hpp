@@ -3,25 +3,21 @@
 #define USERMANAGEMENT_HPP
 
 #include "User.hpp"
-#include "HandleMain.hpp"
 #include "FileManager.hpp"
-// #include "ConsoleIO.hpp"
-#include "IReader.hpp"
-#include "IWriter.hpp"
+#include "ConsoleIO.hpp"
 
-class UserManagement :public IReader, public IWriter {
+class UserManagement {
 private:
 	User user;
 
 public:
 	UserManagement(const User & _user = User());
 
-	const User & get_user();
+	const User & get_user() const;
+	void set_user(const User &_user);
 
+	// TODO: convert to read_user() method, return user
 	void show_user(std::string _username);
-
-	void read_file(std::ifstream & _fin) override;
-	void write_file(std::ofstream & _fout) override;
 
 	void create_user(std::string _username);
 	void delete_user(std::string _username);

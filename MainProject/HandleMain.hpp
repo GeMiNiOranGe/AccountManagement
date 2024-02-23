@@ -2,13 +2,9 @@
 #ifndef HANDLEMAIN_HPP
 #define HANDLEMAIN_HPP
 
-// #include "UserManagement.hpp"
 #include "AccountManagement.hpp"
 #include "ConsoleIO.hpp"
 #include "AccountType.hpp"
-
-//std::ofstream create_file(std::string _username);
-// std::ifstream open_file(std::string _username);
 
 bool has_username(std::string _username);
 bool has_account(std::string _username, std::string _password);

@@ -27,19 +27,19 @@ std::string * User::get_properties() {
 	};
 }
 
-const std::string & User::get_id() {
+const std::string & User::get_id() const {
 	return this->id;
 }
-const std::string & User::get_full_name() {
+const std::string & User::get_full_name() const {
 	return this->full_name;
 }
-const std::string & User::get_address() {
+const std::string & User::get_address() const {
 	return this->address;
 }
-const std::string & User::get_phone_number() {
+const std::string & User::get_phone_number() const {
 	return this->phone_number;
 }
-const std::string & User::get_email_address() {
+const std::string & User::get_email_address() const {
 	return this->email_address;
 }
 

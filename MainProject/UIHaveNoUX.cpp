@@ -157,22 +157,19 @@ void show_info_accounts() {
 	fin.open(ACCOUNTS_FILE);
 
 	while (!fin.eof()) {
-		UserManagement user_manager;
-		AccountManagement account_manager;
+		User user;
+		Account account;
 
-		account_manager.read_file(fin);
-
-		std::ifstream file_info = FileManager::open_file(account_manager.get_account().get_username());
-
-		user_manager.read_file(file_info);
+		FileManager::read_file(fin, account);
+		std::ifstream file_info = FileManager::open_file(account.get_username());
+		FileManager::read_file(file_info, user);
 
 		// Get all properties in class User
 		// TODO: convert to vector
-		User user_pros = user_manager.get_user();
-		std::string * ptr_user_properties = user_pros.get_properties();
+		std::string * ptr_user_properties = user.get_properties();
 
 		// Find the maximum size of each table cell, horizontally
-		if (account_manager.get_account().get_username() != "")
+		if (account.get_username() != "")
 			for (short i = 0; i < titles_size; i++)
 				if (title_max_sizes[i] < ptr_user_properties[i].size())
 					title_max_sizes[i] = static_cast<short>(ptr_user_properties[i].size());
@@ -195,25 +192,22 @@ void show_info_accounts() {
 
 	// Show all account information
 	while (!fin.eof()) {
-		//User user;
-		UserManagement user;
-		AccountManagement account;
-		account.read_file(fin);
-		std::ifstream file_info = FileManager::open_file(account.get_account().get_username());
-		// user.read_file(file_info);
+		User user;
+		Account account;
 
-		user.read_file(file_info);
+		FileManager::read_file(fin, account);
+		std::ifstream file_info = FileManager::open_file(account.get_username());
+		FileManager::read_file(file_info, user);
 
 		// Get all properties in class User
-		User user_pros = user.get_user();
-		std::string * ptr_user_properties = user_pros.get_properties();
+		std::string * ptr_user_properties = user.get_properties();
 
 		std::vector<std::pair<short, std::wstring>> title_max_size_user_property;
 		for (short i = 0; i < titles_size; i++)
 			title_max_size_user_property.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(ptr_user_properties[i])));
 
 		// Show current account information
-		if (account.get_account().get_username() != "") {
+		if (account.get_username() != "") {
 			show_a_part_border(title_max_sizes, Position::MIDDLE);
 			std::cout << std::endl;
 
