@@ -25,6 +25,23 @@ bool AccountManagement::has_username(const std::string &_username) {
 	fin.close();
 	return false;
 }
+bool AccountManagement::has_account(const Account &_account) {
+	std::ifstream fin;
+	fin.open(ACCOUNTS_FILE.c_str());
+	while (!fin.eof()) {
+		Account account;
+		AccountFileManager::read_file(fin, account);
+		if (account.get_username() == _account.get_username() &&
+			account.get_password() == _account.get_password() &&
+			account.get_username() != "" &&
+			account.get_password() != "") {
+			fin.close();
+			return true;
+		}
+	}
+	fin.close();
+	return false;
+}
 
 void AccountManagement::create_account(const std::string &_username) {
 	// append account in file Accounts.txt

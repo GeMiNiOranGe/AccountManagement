@@ -24,14 +24,15 @@ int main() {
 	while (true) {
 		console::resize(350, 400);
 		console::move_to::center();
+
+		AccountManagement account_manager;
 		bool is_logged_in = true;
 
 		auto account = show_login_form();
 		AccountType account_type = get_account_type(account.get_username(), account.get_password());
 
-		if (is_default_password(account)) {
+		if (account_manager.has_account(account) && account.get_password() == DEFAULT_PASSWORD) {
 			std::string new_password, confirm_new_password;
-			AccountManagement account_manager;
 
 			system("cls");
 			set_color(Color::LIGHT_YELLOW);
@@ -55,8 +56,6 @@ int main() {
 
 				account_manager.update_account(account, new_account);
 
-				new_password.clear();
-				confirm_new_password.clear();
 				set_color(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
 				system("pause");
