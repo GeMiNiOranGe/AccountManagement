@@ -3,7 +3,6 @@
 #define USERMANAGEMENT_HPP
 
 #include "UserFileManager.hpp"
-#include "ConsoleIO.hpp"
 
 class UserManagement {
 private:
@@ -15,12 +14,10 @@ public:
 	const User & get_user() const;
 	void set_user(const User &_user);
 
-	// TODO: convert to read_user() method, return user
-	void show_user(std::string _username);
-
-	void create_user(std::string _username);
-	void delete_user(std::string _username);
-	void update_user(std::string _username, std::string _info_updated, char _option);
+	void create_user(const std::string &_username, const User &_user_information);
+	void delete_user(const std::string &_username);
+	void update_user(const std::string &_username, std::string _info_updated, char _option);
+	User read_user(const std::string &_username);
 };
 
 #endif // end USERMANAGEMENT_HPP

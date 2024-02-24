@@ -14,9 +14,9 @@ public:
 	const std::string & get_username() const;
 	const std::string & get_password() const;
 
-	void set_id(const std::string &);
-	void set_username(const std::string &);
-	void set_password(const std::string &);
+	void set_id(const std::string &_id);
+	void set_username(const std::string &_username);
+	void set_password(const std::string &_password);
 
 private:
 	std::string id;

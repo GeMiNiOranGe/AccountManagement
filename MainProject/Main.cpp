@@ -4,12 +4,6 @@
 void show_administrator_form();
 void show_employee_form(Account _account);
 
-// class UserConsoleIO {
-// public:
-//     User read_user_from_console();
-//     void write_user_to_console(const User& user);
-// };
-
 int main() {
 	SetConsoleTitle(L"Employee management");
 	//console::resize(1920, 1080);// 377
@@ -38,6 +32,7 @@ int main() {
 		if (is_default_password(account)) {
 			std::string new_password, confirm_new_password;
 			AccountManagement account_manager;
+
 			system("cls");
 			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Doi mat khau mac dinh>" << std::endl;
@@ -52,14 +47,14 @@ int main() {
 			set_color(Color::BRIGHT_WHITE);
 			encode_password(confirm_new_password);
 			std::cout << std::endl;
-			// if (account_manager.is_success_change_pass(account.get_username(), DEFAULT_PASSWORD, new_password, confirm_new_password)) {
+
 			if (new_password != DEFAULT_PASSWORD && new_password == confirm_new_password) {
 				Account new_account;
-
 				new_account.set_username(account.get_username());
 				new_account.set_password(new_password);
 
 				account_manager.update_account(account, new_account);
+
 				new_password.clear();
 				confirm_new_password.clear();
 				set_color(Color::LIGHT_RED);
@@ -110,6 +105,7 @@ void show_administrator_form() {
 	UserManagement user_manager;
 	std::string info_updated, username;
 	char event;
+
 	while (true) {
 		console::resize(500, 500);
 		console::move_to::center();
@@ -134,11 +130,16 @@ void show_administrator_form() {
 			std::cout << "    Nhap ten tai khoan muon them: ";
 			set_color(Color::BRIGHT_WHITE);
 			std::cin >> username;
-			if (has_username(username))
+
+			if (account_manager.has_username(username))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
+				User user_information;
+
 				account_manager.create_account(username);
-				user_manager.create_user(username);
+				console::read_info(user_information);
+				user_manager.create_user(username, user_information);
+
 				set_color(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
 				system("pause");
@@ -155,9 +156,11 @@ void show_administrator_form() {
 			set_color(Color::BRIGHT_WHITE);
 			username.clear();
 			std::cin >> username;
-			if (has_username(username)) {
+
+			if (account_manager.has_username(username)) {
 				account_manager.delete_account(username);
 				user_manager.delete_user(username);
+
 				set_color(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
 				system("pause");
@@ -176,10 +179,14 @@ void show_administrator_form() {
 			set_color(Color::BRIGHT_WHITE);
 			username.clear();
 			std::cin >> username;
-			if (has_username(username)) {
+
+			if (account_manager.has_username(username)) {
 				set_color(Color::LIGHT_YELLOW);
 				std::cout << "    Thong tin Employee can tim: " << std::endl;
-				user_manager.show_user(username);
+
+				User user = user_manager.read_user(username);
+				console::write_info(user);
+				
 				system("pause");
 			}
 			else
@@ -194,7 +201,7 @@ void show_administrator_form() {
 			set_color(Color::BRIGHT_WHITE);
 			username.clear();
 			std::cin >> username;
-			if (has_username(username)) {
+			if (account_manager.has_username(username)) {
 				while (true) {
 					event = menu_options(
 						L"< Select the information to edit >",
@@ -215,7 +222,9 @@ void show_administrator_form() {
 						set_color(Color::BRIGHT_WHITE);
 						std::cin.ignore();
 						getline(std::cin, info_updated);
+
 						user_manager.update_user(username, info_updated, event);
+						
 						set_color(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
 						system("pause");
@@ -236,7 +245,9 @@ void show_administrator_form() {
 			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Hien thi thong tin toan bo Employees>" << std::endl;
 			set_color(Color::BRIGHT_WHITE);
+
 			show_info_accounts();
+			
 			system("pause");
 			system("cls");
 			break;
@@ -255,6 +266,8 @@ void show_employee_form(Account _account) {
 		std::string current_password, new_password, confirm_new_password;
 		AccountManagement account_manager;
 		UserManagement user_manager;
+		User user;
+
 		console::resize(500, 500);
 		console::move_to::center();
 		event = menu_options(
@@ -273,7 +286,10 @@ void show_employee_form(Account _account) {
 			std::cout << "    Ten tai khoan: ";
 			set_color(Color::BRIGHT_WHITE);
 			std::cout << _account.get_username() << std::endl;
-			user_manager.show_user(_account.get_username());
+
+			user = user_manager.read_user(_account.get_username());
+			console::write_info(user);
+
 			system("pause");
 			system("cls");
 			break;
@@ -296,14 +312,14 @@ void show_employee_form(Account _account) {
 			set_color(Color::BRIGHT_WHITE);
 			encode_password(confirm_new_password);
 			std::cout << std::endl;
-			// if (account_manager.is_success_change_pass(_username, current_password, new_password, confirm_new_password)) {
+
 			if (new_password != current_password && new_password == confirm_new_password) {
 				Account new_account;
-
 				new_account.set_username(_account.get_username());
 				new_account.set_password(new_password);
 
 				account_manager.update_account(_account, new_account);
+
 				set_color(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
 				system("pause");

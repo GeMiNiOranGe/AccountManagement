@@ -11,7 +11,22 @@ void AccountManagement::set_account(const Account &_account) {
 	this->account = _account;
 }
 
-void AccountManagement::create_account(std::string _username) {
+bool AccountManagement::has_username(const std::string &_username) {
+	std::ifstream fin;
+	fin.open(ACCOUNTS_FILE.c_str());
+	while (!fin.eof()) {
+		Account account;
+		AccountFileManager::read_file(fin, account);
+		if (_username == account.get_username()) {
+			fin.close();
+			return true;
+		}
+	}
+	fin.close();
+	return false;
+}
+
+void AccountManagement::create_account(const std::string &_username) {
 	// append account in file Accounts.txt
 	std::ofstream fout;
 	fout.open(ACCOUNTS_FILE, std::ios_base::app);
@@ -22,7 +37,7 @@ void AccountManagement::create_account(std::string _username) {
 
 	AccountFileManager::write_file(this->account, fout);
 }
-void AccountManagement::delete_account(std::string _username) {
+void AccountManagement::delete_account(const std::string &_username) {
 	std::ofstream fout;
 	std::ifstream fin;
 	const std::string old_accounts_file = ACCOUNTS_FILE;
@@ -57,7 +72,7 @@ void AccountManagement::delete_account(std::string _username) {
 		return;
 	}
 }
-void AccountManagement::update_account(Account _old_account, Account _new_account) {
+void AccountManagement::update_account(const Account &_old_account, const Account &_new_account) {
 	std::ofstream fout;
 	std::ifstream fin;
 	const std::string old_accounts_file = ACCOUNTS_FILE;

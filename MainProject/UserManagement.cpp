@@ -12,29 +12,19 @@ void UserManagement::set_user(const User &_user) {
 	this->user = _user;
 }
 
-void UserManagement::show_user(std::string _username) {
-	std::ifstream fin = UserFileManager::open_file(_username);
-	UserFileManager::read_file(fin, this->user);
-	console::write_info(this->user);
-	fin.close();
-}
-
-void UserManagement::create_user(std::string _username) {
+void UserManagement::create_user(const std::string &_username, const User &_user_information) {
 	const std::string PATH = USERS_DIRECTORY + _username + ".txt";
 	std::ofstream fout;
 	fout.open(PATH);
-
-	console::read_info(this->user);
-	UserFileManager::write_file(this->user, fout);
-
+	UserFileManager::write_file(_user_information, fout);
 	fout.close();
 }
-void UserManagement::delete_user(std::string _username) {
+void UserManagement::delete_user(const std::string &_username) {
 	const std::string COMMAND = "del " + USERS_DIRECTORY + _username + ".txt";
 	// TODO: use remove funcion
 	system(COMMAND.c_str());
 }
-void UserManagement::update_user(std::string _username, std::string _info_updated, char _option) {
+void UserManagement::update_user(const std::string &_username, std::string _info_updated, char _option) {
 	// Load infomation from _username file
 	std::ifstream fin = UserFileManager::open_file(_username);
 	UserFileManager::read_file(fin, this->user);
@@ -56,4 +46,10 @@ void UserManagement::update_user(std::string _username, std::string _info_update
 	
 	UserFileManager::write_file(this->user, fout);
 	fout.close();
+}
+User UserManagement::read_user(const std::string &_username) {
+	std::ifstream fin = UserFileManager::open_file(_username);
+	UserFileManager::read_file(fin, this->user);
+	fin.close();
+	return this->user;
 }

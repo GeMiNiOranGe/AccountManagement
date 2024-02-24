@@ -13,6 +13,7 @@
 #include "HandleMain.hpp"
 #include "Convert.hpp"
 #include "Position.hpp"
+#include "ConsoleIO.hpp"
 
 short get_max_size_of_labels(std::vector<std::wstring> _labels);
 
