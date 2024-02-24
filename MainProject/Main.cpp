@@ -2,7 +2,7 @@
 #include "UIHaveNoUX.hpp"
 
 void show_administrator_form();
-void show_employee_form(std::string _username, std::string _password);
+void show_employee_form(Account _account);
 
 // class UserConsoleIO {
 // public:
@@ -32,12 +32,12 @@ int main() {
 		console::move_to::center();
 		bool is_logged_in = true;
 
-		auto account = form_login();
-		AccountType account_type = get_account_type(account.first, account.second);
+		auto account = show_login_form();
+		AccountType account_type = get_account_type(account.get_username(), account.get_password());
 
-		if (is_default_password(account.first, account.second)) {
+		if (is_default_password(account)) {
 			std::string new_password, confirm_new_password;
-			AccountManagement employee;
+			AccountManagement account_manager;
 			system("cls");
 			set_color(Color::LIGHT_YELLOW);
 			std::cout << "<Doi mat khau mac dinh>" << std::endl;
@@ -48,11 +48,18 @@ int main() {
 			encode_password(new_password);
 			std::cout << std::endl;
 			set_color(Color::LIGHT_BLUE);
-			std::cout << "Nhap xac nhan mat khau moi: ";
+			std::cout << "Nhap lai mat khau moi: ";
 			set_color(Color::BRIGHT_WHITE);
 			encode_password(confirm_new_password);
 			std::cout << std::endl;
-			if (employee.is_success_change_pass(account.first, DEFAULT_PASSWORD, new_password, confirm_new_password)) {
+			// if (account_manager.is_success_change_pass(account.get_username(), DEFAULT_PASSWORD, new_password, confirm_new_password)) {
+			if (new_password != DEFAULT_PASSWORD && new_password == confirm_new_password) {
+				Account new_account;
+
+				new_account.set_username(account.get_username());
+				new_account.set_password(new_password);
+
+				account_manager.update_account(account, new_account);
 				new_password.clear();
 				confirm_new_password.clear();
 				set_color(Color::LIGHT_RED);
@@ -71,7 +78,7 @@ int main() {
 				show_administrator_form();
 				break;
 			case AccountType::EMPLOYEE:
-				show_employee_form(account.first, account.second);
+				show_employee_form(account);
 				break;
 			default:
 				number_of_login--;
@@ -242,11 +249,11 @@ void show_administrator_form() {
 	}
 }
 
-void show_employee_form(std::string _username, std::string _password) {
+void show_employee_form(Account _account) {
 	char event;
 	while (true) {
-		std::string current_password, new_password, current_new_password;
-		AccountManagement employee;
+		std::string current_password, new_password, confirm_new_password;
+		AccountManagement account_manager;
 		UserManagement user_manager;
 		console::resize(500, 500);
 		console::move_to::center();
@@ -265,8 +272,8 @@ void show_employee_form(std::string _username, std::string _password) {
 			set_color(Color::YELLOW);
 			std::cout << "    Ten tai khoan: ";
 			set_color(Color::BRIGHT_WHITE);
-			std::cout << _username << std::endl;
-			user_manager.show_user(_username);
+			std::cout << _account.get_username() << std::endl;
+			user_manager.show_user(_account.get_username());
 			system("pause");
 			system("cls");
 			break;
@@ -285,11 +292,18 @@ void show_employee_form(std::string _username, std::string _password) {
 			encode_password(new_password);
 			std::cout << std::endl;
 			set_color(Color::LIGHT_BLUE);
-			std::cout << "Nhap xac nhan mat khau moi: ";
+			std::cout << "Nhap lai mat khau moi: ";
 			set_color(Color::BRIGHT_WHITE);
-			encode_password(current_new_password);
+			encode_password(confirm_new_password);
 			std::cout << std::endl;
-			if (employee.is_success_change_pass(_username, current_password, new_password, current_new_password)) {
+			// if (account_manager.is_success_change_pass(_username, current_password, new_password, confirm_new_password)) {
+			if (new_password != current_password && new_password == confirm_new_password) {
+				Account new_account;
+
+				new_account.set_username(_account.get_username());
+				new_account.set_password(new_password);
+
+				account_manager.update_account(_account, new_account);
 				set_color(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
 				system("pause");

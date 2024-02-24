@@ -52,14 +52,14 @@ AccountType get_account_type(std::string _username, std::string _password) {
 	return AccountType::NONE;
 }
 
-bool is_default_password(std::string _username, std::string _password) {
+bool is_default_password(Account _account) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
 		Account account;
 		AccountFileManager::read_file(fin, account);
-		if (account.get_username() == _username &&
-			account.get_password() == _password &&
+		if (account.get_username() == _account.get_username() &&
+			account.get_password() == _account.get_password() &&
 			account.get_password() == DEFAULT_PASSWORD &&
 			account.get_username() != "" &&
 			account.get_password() != "") {

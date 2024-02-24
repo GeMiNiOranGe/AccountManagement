@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "Config.hpp"
+const std::string DEFAULT_PASSWORD = "111111";
 
 class Account {
 public:

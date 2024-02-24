@@ -8,13 +8,14 @@ short get_max_size_of_labels(std::vector<std::wstring> _labels) {
 	return label_size;
 }
 
-std::pair<std::string, std::string> form_login(box::BorderStyle _style) {
+Account show_login_form(box::BorderStyle _style) {
 	typedef box::Border Border;
 	std::string username, password;
 	std::string title = "Log in";
 	std::string username_label = "Username: ";
 	std::string password_label = "Password: ";
 	wchar_t fill_style = ' ';
+	Account account;
 
 	short width = 30;
 	short new_width = width + 1;
@@ -48,7 +49,9 @@ std::pair<std::string, std::string> form_login(box::BorderStyle _style) {
 	encode_password(password);
 	go_to_xy(0, 11);
 
-	return std::make_pair(username, password);
+	account.set_username(username);
+	account.set_password(password);
+	return account;
 }
 void form_info(std::wstring _title, std::vector<std::wstring> _labels, box::BorderStyle _style, short fill_size) {
 	typedef box::Border Border;
