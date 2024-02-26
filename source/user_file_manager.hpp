@@ -12,7 +12,7 @@ public:
 	static std::ifstream open_file(const std::string &_username);
 
 	static void read_file(std::ifstream & _fin, User & _user);
-	static void write_file(const User & _user, std::ofstream & _fout);
+	static void write_file(std::ofstream & _fout, const User & _user);
 };
 
 #endif // end USERFILEMANAGER_HPP

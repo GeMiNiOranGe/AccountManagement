@@ -18,7 +18,7 @@ void AccountFileManager::read_file(std::ifstream &_fin, Account &_account) {
     _account.set_username(username);
     _account.set_password(password);
 }
-void AccountFileManager::write_file(const Account &_account, std::ofstream &_fout) {
+void AccountFileManager::write_file(std::ofstream &_fout, const Account &_account) {
     std::string type = [](const AccountType &_type) -> std::string {
         switch (_type) {
         case AccountType::ADMINISTRATOR:

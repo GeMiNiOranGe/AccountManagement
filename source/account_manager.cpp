@@ -74,7 +74,7 @@ void AccountManagement::create_account(const std::string &_username) {
 	this->account.set_username(_username);
 	this->account.set_password(DEFAULT_PASSWORD);
 
-	AccountFileManager::write_file(this->account, fout);
+	AccountFileManager::write_file(fout, this->account);
 }
 void AccountManagement::delete_account(const std::string &_username) {
 	std::ofstream fout;
@@ -83,7 +83,7 @@ void AccountManagement::delete_account(const std::string &_username) {
 	std::string new_accounts_file = old_accounts_file;
 
 	// Rename Accounts.txt into AccountsTemp.txt
-	new_accounts_file.insert(new_accounts_file.size() - 4, "New");
+	new_accounts_file.insert(new_accounts_file.size() - 4, "_new");
 	if (rename(old_accounts_file.c_str(), new_accounts_file.c_str()) != 0) {
 		std::cerr << "Error renaming file" << std::endl;
 		return;
@@ -101,7 +101,7 @@ void AccountManagement::delete_account(const std::string &_username) {
 	while (!fin.eof()) {
 		AccountFileManager::read_file(fin, this->account);
 		if (!this->account.get_username().empty() && this->account.get_username() != _username)
-			AccountFileManager::write_file(this->account, fout);
+			AccountFileManager::write_file(fout, this->account);
 	}
 
 	fout.close();
@@ -118,7 +118,7 @@ void AccountManagement::update_account(const Account &_old_account, const Accoun
 	std::string new_accounts_file = old_accounts_file;
 
 	// Rename Accounts.txt into AccountsTemp.txt
-	new_accounts_file.insert(new_accounts_file.size() - 4, "New");
+	new_accounts_file.insert(new_accounts_file.size() - 4, "_new");
 	if (rename(old_accounts_file.c_str(), new_accounts_file.c_str()) != 0) {
 		std::cerr << "Error renaming file" << std::endl;
 		return;
@@ -141,7 +141,7 @@ void AccountManagement::update_account(const Account &_old_account, const Accoun
 				this->account.set_username(_new_account.get_username());
 				this->account.set_password(_new_account.get_password());
 			}
-			AccountFileManager::write_file(this->account, fout);
+			AccountFileManager::write_file(fout, this->account);
 		}
 	}
 

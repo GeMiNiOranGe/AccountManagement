@@ -24,7 +24,6 @@ private:
 	AccountType account_type;
 	std::string password;
 	std::string username;
-	// TODO: add std::string strAccountType; and config in code
 };
 
 #endif // end ACCOUNT_HPP

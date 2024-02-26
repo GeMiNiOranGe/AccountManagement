@@ -18,7 +18,7 @@ void UserFileManager::read_file(std::ifstream &_fin, User &_user) {
 	_user.set_phone_number(phone_number);
 	_user.set_email_address(email_address);
 }
-void UserFileManager::write_file(const User &_user, std::ofstream &_fout) {
+void UserFileManager::write_file(std::ofstream &_fout, const User &_user) {
 	_fout << _user.get_full_name() << std::endl;
 	_fout << _user.get_address() << std::endl;
 	_fout << _user.get_phone_number() << std::endl;

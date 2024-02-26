@@ -16,7 +16,7 @@ void UserManagement::create_user(const std::string &_username, const User &_user
 	const std::string PATH = USERS_DIRECTORY + _username + ".txt";
 	std::ofstream fout;
 	fout.open(PATH);
-	UserFileManager::write_file(_user_information, fout);
+	UserFileManager::write_file(fout, _user_information);
 	fout.close();
 }
 void UserManagement::delete_user(const std::string &_username) {
@@ -44,7 +44,7 @@ void UserManagement::update_user(const std::string &_username, std::string _info
 	if (_option == 52)
 		this->user.set_email_address(_info_updated);
 	
-	UserFileManager::write_file(this->user, fout);
+	UserFileManager::write_file(fout, this->user);
 	fout.close();
 }
 User UserManagement::read_user(const std::string &_username) {
