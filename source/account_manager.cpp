@@ -1,17 +1,17 @@
 #include "account_manager.hpp"
 
-AccountManagement::AccountManagement(const Account & _account) {
+AccountManager::AccountManager(const Account & _account) {
 	this->account = _account;
 }
 
-const Account & AccountManagement::get_account() const {
+const Account & AccountManager::get_account() const {
 	return this->account;
 }
-void AccountManagement::set_account(const Account &_account) {
+void AccountManager::set_account(const Account &_account) {
 	this->account = _account;
 }
 
-bool AccountManagement::has_username(const std::string &_username) {
+bool AccountManager::has_username(const std::string &_username) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
@@ -25,7 +25,7 @@ bool AccountManagement::has_username(const std::string &_username) {
 	fin.close();
 	return false;
 }
-bool AccountManagement::has_account(const Account &_account) {
+bool AccountManager::has_account(const Account &_account) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
@@ -43,7 +43,7 @@ bool AccountManagement::has_account(const Account &_account) {
 	return false;
 }
 
-Account AccountManagement::get_account_details(const std::string &_username, const std::string &_password) {
+Account AccountManager::get_account_details(const std::string &_username, const std::string &_password) {
 	std::ifstream fin;
 
 	fin.open(ACCOUNTS_FILE.c_str());
@@ -65,7 +65,7 @@ Account AccountManagement::get_account_details(const std::string &_username, con
 	return Account();
 }
 
-void AccountManagement::create_account(const std::string &_username) {
+void AccountManager::create_account(const std::string &_username) {
 	// append account in file Accounts.txt
 	std::ofstream fout;
 	fout.open(ACCOUNTS_FILE, std::ios_base::app);
@@ -76,7 +76,7 @@ void AccountManagement::create_account(const std::string &_username) {
 
 	AccountFileManager::write_file(fout, this->account);
 }
-void AccountManagement::delete_account(const std::string &_username) {
+void AccountManager::delete_account(const std::string &_username) {
 	std::ofstream fout;
 	std::ifstream fin;
 	const std::string old_accounts_file = ACCOUNTS_FILE;
@@ -111,7 +111,7 @@ void AccountManagement::delete_account(const std::string &_username) {
 		return;
 	}
 }
-void AccountManagement::update_account(const Account &_old_account, const Account &_new_account) {
+void AccountManager::update_account(const Account &_old_account, const Account &_new_account) {
 	std::ofstream fout;
 	std::ifstream fin;
 	const std::string old_accounts_file = ACCOUNTS_FILE;

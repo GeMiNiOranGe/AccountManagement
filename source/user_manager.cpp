@@ -1,30 +1,31 @@
 #include "user_manager.hpp"
 
-UserManagement::UserManagement(const User &_user) {
+UserManager::UserManager(const User &_user) {
 	this->user = _user;
 }
 
-const User &UserManagement::get_user() const {
+const User &UserManager::get_user() const {
     return this->user;
 }
 
-void UserManagement::set_user(const User &_user) {
+void UserManager::set_user(const User &_user) {
 	this->user = _user;
 }
 
-void UserManagement::create_user(const std::string &_username, const User &_user_information) {
+void UserManager::create_user(const std::string &_username, const User &_user_information) {
 	const std::string PATH = USERS_DIRECTORY + _username + ".txt";
 	std::ofstream fout;
 	fout.open(PATH);
 	UserFileManager::write_file(fout, _user_information);
 	fout.close();
 }
-void UserManagement::delete_user(const std::string &_username) {
+void UserManager::delete_user(const std::string &_username) {
 	const std::string COMMAND = "del " + USERS_DIRECTORY + _username + ".txt";
 	// TODO: use remove funcion
 	system(COMMAND.c_str());
 }
-void UserManagement::update_user(const std::string &_username, std::string _info_updated, char _option) {
+// TODO: update from new_user to old_user
+void UserManager::update_user(const std::string &_username, std::string _info_updated, char _option) {
 	// Load infomation from _username file
 	std::ifstream fin = UserFileManager::open_file(_username);
 	UserFileManager::read_file(fin, this->user);
@@ -47,7 +48,7 @@ void UserManagement::update_user(const std::string &_username, std::string _info
 	UserFileManager::write_file(fout, this->user);
 	fout.close();
 }
-User UserManagement::read_user(const std::string &_username) {
+User UserManager::read_user(const std::string &_username) {
 	std::ifstream fin = UserFileManager::open_file(_username);
 	UserFileManager::read_file(fin, this->user);
 	fin.close();

@@ -1,15 +1,15 @@
 #pragma once
-#ifndef USERMANAGEMENT_HPP
-#define USERMANAGEMENT_HPP
+#ifndef USER_MANAGER_HPP
+#define USER_MANAGER_HPP
 
 #include "user_file_manager.hpp"
 
-class UserManagement {
+class UserManager {
 private:
 	User user;
 
 public:
-	UserManagement(const User & _user = User());
+	UserManager(const User & _user = User());
 
 	const User & get_user() const;
 	void set_user(const User &_user);
@@ -20,4 +20,4 @@ public:
 	User read_user(const std::string &_username);
 };
 
-#endif // end USERMANAGEMENT_HPP
+#endif // end USER_MANAGER_HPP

@@ -25,7 +25,7 @@ int main() {
 		console::resize(350, 400);
 		console::move_to::center();
 
-		AccountManagement account_manager;
+		AccountManager account_manager;
 		bool is_logged_in = true;
 
 		auto pair_user_pass = show_login_form();
@@ -100,8 +100,8 @@ int main() {
 }
 
 void show_administrator_form() {
-	AccountManagement account_manager;
-	UserManagement user_manager;
+	AccountManager account_manager;
+	UserManager user_manager;
 	std::string info_updated, username;
 	char event;
 
@@ -263,8 +263,8 @@ void show_employee_form(Account _account) {
 	char event;
 	while (true) {
 		std::string current_password, new_password, confirm_new_password;
-		AccountManagement account_manager;
-		UserManagement user_manager;
+		AccountManager account_manager;
+		UserManager user_manager;
 		User user;
 
 		console::resize(500, 500);

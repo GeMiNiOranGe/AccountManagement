@@ -1,6 +1,6 @@
 #pragma once
-#ifndef USERFILEMANAGER_HPP
-#define USERFILEMANAGER_HPP
+#ifndef USER_FILE_MANAGER_HPP
+#define USER_FILE_MANAGER_HPP
 
 #include <fstream>
 
@@ -15,4 +15,4 @@ public:
 	static void write_file(std::ofstream & _fout, const User & _user);
 };
 
-#endif // end USERFILEMANAGER_HPP
+#endif // end USER_FILE_MANAGER_HPP

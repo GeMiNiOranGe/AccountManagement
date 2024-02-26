@@ -7,11 +7,11 @@
 #include "account_file_manager.hpp"
 #include "config.hpp"
 
-class AccountManagement {
+class AccountManager {
 private:
 	Account account;
 public:
-	AccountManagement(const Account & _account = Account());
+	AccountManager(const Account & _account = Account());
 
 	const Account & get_account() const;
 	void set_account(const Account &_account);
