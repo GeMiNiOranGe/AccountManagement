@@ -10,8 +10,6 @@ public:
 	User(const User &_user);
 	~User();
 
-	std::string * get_properties();
-
 	const std::string & get_id() const;
 	const std::string & get_full_name() const;
 	const std::string & get_address() const;

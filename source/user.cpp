@@ -17,16 +17,6 @@ User::User(const User & _user) {
 User::~User() {
 }
 
-std::string * User::get_properties() {
-	return new std::string[7]{
-		this->id,
-		this->full_name,
-		this->address,
-		this->phone_number,
-		this->email_address,
-	};
-}
-
 const std::string & User::get_id() const {
 	return this->id;
 }

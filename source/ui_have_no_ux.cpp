@@ -138,8 +138,8 @@ void show_info_account(std::vector<std::pair<short, std::wstring>> _max_size_and
 }
 
 void show_info_accounts() {
-	std::string titles[] = {
-		"Id",
+	std::vector<std::string> titles = {
+		"No.",
 		"Username",
 		"Password",
 		"Full name",
@@ -147,7 +147,6 @@ void show_info_accounts() {
 		"Phone number",
 		"Email address"
 	};
-	const int titles_size = sizeof(titles) / sizeof(titles[0]);
 	std::vector<short> title_max_sizes;
 	std::vector<std::pair<short, std::wstring>> vec_title_max_size_and_title;
 	std::ifstream fin;
@@ -157,7 +156,8 @@ void show_info_accounts() {
 
 	fin.open(ACCOUNTS_FILE);
 
-	while (!fin.eof()) {
+	
+	for (int index = 1; !fin.eof(); index++) {
 		User user;
 		Account account;
 
@@ -165,15 +165,21 @@ void show_info_accounts() {
 		std::ifstream file_info = UserFileManager::open_file(account.get_username());
 		UserFileManager::read_file(file_info, user);
 
-		// Get all properties in class User
-		// TODO: convert to vector
-		std::string * ptr_user_properties = user.get_properties();
+		std::vector<std::string> vec_properties = {
+			std::to_string(index),
+			account.get_username(),
+			account.get_password(),
+			user.get_full_name(),
+			user.get_address(),
+			user.get_phone_number(),
+			user.get_email_address()
+		};
 
 		// Find the maximum size of each table cell, horizontally
 		if (account.get_username() != "")
-			for (short i = 0; i < titles_size; i++)
-				if (title_max_sizes[i] < ptr_user_properties[i].size())
-					title_max_sizes[i] = static_cast<short>(ptr_user_properties[i].size());
+			for (short i = 0; i < titles.size(); i++)
+				if (title_max_sizes[i] < vec_properties.at(i).size())
+					title_max_sizes[i] = static_cast<short>(vec_properties.at(i).size());
 
 		file_info.close();
 	}
@@ -186,13 +192,13 @@ void show_info_accounts() {
 	std::cout << std::endl;
 
 	// Show titles
-	for (short i = 0; i < titles_size; i++)
+	for (short i = 0; i < titles.size(); i++)
 		vec_title_max_size_and_title.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(titles[i])));
 	show_info_account(vec_title_max_size_and_title, Color::LIGHT_YELLOW);
 	std::cout << std::endl;
 
 	// Show all account information
-	while (!fin.eof()) {
+	for (int index = 1; !fin.eof(); index++) {
 		User user;
 		Account account;
 
@@ -200,12 +206,19 @@ void show_info_accounts() {
 		std::ifstream file_info = UserFileManager::open_file(account.get_username());
 		UserFileManager::read_file(file_info, user);
 
-		// Get all properties in class User
-		std::string * ptr_user_properties = user.get_properties();
+		std::vector<std::string> vec_properties = {
+			std::to_string(index),
+			account.get_username(),
+			account.get_password(),
+			user.get_full_name(),
+			user.get_address(),
+			user.get_phone_number(),
+			user.get_email_address()
+		};
 
 		std::vector<std::pair<short, std::wstring>> title_max_size_user_property;
-		for (short i = 0; i < titles_size; i++)
-			title_max_size_user_property.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(ptr_user_properties[i])));
+		for (short i = 0; i < titles.size(); i++)
+			title_max_size_user_property.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(vec_properties.at(i))));
 
 		// Show current account information
 		if (account.get_username() != "") {
