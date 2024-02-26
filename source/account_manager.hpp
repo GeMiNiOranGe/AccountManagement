@@ -19,6 +19,8 @@ public:
 	bool has_username(const std::string &_username);
 	bool has_account(const Account &_account);
 
+	Account get_account_details(const std::string &_username, const std::string &_password);
+
 	void create_account(const std::string &_username);
 	void delete_account(const std::string &_username);
 	void update_account(const Account &_old_account, const Account &_new_account);

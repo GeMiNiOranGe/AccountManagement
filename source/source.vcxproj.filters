@@ -57,12 +57,6 @@
     <ClInclude Include="handle_window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ireader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iwriter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="login_status.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

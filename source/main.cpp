@@ -28,8 +28,8 @@ int main() {
 		AccountManagement account_manager;
 		bool is_logged_in = true;
 
-		auto account = show_login_form();
-		AccountType account_type = get_account_type(account.get_username(), account.get_password());
+		auto pair_user_pass = show_login_form();
+		Account account = account_manager.get_account_details(pair_user_pass.first, pair_user_pass.second);
 
 		if (account_manager.has_account(account) && account.get_password() == DEFAULT_PASSWORD) {
 			std::string new_password, confirm_new_password;
@@ -67,7 +67,7 @@ int main() {
 		}
 
 		if (is_logged_in)
-			switch (account_type) {
+			switch (account.get_account_type()) {
 			case AccountType::ADMINISTRATOR:
 				show_administrator_form();
 				break;

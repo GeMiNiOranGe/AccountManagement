@@ -43,12 +43,34 @@ bool AccountManagement::has_account(const Account &_account) {
 	return false;
 }
 
+Account AccountManagement::get_account_details(const std::string &_username, const std::string &_password) {
+	std::ifstream fin;
+
+	fin.open(ACCOUNTS_FILE.c_str());
+	if (!fin.is_open()) {
+		std::cerr << "Failed to open files" << std::endl;
+		return Account();
+	}
+	
+	while (!fin.eof()) {
+		Account account;
+		AccountFileManager::read_file(fin, account);
+		if (account.get_username() == _username && account.get_password() == _password) {
+			fin.close();
+			return account;
+		}
+	}
+
+	fin.close();
+	return Account();
+}
+
 void AccountManagement::create_account(const std::string &_username) {
 	// append account in file Accounts.txt
 	std::ofstream fout;
 	fout.open(ACCOUNTS_FILE, std::ios_base::app);
 
-	this->account.set_id("EM");
+	this->account.set_account_type(AccountType::EMPLOYEE);
 	this->account.set_username(_username);
 	this->account.set_password(DEFAULT_PASSWORD);
 

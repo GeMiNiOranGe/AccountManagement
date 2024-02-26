@@ -6,7 +6,7 @@
 #include "account_type.hpp"
 #include "config.hpp"
 
-AccountType get_account_type(std::string _username, std::string _password);
+// AccountType get_account_type(std::string _username, std::string _password);
 
 
 #endif // end HANDLE_MAIN_HPP
