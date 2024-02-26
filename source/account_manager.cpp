@@ -1,23 +1,12 @@
 #include "account_manager.hpp"
 
-AccountManager::AccountManager(const Account & _account) {
-	this->account = _account;
-}
-
-const Account & AccountManager::get_account() const {
-	return this->account;
-}
-void AccountManager::set_account(const Account &_account) {
-	this->account = _account;
-}
-
 bool AccountManager::has_username(const std::string &_username) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
-		Account account;
-		AccountFileManager::read_file(fin, account);
-		if (_username == account.get_username()) {
+		Account current_account;
+		AccountFileManager::read_file(fin, current_account);
+		if (current_account.get_username() == _username) {
 			fin.close();
 			return true;
 		}
@@ -29,12 +18,12 @@ bool AccountManager::has_account(const Account &_account) {
 	std::ifstream fin;
 	fin.open(ACCOUNTS_FILE.c_str());
 	while (!fin.eof()) {
-		Account account;
-		AccountFileManager::read_file(fin, account);
-		if (account.get_username() == _account.get_username() &&
-			account.get_password() == _account.get_password() &&
-			account.get_username() != "" &&
-			account.get_password() != "") {
+		Account current_account;
+		AccountFileManager::read_file(fin, current_account);
+		if (current_account.get_username() == _account.get_username() &&
+			current_account.get_password() == _account.get_password() &&
+			current_account.get_username() != "" &&
+			current_account.get_password() != "") {
 			fin.close();
 			return true;
 		}
@@ -53,11 +42,12 @@ Account AccountManager::get_account_details(const std::string &_username, const 
 	}
 	
 	while (!fin.eof()) {
-		Account account;
-		AccountFileManager::read_file(fin, account);
-		if (account.get_username() == _username && account.get_password() == _password) {
+		Account current_account;
+		AccountFileManager::read_file(fin, current_account);
+		if (current_account.get_username() == _username &&
+			current_account.get_password() == _password) {
 			fin.close();
-			return account;
+			return current_account;
 		}
 	}
 
@@ -67,14 +57,14 @@ Account AccountManager::get_account_details(const std::string &_username, const 
 
 void AccountManager::create_account(const std::string &_username) {
 	// append account in file Accounts.txt
+	Account account;
 	std::ofstream fout;
 	fout.open(ACCOUNTS_FILE, std::ios_base::app);
 
-	this->account.set_account_type(AccountType::EMPLOYEE);
-	this->account.set_username(_username);
-	this->account.set_password(DEFAULT_PASSWORD);
+	account.set_account_type(AccountType::EMPLOYEE);
+	account.set_username(_username);
 
-	AccountFileManager::write_file(fout, this->account);
+	AccountFileManager::write_file(fout, account);
 }
 void AccountManager::delete_account(const std::string &_username) {
 	std::ofstream fout;
@@ -99,9 +89,10 @@ void AccountManager::delete_account(const std::string &_username) {
 
 	// Write from the file is renamed (AccountsNew.txt) to Accounts.txt, and don't write the employee want to delete
 	while (!fin.eof()) {
-		AccountFileManager::read_file(fin, this->account);
-		if (!this->account.get_username().empty() && this->account.get_username() != _username)
-			AccountFileManager::write_file(fout, this->account);
+		Account current_account;
+		AccountFileManager::read_file(fin, current_account);
+		if (!current_account.get_username().empty() && current_account.get_username() != _username)
+			AccountFileManager::write_file(fout, current_account);
 	}
 
 	fout.close();
@@ -134,14 +125,15 @@ void AccountManager::update_account(const Account &_old_account, const Account &
 
 	// Write from the file is renamed (AccountsNew.txt) to Accounts.txt, and update password the account want to update
 	while (!fin.eof()) {
-		AccountFileManager::read_file(fin, this->account);
-		if (!this->account.get_username().empty()) {
-			if (this->account.get_username() == _old_account.get_username() &&
-				this->account.get_password() == _old_account.get_password()) {
-				this->account.set_username(_new_account.get_username());
-				this->account.set_password(_new_account.get_password());
+		Account current_account;
+		AccountFileManager::read_file(fin, current_account);
+		if (!current_account.get_username().empty()) {
+			if (current_account.get_username() == _old_account.get_username() &&
+				current_account.get_password() == _old_account.get_password()) {
+				current_account.set_username(_new_account.get_username());
+				current_account.set_password(_new_account.get_password());
 			}
-			AccountFileManager::write_file(fout, this->account);
+			AccountFileManager::write_file(fout, current_account);
 		}
 	}
 

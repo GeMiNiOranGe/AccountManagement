@@ -25,13 +25,12 @@ int main() {
 		console::resize(350, 400);
 		console::move_to::center();
 
-		AccountManager account_manager;
 		bool is_logged_in = true;
 
 		auto pair_user_pass = show_login_form();
-		Account account = account_manager.get_account_details(pair_user_pass.first, pair_user_pass.second);
+		Account account = AccountManager::get_account_details(pair_user_pass.first, pair_user_pass.second);
 
-		if (account_manager.has_account(account) && account.get_password() == DEFAULT_PASSWORD) {
+		if (AccountManager::has_account(account) && account.get_password() == DEFAULT_PASSWORD) {
 			std::string new_password, confirm_new_password;
 
 			system("cls");
@@ -54,7 +53,7 @@ int main() {
 				new_account.set_username(account.get_username());
 				new_account.set_password(new_password);
 
-				account_manager.update_account(account, new_account);
+				AccountManager::update_account(account, new_account);
 
 				set_color(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
@@ -100,8 +99,6 @@ int main() {
 }
 
 void show_administrator_form() {
-	AccountManager account_manager;
-	UserManager user_manager;
 	std::string info_updated, username;
 	char event;
 
@@ -130,14 +127,14 @@ void show_administrator_form() {
 			set_color(Color::BRIGHT_WHITE);
 			std::cin >> username;
 
-			if (account_manager.has_username(username))
+			if (AccountManager::has_username(username))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
 				User user_information;
 
-				account_manager.create_account(username);
+				AccountManager::create_account(username);
 				console::read_info(user_information);
-				user_manager.create_user(username, user_information);
+				UserManager::create_user(username, user_information);
 
 				set_color(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
@@ -156,9 +153,9 @@ void show_administrator_form() {
 			username.clear();
 			std::cin >> username;
 
-			if (account_manager.has_username(username)) {
-				account_manager.delete_account(username);
-				user_manager.delete_user(username);
+			if (AccountManager::has_username(username)) {
+				AccountManager::delete_account(username);
+				UserManager::delete_user(username);
 
 				set_color(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
@@ -179,11 +176,11 @@ void show_administrator_form() {
 			username.clear();
 			std::cin >> username;
 
-			if (account_manager.has_username(username)) {
+			if (AccountManager::has_username(username)) {
 				set_color(Color::LIGHT_YELLOW);
 				std::cout << "    Thong tin Employee can tim: " << std::endl;
 
-				User user = user_manager.read_user(username);
+				User user = UserManager::read_user(username);
 				console::write_info(user);
 				
 				system("pause");
@@ -200,7 +197,7 @@ void show_administrator_form() {
 			set_color(Color::BRIGHT_WHITE);
 			username.clear();
 			std::cin >> username;
-			if (account_manager.has_username(username)) {
+			if (AccountManager::has_username(username)) {
 				while (true) {
 					event = menu_options(
 						L"< Select the information to edit >",
@@ -222,7 +219,7 @@ void show_administrator_form() {
 						std::cin.ignore();
 						getline(std::cin, info_updated);
 
-						user_manager.update_user(username, info_updated, event);
+						UserManager::update_user(username, info_updated, event);
 						
 						set_color(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
@@ -263,8 +260,6 @@ void show_employee_form(Account _account) {
 	char event;
 	while (true) {
 		std::string current_password, new_password, confirm_new_password;
-		AccountManager account_manager;
-		UserManager user_manager;
 		User user;
 
 		console::resize(500, 500);
@@ -286,7 +281,7 @@ void show_employee_form(Account _account) {
 			set_color(Color::BRIGHT_WHITE);
 			std::cout << _account.get_username() << std::endl;
 
-			user = user_manager.read_user(_account.get_username());
+			user = UserManager::read_user(_account.get_username());
 			console::write_info(user);
 
 			system("pause");
@@ -317,7 +312,7 @@ void show_employee_form(Account _account) {
 				new_account.set_username(_account.get_username());
 				new_account.set_password(new_password);
 
-				account_manager.update_account(_account, new_account);
+				AccountManager::update_account(_account, new_account);
 				_account.set_password(new_account.get_password());
 
 				set_color(Color::LIGHT_RED);

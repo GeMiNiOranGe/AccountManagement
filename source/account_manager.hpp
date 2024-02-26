@@ -8,22 +8,15 @@
 #include "config.hpp"
 
 class AccountManager {
-private:
-	Account account;
 public:
-	AccountManager(const Account & _account = Account());
+	static bool has_username(const std::string &_username);
+	static bool has_account(const Account &_account);
 
-	const Account & get_account() const;
-	void set_account(const Account &_account);
+	static Account get_account_details(const std::string &_username, const std::string &_password);
 
-	bool has_username(const std::string &_username);
-	bool has_account(const Account &_account);
-
-	Account get_account_details(const std::string &_username, const std::string &_password);
-
-	void create_account(const std::string &_username);
-	void delete_account(const std::string &_username);
-	void update_account(const Account &_old_account, const Account &_new_account);
+	static void create_account(const std::string &_username);
+	static void delete_account(const std::string &_username);
+	static void update_account(const Account &_old_account, const Account &_new_account);
 };
 
 #endif // end ACCOUNT_MANAGER_HPP
