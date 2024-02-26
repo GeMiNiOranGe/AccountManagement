@@ -84,7 +84,7 @@ void form_info(std::wstring _title, std::vector<std::wstring> _labels, box::Bord
 	_setmode(_fileno(stdout), _O_TEXT);
 }
 
-void show_a_part_border(std::vector<short> number_of_fill, Position _position, box::BorderStyle _style) {
+void show_a_part_border(std::vector<std::pair<std::string, short>> number_of_fill, Position _position, box::BorderStyle _style) {
 	typedef box::Border Border;
 	std::wcout << std::setfill(Border::horizontal(_style)) << std::right;
 
@@ -97,7 +97,7 @@ void show_a_part_border(std::vector<short> number_of_fill, Position _position, b
 		std::wcout << Border::bottom_left(_style);
 
 	for (auto & element : number_of_fill) {
-		short string_with_space = element + 2;
+		short string_with_space = element.second + 2;
 		std::wcout << Border::horizontal(_style) << std::setw(string_with_space);
 		if (element != *(number_of_fill.end() - 1)) {
 			if (_position == Position::FIRST)
@@ -120,16 +120,16 @@ void show_a_part_border(std::vector<short> number_of_fill, Position _position, b
 
 // Output to console in given format: 
 // Pair (maxSize: maximum cell size, wString: One sentence), BorderStyle: Single(customizable)
-void show_info_account(std::vector<std::pair<short, std::wstring>> _max_size_and_wstring_pairs, Color _text_color, wchar_t _fill_type, box::BorderStyle _style) {
+void show_info_account(std::vector<std::pair<std::wstring, short>> _max_size_and_wstring_pairs, Color _text_color, wchar_t _fill_type, box::BorderStyle _style) {
 	//TODO: make enum for fill type
 	typedef box::Border Border;
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	std::wcout << Border::vertical(_style);
 	std::wcout << std::setfill(_fill_type) << std::left;
 	for (auto & element : _max_size_and_wstring_pairs) {
-		short max_size = static_cast<short>(element.first);
+		short max_size = static_cast<short>(element.second);
 		set_color(_text_color);
-		std::wcout << _fill_type << std::setw(max_size) << element.second << _fill_type;
+		std::wcout << _fill_type << std::setw(max_size) << element.first << _fill_type;
 		set_color(Color::BRIGHT_WHITE);
 		std::wcout << Border::vertical(_style);
 	}
@@ -138,25 +138,20 @@ void show_info_account(std::vector<std::pair<short, std::wstring>> _max_size_and
 }
 
 void show_info_accounts() {
-	std::vector<std::string> titles = {
-		"No.",
-		"Username",
-		"Password",
-		"Full name",
-		"Address",
-		"Phone number",
-		"Email address"
+	std::vector<std::pair<std::string, short>> titles = {
+		std::make_pair("No.", 3),
+		std::make_pair("Username", 8),
+		std::make_pair("Password", 8),
+		std::make_pair("Full name", 9),
+		std::make_pair("Address", 7),
+		std::make_pair("Phone number", 12),
+		std::make_pair("Email address", 13)
 	};
-	std::vector<short> title_max_sizes;
-	std::vector<std::pair<short, std::wstring>> vec_title_max_size_and_title;
+	std::vector<std::vector<std::string>> contents;
+	std::vector<std::pair<std::wstring, short>> vec_title_and_max_size;
 	std::ifstream fin;
 
-	// Initialize each element in title_max_sizes with the string size of each element in titles
-	for (auto & title : titles) title_max_sizes.push_back(static_cast<short>(title.size()));
-
 	fin.open(ACCOUNTS_FILE);
-
-	
 	for (int index = 1; !fin.eof(); index++) {
 		User user;
 		Account account;
@@ -165,7 +160,7 @@ void show_info_accounts() {
 		std::ifstream file_info = UserFileManager::open_file(account.get_username());
 		UserFileManager::read_file(file_info, user);
 
-		std::vector<std::string> vec_properties = {
+		std::vector<std::string> properties = {
 			std::to_string(index),
 			account.get_username(),
 			account.get_password(),
@@ -176,65 +171,45 @@ void show_info_accounts() {
 		};
 
 		// Find the maximum size of each table cell, horizontally
-		if (account.get_username() != "")
-			for (short i = 0; i < titles.size(); i++)
-				if (title_max_sizes[i] < vec_properties.at(i).size())
-					title_max_sizes[i] = static_cast<short>(vec_properties.at(i).size());
-
-		file_info.close();
-	}
-
-	// Reset file pointer
-	fin.clear();
-	fin.seekg(0, std::ios::beg);
-
-	show_a_part_border(title_max_sizes, Position::FIRST);
-	std::cout << std::endl;
-
-	// Show titles
-	for (short i = 0; i < titles.size(); i++)
-		vec_title_max_size_and_title.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(titles[i])));
-	show_info_account(vec_title_max_size_and_title, Color::LIGHT_YELLOW);
-	std::cout << std::endl;
-
-	// Show all account information
-	for (int index = 1; !fin.eof(); index++) {
-		User user;
-		Account account;
-
-		AccountFileManager::read_file(fin, account);
-		std::ifstream file_info = UserFileManager::open_file(account.get_username());
-		UserFileManager::read_file(file_info, user);
-
-		std::vector<std::string> vec_properties = {
-			std::to_string(index),
-			account.get_username(),
-			account.get_password(),
-			user.get_full_name(),
-			user.get_address(),
-			user.get_phone_number(),
-			user.get_email_address()
-		};
-
-		std::vector<std::pair<short, std::wstring>> title_max_size_user_property;
-		for (short i = 0; i < titles.size(); i++)
-			title_max_size_user_property.push_back(std::make_pair(title_max_sizes[i], Convert::to_wstring(vec_properties.at(i))));
-
-		// Show current account information
 		if (account.get_username() != "") {
-			show_a_part_border(title_max_sizes, Position::MIDDLE);
-			std::cout << std::endl;
-
-			show_info_account(title_max_size_user_property, Color::WHITE);
-			std::cout << std::endl;
+			contents.push_back(properties);
+			for (short i = 0; i < properties.size(); i++)
+				if (titles.at(i).second < properties.at(i).size())
+					titles.at(i).second = static_cast<short>(properties.at(i).size());
 		}
 
 		file_info.close();
 	}
-
-	show_a_part_border(title_max_sizes, Position::LAST);
-
 	fin.close();
+
+	show_a_part_border(titles, Position::FIRST);
+	std::cout << std::endl;
+
+	// Show titles
+	for (short i = 0; i < titles.size(); i++)
+		vec_title_and_max_size.push_back(std::make_pair(Convert::to_wstring(titles.at(i).first), titles.at(i).second));
+	show_info_account(vec_title_and_max_size, Color::LIGHT_YELLOW);
+	std::cout << std::endl;
+
+	show_a_part_border(titles, Position::MIDDLE);
+	std::cout << std::endl;
+
+	// Show all account information
+	for (int index = 0; index < contents.size(); index++) {
+		auto line = contents.at(index);
+
+		std::vector<std::pair<std::wstring, short>> vec_title_and_max_size_temp;
+		for (short i = 0; i < titles.size(); i++)
+			vec_title_and_max_size_temp.push_back(std::make_pair(Convert::to_wstring(line.at(i)), titles.at(i).second));
+		show_info_account(vec_title_and_max_size_temp, Color::LIGHT_YELLOW);
+		std::cout << std::endl;
+		
+		if (index != contents.size() - 1) {
+			show_a_part_border(titles, Position::MIDDLE);
+			std::cout << std::endl;
+		}
+	}
+	show_a_part_border(titles, Position::LAST);
 }
 
 char menu_options(std::wstring _title, std::vector<std::wstring> _options, std::vector<std::wstring> _sub_options, box::BorderStyle _style) {
