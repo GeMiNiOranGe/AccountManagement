@@ -158,6 +158,7 @@
     <ClInclude Include="user.hpp" />
     <ClInclude Include="user_file_manager.hpp" />
     <ClInclude Include="user_manager.hpp" />
+    <ClInclude Include="utilities.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\accounts.txt" />
@@ -177,6 +178,7 @@
     <ClCompile Include="user.cpp" />
     <ClCompile Include="user_file_manager.cpp" />
     <ClCompile Include="user_manager.cpp" />
+    <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

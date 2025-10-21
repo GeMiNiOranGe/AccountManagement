@@ -3,11 +3,18 @@
 #define ACCOUNT_MANAGER_HPP
 
 #include <iostream>
+#include <functional>
 
 #include "account_file_manager.hpp"
 #include "config.hpp"
+#include "utilities.hpp"
 
 class AccountManager {
+private:
+	static void for_each_account(
+		const std::function<bool(const Account &)> &callback
+	);
+
 public:
 	static bool has_username(const std::string &_username);
 	static bool has_account(const Account &_account);

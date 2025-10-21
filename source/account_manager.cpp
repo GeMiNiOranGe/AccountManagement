@@ -1,58 +1,76 @@
-#include "account_manager.hpp"
+﻿#include "account_manager.hpp"
 
-bool AccountManager::has_username(const std::string &_username) {
-	std::ifstream fin;
-	fin.open(ACCOUNTS_FILE.c_str());
-	while (!fin.eof()) {
-		Account current_account;
-		AccountFileManager::read_file(fin, current_account);
-		if (current_account.get_username() == _username) {
-			fin.close();
-			return true;
-		}
-	}
-	fin.close();
-	return false;
-}
-bool AccountManager::has_account(const Account &_account) {
-	std::ifstream fin;
-	fin.open(ACCOUNTS_FILE.c_str());
-	while (!fin.eof()) {
-		Account current_account;
-		AccountFileManager::read_file(fin, current_account);
-		if (current_account.get_username() == _account.get_username() &&
-			current_account.get_password() == _account.get_password() &&
-			current_account.get_username() != "" &&
-			current_account.get_password() != "") {
-			fin.close();
-			return true;
-		}
-	}
-	fin.close();
-	return false;
+void AccountManager::for_each_account(
+    const std::function<bool(const Account &)> &callback
+) {
+    std::ifstream fin;
+
+    if (!is_open_file(fin, ACCOUNTS_FILE.c_str())) {
+        return;
+    }
+
+    while (!fin.eof()) {
+        Account acc;
+        AccountFileManager::read_file(fin, acc);
+        if (callback(acc)) {
+            break;
+        }
+    }
 }
 
-Account AccountManager::get_account_details(const std::string &_username, const std::string &_password) {
-	std::ifstream fin;
+bool AccountManager::has_username(const std::string &username) {
+    bool found = false;
 
-	fin.open(ACCOUNTS_FILE.c_str());
-	if (!fin.is_open()) {
-		std::cerr << "Failed to open files" << std::endl;
-		return Account();
-	}
-	
-	while (!fin.eof()) {
-		Account current_account;
-		AccountFileManager::read_file(fin, current_account);
-		if (current_account.get_username() == _username &&
-			current_account.get_password() == _password) {
-			fin.close();
-			return current_account;
-		}
-	}
+    for_each_account(
+        [&](const Account &item) {
+            if (item.get_username() == username) {
+                found = true;
+                return true;
+            }
+            return false;
+        }
+    );
 
-	fin.close();
-	return Account();
+    return found;
+}
+
+bool AccountManager::has_account(const Account &account) {
+    bool found = false;
+
+    for_each_account(
+        [&](const Account &item) {
+            if (item.get_username() == account.get_username() &&
+				item.get_password() == account.get_password() &&
+				item.get_username() != "" &&
+				item.get_password() != "") {
+                found = true;
+                return true;
+            }
+            return false;
+        }
+    );
+
+    return found;
+}
+
+Account AccountManager::get_account_details(
+    const std::string &username,
+    const std::string &password
+) {
+    Account result;
+
+    for_each_account(
+        [&](const Account &item) {
+            if (item.get_username() == username &&
+				item.get_password() == password) {
+                result = item;
+                return true;
+            }
+            return false;
+        }
+    );
+
+    return result;
 }
 
 void AccountManager::create_account(const std::string &_username) {
