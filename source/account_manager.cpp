@@ -74,13 +74,12 @@ Account AccountManager::get_account_details(
 }
 
 void AccountManager::create_account(const std::string &_username) {
-	// append account in file Accounts.txt
-	std::ofstream fout;
-	Account new_account(AccountType::EMPLOYEE, _username);
-
-	fout.open(ACCOUNTS_FILE, std::ios_base::app);
-	AccountFileManager::write_file(fout, new_account);
+    // append account in file Accounts.txt
+    std::ofstream fout(ACCOUNTS_FILE, std::ios_base::app);
+    Account new_account(AccountType::EMPLOYEE, _username);
+    AccountFileManager::write_file(fout, new_account);
 }
+
 void AccountManager::delete_account(const std::string &_username) {
 	std::ofstream fout;
 	std::ifstream fin;
