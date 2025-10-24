@@ -10,12 +10,47 @@ void AccountManager::for_each_account(
     }
 
     while (!fin.eof()) {
-        Account acc;
-        AccountFileManager::read_file(fin, acc);
-        if (callback(acc)) {
+        Account account;
+        AccountFileManager::read_file(fin, account);
+        if (callback(account)) {
             break;
         }
     }
+}
+
+void AccountManager::process_accounts_file(
+	const std::function<void(Account &, std::ofstream &)> &processor
+) {
+	const std::string original_file = ACCOUNTS_FILE;
+	std::string backup_file = ACCOUNTS_FILE;
+	backup_file.insert(backup_file.size() - 4, "_new");
+
+	// Rename Accounts.txt into AccountsTemp.txt
+	if (rename(original_file.c_str(), backup_file.c_str()) != 0) {
+		std::cerr << "Error renaming file" << std::endl;
+		return;
+	}
+
+	std::ifstream fin;
+	std::ofstream fout;
+
+	// Re-create the old Accounts.txt file without content
+	if (!is_open_file(fin, backup_file) || !is_open_file(fout, original_file)) {
+		return;
+	}
+
+	// Write from the file is renamed (AccountsNew.txt) to Accounts.txt,
+	// and don't write the employee want to delete
+	while (!fin.eof()) {
+		Account account;
+		AccountFileManager::read_file(fin, account);
+		if (!account.get_username().empty())
+			processor(account, fout);
+	}
+
+	fin.close();
+	fout.close();
+	remove(backup_file.c_str());
 }
 
 bool AccountManager::has_username(const std::string &username) {
@@ -73,88 +108,33 @@ Account AccountManager::get_account_details(
     return result;
 }
 
-void AccountManager::create_account(const std::string &_username) {
+void AccountManager::create_account(const std::string &username) {
     // append account in file Accounts.txt
     std::ofstream fout(ACCOUNTS_FILE, std::ios_base::app);
-    Account new_account(AccountType::EMPLOYEE, _username);
+    Account new_account(AccountType::EMPLOYEE, username);
     AccountFileManager::write_file(fout, new_account);
 }
 
-void AccountManager::delete_account(const std::string &_username) {
-	std::ofstream fout;
-	std::ifstream fin;
-	const std::string old_accounts_file = ACCOUNTS_FILE;
-	std::string new_accounts_file = old_accounts_file;
-
-	// Rename Accounts.txt into AccountsTemp.txt
-	new_accounts_file.insert(new_accounts_file.size() - 4, "_new");
-	if (rename(old_accounts_file.c_str(), new_accounts_file.c_str()) != 0) {
-		std::cerr << "Error renaming file" << std::endl;
-		return;
-	}
-
-	// Re-create the old Accounts.txt file without content
-	fout.open(old_accounts_file);
-	fin.open(new_accounts_file);
-	if (!fin.is_open() || !fout.is_open()) {
-		std::cerr << "Failed to open files" << std::endl;
-		return;
-	}
-
-	// Write from the file is renamed (AccountsNew.txt) to Accounts.txt, and don't write the employee want to delete
-	while (!fin.eof()) {
-		Account current_account;
-		AccountFileManager::read_file(fin, current_account);
-		if (!current_account.get_username().empty() && current_account.get_username() != _username)
-			AccountFileManager::write_file(fout, current_account);
-	}
-
-	fout.close();
-	fin.close();
-	if (remove(new_accounts_file.c_str()) != 0) {
-		std::cerr << "Failed to remove file" << std::endl;
-		return;
-	}
+void AccountManager::delete_account(const std::string &username) {
+	process_accounts_file([&username](Account &account, std::ofstream &fout) {
+        if (account.get_username() != username) {
+			AccountFileManager::write_file(fout, account);
+        }
+	});
 }
-void AccountManager::update_account(const Account &_old_account, const Account &_new_account) {
-	std::ofstream fout;
-	std::ifstream fin;
-	const std::string old_accounts_file = ACCOUNTS_FILE;
-	std::string new_accounts_file = old_accounts_file;
 
-	// Rename Accounts.txt into AccountsTemp.txt
-	new_accounts_file.insert(new_accounts_file.size() - 4, "_new");
-	if (rename(old_accounts_file.c_str(), new_accounts_file.c_str()) != 0) {
-		std::cerr << "Error renaming file" << std::endl;
-		return;
-	}
-
-	// Re-create the old Accounts.txt file without content
-	fout.open(old_accounts_file);
-	fin.open(new_accounts_file);
-	if (!fin.is_open() || !fout.is_open()) {
-		std::cerr << "Failed to open files" << std::endl;
-		return;
-	}
-
-	// Write from the file is renamed (AccountsNew.txt) to Accounts.txt, and update password the account want to update
-	while (!fin.eof()) {
-		Account current_account;
-		AccountFileManager::read_file(fin, current_account);
-		if (!current_account.get_username().empty()) {
-			if (current_account.get_username() == _old_account.get_username() &&
-				current_account.get_password() == _old_account.get_password()) {
-				current_account.set_username(_new_account.get_username());
-				current_account.set_password(_new_account.get_password());
+void AccountManager::update_account(
+	const Account &old_account,
+	const Account &new_account
+) {
+	process_accounts_file(
+		[&old_account, &new_account](Account &account, std::ofstream &fout) {
+			if (account.get_username() == old_account.get_username() &&
+				account.get_password() == old_account.get_password()) {
+				account.set_username(new_account.get_username());
+				account.set_password(new_account.get_password());
 			}
-			AccountFileManager::write_file(fout, current_account);
+			AccountFileManager::write_file(fout, account);
 		}
-	}
-
-	fout.close();
-	fin.close();
-	if (remove(new_accounts_file.c_str()) != 0) {
-		std::cerr << "Failed to remove file" << std::endl;
-		return;
-	}
+	);
 }

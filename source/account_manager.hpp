@@ -15,6 +15,10 @@ private:
 		const std::function<bool(const Account &)> &callback
 	);
 
+	static void process_accounts_file(
+		const std::function<void(Account &, std::ofstream &)> &processor
+	);
+
 public:
 	static bool has_username(const std::string &_username);
 	static bool has_account(const Account &_account);
