@@ -20,14 +20,19 @@ private:
 	);
 
 public:
-	static bool has_username(const std::string &_username);
+	static bool has_username(const std::string &username);
 	static bool has_account(const Account &_account);
 
-	static Account get_account_details(const std::string &_username, const std::string &_password);
+	static Account get_account_details(
+		const std::string &username,
+		const std::string &password
+	);
 
-	static void create_account(const std::string &_username);
-	static void delete_account(const std::string &_username);
-	static void update_account(const Account &_old_account, const Account &_new_account);
+	static void create_account(const std::string &username);
+	static void delete_account(const std::string &username);
+	static void update_account(const Account &old_account,
+		const Account &new_account
+	);
 };
 
 #endif // end ACCOUNT_MANAGER_HPP
