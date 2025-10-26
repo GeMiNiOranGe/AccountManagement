@@ -74,7 +74,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="resources\accounts.txt">
+    <Text Include="resources\accounts.tsv">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

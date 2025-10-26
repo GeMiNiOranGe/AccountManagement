@@ -161,7 +161,7 @@
     <ClInclude Include="utilities.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="resources\accounts.txt" />
+    <Text Include="resources\accounts.tsv" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="account.cpp" />

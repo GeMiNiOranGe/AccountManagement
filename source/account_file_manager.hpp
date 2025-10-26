@@ -6,10 +6,12 @@
 
 #include "account.hpp"
 
+const char CHAR_SEPARATED_VALUES = '\t';
+
 class AccountFileManager {
 public:
-	static void read_file(std::ifstream & _fin, Account & _account);
-	static void write_file(std::ofstream & _fout, const Account & _account);
+    static void read_file(std::ifstream &fin, Account &account);
+    static void write_file(std::ofstream &fout, const Account &account);
 };
 
 #endif // end ACCOUNT_FILE_MANAGER_HPP

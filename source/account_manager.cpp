@@ -44,8 +44,9 @@ void AccountManager::process_accounts_file(
 	while (!fin.eof()) {
 		Account account;
 		AccountFileManager::read_file(fin, account);
-		if (!account.get_username().empty())
+		if (!account.get_username().empty()) {
 			processor(account, fout);
+        }
 	}
 
 	fin.close();
