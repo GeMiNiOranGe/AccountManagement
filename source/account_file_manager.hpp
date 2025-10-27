@@ -5,8 +5,7 @@
 #include <fstream>
 
 #include "account.hpp"
-
-const char CHAR_SEPARATED_VALUES = '\t';
+#include "config.hpp"
 
 class AccountFileManager {
 public:

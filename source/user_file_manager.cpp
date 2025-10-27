@@ -1,26 +1,32 @@
 #include "user_file_manager.hpp"
 
-std::ifstream UserFileManager::open_file(const std::string &_username) {
-	const std::string PATH = USERS_DIRECTORY + _username + ".txt";
-	std::ifstream fin;
-	fin.open(PATH);
-	return fin;
+std::ifstream UserFileManager::open_file(const std::string &username) {
+    const std::string PATH = USERS_DIRECTORY + username + ".txt";
+    std::ifstream fin;
+    fin.open(PATH);
+    return fin;
 }
 
-void UserFileManager::read_file(std::ifstream &_fin, User &_user) {
-	std::string full_name, address, phone_number, email_address;
-	getline(_fin, full_name);
-	getline(_fin, address);
-	getline(_fin, phone_number);
-	getline(_fin, email_address);
-	_user.set_full_name(full_name);
-	_user.set_address(address);
-	_user.set_phone_number(phone_number);
-	_user.set_email_address(email_address);
+void UserFileManager::read_file(std::ifstream &fin, User &user) {
+    std::string username, full_name, address, phone_number, email_address;
+
+    getline(fin, username, CHAR_SEPARATED_VALUES);
+    getline(fin, full_name, CHAR_SEPARATED_VALUES);
+    getline(fin, address, CHAR_SEPARATED_VALUES);
+    getline(fin, phone_number, CHAR_SEPARATED_VALUES);
+    getline(fin, email_address);
+
+    user.set_username(username);
+    user.set_full_name(full_name);
+    user.set_address(address);
+    user.set_phone_number(phone_number);
+    user.set_email_address(email_address);
 }
-void UserFileManager::write_file(std::ofstream &_fout, const User &_user) {
-	_fout << _user.get_full_name() << std::endl;
-	_fout << _user.get_address() << std::endl;
-	_fout << _user.get_phone_number() << std::endl;
-	_fout << _user.get_email_address() << std::endl;
+
+void UserFileManager::write_file(std::ofstream &fout, const User &user) {
+    fout << user.get_username() << CHAR_SEPARATED_VALUES;
+    fout << user.get_full_name() << CHAR_SEPARATED_VALUES;
+    fout << user.get_address() << CHAR_SEPARATED_VALUES;
+    fout << user.get_phone_number() << CHAR_SEPARATED_VALUES;
+    fout << user.get_email_address() << std::endl;
 }

@@ -130,11 +130,12 @@ void show_administrator_form() {
 			if (AccountManager::has_username(username))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
-				User user_information;
+				User user;
 
 				AccountManager::create_account(username);
-				console::read_info(user_information);
-				UserManager::create_user(username, user_information);
+				user.set_username(username);
+				console::read_info(user);
+				UserManager::create_user(user);
 
 				set_color(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;

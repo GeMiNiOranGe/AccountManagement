@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\accounts.tsv" />
+    <Text Include="resources\users.tsv" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="account.cpp" />

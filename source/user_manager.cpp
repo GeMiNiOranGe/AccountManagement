@@ -1,11 +1,8 @@
 #include "user_manager.hpp"
 
-void UserManager::create_user(const std::string &_username, const User &_user_information) {
-	const std::string PATH = USERS_DIRECTORY + _username + ".txt";
-	std::ofstream fout;
-	fout.open(PATH);
-	UserFileManager::write_file(fout, _user_information);
-	fout.close();
+void UserManager::create_user(const User &user) {
+    std::ofstream fout(USERS_FILE, std::ios_base::app);
+    UserFileManager::write_file(fout, user);
 }
 void UserManager::delete_user(const std::string &_username) {
 	const std::string COMMAND = "del " + USERS_DIRECTORY + _username + ".txt";
