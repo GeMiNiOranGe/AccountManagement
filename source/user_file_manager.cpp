@@ -1,12 +1,5 @@
 #include "user_file_manager.hpp"
 
-std::ifstream UserFileManager::open_file(const std::string &username) {
-    const std::string PATH = USERS_DIRECTORY + username + ".txt";
-    std::ifstream fin;
-    fin.open(PATH);
-    return fin;
-}
-
 void UserFileManager::read_file(std::ifstream &fin, User &user) {
     std::string username, full_name, address, phone_number, email_address;
 

@@ -6,6 +6,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include <vector>
+#include <unordered_map>
 
 #include "user_manager.hpp"
 #include "account_manager.hpp"

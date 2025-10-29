@@ -151,14 +151,22 @@ void show_info_accounts() {
 	std::vector<std::pair<std::wstring, short>> vec_title_and_max_size;
 	std::ifstream fin;
 
+	std::unordered_map<std::string, User> user_map;
+
+	UserManager::for_each_user(
+		[&](const User &item) {
+			user_map[item.get_username()] = item;
+			return false;
+		}
+	);
+
 	fin.open(ACCOUNTS_FILE);
 	for (int index = 1; !fin.eof(); index++) {
 		User user;
 		Account account;
 
 		AccountFileManager::read_file(fin, account);
-		std::ifstream file_info = UserFileManager::open_file(account.get_username());
-		UserFileManager::read_file(file_info, user);
+		user = user_map[account.get_username()];
 
 		std::vector<std::string> properties = {
 			std::to_string(index),
@@ -177,8 +185,6 @@ void show_info_accounts() {
 				if (titles.at(i).second < properties.at(i).size())
 					titles.at(i).second = static_cast<short>(properties.at(i).size());
 		}
-
-		file_info.close();
 	}
 	fin.close();
 
