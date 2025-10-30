@@ -150,7 +150,6 @@
     <ClInclude Include="console_io.hpp" />
     <ClInclude Include="convert.hpp" />
     <ClInclude Include="handle_console.hpp" />
-    <ClInclude Include="handle_miscellaneous.hpp" />
     <ClInclude Include="handle_window.hpp" />
     <ClInclude Include="login_status.hpp" />
     <ClInclude Include="position.hpp" />
@@ -172,7 +171,6 @@
     <ClCompile Include="console_io.cpp" />
     <ClCompile Include="convert.cpp" />
     <ClCompile Include="handle_console.cpp" />
-    <ClCompile Include="handle_miscellaneous.cpp" />
     <ClCompile Include="handle_window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ui_have_no_ux.cpp" />

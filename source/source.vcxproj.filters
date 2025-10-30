@@ -48,9 +48,6 @@
     <ClInclude Include="handle_console.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="handle_miscellaneous.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="handle_window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -101,9 +98,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="handle_console.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="handle_miscellaneous.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="handle_window.cpp">
