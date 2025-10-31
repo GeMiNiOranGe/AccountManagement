@@ -135,7 +135,7 @@ void show_administrator_form() {
 				AccountManager::create_account(username);
 				user.set_username(username);
 				console::read_info(user);
-				UserManager::create_user(user);
+				UserStorage::create_user(user);
 
 				set_color(Color::LIGHT_RED);
 				std::cout << "Them thanh cong!!!" << std::endl;
@@ -156,7 +156,7 @@ void show_administrator_form() {
 
 			if (AccountManager::has_username(username)) {
 				AccountManager::delete_account(username);
-				UserManager::delete_user(username);
+				UserStorage::delete_user(username);
 
 				set_color(Color::LIGHT_RED);
 				std::cout << "Xoa thanh cong!!!" << std::endl;
@@ -181,7 +181,7 @@ void show_administrator_form() {
 				set_color(Color::LIGHT_YELLOW);
 				std::cout << "    Thong tin Employee can tim: " << std::endl;
 
-				User user = UserManager::read_user(username);
+				User user = UserStorage::read_user(username);
 				console::write_info(user);
 				
 				system("pause");
@@ -220,7 +220,7 @@ void show_administrator_form() {
 						std::cin.ignore();
 						getline(std::cin, info_updated);
 
-						UserManager::update_user(username, info_updated, event);
+						UserStorage::update_user(username, info_updated, event);
 						
 						set_color(Color::LIGHT_RED);
 						std::cout << "Cap nhat thanh cong!!!" << std::endl;
@@ -282,7 +282,7 @@ void show_employee_form(Account _account) {
 			set_color(Color::BRIGHT_WHITE);
 			std::cout << _account.get_username() << std::endl;
 
-			user = UserManager::read_user(_account.get_username());
+			user = UserStorage::read_user(_account.get_username());
 			console::write_info(user);
 
 			system("pause");

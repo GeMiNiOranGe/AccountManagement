@@ -1,6 +1,6 @@
 #pragma once
-#ifndef USER_MANAGER_HPP
-#define USER_MANAGER_HPP
+#ifndef USER_STORAGE_HPP
+#define USER_STORAGE_HPP
 
 #include <functional>
 
@@ -8,7 +8,7 @@
 #include "config.hpp"
 #include "utilities.hpp"
 
-class UserManager {
+class UserStorage {
 private:
     static void process_users_file(
         const std::function<void(User &, std::ofstream &)> &processor
@@ -25,4 +25,4 @@ public:
     static User read_user(const std::string &username);
 };
 
-#endif // end USER_MANAGER_HPP
+#endif // end USER_STORAGE_HPP

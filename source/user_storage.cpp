@@ -1,6 +1,6 @@
-#include "user_manager.hpp"
+#include "user_storage.hpp"
 
-void UserManager::process_users_file(
+void UserStorage::process_users_file(
     const std::function<void(User &, std::ofstream &)> &processor
 ) {
     const std::string original_file = USERS_FILE;
@@ -36,7 +36,7 @@ void UserManager::process_users_file(
     remove(backup_file.c_str());
 }
 
-void UserManager::for_each_user(
+void UserStorage::for_each_user(
     const std::function<bool(const User &)> &callback
 ) {
     std::ifstream fin;
@@ -54,12 +54,12 @@ void UserManager::for_each_user(
     }
 }
 
-void UserManager::create_user(const User &user) {
+void UserStorage::create_user(const User &user) {
     std::ofstream fout(USERS_FILE, std::ios_base::app);
     UserFileManager::write_file(fout, user);
 }
 
-void UserManager::delete_user(const std::string &username) {
+void UserStorage::delete_user(const std::string &username) {
     process_users_file([&username](User &user, std::ofstream &fout) {
         if (user.get_username() != username) {
             UserFileManager::write_file(fout, user);
@@ -68,7 +68,7 @@ void UserManager::delete_user(const std::string &username) {
 }
 
 // TODO: update from new_user to old_user
-void UserManager::update_user(const std::string &username, std::string info_updated, char option) {
+void UserStorage::update_user(const std::string &username, std::string info_updated, char option) {
     process_users_file(
         [&username, &info_updated, &option](User &user, std::ofstream &fout) {
             if (user.get_username() == username) {
@@ -91,7 +91,7 @@ void UserManager::update_user(const std::string &username, std::string info_upda
     );
 }
 
-User UserManager::read_user(const std::string &username) {
+User UserStorage::read_user(const std::string &username) {
     User result;
 
     for_each_user(

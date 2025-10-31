@@ -153,7 +153,7 @@ void show_info_accounts() {
 
 	std::unordered_map<std::string, User> user_map;
 
-	UserManager::for_each_user(
+	UserStorage::for_each_user(
 		[&](const User &item) {
 			user_map[item.get_username()] = item;
 			return false;
