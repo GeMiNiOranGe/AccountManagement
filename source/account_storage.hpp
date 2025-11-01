@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ACCOUNT_MANAGER_HPP
-#define ACCOUNT_MANAGER_HPP
+#ifndef ACCOUNT_STORAGE_HPP
+#define ACCOUNT_STORAGE_HPP
 
 #include <iostream>
 #include <functional>
@@ -9,7 +9,7 @@
 #include "config.hpp"
 #include "utilities.hpp"
 
-class AccountManager {
+class AccountStorage {
 private:
 	static void for_each_account(
 		const std::function<bool(const Account &)> &callback
@@ -35,4 +35,4 @@ public:
 	);
 };
 
-#endif // end ACCOUNT_MANAGER_HPP
+#endif // end ACCOUNT_STORAGE_HPP

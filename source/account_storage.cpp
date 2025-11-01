@@ -1,6 +1,6 @@
-﻿#include "account_manager.hpp"
+﻿#include "account_storage.hpp"
 
-void AccountManager::for_each_account(
+void AccountStorage::for_each_account(
     const std::function<bool(const Account &)> &callback
 ) {
     std::ifstream fin;
@@ -18,7 +18,7 @@ void AccountManager::for_each_account(
     }
 }
 
-void AccountManager::process_accounts_file(
+void AccountStorage::process_accounts_file(
 	const std::function<void(Account &, std::ofstream &)> &processor
 ) {
 	const std::string original_file = ACCOUNTS_FILE;
@@ -54,7 +54,7 @@ void AccountManager::process_accounts_file(
 	remove(backup_file.c_str());
 }
 
-bool AccountManager::has_username(const std::string &username) {
+bool AccountStorage::has_username(const std::string &username) {
     bool found = false;
 
     for_each_account(
@@ -70,7 +70,7 @@ bool AccountManager::has_username(const std::string &username) {
     return found;
 }
 
-bool AccountManager::has_account(const Account &account) {
+bool AccountStorage::has_account(const Account &account) {
     bool found = false;
 
     for_each_account(
@@ -89,7 +89,7 @@ bool AccountManager::has_account(const Account &account) {
     return found;
 }
 
-Account AccountManager::get_account_details(
+Account AccountStorage::get_account_details(
     const std::string &username,
     const std::string &password
 ) {
@@ -109,14 +109,14 @@ Account AccountManager::get_account_details(
     return result;
 }
 
-void AccountManager::create_account(const std::string &username) {
+void AccountStorage::create_account(const std::string &username) {
     // append account in file Accounts.txt
     std::ofstream fout(ACCOUNTS_FILE, std::ios_base::app);
     Account new_account(AccountType::EMPLOYEE, username);
     AccountFileManager::write_file(fout, new_account);
 }
 
-void AccountManager::delete_account(const std::string &username) {
+void AccountStorage::delete_account(const std::string &username) {
 	process_accounts_file([&username](Account &account, std::ofstream &fout) {
         if (account.get_username() != username) {
 			AccountFileManager::write_file(fout, account);
@@ -124,7 +124,7 @@ void AccountManager::delete_account(const std::string &username) {
 	});
 }
 
-void AccountManager::update_account(
+void AccountStorage::update_account(
 	const Account &old_account,
 	const Account &new_account
 ) {

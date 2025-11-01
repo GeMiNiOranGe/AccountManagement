@@ -141,7 +141,7 @@
   <ItemGroup>
     <ClInclude Include="account.hpp" />
     <ClInclude Include="account_file_manager.hpp" />
-    <ClInclude Include="account_manager.hpp" />
+    <ClInclude Include="account_storage.hpp" />
     <ClInclude Include="account_type.hpp" />
     <ClInclude Include="anchor.hpp" />
     <ClInclude Include="box_border.hpp" />
@@ -166,7 +166,7 @@
   <ItemGroup>
     <ClCompile Include="account.cpp" />
     <ClCompile Include="account_file_manager.cpp" />
-    <ClCompile Include="account_manager.cpp" />
+    <ClCompile Include="account_storage.cpp" />
     <ClCompile Include="box_border.cpp" />
     <ClCompile Include="console_io.cpp" />
     <ClCompile Include="convert.cpp" />

@@ -21,7 +21,7 @@
     <ClInclude Include="account_file_manager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="account_manager.hpp">
+    <ClInclude Include="account_storage.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="account_type.hpp">
@@ -85,7 +85,7 @@
     <ClCompile Include="account_file_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="account_manager.cpp">
+    <ClCompile Include="account_storage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="box_border.cpp">

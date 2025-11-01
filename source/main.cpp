@@ -28,9 +28,9 @@ int main() {
 		bool is_logged_in = true;
 
 		auto pair_user_pass = show_login_form();
-		Account account = AccountManager::get_account_details(pair_user_pass.first, pair_user_pass.second);
+		Account account = AccountStorage::get_account_details(pair_user_pass.first, pair_user_pass.second);
 
-		if (AccountManager::has_account(account) && account.get_password() == DEFAULT_PASSWORD) {
+		if (AccountStorage::has_account(account) && account.get_password() == DEFAULT_PASSWORD) {
 			std::string new_password, confirm_new_password;
 
 			system("cls");
@@ -53,7 +53,7 @@ int main() {
 				new_account.set_username(account.get_username());
 				new_account.set_password(new_password);
 
-				AccountManager::update_account(account, new_account);
+				AccountStorage::update_account(account, new_account);
 
 				set_color(Color::LIGHT_RED);
 				std::cout << "Cap nhat thanh cong!!!" << std::endl;
@@ -127,12 +127,12 @@ void show_administrator_form() {
 			set_color(Color::BRIGHT_WHITE);
 			std::cin >> username;
 
-			if (AccountManager::has_username(username))
+			if (AccountStorage::has_username(username))
 				warning("Ten tai khoan da ton tai!!!");
 			else {
 				User user;
 
-				AccountManager::create_account(username);
+				AccountStorage::create_account(username);
 				user.set_username(username);
 				console::read_info(user);
 				UserStorage::create_user(user);
@@ -154,8 +154,8 @@ void show_administrator_form() {
 			username.clear();
 			std::cin >> username;
 
-			if (AccountManager::has_username(username)) {
-				AccountManager::delete_account(username);
+			if (AccountStorage::has_username(username)) {
+				AccountStorage::delete_account(username);
 				UserStorage::delete_user(username);
 
 				set_color(Color::LIGHT_RED);
@@ -177,7 +177,7 @@ void show_administrator_form() {
 			username.clear();
 			std::cin >> username;
 
-			if (AccountManager::has_username(username)) {
+			if (AccountStorage::has_username(username)) {
 				set_color(Color::LIGHT_YELLOW);
 				std::cout << "    Thong tin Employee can tim: " << std::endl;
 
@@ -198,7 +198,7 @@ void show_administrator_form() {
 			set_color(Color::BRIGHT_WHITE);
 			username.clear();
 			std::cin >> username;
-			if (AccountManager::has_username(username)) {
+			if (AccountStorage::has_username(username)) {
 				while (true) {
 					event = menu_options(
 						L"< Select the information to edit >",
@@ -313,7 +313,7 @@ void show_employee_form(Account _account) {
 				new_account.set_username(_account.get_username());
 				new_account.set_password(new_password);
 
-				AccountManager::update_account(_account, new_account);
+				AccountStorage::update_account(_account, new_account);
 				_account.set_password(new_account.get_password());
 
 				set_color(Color::LIGHT_RED);
