@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="account.hpp" />
-    <ClInclude Include="account_file_manager.hpp" />
+    <ClInclude Include="account_file_io.hpp" />
     <ClInclude Include="account_storage.hpp" />
     <ClInclude Include="account_type.hpp" />
     <ClInclude Include="anchor.hpp" />
@@ -155,7 +155,7 @@
     <ClInclude Include="position.hpp" />
     <ClInclude Include="ui_have_no_ux.hpp" />
     <ClInclude Include="user.hpp" />
-    <ClInclude Include="user_file_manager.hpp" />
+    <ClInclude Include="user_file_io.hpp" />
     <ClInclude Include="user_storage.hpp" />
     <ClInclude Include="utilities.hpp" />
   </ItemGroup>
@@ -165,7 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="account.cpp" />
-    <ClCompile Include="account_file_manager.cpp" />
+    <ClCompile Include="account_file_io.cpp" />
     <ClCompile Include="account_storage.cpp" />
     <ClCompile Include="box_border.cpp" />
     <ClCompile Include="console_io.cpp" />
@@ -175,7 +175,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ui_have_no_ux.cpp" />
     <ClCompile Include="user.cpp" />
-    <ClCompile Include="user_file_manager.cpp" />
+    <ClCompile Include="user_file_io.cpp" />
     <ClCompile Include="user_storage.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>

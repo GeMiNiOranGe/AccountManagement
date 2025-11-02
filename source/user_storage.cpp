@@ -25,7 +25,7 @@ void UserStorage::process_users_file(
     // and don't write the employee want to delete
     while (!fin.eof()) {
         User user;
-        UserFileManager::read_file(fin, user);
+        UserFileIO::read_file(fin, user);
         if (!user.get_username().empty()) {
             processor(user, fout);
         }
@@ -47,7 +47,7 @@ void UserStorage::for_each_user(
 
     while (!fin.eof()) {
         User user;
-        UserFileManager::read_file(fin, user);
+        UserFileIO::read_file(fin, user);
         if (callback(user)) {
             break;
         }
@@ -56,13 +56,13 @@ void UserStorage::for_each_user(
 
 void UserStorage::create_user(const User &user) {
     std::ofstream fout(USERS_FILE, std::ios_base::app);
-    UserFileManager::write_file(fout, user);
+    UserFileIO::write_file(fout, user);
 }
 
 void UserStorage::delete_user(const std::string &username) {
     process_users_file([&username](User &user, std::ofstream &fout) {
         if (user.get_username() != username) {
-            UserFileManager::write_file(fout, user);
+            UserFileIO::write_file(fout, user);
         }
     });
 }
@@ -86,7 +86,7 @@ void UserStorage::update_user(const std::string &username, std::string info_upda
                     user.set_email_address(info_updated);
                 }
             }
-            UserFileManager::write_file(fout, user);
+            UserFileIO::write_file(fout, user);
         }
     );
 }

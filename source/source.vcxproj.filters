@@ -18,7 +18,7 @@
     <ClInclude Include="account.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="account_file_manager.hpp">
+    <ClInclude Include="account_file_io.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="account_storage.hpp">
@@ -63,7 +63,7 @@
     <ClInclude Include="user.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="user_file_manager.hpp">
+    <ClInclude Include="user_file_io.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="user_storage.hpp">
@@ -82,7 +82,7 @@
     <ClCompile Include="account.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="account_file_manager.cpp">
+    <ClCompile Include="account_file_io.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="account_storage.cpp">
@@ -112,7 +112,7 @@
     <ClCompile Include="user.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="user_file_manager.cpp">
+    <ClCompile Include="user_file_io.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="user_storage.cpp">

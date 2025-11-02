@@ -1,6 +1,6 @@
-#include "user_file_manager.hpp"
+#include "user_file_io.hpp"
 
-void UserFileManager::read_file(std::ifstream &fin, User &user) {
+void UserFileIO::read_file(std::ifstream &fin, User &user) {
     std::string username, full_name, address, phone_number, email_address;
 
     getline(fin, username, CHAR_SEPARATED_VALUES);
@@ -16,7 +16,7 @@ void UserFileManager::read_file(std::ifstream &fin, User &user) {
     user.set_email_address(email_address);
 }
 
-void UserFileManager::write_file(std::ofstream &fout, const User &user) {
+void UserFileIO::write_file(std::ofstream &fout, const User &user) {
     fout << user.get_username() << CHAR_SEPARATED_VALUES;
     fout << user.get_full_name() << CHAR_SEPARATED_VALUES;
     fout << user.get_address() << CHAR_SEPARATED_VALUES;

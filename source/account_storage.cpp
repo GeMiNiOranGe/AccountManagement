@@ -11,7 +11,7 @@ void AccountStorage::for_each_account(
 
     while (!fin.eof()) {
         Account account;
-        AccountFileManager::read_file(fin, account);
+        AccountFileIO::read_file(fin, account);
         if (callback(account)) {
             break;
         }
@@ -43,7 +43,7 @@ void AccountStorage::process_accounts_file(
 	// and don't write the employee want to delete
 	while (!fin.eof()) {
 		Account account;
-		AccountFileManager::read_file(fin, account);
+		AccountFileIO::read_file(fin, account);
 		if (!account.get_username().empty()) {
 			processor(account, fout);
         }
@@ -113,13 +113,13 @@ void AccountStorage::create_account(const std::string &username) {
     // append account in file Accounts.txt
     std::ofstream fout(ACCOUNTS_FILE, std::ios_base::app);
     Account new_account(AccountType::EMPLOYEE, username);
-    AccountFileManager::write_file(fout, new_account);
+    AccountFileIO::write_file(fout, new_account);
 }
 
 void AccountStorage::delete_account(const std::string &username) {
 	process_accounts_file([&username](Account &account, std::ofstream &fout) {
         if (account.get_username() != username) {
-			AccountFileManager::write_file(fout, account);
+			AccountFileIO::write_file(fout, account);
         }
 	});
 }
@@ -135,7 +135,7 @@ void AccountStorage::update_account(
 				account.set_username(new_account.get_username());
 				account.set_password(new_account.get_password());
 			}
-			AccountFileManager::write_file(fout, account);
+			AccountFileIO::write_file(fout, account);
 		}
 	);
 }

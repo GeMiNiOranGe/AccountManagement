@@ -165,7 +165,7 @@ void show_info_accounts() {
 		User user;
 		Account account;
 
-		AccountFileManager::read_file(fin, account);
+		AccountFileIO::read_file(fin, account);
 		user = user_map[account.get_username()];
 
 		std::vector<std::string> properties = {

@@ -1,6 +1,6 @@
-#include "account_file_manager.hpp"
+#include "account_file_io.hpp"
 
-void AccountFileManager::read_file(std::ifstream &fin, Account &account) {
+void AccountFileIO::read_file(std::ifstream &fin, Account &account) {
     std::string account_type, username, password;
     getline(fin, account_type, CHAR_SEPARATED_VALUES);
     getline(fin, username, CHAR_SEPARATED_VALUES);
@@ -19,7 +19,7 @@ void AccountFileManager::read_file(std::ifstream &fin, Account &account) {
     account.set_password(password);
 }
 
-void AccountFileManager::write_file(std::ofstream &fout, const Account &account) {
+void AccountFileIO::write_file(std::ofstream &fout, const Account &account) {
     std::string type = [](const AccountType &_type) -> std::string {
         switch (_type) {
         case AccountType::ADMINISTRATOR:
@@ -31,5 +31,7 @@ void AccountFileManager::write_file(std::ofstream &fout, const Account &account)
         }
     }(account.get_account_type());
 
-    fout << type << CHAR_SEPARATED_VALUES << account.get_username() << CHAR_SEPARATED_VALUES << account.get_password() << std::endl;
+    fout << type << CHAR_SEPARATED_VALUES;
+    fout << account.get_username() << CHAR_SEPARATED_VALUES;
+    fout << account.get_password() << std::endl;
 }
