@@ -1,37 +1,39 @@
 #include "account_file_io.hpp"
 
-void AccountFileIO::read_file(std::ifstream &fin, Account &account) {
-    std::string account_type, username, password;
-    getline(fin, account_type, CHAR_SEPARATED_VALUES);
+AccountType AccountFileIO::parse_role_text(const std::string &value) {
+    if (value == "AD") {
+        return AccountType::ADMINISTRATOR;
+    }
+    if (value == "EM") {
+        return AccountType::EMPLOYEE;
+    }
+    return AccountType::NONE;
+}
+
+std::string AccountFileIO::to_role_text(AccountType value) {
+    if (value == AccountType::ADMINISTRATOR) {
+        return "AD";
+    }
+    if (value == AccountType::EMPLOYEE) {
+        return "EM";
+    }
+    return "";
+}
+
+void AccountFileIO::read_file(std::ifstream &fin, Account &value) {
+    std::string role_text, username, password;
+
+    getline(fin, role_text, CHAR_SEPARATED_VALUES);
     getline(fin, username, CHAR_SEPARATED_VALUES);
     getline(fin, password);
 
-    AccountType type = [](const std::string &_account_type) -> AccountType {
-        if (_account_type == "AD")
-            return AccountType::ADMINISTRATOR;
-        if (_account_type == "EM")
-            return AccountType::EMPLOYEE;
-        return AccountType::NONE;
-    }(account_type);
-
-    account.set_account_type(type);
-    account.set_username(username);
-    account.set_password(password);
+    value.set_account_type(parse_role_text(role_text));
+    value.set_username(username);
+    value.set_password(password);
 }
 
-void AccountFileIO::write_file(std::ofstream &fout, const Account &account) {
-    std::string type = [](const AccountType &_type) -> std::string {
-        switch (_type) {
-        case AccountType::ADMINISTRATOR:
-            return "AD";
-        case AccountType::EMPLOYEE:
-            return "EM";
-        default:
-            return std::string();
-        }
-    }(account.get_account_type());
-
-    fout << type << CHAR_SEPARATED_VALUES;
-    fout << account.get_username() << CHAR_SEPARATED_VALUES;
-    fout << account.get_password() << std::endl;
+void AccountFileIO::write_file(std::ofstream &fout, const Account &value) {
+    fout << to_role_text(value.get_account_type()) << CHAR_SEPARATED_VALUES;
+    fout << value.get_username() << CHAR_SEPARATED_VALUES;
+    fout << value.get_password() << std::endl;
 }
