@@ -66,11 +66,11 @@ int main() {
 		}
 
 		if (is_logged_in)
-			switch (account.get_account_type()) {
-			case AccountType::ADMINISTRATOR:
+			switch (account.get_role()) {
+			case AccountRole::ADMINISTRATOR:
 				show_administrator_form();
 				break;
-			case AccountType::EMPLOYEE:
+			case AccountRole::EMPLOYEE:
 				show_employee_form(account);
 				break;
 			default:

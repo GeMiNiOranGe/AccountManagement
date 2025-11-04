@@ -9,8 +9,8 @@
 
 class AccountFileIO {
 private:
-    static AccountType parse_role_text(const std::string &value);
-    static std::string to_role_text(AccountType value);
+    static AccountRole parse_role_text(const std::string &value);
+    static std::string to_role_text(AccountRole value);
 
 public:
     static void read_file(std::ifstream &fin, Account &value);

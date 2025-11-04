@@ -24,7 +24,7 @@
     <ClInclude Include="account_storage.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="account_type.hpp">
+    <ClInclude Include="account_role.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="anchor.hpp">

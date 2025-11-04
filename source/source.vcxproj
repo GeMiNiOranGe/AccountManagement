@@ -142,7 +142,7 @@
     <ClInclude Include="account.hpp" />
     <ClInclude Include="account_file_io.hpp" />
     <ClInclude Include="account_storage.hpp" />
-    <ClInclude Include="account_type.hpp" />
+    <ClInclude Include="account_role.hpp" />
     <ClInclude Include="anchor.hpp" />
     <ClInclude Include="box_border.hpp" />
     <ClInclude Include="color.hpp" />

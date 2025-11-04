@@ -4,24 +4,23 @@
 
 #include <string>
 
-#include "account_type.hpp"
-
-const std::string DEFAULT_PASSWORD = "111111";
+#include "account_role.hpp"
+#include "config.hpp"
 
 class Account {
 public:
-	Account(AccountType _id = AccountType::NONE, std::string _username = "", std::string _password = DEFAULT_PASSWORD);
+	Account(AccountRole _role = AccountRole::NONE, std::string _username = "", std::string _password = DEFAULT_PASSWORD);
 
-	const AccountType & get_account_type() const;
+	const AccountRole & get_role() const;
 	const std::string & get_username() const;
 	const std::string & get_password() const;
 
-	void set_account_type(const AccountType &_id);
+	void set_role(const AccountRole &_role);
 	void set_username(const std::string &_username);
 	void set_password(const std::string &_password);
 
 private:
-	AccountType account_type;
+	AccountRole role;
 	std::string password;
 	std::string username;
 };

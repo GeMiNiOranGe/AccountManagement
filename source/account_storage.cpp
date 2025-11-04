@@ -112,7 +112,7 @@ Account AccountStorage::get_account_details(
 void AccountStorage::create_account(const std::string &username) {
     // append account in file Accounts.txt
     std::ofstream fout(ACCOUNTS_FILE, std::ios_base::app);
-    Account new_account(AccountType::EMPLOYEE, username);
+    Account new_account(AccountRole::EMPLOYEE, username);
     AccountFileIO::write_file(fout, new_account);
 }
 
