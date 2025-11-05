@@ -144,6 +144,7 @@
     <ClInclude Include="account_storage.hpp" />
     <ClInclude Include="account_role.hpp" />
     <ClInclude Include="anchor.hpp" />
+    <ClInclude Include="base_storage.hpp" />
     <ClInclude Include="box_border.hpp" />
     <ClInclude Include="color.hpp" />
     <ClInclude Include="config.hpp" />

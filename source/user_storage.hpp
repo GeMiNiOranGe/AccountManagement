@@ -2,26 +2,24 @@
 #ifndef USER_STORAGE_HPP
 #define USER_STORAGE_HPP
 
-#include <functional>
+#include <unordered_map>
 
 #include "user_file_io.hpp"
+#include "base_storage.hpp"
 #include "config.hpp"
-#include "utilities.hpp"
 
-class UserStorage {
-private:
-    static void process_users_file(
-        const std::function<void(User &, std::ofstream &)> &processor
-    );
-
+class UserStorage 
+    : public BaseStorage<User, UserFileIO, USERS_FILE> {
 public:
-    static void for_each_user(
-        const std::function<bool(const User &)> &callback
-    );
+    static std::unordered_map<std::string, User> get_users_map();
 
     static void create_user(const User &user);
     static void delete_user(const std::string &username);
-    static void update_user(const std::string &username, std::string info_updated, char option);
+    static void update_user(
+        const std::string &username,
+        std::string info_updated,
+        char option
+    );
     static User read_user(const std::string &username);
 };
 

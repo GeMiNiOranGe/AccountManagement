@@ -151,14 +151,7 @@ void show_info_accounts() {
 	std::vector<std::pair<std::wstring, short>> vec_title_and_max_size;
 	std::ifstream fin;
 
-	std::unordered_map<std::string, User> user_map;
-
-	UserStorage::for_each_user(
-		[&](const User &item) {
-			user_map[item.get_username()] = item;
-			return false;
-		}
-	);
+	std::unordered_map<std::string, User> user_map = UserStorage::get_users_map();
 
 	fin.open(ACCOUNTS_FILE);
 	for (int index = 1; !fin.eof(); index++) {
