@@ -3,6 +3,7 @@
 #define ACCOUNT_FILE_IO_HPP
 
 #include <fstream>
+#include <sstream>
 
 #include "account.hpp"
 #include "config.hpp"
@@ -13,7 +14,7 @@ private:
     static std::string to_role_text(AccountRole value);
 
 public:
-    static void read_file(std::ifstream &fin, Account &value);
+    static bool read_file(std::ifstream &fin, Account &value);
     static void write_file(std::ofstream &fout, const Account &value);
 };
 

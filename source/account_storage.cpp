@@ -19,9 +19,7 @@ bool AccountStorage::has_account(const Account &account) {
 
     for_each_item([&](const Account &item) {
         if (item.get_username() == account.get_username() &&
-            item.get_password() == account.get_password() &&
-            item.get_username() != "" &&
-            item.get_password() != "") {
+            item.get_password() == account.get_password()) {
             found = true;
             return true;
         }
@@ -38,8 +36,7 @@ Account AccountStorage::get_account_details(
     Account result;
 
     for_each_item([&](const Account &item) {
-        if (item.get_username() == username &&
-            item.get_password() == password) {
+        if (item.get_username() == username) {
             result = item;
             return true;
         }

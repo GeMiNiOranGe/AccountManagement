@@ -30,8 +30,7 @@ void BaseStorage<T, FileIO, FilePath>::for_each_item(
 
     while (!fin.eof()) {
         T item;
-        FileIO::read_file(fin, item);
-        if (callback(item)) {
+        if (FileIO::read_file(fin, item) && callback(item)) {
             break;
         }
     }
@@ -63,8 +62,7 @@ void BaseStorage<T, FileIO, FilePath>::process_file(
     // and don't write the employee want to delete
     while (!fin.eof()) {
         T item;
-        FileIO::read_file(fin, item);
-        if (!item.get_username().empty()) {
+        if (FileIO::read_file(fin, item)) {
             processor(item, fout);
         }
     }

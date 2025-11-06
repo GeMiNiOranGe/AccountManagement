@@ -20,16 +20,25 @@ std::string AccountFileIO::to_role_text(AccountRole value) {
     return "";
 }
 
-void AccountFileIO::read_file(std::ifstream &fin, Account &value) {
+bool AccountFileIO::read_file(std::ifstream &fin, Account &value) {
+    std::string line;
+
+    if (!getline(fin, line) || line.empty()) {
+        return false;
+    }
+
+    std::stringstream ss(line);
     std::string role_text, username, password;
 
-    getline(fin, role_text, CHAR_SEPARATED_VALUES);
-    getline(fin, username, CHAR_SEPARATED_VALUES);
-    getline(fin, password);
+    getline(ss, role_text, CHAR_SEPARATED_VALUES);
+    getline(ss, username, CHAR_SEPARATED_VALUES);
+    getline(ss, password);
 
     value.set_role(parse_role_text(role_text));
     value.set_username(username);
     value.set_password(password);
+
+    return true;
 }
 
 void AccountFileIO::write_file(std::ofstream &fout, const Account &value) {
