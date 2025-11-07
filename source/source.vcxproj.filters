@@ -75,6 +75,15 @@
     <ClInclude Include="base_storage.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="administrator_form.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="employee_form.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main_form.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\accounts.tsv">
@@ -125,6 +134,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="administrator_form.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="employee_form.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main_form.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

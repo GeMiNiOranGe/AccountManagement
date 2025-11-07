@@ -143,6 +143,7 @@
     <ClInclude Include="account_file_io.hpp" />
     <ClInclude Include="account_storage.hpp" />
     <ClInclude Include="account_role.hpp" />
+    <ClInclude Include="administrator_form.hpp" />
     <ClInclude Include="anchor.hpp" />
     <ClInclude Include="base_storage.hpp" />
     <ClInclude Include="box_border.hpp" />
@@ -150,9 +151,11 @@
     <ClInclude Include="config.hpp" />
     <ClInclude Include="console_io.hpp" />
     <ClInclude Include="convert.hpp" />
+    <ClInclude Include="employee_form.hpp" />
     <ClInclude Include="handle_console.hpp" />
     <ClInclude Include="handle_window.hpp" />
     <ClInclude Include="login_status.hpp" />
+    <ClInclude Include="main_form.hpp" />
     <ClInclude Include="position.hpp" />
     <ClInclude Include="ui_have_no_ux.hpp" />
     <ClInclude Include="user.hpp" />
@@ -168,12 +171,15 @@
     <ClCompile Include="account.cpp" />
     <ClCompile Include="account_file_io.cpp" />
     <ClCompile Include="account_storage.cpp" />
+    <ClCompile Include="administrator_form.cpp" />
     <ClCompile Include="box_border.cpp" />
     <ClCompile Include="console_io.cpp" />
     <ClCompile Include="convert.cpp" />
+    <ClCompile Include="employee_form.cpp" />
     <ClCompile Include="handle_console.cpp" />
     <ClCompile Include="handle_window.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="main_form.cpp" />
     <ClCompile Include="ui_have_no_ux.cpp" />
     <ClCompile Include="user.cpp" />
     <ClCompile Include="user_file_io.cpp" />
