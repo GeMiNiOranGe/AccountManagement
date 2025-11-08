@@ -1,14 +1,11 @@
 #include "employee_form.hpp"
 
-void EmployeeForm::show(Account _account) {
-    char event;
+void EmployeeForm::show(const Account &account) {
     while (true) {
-        std::string current_password, new_password, confirm_new_password;
-        User user;
-
         console::resize(500, 500);
         console::move_to::center();
-        event = menu_options(
+
+        char event = menu_options(
             L"< MENU EMPLOYEE >",
             {L"View account information",
              L"Change password",
@@ -16,59 +13,57 @@ void EmployeeForm::show(Account _account) {
 
         switch (event) {
         case 49:
-            system("cls");
-            std::cout << byellow;
-            std::cout << "<Thong tin tai khoan>" << std::endl;
-            std::cout << yellow;
-            std::cout << "    Ten tai khoan: ";
-            std::cout << bwhite;
-            std::cout << _account.get_username() << std::endl;
-
-            user = UserStorage::read_user(_account.get_username());
-            console::write_info(user);
-
-            system("pause");
-            system("cls");
+            handle_view_personal_information(account);
             break;
         case 50:
-            system("cls");
-            std::cout << byellow;
-            std::cout << "<Doi mat khau>" << std::endl;
-            std::cout << bblue;
-            std::cout << "Nhap mat khau hien tai: ";
-            std::cout << bwhite;
-            encode_password(current_password);
-            std::cout << std::endl;
-            std::cout << bblue;
-            std::cout << "Nhap mat khau moi: ";
-            std::cout << bwhite;
-            encode_password(new_password);
-            std::cout << std::endl;
-            std::cout << bblue;
-            std::cout << "Nhap lai mat khau moi: ";
-            std::cout << bwhite;
-            encode_password(confirm_new_password);
-            std::cout << std::endl;
-
-            if (new_password != current_password && new_password == confirm_new_password) {
-                Account new_account;
-                new_account.set_username(_account.get_username());
-                new_account.set_password(new_password);
-
-                AccountStorage::update_account(_account, new_account);
-                _account.set_password(new_account.get_password());
-
-                std::cout << bred;
-                std::cout << "Cap nhat thanh cong!!!" << std::endl;
-                system("pause");
-            } else
-                warning("Sai thong tin!!!");
+            handle_change_password(account);
             break;
         case 51:
             return;
         default:
-            warning("Lua chon khong hop le!!!");
+            warning("Invalid choice!!!");
             break;
         }
     }
+}
+
+void EmployeeForm::handle_view_personal_information(const Account &account) {
+    system("cls");
+    std::cout << byellow << "<Account information>" << std::endl;
+    std::cout << yellow << "    Username: " << reset_color;
+    std::cout << account.get_username() << std::endl;
+
+    User user = UserStorage::read_user(account.get_username());
+    console::write_info(user);
+
+    system("pause");
+}
+
+void EmployeeForm::handle_change_password(const Account &account) {
+    std::string current_password, new_password, confirm_new_password;
+
+    system("cls");
+    std::cout << byellow << "<Change password>" << std::endl;
+    std::cout << bblue << "Enter current password: " << reset_color;
+    encode_password(current_password);
+    std::cout << std::endl << bblue << "Enter new password: " << reset_color;
+    encode_password(new_password);
+    std::cout << std::endl << bblue << "Confirm new password: " << reset_color;
+    encode_password(confirm_new_password);
+    std::cout << std::endl;
+
+    bool is_valid_password = new_password != current_password
+        && new_password == confirm_new_password;
+
+    if (!is_valid_password) {
+        warning("Wrong information!!!");
+        return;
+    }
+
+    Account new_account;
+    new_account.set_username(account.get_username());
+    new_account.set_password(new_password);
+
+    AccountStorage::update_account(account, new_account);
+    success("Update success!!!");
 }

@@ -53,8 +53,12 @@ void go_to_xy(short x, short y) {
     SetConsoleCursorPosition(handle_std_out, pos);
 }
 
-void warning(std::string _message) {
-    std::cout << white_on_red << "\a" << _message << std::endl
-              << reset_color;
+void warning(std::string message) {
+    std::cout << white_on_red << "\a" << message << reset_color << std::endl;
+    system("pause");
+}
+
+void success(std::string message) {
+    std::cout << bgreen << message << reset_color << std::endl;
     system("pause");
 }
