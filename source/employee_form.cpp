@@ -17,11 +17,11 @@ void EmployeeForm::show(Account _account) {
         switch (event) {
         case 49:
             system("cls");
-            set_color(Color::LIGHT_YELLOW);
+            std::cout << byellow;
             std::cout << "<Thong tin tai khoan>" << std::endl;
-            set_color(Color::YELLOW);
+            std::cout << yellow;
             std::cout << "    Ten tai khoan: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bwhite;
             std::cout << _account.get_username() << std::endl;
 
             user = UserStorage::read_user(_account.get_username());
@@ -32,21 +32,21 @@ void EmployeeForm::show(Account _account) {
             break;
         case 50:
             system("cls");
-            set_color(Color::LIGHT_YELLOW);
+            std::cout << byellow;
             std::cout << "<Doi mat khau>" << std::endl;
-            set_color(Color::LIGHT_BLUE);
+            std::cout << bblue;
             std::cout << "Nhap mat khau hien tai: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bwhite;
             encode_password(current_password);
             std::cout << std::endl;
-            set_color(Color::LIGHT_BLUE);
+            std::cout << bblue;
             std::cout << "Nhap mat khau moi: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bwhite;
             encode_password(new_password);
             std::cout << std::endl;
-            set_color(Color::LIGHT_BLUE);
+            std::cout << bblue;
             std::cout << "Nhap lai mat khau moi: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bwhite;
             encode_password(confirm_new_password);
             std::cout << std::endl;
 
@@ -58,7 +58,7 @@ void EmployeeForm::show(Account _account) {
                 AccountStorage::update_account(_account, new_account);
                 _account.set_password(new_account.get_password());
 
-                set_color(Color::LIGHT_RED);
+                std::cout << bred;
                 std::cout << "Cap nhat thanh cong!!!" << std::endl;
                 system("pause");
             } else

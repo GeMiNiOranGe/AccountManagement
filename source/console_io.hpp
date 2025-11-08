@@ -4,6 +4,7 @@
 
 #include "user.hpp"
 #include "utilities.hpp"
+#include "console_color.hpp"
 
 namespace console {
 	void read_account(User &_user);

@@ -19,13 +19,13 @@ void AdministratorForm::show() {
         switch (event) {
         case 49:
             system("cls");
-            set_color(Color::LIGHT_YELLOW);
-            std::cout << "<Them Employees>" << std::endl;
-            set_color(Color::LIGHT_RED);
+            std::cout << byellow;
+            std::cout << "<Them tai khoan>" << std::endl;
+            std::cout << bred;
             std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-            set_color(Color::LIGHT_BLUE);
-            std::cout << "    Nhap ten tai khoan muon them: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bblue;
+            std::cout << "    Nhap ten tai khoan: ";
+            std::cout << reset_color;
             std::cin >> username;
 
             if (AccountStorage::has_username(username))
@@ -38,20 +38,20 @@ void AdministratorForm::show() {
                 console::read_info(user);
                 UserStorage::create_user(user);
 
-                set_color(Color::LIGHT_RED);
+                std::cout << bred;
                 std::cout << "Them thanh cong!!!" << std::endl;
                 system("pause");
             }
             break;
         case 50:
             system("cls");
-            set_color(Color::LIGHT_YELLOW);
-            std::cout << "<Xoa Employees>" << std::endl;
-            set_color(Color::LIGHT_RED);
+            std::cout << byellow;
+            std::cout << "<Xoa tai khoan>" << std::endl;
+            std::cout << bred;
             std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-            set_color(Color::LIGHT_BLUE);
-            std::cout << "    Nhap ten tai khoan muon xoa: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bblue;
+            std::cout << "    Nhap ten tai khoan: ";
+            std::cout << reset_color;
             username.clear();
             std::cin >> username;
 
@@ -59,7 +59,7 @@ void AdministratorForm::show() {
                 AccountStorage::delete_account(username);
                 UserStorage::delete_user(username);
 
-                set_color(Color::LIGHT_RED);
+                std::cout << bred;
                 std::cout << "Xoa thanh cong!!!" << std::endl;
                 system("pause");
             } else
@@ -67,18 +67,18 @@ void AdministratorForm::show() {
             break;
         case 51:
             system("cls");
-            set_color(Color::LIGHT_YELLOW);
-            std::cout << "<Tim Employees>" << std::endl;
-            set_color(Color::LIGHT_RED);
+            std::cout << byellow;
+            std::cout << "<Tim tai khoan>" << std::endl;
+            std::cout << bred;
             std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
-            set_color(Color::LIGHT_BLUE);
-            std::cout << "    Nhap ten tai khoan muon tim: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bblue;
+            std::cout << "    Nhap ten tai khoan: ";
+            std::cout << reset_color;
             username.clear();
             std::cin >> username;
 
             if (AccountStorage::has_username(username)) {
-                set_color(Color::LIGHT_YELLOW);
+                std::cout << byellow;
                 std::cout << "    Thong tin Employee can tim: " << std::endl;
 
                 User user = UserStorage::read_user(username);
@@ -90,11 +90,13 @@ void AdministratorForm::show() {
             break;
         case 52:
             system("cls");
-            set_color(Color::LIGHT_YELLOW);
-            std::cout << "<Cap nhat thong tin Employees>" << std::endl;
-            set_color(Color::LIGHT_BLUE);
-            std::cout << "Nhap ten tai khoan can cap nhat: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << byellow;
+            std::cout << "<Cap nhat thong tin tai khoan>" << std::endl;
+            std::cout << bred;
+            std::cout << "Ten tai khoan khong duoc co khoang cach" << std::endl;
+            std::cout << bblue;
+            std::cout << "    Nhap ten tai khoan: ";
+            std::cout << reset_color;
             username.clear();
             std::cin >> username;
             if (AccountStorage::has_username(username)) {
@@ -108,19 +110,19 @@ void AdministratorForm::show() {
                         {L"<ESC> de huy bo"});
 
                     if (48 < event && event < 53) {
-                        set_color(Color::LIGHT_BLUE);
+                        std::cout << bblue;
                         std::cout << "Cap nhat thong tin o lua chon: ";
-                        set_color(Color::BRIGHT_WHITE);
+                        std::cout << reset_color;
                         std::cout << event - 48 << std::endl;
-                        set_color(Color::LIGHT_BLUE);
+                        std::cout << bblue;
                         std::cout << "Thong tin moi se duoc cap nhat: ";
-                        set_color(Color::BRIGHT_WHITE);
+                        std::cout << reset_color;
                         std::cin.ignore();
                         getline(std::cin, info_updated);
 
                         UserStorage::update_user(username, info_updated, event);
 
-                        set_color(Color::LIGHT_RED);
+                        std::cout << bred;
                         std::cout << "Cap nhat thanh cong!!!" << std::endl;
                         system("pause");
                     } else if (event == 27)
@@ -135,9 +137,9 @@ void AdministratorForm::show() {
             system("cls");
             console::resize(1275, 750);
             console::move_to::center();
-            set_color(Color::LIGHT_YELLOW);
-            std::cout << "<Hien thi thong tin toan bo Employees>" << std::endl;
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << byellow;
+            std::cout << "<Hien thi thong tin toan bo tai khoan>" << std::endl;
+            std::cout << reset_color;
 
             show_info_accounts();
 

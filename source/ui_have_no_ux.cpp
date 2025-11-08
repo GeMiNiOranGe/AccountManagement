@@ -24,7 +24,7 @@ std::pair<std::string, std::string> show_login_form(box::BorderStyle _style) {
 
 	system("cls");
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	set_color(Color::LIGHT_GREEN);
+	std::wcout << bgreen;
 	std::wcout << Border::top_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(new_width) << Border::top_right(_style) << std::setfill(fill_style) << std::endl;
 	for (int i = 0; i < 3; i++)
 		std::wcout << Border::vertical(_style) << std::setw(new_width) << Border::vertical(_style) << std::endl;
@@ -34,7 +34,7 @@ std::pair<std::string, std::string> show_login_form(box::BorderStyle _style) {
 	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(new_width) << Border::bottom_right(_style) << std::setfill(fill_style) << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 
-	set_color(Color::LIGHT_AQUA);
+	std::cout << baqua;
 	go_to_xy(align_middle + 1, 2);
 	std::cout << title;
 	go_to_xy(2, 6);
@@ -42,7 +42,7 @@ std::pair<std::string, std::string> show_login_form(box::BorderStyle _style) {
 	go_to_xy(2, 8);
 	std::cout << password_label;
 
-	set_color(Color::BRIGHT_WHITE);
+	std::cout << bwhite;
 	go_to_xy(static_cast<short>(username_label.size()) + 2, 6);
 	getline(std::cin, username);
 	go_to_xy(static_cast<short>(password_label.size()) + 2, 8);
@@ -130,7 +130,7 @@ void show_info_account(std::vector<std::pair<std::wstring, short>> _max_size_and
 		short max_size = static_cast<short>(element.second);
 		set_color(_text_color);
 		std::wcout << _fill_type << std::setw(max_size) << element.first << _fill_type;
-		set_color(Color::BRIGHT_WHITE);
+		std::wcout << bwhite;
 		std::wcout << Border::vertical(_style);
 	}
 	std::wcout << std::setfill(L' ');
@@ -187,7 +187,7 @@ void show_info_accounts() {
 	// Show titles
 	for (short i = 0; i < titles.size(); i++)
 		vec_title_and_max_size.push_back(std::make_pair(Convert::to_wstring(titles.at(i).first), titles.at(i).second));
-	show_info_account(vec_title_and_max_size, Color::LIGHT_YELLOW);
+	show_info_account(vec_title_and_max_size, Color::BRIGHT_YELLOW);
 	std::cout << std::endl;
 
 	show_a_part_border(titles, Position::MIDDLE);
@@ -200,7 +200,7 @@ void show_info_accounts() {
 		std::vector<std::pair<std::wstring, short>> vec_title_and_max_size_temp;
 		for (short i = 0; i < titles.size(); i++)
 			vec_title_and_max_size_temp.push_back(std::make_pair(Convert::to_wstring(line.at(i)), titles.at(i).second));
-		show_info_account(vec_title_and_max_size_temp, Color::LIGHT_YELLOW);
+		show_info_account(vec_title_and_max_size_temp, Color::BRIGHT_YELLOW);
 		std::cout << std::endl;
 		
 		if (index != contents.size() - 1) {
@@ -225,27 +225,27 @@ char menu_options(std::wstring _title, std::vector<std::wstring> _options, std::
 
 	system("cls");
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	set_color(Color::LIGHT_YELLOW);
+	std::wcout << byellow;
 	std::wcout << Border::top_left(_style) << std::setfill(Border::horizontal(_style)) << _title << std::setw(static_cast<short>(width - _title.size() + 1)) << Border::top_right(_style) << std::setfill(fill_style) << std::endl;
 	for (short i = 0; i < _options.size(); i++) {
 		std::wstring index = fill_style + std::to_wstring(i + 1) + L'.' + fill_style;
 		std::wcout << Border::vertical(_style);
-		set_color(Color::LIGHT_GREEN);
+		std::wcout << bgreen;
 		_options.size() < 10 ? std::wcout << index : std::wcout << std::right << std::setw(index_size) << index;
-		set_color(Color::BRIGHT_WHITE);
+		std::wcout << bwhite;
 		std::wcout << _options[i];
-		set_color(Color::LIGHT_YELLOW);
+		std::wcout << byellow;
 		std::wcout << std::right << std::setw(label_size - _options[i].size() + 1) << Border::vertical(_style) << std::endl;
 	}
-	set_color(Color::LIGHT_YELLOW);
+	std::wcout << byellow;
 	std::wcout << Border::bottom_left(_style) << std::setfill(Border::horizontal(_style)) << std::setw(width + static_cast<short>(1)) << Border::bottom_right(_style) << std::setfill(fill_style) << std::endl;
 
-	set_color(Color::LIGHT_GREEN);
+	std::wcout << bgreen;
 	if (!_sub_options.empty())
 		for (auto & element : _sub_options)
 			std::wcout << element << std::endl;
 
-	set_color(Color::LIGHT_AQUA);
+	std::wcout << baqua;
 	std::wcout << "Moi ban chon chuc nang" << std::endl;
 	_setmode(_fileno(stdout), _O_TEXT);
 

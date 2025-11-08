@@ -84,6 +84,9 @@
     <ClInclude Include="main_form.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="console_color.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources\accounts.tsv">
@@ -145,5 +148,11 @@
     <ClCompile Include="main_form.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="console_color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

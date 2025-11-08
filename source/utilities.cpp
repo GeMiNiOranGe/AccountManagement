@@ -18,7 +18,7 @@ bool is_open_file(std::ofstream &fout, const std::string &path) {
     return true;
 }
 
-void encode_password(std::string & _password) {
+void encode_password(std::string &_password) {
     char event_key;
     do {
         event_key = _getch();
@@ -47,24 +47,14 @@ void encode_password(std::string & _password) {
     } while (event_key != 13);
 }
 
-void set_color(Color text_color, Color background_color) {
-    short color_code = static_cast<short>(background_color) * 16 + static_cast<short>(text_color);
-    HANDLE handle_std_out = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(handle_std_out, color_code);
-
-    //TODO: class ConsoleColor by singleton in namespace console
-    // getForeColor, getBackColor
-}
-
 void go_to_xy(short x, short y) {
-    COORD pos = { x, y };
+    COORD pos = {x, y};
     HANDLE handle_std_out = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(handle_std_out, pos);
 }
 
 void warning(std::string _message) {
-    set_color(Color::WHITE, Color::RED);
-    std::cout << "\a" << _message << std::endl;
-    set_color(Color::WHITE, Color::BLACK);
+    std::cout << white_on_red << "\a" << _message << std::endl
+              << reset_color;
     system("pause");
 }

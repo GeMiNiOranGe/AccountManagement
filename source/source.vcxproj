@@ -149,6 +149,7 @@
     <ClInclude Include="box_border.hpp" />
     <ClInclude Include="color.hpp" />
     <ClInclude Include="config.hpp" />
+    <ClInclude Include="console_color.hpp" />
     <ClInclude Include="console_io.hpp" />
     <ClInclude Include="convert.hpp" />
     <ClInclude Include="employee_form.hpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="account_storage.cpp" />
     <ClCompile Include="administrator_form.cpp" />
     <ClCompile Include="box_border.cpp" />
+    <ClCompile Include="console_color.cpp" />
     <ClCompile Include="console_io.cpp" />
     <ClCompile Include="convert.cpp" />
     <ClCompile Include="employee_form.cpp" />
@@ -185,6 +187,9 @@
     <ClCompile Include="user_file_io.cpp" />
     <ClCompile Include="user_storage.cpp" />
     <ClCompile Include="utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

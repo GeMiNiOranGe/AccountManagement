@@ -30,17 +30,17 @@ void MainForm::show() {
             std::string new_password, confirm_new_password;
 
             system("cls");
-            set_color(Color::LIGHT_YELLOW);
+            std::cout << byellow;
             std::cout << "<Doi mat khau mac dinh>" << std::endl;
             std::cout << "(Mat khau mac dinh la: " + DEFAULT_PASSWORD + ")" << std::endl;
-            set_color(Color::LIGHT_BLUE);
+            std::cout << bblue;
             std::cout << "Nhap mat khau moi: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bwhite;
             encode_password(new_password);
             std::cout << std::endl;
-            set_color(Color::LIGHT_BLUE);
+            std::cout << bblue;
             std::cout << "Nhap lai mat khau moi: ";
-            set_color(Color::BRIGHT_WHITE);
+            std::cout << bwhite;
             encode_password(confirm_new_password);
             std::cout << std::endl;
 
@@ -51,7 +51,7 @@ void MainForm::show() {
 
                 AccountStorage::update_account(account, new_account);
 
-                set_color(Color::LIGHT_RED);
+                std::cout << bred;
                 std::cout << "Cap nhat thanh cong!!!" << std::endl;
                 system("pause");
             } else {
