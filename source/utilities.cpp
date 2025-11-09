@@ -18,33 +18,39 @@ bool is_open_file(std::ofstream &fout, const std::string &path) {
     return true;
 }
 
-void encode_password(std::string &_password) {
-    char event_key;
+std::string input_password() {
+    std::string password;
+    char key;
+
     do {
-        event_key = _getch();
-        // ESC key
-        if (event_key == 27)
-            exit(0);
+        key = _getch();
+
         // BACKSPACE key
-        if (event_key == 8 && !_password.empty()) {
+        if (key == 8 && !password.empty()) {
             std::cout << "\b \b";
-            _password.pop_back();
+            password.pop_back();
         }
+
         // Erase a line with "CTRL + BACKSPACE"
-        if (event_key == 127) {
-            for (int i = 0; i < _password.size(); i++)
+        if (key == 127) {
+            for (int i = 0; i < password.size(); i++) {
                 std::cout << "\b \b";
-            _password.clear();
+            }
+            password.clear();
         }
+
         // Printable characters
-        if (isprint(event_key)) {
-            _password.push_back(event_key);
-            std::cout << event_key;
+        if (isprint(key)) {
+            password.push_back(key);
+            std::cout << key;
             Sleep(100);
             std::cout << "\b \b*";
         }
+
         // Not the ENTER key
-    } while (event_key != 13);
+    } while (key != 13);
+
+    return password;
 }
 
 void go_to_xy(short x, short y) {

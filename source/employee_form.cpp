@@ -40,16 +40,19 @@ void EmployeeForm::handle_view_personal_information(const Account &account) {
 }
 
 void EmployeeForm::handle_change_password(const Account &account) {
-    std::string current_password, new_password, confirm_new_password;
-
     system("cls");
     std::cout << byellow << "<Change password>" << std::endl;
+
     std::cout << bblue << "Enter current password: " << reset_color;
-    encode_password(current_password);
-    std::cout << std::endl << bblue << "Enter new password: " << reset_color;
-    encode_password(new_password);
-    std::cout << std::endl << bblue << "Confirm new password: " << reset_color;
-    encode_password(confirm_new_password);
+    std::string current_password = input_password();
+    std::cout << std::endl;
+
+    std::cout << bblue << "Enter new password: " << reset_color;
+    std::string new_password = input_password();
+    std::cout << std::endl;
+
+    std::cout << bblue << "Confirm new password: " << reset_color;
+    std::string confirm_new_password = input_password();
     std::cout << std::endl;
 
     bool is_valid_password = new_password != current_password

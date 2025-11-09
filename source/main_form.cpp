@@ -27,21 +27,17 @@ void MainForm::show() {
         Account account = AccountStorage::get_account_details(pair_user_pass.first, pair_user_pass.second);
 
         if (AccountStorage::has_account(account) && account.get_password() == DEFAULT_PASSWORD) {
-            std::string new_password, confirm_new_password;
-
             system("cls");
             std::cout << byellow;
             std::cout << "<Doi mat khau mac dinh>" << std::endl;
             std::cout << "(Mat khau mac dinh la: " + DEFAULT_PASSWORD + ")" << std::endl;
-            std::cout << bblue;
-            std::cout << "Nhap mat khau moi: ";
-            std::cout << bwhite;
-            encode_password(new_password);
+
+            std::cout << bblue << "Nhap mat khau moi: " << reset_color;
+            std::string new_password = input_password();
             std::cout << std::endl;
-            std::cout << bblue;
-            std::cout << "Nhap lai mat khau moi: ";
-            std::cout << bwhite;
-            encode_password(confirm_new_password);
+
+            std::cout << bblue << "Nhap lai mat khau moi: " << reset_color;
+            std::string confirm_new_password = input_password();
             std::cout << std::endl;
 
             if (new_password != DEFAULT_PASSWORD && new_password == confirm_new_password) {
