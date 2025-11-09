@@ -2,6 +2,8 @@
 #ifndef ADMINISTRATOR_FORM_HPP
 #define ADMINISTRATOR_FORM_HPP
 
+#include "account_service.hpp"
+#include "config.hpp"
 #include "console_color.hpp"
 #include "handle_console.hpp"
 #include "ui_have_no_ux.hpp"

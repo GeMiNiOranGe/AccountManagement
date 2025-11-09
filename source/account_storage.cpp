@@ -46,11 +46,9 @@ Account AccountStorage::get_account_details(
     return result;
 }
 
-void AccountStorage::create_account(const std::string &username) {
-    // append account in file Accounts.txt
+void AccountStorage::create_account(const Account &account) {
     std::ofstream fout(ACCOUNTS_FILE, std::ios_base::app);
-    Account new_account(AccountRole::EMPLOYEE, username);
-    AccountFileIO::write_file(fout, new_account);
+    AccountFileIO::write_file(fout, account);
 }
 
 void AccountStorage::delete_account(const std::string &username) {

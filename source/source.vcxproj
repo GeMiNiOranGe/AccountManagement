@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="account.hpp" />
     <ClInclude Include="account_file_io.hpp" />
+    <ClInclude Include="account_service.hpp" />
     <ClInclude Include="account_storage.hpp" />
     <ClInclude Include="account_role.hpp" />
     <ClInclude Include="administrator_form.hpp" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="account.cpp" />
     <ClCompile Include="account_file_io.cpp" />
+    <ClCompile Include="account_service.cpp" />
     <ClCompile Include="account_storage.cpp" />
     <ClCompile Include="administrator_form.cpp" />
     <ClCompile Include="box_border.cpp" />
@@ -187,9 +189,6 @@
     <ClCompile Include="user_file_io.cpp" />
     <ClCompile Include="user_storage.cpp" />
     <ClCompile Include="utilities.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

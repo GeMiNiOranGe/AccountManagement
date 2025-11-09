@@ -53,6 +53,20 @@ std::string AdministratorForm::prompt_username(const std::string &header) {
 void AdministratorForm::handle_add() {
     std::string username = prompt_username("Add account");
 
+    /*
+    // TODO: Reimplement this code, allow user enter username until it's valid.
+    // Loop until user enter a username that doesn't exist in the storage.
+    std::string username = prompt_username("Add employee account");
+
+    bool is_success = UserService::create_user(User(username));
+    if (is_success) {
+        success("Add success!!!");
+        return;
+    }
+
+    warning("Username already exists!!!");
+    */
+
     if (AccountStorage::has_username(username)) {
         warning("Username already exists!!!");
         return;
@@ -60,7 +74,7 @@ void AdministratorForm::handle_add() {
 
     User user;
 
-    AccountStorage::create_account(username);
+    AccountService::create_account(username);
     user.set_username(username);
     console::read_info(user);
     UserStorage::create_user(user);

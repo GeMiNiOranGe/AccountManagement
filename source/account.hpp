@@ -5,11 +5,10 @@
 #include <string>
 
 #include "account_role.hpp"
-#include "config.hpp"
 
 class Account {
 public:
-	Account(AccountRole _role = AccountRole::NONE, std::string _username = "", std::string _password = DEFAULT_PASSWORD);
+	Account(AccountRole _role = AccountRole::NONE, std::string _username = "", std::string _password = "");
 
 	const AccountRole & get_role() const;
 	const std::string & get_username() const;
