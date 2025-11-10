@@ -10,8 +10,8 @@
 
 class UserFileIO {
 public:
-	static bool read_file(std::ifstream &fin, User &value);
-	static void write_file(std::ofstream &fout, const User &value);
+    static bool read_file(std::ifstream & fin, User & value);
+    static void write_file(std::ofstream & fout, const User & value);
 };
 
-#endif // end USER_FILE_IO_HPP
+#endif  // end USER_FILE_IO_HPP

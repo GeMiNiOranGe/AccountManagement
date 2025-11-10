@@ -10,7 +10,7 @@
 
 class AdministratorForm {
 private:
-    static std::string prompt_username(const std::string &header);
+    static std::string prompt_username(const std::string & header);
     static void handle_add();
     static void handle_delete();
     static void handle_search();
@@ -21,4 +21,4 @@ public:
     static void show();
 };
 
-#endif // end ADMINISTRATOR_FORM_HPP
+#endif  // end ADMINISTRATOR_FORM_HPP

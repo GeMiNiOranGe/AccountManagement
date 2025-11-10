@@ -3,9 +3,9 @@
 #define ACCOUNT_ROLE_HPP
 
 enum class AccountRole {
-	ADMINISTRATOR,
-	EMPLOYEE,
-	NONE,
+    ADMINISTRATOR,
+    EMPLOYEE,
+    NONE,
 };
 
-#endif // end ACCOUNT_ROLE_HPP
+#endif  // end ACCOUNT_ROLE_HPP

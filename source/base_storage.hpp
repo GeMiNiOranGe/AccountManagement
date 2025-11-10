@@ -3,24 +3,24 @@
 #define BASE_STORAGE_HPP
 
 #include <fstream>
-#include <string>
 #include <functional>
+#include <string>
 
 #include "utilities.hpp"
 
-template <typename T, typename FileIO, const std::string &FilePath>
+template <typename T, typename FileIO, const std::string & FilePath>
 class BaseStorage {
 protected:
-    static void for_each_item(const std::function<bool(const T &)> &callback);
+    static void for_each_item(const std::function<bool(const T &)> & callback);
 
     static void process_file(
-        const std::function<void(T &, std::ofstream &)> &processor
+        const std::function<void(T &, std::ofstream &)> & processor
     );
 };
 
-template <typename T, typename FileIO, const std::string &FilePath>
+template <typename T, typename FileIO, const std::string & FilePath>
 void BaseStorage<T, FileIO, FilePath>::for_each_item(
-    const std::function<bool(const T &)> &callback
+    const std::function<bool(const T &)> & callback
 ) {
     std::ifstream fin;
 
@@ -36,9 +36,9 @@ void BaseStorage<T, FileIO, FilePath>::for_each_item(
     }
 }
 
-template <typename T, typename FileIO, const std::string &FilePath>
+template <typename T, typename FileIO, const std::string & FilePath>
 void BaseStorage<T, FileIO, FilePath>::process_file(
-    const std::function<void(T &, std::ofstream &)> &processor
+    const std::function<void(T &, std::ofstream &)> & processor
 ) {
     const std::string original_file = FilePath;
     std::string backup_file = FilePath;
@@ -72,4 +72,4 @@ void BaseStorage<T, FileIO, FilePath>::process_file(
     remove(backup_file.c_str());
 }
 
-#endif // end BASE_STORAGE_HPP
+#endif  // end BASE_STORAGE_HPP

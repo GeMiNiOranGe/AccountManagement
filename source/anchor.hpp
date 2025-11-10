@@ -3,15 +3,15 @@
 #define ANCHOR_HPP
 
 enum class Anchor {
-	TOP_LEFT,
-	TOP,
-	TOP_RIGHT,
-	LEFT,
-	CENTER,
-	RIGHT,
-	BOTTOM_LEFT,
-	BOTTOM,
-	BOTTOM_RIGHT
+    TOP_LEFT,
+    TOP,
+    TOP_RIGHT,
+    LEFT,
+    CENTER,
+    RIGHT,
+    BOTTOM_LEFT,
+    BOTTOM,
+    BOTTOM_RIGHT
 };
 
-#endif // end ANCHOR_HPP
+#endif  // end ANCHOR_HPP

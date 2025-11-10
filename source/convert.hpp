@@ -6,8 +6,8 @@
 
 class Convert {
 public:
-	static std::wstring to_wstring(const std::string);
-	static char * to_char(const std::string);
+    static std::wstring to_wstring(const std::string);
+    static char * to_char(const std::string);
 };
 
-#endif // end CONVERT_HPP
+#endif  // end CONVERT_HPP

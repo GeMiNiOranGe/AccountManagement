@@ -3,7 +3,7 @@
 std::unordered_map<std::string, User> UserStorage::get_users_map() {
     std::unordered_map<std::string, User> users_map;
 
-    for_each_item([&](const User &item) {
+    for_each_item([&](const User & item) {
         users_map[item.get_username()] = item;
         return false;
     });
@@ -11,13 +11,13 @@ std::unordered_map<std::string, User> UserStorage::get_users_map() {
     return users_map;
 }
 
-void UserStorage::create_user(const User &user) {
+void UserStorage::create_user(const User & user) {
     std::ofstream fout(USERS_FILE, std::ios_base::app);
     UserFileIO::write_file(fout, user);
 }
 
-void UserStorage::delete_user(const std::string &username) {
-    process_file([&username](User &user, std::ofstream &fout) {
+void UserStorage::delete_user(const std::string & username) {
+    process_file([&username](User & user, std::ofstream & fout) {
         if (user.get_username() != username) {
             UserFileIO::write_file(fout, user);
         }
@@ -26,7 +26,7 @@ void UserStorage::delete_user(const std::string &username) {
 
 // TODO: update from new_user to old_user
 void UserStorage::update_user(
-    const std::string &username,
+    const std::string & username,
     std::string info_updated,
     char option
 ) {
@@ -50,10 +50,10 @@ void UserStorage::update_user(
     });
 }
 
-User UserStorage::read_user(const std::string &username) {
+User UserStorage::read_user(const std::string & username) {
     User result;
 
-    for_each_item([&](const User &item) {
+    for_each_item([&](const User & item) {
         if (item.get_username() == username) {
             result = item;
             return true;

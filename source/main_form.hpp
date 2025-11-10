@@ -10,4 +10,4 @@ public:
     static void show();
 };
 
-#endif // end MAIN_FORM_HPP
+#endif  // end MAIN_FORM_HPP

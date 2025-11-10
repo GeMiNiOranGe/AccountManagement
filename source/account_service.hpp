@@ -7,7 +7,7 @@
 
 class AccountService {
 public:
-    static bool create_account(const std::string &username);
+    static bool create_account(const std::string & username);
 };
 
-#endif // end ACCOUNT_SERVICE_HPP
+#endif  // end ACCOUNT_SERVICE_HPP

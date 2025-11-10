@@ -12,34 +12,35 @@ void AdministratorForm::show() {
              L"Search employee account",
              L"Edit employee account",
              L"Display employee account information",
-             L"Log out"});
+             L"Log out"}
+        );
 
         switch (event) {
-        case 49:
-            handle_add();
-            break;
-        case 50:
-            handle_delete();
-            break;
-        case 51:
-            handle_search();
-            break;
-        case 52:
-            handle_edit();
-            break;
-        case 53:
-            handle_show_information();
-            break;
-        case 54:
-            return;
-        default:
-            warning("Invalid choice!!!");
-            break;
+            case 49:
+                handle_add();
+                break;
+            case 50:
+                handle_delete();
+                break;
+            case 51:
+                handle_search();
+                break;
+            case 52:
+                handle_edit();
+                break;
+            case 53:
+                handle_show_information();
+                break;
+            case 54:
+                return;
+            default:
+                warning("Invalid choice!!!");
+                break;
         }
     }
 }
 
-std::string AdministratorForm::prompt_username(const std::string &header) {
+std::string AdministratorForm::prompt_username(const std::string & header) {
     system("cls");
     std::cout << byellow << "<" << header << ">" << std::endl;
     std::cout << bred << "Username cannot have spaces" << std::endl;
@@ -123,11 +124,9 @@ void AdministratorForm::handle_edit() {
     while (true) {
         char event = menu_options(
             L"< Select the information to edit >",
-            {L"Full name",
-             L"Address",
-             L"Phone number",
-             L"Email address"},
-            {L"<ESC> de huy bo"});
+            {L"Full name", L"Address", L"Phone number", L"Email address"},
+            {L"<ESC> de huy bo"}
+        );
 
         if (48 < event && event < 53) {
             std::string info_updated;

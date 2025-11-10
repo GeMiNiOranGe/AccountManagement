@@ -39,4 +39,4 @@ enum class Color {
     BRIGHT_WHITE,
 };
 
-#endif // end COLOR_HPP
+#endif  // end COLOR_HPP

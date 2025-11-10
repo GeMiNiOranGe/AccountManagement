@@ -1,6 +1,6 @@
 #include "account_file_io.hpp"
 
-AccountRole AccountFileIO::parse_role_text(const std::string &value) {
+AccountRole AccountFileIO::parse_role_text(const std::string & value) {
     if (value == "AD") {
         return AccountRole::ADMINISTRATOR;
     }
@@ -20,7 +20,7 @@ std::string AccountFileIO::to_role_text(AccountRole value) {
     return "";
 }
 
-bool AccountFileIO::read_file(std::ifstream &fin, Account &value) {
+bool AccountFileIO::read_file(std::ifstream & fin, Account & value) {
     std::string line;
 
     if (!getline(fin, line) || line.empty()) {
@@ -41,7 +41,7 @@ bool AccountFileIO::read_file(std::ifstream &fin, Account &value) {
     return true;
 }
 
-void AccountFileIO::write_file(std::ofstream &fout, const Account &value) {
+void AccountFileIO::write_file(std::ofstream & fout, const Account & value) {
     fout << value.get_username() << CHAR_SEPARATED_VALUES;
     fout << value.get_password() << CHAR_SEPARATED_VALUES;
     fout << to_role_text(value.get_role()) << std::endl;

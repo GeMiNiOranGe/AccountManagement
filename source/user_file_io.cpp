@@ -1,6 +1,6 @@
 #include "user_file_io.hpp"
 
-bool UserFileIO::read_file(std::ifstream &fin, User &value) {
+bool UserFileIO::read_file(std::ifstream & fin, User & value) {
     std::string line;
 
     if (!getline(fin, line) || line.empty()) {
@@ -25,7 +25,7 @@ bool UserFileIO::read_file(std::ifstream &fin, User &value) {
     return true;
 }
 
-void UserFileIO::write_file(std::ofstream &fout, const User &value) {
+void UserFileIO::write_file(std::ofstream & fout, const User & value) {
     fout << value.get_username() << CHAR_SEPARATED_VALUES;
     fout << value.get_full_name() << CHAR_SEPARATED_VALUES;
     fout << value.get_address() << CHAR_SEPARATED_VALUES;

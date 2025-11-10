@@ -13,15 +13,19 @@ private:
     AccountRole role_;
 
 public:
-    Account(std::string username = "", std::string password = "", AccountRole role = AccountRole::NONE);
+    Account(
+        std::string username = "",
+        std::string password = "",
+        AccountRole role = AccountRole::NONE
+    );
 
-    const AccountRole &get_role() const;
-    const std::string &get_username() const;
-    const std::string &get_password() const;
+    const AccountRole & get_role() const;
+    const std::string & get_username() const;
+    const std::string & get_password() const;
 
-    void set_role(const AccountRole &value);
-    void set_username(const std::string &value);
-    void set_password(const std::string &value);
+    void set_role(const AccountRole & value);
+    void set_username(const std::string & value);
+    void set_password(const std::string & value);
 };
 
-#endif // end ACCOUNT_HPP
+#endif  // end ACCOUNT_HPP

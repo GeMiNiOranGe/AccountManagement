@@ -1,4 +1,4 @@
-﻿#include "main_form.hpp"
+#include "main_form.hpp"
 
 int main() {
     MainForm::show();

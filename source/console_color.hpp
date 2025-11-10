@@ -2,8 +2,8 @@
 #ifndef CONSOLE_COLOR_HPP
 #define CONSOLE_COLOR_HPP
 
-#include <iostream>
 #include <windows.h>
+#include <iostream>
 
 #include "color.hpp"
 
@@ -12,37 +12,37 @@ void set_color(Color foreground, Color background = Color::BLACK);
 // ---------------------------------------------
 // Foreground only manipulators
 // ---------------------------------------------
-#define DEFINE_COLOR_MANIP(name, foreground)         \
-    inline std::ostream &name(std::ostream &os) {    \
-        set_color(Color::foreground);                \
-        return os;                                   \
-    }                                                \
-    inline std::wostream &name(std::wostream &wos) { \
-        set_color(Color::foreground);                \
-        return wos;                                  \
+#define DEFINE_COLOR_MANIP(name, foreground)                                   \
+    inline std::ostream & name(std::ostream & os) {                            \
+        set_color(Color::foreground);                                          \
+        return os;                                                             \
+    }                                                                          \
+    inline std::wostream & name(std::wostream & wos) {                         \
+        set_color(Color::foreground);                                          \
+        return wos;                                                            \
     }
 
 // ---------------------------------------------
 // Foreground + Background combinations
 // ---------------------------------------------
-#define DEFINE_COLOR_PAIR_MANIP(name, foreground, background) \
-    inline std::ostream &name(std::ostream &os) {             \
-        set_color(Color::foreground, Color::background);      \
-        return os;                                            \
-    }                                                         \
-    inline std::wostream &name(std::wostream &wos) {          \
-        set_color(Color::foreground, Color::background);      \
-        return wos;                                           \
+#define DEFINE_COLOR_PAIR_MANIP(name, foreground, background)                  \
+    inline std::ostream & name(std::ostream & os) {                            \
+        set_color(Color::foreground, Color::background);                       \
+        return os;                                                             \
+    }                                                                          \
+    inline std::wostream & name(std::wostream & wos) {                         \
+        set_color(Color::foreground, Color::background);                       \
+        return wos;                                                            \
     }
 
 // Reset to default console color
-inline std::ostream &reset_color(std::ostream &os) {
+inline std::ostream & reset_color(std::ostream & os) {
     set_color(Color::BRIGHT_WHITE, Color::BLACK);
     return os;
 }
 
 // Reset to default console color
-inline std::wostream &reset_color(std::wostream &os) {
+inline std::wostream & reset_color(std::wostream & os) {
     set_color(Color::BRIGHT_WHITE, Color::BLACK);
     return os;
 }
@@ -115,4 +115,4 @@ DEFINE_COLOR_PAIR_MANIP(bpurple_on_white, BRIGHT_PURPLE, WHITE)
 DEFINE_COLOR_PAIR_MANIP(byellow_on_white, BRIGHT_YELLOW, WHITE)
 DEFINE_COLOR_PAIR_MANIP(bwhite_on_white, BRIGHT_WHITE, WHITE)
 
-#endif // end CONSOLE_COLOR_HPP
+#endif  // end CONSOLE_COLOR_HPP

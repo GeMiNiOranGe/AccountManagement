@@ -1,33 +1,32 @@
 #include "employee_form.hpp"
 
-void EmployeeForm::show(const Account &account) {
+void EmployeeForm::show(const Account & account) {
     while (true) {
         console::resize(500, 500);
         console::move_to::center();
 
         char event = menu_options(
             L"< MENU EMPLOYEE >",
-            {L"View account information",
-             L"Change password",
-             L"Log out"});
+            {L"View account information", L"Change password", L"Log out"}
+        );
 
         switch (event) {
-        case 49:
-            handle_view_personal_information(account);
-            break;
-        case 50:
-            handle_change_password(account);
-            break;
-        case 51:
-            return;
-        default:
-            warning("Invalid choice!!!");
-            break;
+            case 49:
+                handle_view_personal_information(account);
+                break;
+            case 50:
+                handle_change_password(account);
+                break;
+            case 51:
+                return;
+            default:
+                warning("Invalid choice!!!");
+                break;
         }
     }
 }
 
-void EmployeeForm::handle_view_personal_information(const Account &account) {
+void EmployeeForm::handle_view_personal_information(const Account & account) {
     system("cls");
     std::cout << byellow << "<Account information>" << std::endl;
     std::cout << yellow << "    Username: " << reset_color;
@@ -39,7 +38,7 @@ void EmployeeForm::handle_view_personal_information(const Account &account) {
     system("pause");
 }
 
-void EmployeeForm::handle_change_password(const Account &account) {
+void EmployeeForm::handle_change_password(const Account & account) {
     system("cls");
     std::cout << byellow << "<Change password>" << std::endl;
 
@@ -56,7 +55,7 @@ void EmployeeForm::handle_change_password(const Account &account) {
     std::cout << std::endl;
 
     bool is_valid_password = new_password != current_password
-        && new_password == confirm_new_password;
+                             && new_password == confirm_new_password;
 
     if (!is_valid_password) {
         warning("Wrong information!!!");
