@@ -7,10 +7,11 @@
 #include "console_color.hpp"
 #include "handle_console.hpp"
 #include "ui_have_no_ux.hpp"
+#include "user_service.hpp"
 
 class AdministratorForm {
 private:
-    static std::string prompt_username(const std::string & header);
+    static InputResult prompt_username(const std::string & header);
     static void handle_add();
     static void handle_delete();
     static void handle_search();

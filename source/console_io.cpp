@@ -2,7 +2,6 @@
 
 void console::read_info(User & _user) {
     std::string full_name, address, phone_number, email_address;
-    std::cin.ignore();
     std::cout << byellow;
     std::cout << "    Nhap thong tin tai khoan" << std::endl;
     std::cout << baqua;

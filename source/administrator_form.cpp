@@ -1,19 +1,21 @@
 #include "administrator_form.hpp"
 
 void AdministratorForm::show() {
+    std::wstring header = L"< ADMINISTRATOR MENU >";
+    std::vector<std::wstring> option = {
+        L"Add employee account",
+        L"Delete employee account",
+        L"Search employee account",
+        L"Edit employee account",
+        L"Display employee account information",
+        L"Log out"
+    };
+
     while (true) {
         console::resize(500, 500);
         console::move_to::center();
 
-        char event = menu_options(
-            L"< MENU ADMINISTRATOR >",
-            {L"Add employee account",
-             L"Delete employee account",
-             L"Search employee account",
-             L"Edit employee account",
-             L"Display employee account information",
-             L"Log out"}
-        );
+        char event = menu_options(header, option);
 
         switch (event) {
             case 49:
@@ -40,93 +42,100 @@ void AdministratorForm::show() {
     }
 }
 
-std::string AdministratorForm::prompt_username(const std::string & header) {
+InputResult AdministratorForm::prompt_username(const std::string & header) {
     system("cls");
     std::cout << byellow << "<" << header << ">" << std::endl;
     std::cout << bred << "Username cannot have spaces" << std::endl;
+    std::cout << white << "<ESC> to back" << std::endl;
     std::cout << bblue << "    Enter username: " << reset_color;
 
-    std::string username;
-    std::cin >> username;
-    return username;
+    return input_text();
 }
 
 void AdministratorForm::handle_add() {
-    std::string username = prompt_username("Add account");
+    while (true) {
+        InputResult input_result = prompt_username("Add account");
 
-    /*
-    // TODO: Reimplement this code, allow user enter username until it's valid.
-    // Loop until user enter a username that doesn't exist in the storage.
-    std::string username = prompt_username("Add employee account");
+        if (input_result.cancelled) {
+            return;
+        }
 
-    bool is_success = UserService::create_user(User(username));
-    if (is_success) {
-        success("Add success!!!");
-        return;
-    }
+        if (!AccountStorage::has_username(input_result.value)) {
+            User user(input_result.value);
+            console::read_info(user);
 
-    warning("Username already exists!!!");
-    */
+            UserService::create_user(user);
+            success("Account added successfully!");
+            return;
+        }
 
-    if (AccountStorage::has_username(username)) {
         warning("Username already exists!!!");
-        return;
     }
-
-    User user;
-
-    AccountService::create_account(username);
-    user.set_username(username);
-    console::read_info(user);
-    UserStorage::create_user(user);
-
-    success("Add success!!!");
 }
 
 void AdministratorForm::handle_delete() {
-    std::string username = prompt_username("Delete account");
+    while (true) {
+        InputResult input_result = prompt_username("Delete account");
 
-    if (!AccountStorage::has_username(username)) {
-        warning("Can't find \"" + username + "\" to delete!!!");
-        return;
+        if (input_result.cancelled) {
+            return;
+        }
+
+        if (AccountStorage::has_username(input_result.value)) {
+            UserService::delete_user(input_result.value);
+            success("Delete success!!!");
+            return;
+        }
+
+        warning("Can't find \"" + input_result.value + "\"!!!");
     }
-
-    AccountStorage::delete_account(username);
-    UserStorage::delete_user(username);
-
-    success("Delete success!!!");
 }
 
 void AdministratorForm::handle_search() {
-    std::string username = prompt_username("Search account");
+    while (true) {
+        InputResult input_result = prompt_username("Search account");
 
-    if (!AccountStorage::has_username(username)) {
-        warning("Can't find \"" + username + "\" to delete!!!");
-        return;
+        if (input_result.cancelled) {
+            return;
+        }
+
+        if (AccountStorage::has_username(input_result.value)) {
+            User user = UserService::get_user(input_result.value);
+            std::cout << byellow << "    Account information: " << std::endl;
+            console::write_info(user);
+            system("pause");
+            return;
+        }
+
+        warning("Can't find \"" + input_result.value + "\"!!!");
     }
-
-    User user = UserStorage::read_user(username);
-
-    std::cout << byellow << "    Account information to find: " << std::endl;
-    console::write_info(user);
-
-    system("pause");
 }
 
 void AdministratorForm::handle_edit() {
-    std::string username = prompt_username("Edit account");
-
-    if (!AccountStorage::has_username(username)) {
-        warning("Can't find \"" + username + "\" to delete!!!");
-        return;
-    }
+    InputResult input_result;
 
     while (true) {
-        char event = menu_options(
-            L"< Select the information to edit >",
-            {L"Full name", L"Address", L"Phone number", L"Email address"},
-            {L"<ESC> de huy bo"}
-        );
+        input_result = prompt_username("Edit account");
+
+        if (input_result.cancelled) {
+            return;
+        }
+
+        if (AccountStorage::has_username(input_result.value)) {
+            break;
+        }
+
+        warning("Can't find \"" + input_result.value + "\"!!!");
+    }
+
+    std::wstring header = L"< Select the information to edit >";
+    std::vector<std::wstring> option = {
+        L"Full name", L"Address", L"Phone number", L"Email address"
+    };
+    std::vector<std::wstring> sub_option = {L"<ESC> to back"};
+
+    while (true) {
+        char event = menu_options(header, option, sub_option);
 
         if (48 < event && event < 53) {
             std::string info_updated;
@@ -138,7 +147,7 @@ void AdministratorForm::handle_edit() {
             std::cin.ignore();
             getline(std::cin, info_updated);
 
-            UserStorage::update_user(username, info_updated, event);
+            UserStorage::update_user(input_result.value, info_updated, event);
 
             success("Update success!!!");
         } else if (event == 27) {

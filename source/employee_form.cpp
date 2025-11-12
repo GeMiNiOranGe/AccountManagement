@@ -1,14 +1,16 @@
 #include "employee_form.hpp"
 
 void EmployeeForm::show(const Account & account) {
+    std::wstring header = L"< EMPLOYEE MENU >";
+    std::vector<std::wstring> option = {
+        L"View account information", L"Change password", L"Log out"
+    };
+
     while (true) {
         console::resize(500, 500);
         console::move_to::center();
 
-        char event = menu_options(
-            L"< MENU EMPLOYEE >",
-            {L"View account information", L"Change password", L"Log out"}
-        );
+        char event = menu_options(header, option);
 
         switch (event) {
             case 49:

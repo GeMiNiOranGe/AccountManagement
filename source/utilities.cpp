@@ -53,6 +53,36 @@ std::string input_password() {
     return password;
 }
 
+InputResult input_text(bool hide_input, size_t max_length) {
+    std::string text;
+    char key;
+
+    do {
+        key = _getch();
+
+        // BACKSPACE
+        if (key == 8 && !text.empty()) {
+            std::cout << "\b \b";
+            text.pop_back();
+            continue;
+        }
+
+        // ESC: hủy nhập
+        if (key == 27) {
+            std::cout << "\n[Cancelled]\n";
+            return {true, ""};
+        }
+
+        // Printable characters
+        if (isprint(key) && text.size() < max_length) {
+            text.push_back(key);
+            std::cout << (hide_input ? '*' : key);
+        }
+    } while (key != 13);
+
+    return {false, text};
+}
+
 void go_to_xy(short x, short y) {
     COORD pos = {x, y};
     HANDLE handle_std_out = GetStdHandle(STD_OUTPUT_HANDLE);

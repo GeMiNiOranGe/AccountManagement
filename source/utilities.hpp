@@ -10,10 +10,16 @@
 
 #include "console_color.hpp"
 
+struct InputResult {
+    bool cancelled;
+    std::string value;
+};
+
 bool is_open_file(std::ifstream & fin, const std::string & path);
 bool is_open_file(std::ofstream & fout, const std::string & path);
 
 std::string input_password();
+InputResult input_text(bool hide_input = false, size_t max_length = 64);
 
 void go_to_xy(short x, short y);
 void warning(std::string message);
