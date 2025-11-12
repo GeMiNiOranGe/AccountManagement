@@ -166,6 +166,7 @@
     <ClInclude Include="ui_have_no_ux.hpp" />
     <ClInclude Include="user.hpp" />
     <ClInclude Include="user_file_io.hpp" />
+    <ClInclude Include="user_service.hpp" />
     <ClInclude Include="user_storage.hpp" />
     <ClInclude Include="utilities.hpp" />
   </ItemGroup>
@@ -191,6 +192,7 @@
     <ClCompile Include="ui_have_no_ux.cpp" />
     <ClCompile Include="user.cpp" />
     <ClCompile Include="user_file_io.cpp" />
+    <ClCompile Include="user_service.cpp" />
     <ClCompile Include="user_storage.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>

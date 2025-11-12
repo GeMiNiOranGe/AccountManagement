@@ -34,7 +34,7 @@ void EmployeeForm::handle_view_personal_information(const Account & account) {
     std::cout << yellow << "    Username: " << reset_color;
     std::cout << account.get_username() << std::endl;
 
-    User user = UserStorage::read_user(account.get_username());
+    User user = UserStorage::get_user(account.get_username());
     console::write_info(user);
 
     system("pause");

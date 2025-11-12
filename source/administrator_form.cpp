@@ -147,7 +147,7 @@ void AdministratorForm::handle_edit() {
             std::cin.ignore();
             getline(std::cin, info_updated);
 
-            UserStorage::update_user(input_result.value, info_updated, event);
+            UserService::update_user(input_result.value, event, info_updated);
 
             success("Update success!!!");
         } else if (event == 27) {
