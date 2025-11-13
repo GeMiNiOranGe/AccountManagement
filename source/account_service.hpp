@@ -8,6 +8,8 @@
 class AccountService {
 public:
     static void create_default_account(const std::string & username);
+    static void
+    update_password(const std::string & username, const std::string & password);
 };
 
 #endif  // end ACCOUNT_SERVICE_HPP

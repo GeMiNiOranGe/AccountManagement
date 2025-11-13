@@ -64,10 +64,6 @@ void EmployeeForm::handle_change_password(const Account & account) {
         return;
     }
 
-    Account new_account;
-    new_account.set_username(account.get_username());
-    new_account.set_password(new_password);
-
-    AccountStorage::update_account(account, new_account);
-    success("Update success!!!");
+    AccountService::update_password(account.get_username(), new_password);
+    success("Password updated successfully!");
 }

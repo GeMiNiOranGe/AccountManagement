@@ -17,10 +17,14 @@ public:
         const std::string & password
     );
 
+    static Account get_account(const std::string & username);
+
     static void create_account(const Account & account);
     static void delete_account(const std::string & username);
     static void
     update_account(const Account & old_account, const Account & new_account);
+    static void
+    update_account(const std::string & username, const Account & account);
 };
 
 #endif  // end ACCOUNT_STORAGE_HPP
