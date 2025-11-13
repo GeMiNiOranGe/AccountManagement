@@ -19,7 +19,7 @@ void AdministratorForm::show() {
 
         switch (event) {
             case 49:
-                handle_add();
+                handle_create();
                 break;
             case 50:
                 handle_delete();
@@ -28,10 +28,10 @@ void AdministratorForm::show() {
                 handle_search();
                 break;
             case 52:
-                handle_edit();
+                handle_update();
                 break;
             case 53:
-                handle_show_information();
+                handle_show_accounts();
                 break;
             case 54:
                 return;
@@ -49,83 +49,76 @@ InputResult AdministratorForm::prompt_username(const std::string & header) {
     std::cout << white << "<ESC> to back" << std::endl;
     std::cout << bblue << "    Enter username: " << reset_color;
 
-    return input_text();
+    InputResult input_result = input_text();
+    std::cout << std::endl;
+
+    return input_result;
 }
 
-void AdministratorForm::handle_add() {
+InputResult AdministratorForm::prompt_username_until(
+    const std::string & header,
+    bool must_exist
+) {
     while (true) {
-        InputResult input_result = prompt_username("Add account");
+        InputResult input_result = prompt_username(header);
 
         if (input_result.cancelled) {
-            return;
+            return input_result;
         }
 
-        if (!AccountStorage::has_username(input_result.value)) {
-            User user(input_result.value);
-            console::read_info(user);
+        bool exists = AccountStorage::has_username(input_result.value);
 
-            UserService::create_user(user);
-            success("Account added successfully!");
-            return;
+        if ((must_exist && exists) || (!must_exist && !exists)) {
+            return input_result;
         }
 
-        warning("Username already exists!!!");
-    }
-}
-
-void AdministratorForm::handle_delete() {
-    while (true) {
-        InputResult input_result = prompt_username("Delete account");
-
-        if (input_result.cancelled) {
-            return;
+        if (must_exist) {
+            warning("Can't find \"" + input_result.value + "\"!!!");
+        } else {
+            warning("Username already exists!!!");
         }
-
-        if (AccountStorage::has_username(input_result.value)) {
-            UserService::delete_user(input_result.value);
-            success("Delete success!!!");
-            return;
-        }
-
-        warning("Can't find \"" + input_result.value + "\"!!!");
     }
 }
 
 void AdministratorForm::handle_search() {
-    while (true) {
-        InputResult input_result = prompt_username("Search account");
-
-        if (input_result.cancelled) {
-            return;
-        }
-
-        if (AccountStorage::has_username(input_result.value)) {
-            User user = UserService::get_user(input_result.value);
-            std::cout << byellow << "    Account information: " << std::endl;
-            console::write_info(user);
-            system("pause");
-            return;
-        }
-
-        warning("Can't find \"" + input_result.value + "\"!!!");
+    InputResult input_result = prompt_username_until("Search account", true);
+    if (input_result.cancelled) {
+        return;
     }
+
+    User user = UserService::get_user(input_result.value);
+    std::cout << byellow << "    Account information: " << std::endl;
+    console::write_info(user);
+    system("pause");
 }
 
-void AdministratorForm::handle_edit() {
-    InputResult input_result;
+void AdministratorForm::handle_create() {
+    InputResult input_result = prompt_username_until("Add account", false);
+    if (input_result.cancelled) {
+        return;
+    }
 
-    while (true) {
-        input_result = prompt_username("Edit account");
+    User user(input_result.value);
+    console::read_info(user);
 
-        if (input_result.cancelled) {
-            return;
-        }
+    UserService::create_user(user);
+    success("Account created successfully!");
+}
 
-        if (AccountStorage::has_username(input_result.value)) {
-            break;
-        }
+void AdministratorForm::handle_delete() {
+    InputResult input_result = prompt_username_until("Delete account", true);
+    if (input_result.cancelled) {
+        return;
+    }
 
-        warning("Can't find \"" + input_result.value + "\"!!!");
+    UserService::delete_user(input_result.value);
+    success("Account deleted successfully!");
+}
+
+void AdministratorForm::handle_update() {
+    InputResult input_result = prompt_username_until("Edit account", true);
+    if (input_result.cancelled) {
+        return;
     }
 
     std::wstring header = L"< Select the information to edit >";
@@ -137,28 +130,29 @@ void AdministratorForm::handle_edit() {
     while (true) {
         char event = menu_options(header, option, sub_option);
 
-        if (48 < event && event < 53) {
-            std::string info_updated;
-
-            std::cout << bblue << "Update information in the selection: ";
-            std::cout << reset_color << event - 48 << std::endl;
-            std::cout << bblue << "New information will be updated: ";
-            std::cout << reset_color;
-            std::cin.ignore();
-            getline(std::cin, info_updated);
-
-            UserService::update_user(input_result.value, event, info_updated);
-
-            success("Update success!!!");
-        } else if (event == 27) {
-            break;
-        } else {
-            warning("Invalid choice!!!");
+        if (event == 27) {
+            return;
         }
+
+        if (48 < event && event < 53) {
+            std::string new_value;
+
+            std::cout << bblue << "Updating field: " << reset_color;
+            std::cout << event - 48 << std::endl;
+            std::cout << bblue << "Enter new information: " << reset_color;
+            getline(std::cin, new_value);
+
+            UserService::update_user(input_result.value, event, new_value);
+
+            success("Account updated successfully!");
+            return;
+        }
+
+        warning("Invalid choice!!!");
     }
 }
 
-void AdministratorForm::handle_show_information() {
+void AdministratorForm::handle_show_accounts() {
     system("cls");
     console::resize(1275, 750);
     console::move_to::center();

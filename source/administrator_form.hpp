@@ -12,11 +12,21 @@
 class AdministratorForm {
 private:
     static InputResult prompt_username(const std::string & header);
-    static void handle_add();
-    static void handle_delete();
+
+    /**
+     * @param header The header to display in the prompt
+     * @param must_exist true: username must exist, false: username must not
+     * exist
+     * @return InputResult The result of the input prompt
+     */
+    static InputResult
+    prompt_username_until(const std::string & header, bool must_exist);
+
     static void handle_search();
-    static void handle_edit();
-    static void handle_show_information();
+    static void handle_create();
+    static void handle_delete();
+    static void handle_update();
+    static void handle_show_accounts();
 
 public:
     static void show();
