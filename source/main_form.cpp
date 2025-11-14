@@ -21,15 +21,12 @@ void MainForm::show() {
         console::resize(350, 400);
         console::move_to::center();
 
-        bool is_logged_in = true;
-
         auto pair_user_pass = show_login_form();
-        Account account = AccountStorage::get_account_details(
+        auto result = AccountService::try_login(
             pair_user_pass.first, pair_user_pass.second
         );
 
-        if (AccountStorage::has_account(account)
-            && account.get_password() == DEFAULT_PASSWORD) {
+        if (result.first && pair_user_pass.second == DEFAULT_PASSWORD) {
             system("cls");
             std::cout << byellow;
             std::cout << "<Doi mat khau mac dinh>" << std::endl;
@@ -46,40 +43,39 @@ void MainForm::show() {
 
             if (new_password != DEFAULT_PASSWORD
                 && new_password == confirm_new_password) {
-                Account new_account;
-                new_account.set_username(account.get_username());
-                new_account.set_password(new_password);
+                AccountService::update_password(
+                    pair_user_pass.first, new_password
+                );
 
-                AccountStorage::update_account(account, new_account);
-
-                std::cout << bred;
-                std::cout << "Cap nhat thanh cong!!!" << std::endl;
-                system("pause");
+                success("Cap nhat thanh cong!!!");
             } else {
                 warning("Sai thong tin!!!");
-                is_logged_in = false;
             }
         }
 
-        if (is_logged_in)
-            switch (account.get_role()) {
+        if (result.first) {
+            // reset number of login
+            number_of_login = 3;
+            switch (result.second) {
                 case AccountRole::ADMINISTRATOR:
                     AdministratorForm::show();
                     break;
                 case AccountRole::EMPLOYEE:
-                    EmployeeForm::show(account);
+                    EmployeeForm::show(pair_user_pass.first);
                     break;
                 default:
-                    number_of_login--;
-                    std::cout << "So lan dang nhap con lai: " << number_of_login
-                              << std::endl;
-                    std::cout << std::endl;
-                    warning("Sai tai khoan hoac mat khau!!!");
                     break;
             }
+        } else {
+            number_of_login--;
+            std::cout << "So lan dang nhap con lai: " << number_of_login
+                      << "\n\n";
+            warning("Sai tai khoan hoac mat khau!!!");
+        }
 
-        if (number_of_login == 0)
+        if (number_of_login == 0) {
             break;
+        }
     }
 
     // char key_press;

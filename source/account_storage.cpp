@@ -14,38 +14,6 @@ bool AccountStorage::has_username(const std::string & username) {
     return found;
 }
 
-bool AccountStorage::has_account(const Account & account) {
-    bool found = false;
-
-    for_each_item([&](const Account & item) {
-        if (item.get_username() == account.get_username()
-            && item.get_password() == account.get_password()) {
-            found = true;
-            return true;
-        }
-        return false;
-    });
-
-    return found;
-}
-
-Account AccountStorage::get_account_details(
-    const std::string & username,
-    const std::string & password
-) {
-    Account result;
-
-    for_each_item([&](const Account & item) {
-        if (item.get_username() == username) {
-            result = item;
-            return true;
-        }
-        return false;
-    });
-
-    return result;
-}
-
 Account AccountStorage::get_account(const std::string & username) {
     Account result;
 

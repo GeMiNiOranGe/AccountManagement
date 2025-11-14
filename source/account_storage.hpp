@@ -10,12 +10,6 @@ class AccountStorage
     : public BaseStorage<Account, AccountFileIO, ACCOUNTS_FILE> {
 public:
     static bool has_username(const std::string & username);
-    static bool has_account(const Account & _account);
-
-    static Account get_account_details(
-        const std::string & username,
-        const std::string & password
-    );
 
     static Account get_account(const std::string & username);
 

@@ -7,6 +7,9 @@
 
 class AccountService {
 public:
+    static std::pair<bool, AccountRole>
+    try_login(const std::string & username, const std::string & password);
+
     static void create_default_account(const std::string & username);
     static void
     update_password(const std::string & username, const std::string & password);
