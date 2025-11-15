@@ -1,9 +1,9 @@
 #include "employee_form.hpp"
 
 void EmployeeForm::show(const Account & account) {
-    std::wstring header = L"< EMPLOYEE MENU >";
-    std::vector<std::wstring> option = {
-        L"View account information", L"Change password", L"Log out"
+    std::string header = "< EMPLOYEE MENU >";
+    std::vector<std::string> option = {
+        " 1. View account information ", " 2. Change password ", " 3. Log out "
     };
 
     while (true) {

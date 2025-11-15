@@ -2,19 +2,6 @@
 
 void MainForm::show() {
     SetConsoleTitle(L"Employee management");
-    // console::resize(1920, 1080);// 377
-    // console::move_to::center();
-
-    // form_info(
-    // 	L"Enter your information",
-    // 	{ L"Full name:",
-    // 	  L"Address:",
-    // 	  L"Phone number:",
-    // 	  L"Email address:" },
-    // 	box::BorderStyle::CORNER_DOUBLE
-    // );
-
-    // show_info_accounts();
 
     int number_of_login = 3;
     while (true) {
@@ -77,16 +64,4 @@ void MainForm::show() {
             break;
         }
     }
-
-    // char key_press;
-    // int ascii_value;
-    // cout << "\n\t\tNhap phim bat ky de kiem tra ma ASCII\n\t\t\An ESC de
-    // thoat\n\n\n"; while (1) {
-    //	key_press = _getch();
-    //	ascii_value = key_press;
-    //	if (ascii_value == 27) // For ESC
-    //		break;
-    //	cout << "Ban nhap phim-> \" " << key_press << " \" Gia tri ASCII =  " <<
-    // ascii_value << "\n";
-    // }
 }

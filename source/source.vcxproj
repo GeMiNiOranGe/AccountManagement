@@ -163,6 +163,7 @@
     <ClInclude Include="login_status.hpp" />
     <ClInclude Include="main_form.hpp" />
     <ClInclude Include="position.hpp" />
+    <ClInclude Include="table.hpp" />
     <ClInclude Include="ui_have_no_ux.hpp" />
     <ClInclude Include="user.hpp" />
     <ClInclude Include="user_file_io.hpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="handle_window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_form.cpp" />
+    <ClCompile Include="table.cpp" />
     <ClCompile Include="ui_have_no_ux.cpp" />
     <ClCompile Include="user.cpp" />
     <ClCompile Include="user_file_io.cpp" />

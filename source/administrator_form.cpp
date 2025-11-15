@@ -1,14 +1,14 @@
 #include "administrator_form.hpp"
 
 void AdministratorForm::show() {
-    std::wstring header = L"< ADMINISTRATOR MENU >";
-    std::vector<std::wstring> option = {
-        L"Add employee account",
-        L"Delete employee account",
-        L"Search employee account",
-        L"Edit employee account",
-        L"Display employee account information",
-        L"Log out"
+    std::string header = "< ADMINISTRATOR MENU >";
+    std::vector<std::string> option = {
+        " 1. Add employee account ",
+        " 2. Delete employee account ",
+        " 3. Search employee account ",
+        " 4. Edit employee account ",
+        " 5. Display employee account information ",
+        " 6. Log out ",
     };
 
     while (true) {
@@ -121,11 +121,14 @@ void AdministratorForm::handle_update() {
         return;
     }
 
-    std::wstring header = L"< Select the information to edit >";
-    std::vector<std::wstring> option = {
-        L"Full name", L"Address", L"Phone number", L"Email address"
+    std::string header = "< Select the information to edit >";
+    std::vector<std::string> option = {
+        " 1. Full name ",
+        " 2. Address ",
+        " 3. Phone number ",
+        " 4. Email address ",
     };
-    std::vector<std::wstring> sub_option = {L"<ESC> to back"};
+    std::vector<std::string> sub_option = {"<ESC> to back"};
 
     while (true) {
         char event = menu_options(header, option, sub_option);
