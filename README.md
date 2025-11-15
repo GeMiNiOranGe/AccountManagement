@@ -7,4 +7,5 @@
 
 ## Contributing
 
-- Use **clang-format version 21.1.x or higher**; pre-commit hooks will enforce formatting.
+* Use **clang-format version 21.1.x or higher**; pre-commit hooks will enforce formatting.
+* When opening the project in Visual Studio, please switch to **Folder View / File Explorer View** instead of Solution View. The `.vcxproj.filters` file is not committed to the repository, so the default Solution View layout will not represent the actual project structure.
