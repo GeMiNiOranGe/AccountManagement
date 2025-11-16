@@ -13,3 +13,6 @@ trim_trailing_whitespace = true
 
 [*.tsv]
 indent_style = tab
+
+[*.{vcxproj,props,targets}]
+indent_size = 2

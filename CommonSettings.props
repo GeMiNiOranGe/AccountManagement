@@ -2,13 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup>
+    <!-- Run debugger from OutDir instead of ProjectDir -->
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
+      <!-- Add 'include' folder to compiler include path -->
       <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <!-- Force UTF-8 compile -->
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <PostBuildEvent>
+      <!-- Copy data folder to OutDir after build -->
       <Command>robocopy "$(ProjectDir)data" "$(OutDir)data" /MIR &amp; exit 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
