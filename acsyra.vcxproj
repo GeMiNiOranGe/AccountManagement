@@ -147,56 +147,62 @@
     <None Include="data\users.tsv" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include/account.hpp" />
-    <ClInclude Include="include/account_file_io.hpp" />
-    <ClInclude Include="include/account_service.hpp" />
-    <ClInclude Include="include/account_storage.hpp" />
-    <ClInclude Include="include/account_role.hpp" />
-    <ClInclude Include="include/administrator_form.hpp" />
-    <ClInclude Include="include/anchor.hpp" />
-    <ClInclude Include="include/base_storage.hpp" />
-    <ClInclude Include="include/box_border.hpp" />
-    <ClInclude Include="include/color.hpp" />
-    <ClInclude Include="include/config.hpp" />
-    <ClInclude Include="include/console_color.hpp" />
-    <ClInclude Include="include/console_io.hpp" />
-    <ClInclude Include="include/convert.hpp" />
-    <ClInclude Include="include/employee_form.hpp" />
-    <ClInclude Include="include/handle_console.hpp" />
-    <ClInclude Include="include/handle_window.hpp" />
-    <ClInclude Include="include/login_status.hpp" />
-    <ClInclude Include="include/main_form.hpp" />
-    <ClInclude Include="include/position.hpp" />
-    <ClInclude Include="include/table.hpp" />
-    <ClInclude Include="include/ui_have_no_ux.hpp" />
-    <ClInclude Include="include/user.hpp" />
-    <ClInclude Include="include/user_file_io.hpp" />
-    <ClInclude Include="include/user_service.hpp" />
-    <ClInclude Include="include/user_storage.hpp" />
-    <ClInclude Include="include/utilities.hpp" />
+    <ClInclude Include="include/display/administrator_form.hpp" />
+    <ClInclude Include="include/display/anchor.hpp" />
+    <ClInclude Include="include/display/box_border.hpp" />
+    <ClInclude Include="include/display/color.hpp" />
+    <ClInclude Include="include/display/console_color.hpp" />
+    <ClInclude Include="include/display/console_io.hpp" />
+    <ClInclude Include="include/display/employee_form.hpp" />
+    <ClInclude Include="include/display/handle_console.hpp" />
+    <ClInclude Include="include/display/handle_window.hpp" />
+    <ClInclude Include="include/display/main_form.hpp" />
+    <ClInclude Include="include/display/position.hpp" />
+    <ClInclude Include="include/display/table.hpp" />
+    <ClInclude Include="include/display/ui_have_no_ux.hpp" />
+    <ClInclude Include="include/display/utilities.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="library/account.cpp" />
-    <ClCompile Include="library/account_file_io.cpp" />
-    <ClCompile Include="library/account_service.cpp" />
-    <ClCompile Include="library/account_storage.cpp" />
-    <ClCompile Include="library/administrator_form.cpp" />
-    <ClCompile Include="library/box_border.cpp" />
-    <ClCompile Include="library/console_color.cpp" />
-    <ClCompile Include="library/console_io.cpp" />
-    <ClCompile Include="library/convert.cpp" />
-    <ClCompile Include="library/employee_form.cpp" />
-    <ClCompile Include="library/handle_console.cpp" />
-    <ClCompile Include="library/handle_window.cpp" />
-    <ClCompile Include="library/main.cpp" />
-    <ClCompile Include="library/main_form.cpp" />
-    <ClCompile Include="library/table.cpp" />
-    <ClCompile Include="library/ui_have_no_ux.cpp" />
-    <ClCompile Include="library/user.cpp" />
-    <ClCompile Include="library/user_file_io.cpp" />
-    <ClCompile Include="library/user_service.cpp" />
-    <ClCompile Include="library/user_storage.cpp" />
-    <ClCompile Include="library/utilities.cpp" />
+    <ClInclude Include="include/service/account_service.hpp" />
+    <ClInclude Include="include/service/account_role.hpp" />
+    <ClInclude Include="include/service/login_status.hpp" />
+    <ClInclude Include="include/service/user_service.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include/storage/account.hpp" />
+    <ClInclude Include="include/storage/account_file_io.hpp" />
+    <ClInclude Include="include/storage/account_storage.hpp" />
+    <ClInclude Include="include/storage/base_storage.hpp" />
+    <ClInclude Include="include/storage/config.hpp" />
+    <ClInclude Include="include/storage/user.hpp" />
+    <ClInclude Include="include/storage/user_file_io.hpp" />
+    <ClInclude Include="include/storage/user_storage.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="library/display/administrator_form.cpp" />
+    <ClCompile Include="library/display/box_border.cpp" />
+    <ClCompile Include="library/display/console_color.cpp" />
+    <ClCompile Include="library/display/console_io.cpp" />
+    <ClCompile Include="library/display/employee_form.cpp" />
+    <ClCompile Include="library/display/handle_console.cpp" />
+    <ClCompile Include="library/display/handle_window.cpp" />
+    <ClCompile Include="library/display/main_form.cpp" />
+    <ClCompile Include="library/display/main.cpp" />
+    <ClCompile Include="library/display/table.cpp" />
+    <ClCompile Include="library/display/ui_have_no_ux.cpp" />
+    <ClCompile Include="library/display/utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="library/service/account_service.cpp" />
+    <ClCompile Include="library/service/user_service.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="library/storage/account.cpp" />
+    <ClCompile Include="library/storage/account_file_io.cpp" />
+    <ClCompile Include="library/storage/account_storage.cpp" />
+    <ClCompile Include="library/storage/user_file_io.cpp" />
+    <ClCompile Include="library/storage/user_storage.cpp" />
+    <ClCompile Include="library/storage/user.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
