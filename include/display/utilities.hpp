@@ -21,7 +21,7 @@ bool is_open_file(std::ofstream & fout, const std::string & path);
 std::string input_password();
 InputResult input_text(bool hide_input = false, size_t max_length = 64);
 
-void go_to_xy(short x, short y);
+void go_to_xy(SHORT x_coord, SHORT y_coord);
 void warning(std::string message);
 void success(std::string message);
 

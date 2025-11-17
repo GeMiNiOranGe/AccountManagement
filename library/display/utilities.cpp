@@ -83,8 +83,8 @@ InputResult input_text(bool hide_input, size_t max_length) {
     return {false, text};
 }
 
-void go_to_xy(short x, short y) {
-    COORD pos = {x, y};
+void go_to_xy(SHORT x_coord, SHORT y_coord) {
+    COORD pos = {x_coord, y_coord};
     HANDLE handle_std_out = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(handle_std_out, pos);
 }

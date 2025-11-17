@@ -28,19 +28,19 @@ void form_info(
 
 void show_a_part_border_horizontal(
     box::Border2 border,
-    std::vector<std::pair<std::string, short>> number_of_fill,
+    std::vector<std::pair<std::string, size_t>> number_of_fill,
     std::string middle,
     std::string last
 );
 
 void show_a_part_border(
-    std::vector<std::pair<std::string, short>> number_of_fill,
+    std::vector<std::pair<std::string, size_t>> number_of_fill,
     Position position,
     box::BorderStyle style = box::BorderStyle::SINGLE
 );
 
 void show_info_account(
-    std::vector<std::pair<std::string, short>> max_size_and_wstring_pairs,
+    std::vector<std::pair<std::string, size_t>> max_size_and_wstring_pairs,
     Color text_color,
     std::string fill_type = " ",
     box::BorderStyle style = box::BorderStyle::SINGLE

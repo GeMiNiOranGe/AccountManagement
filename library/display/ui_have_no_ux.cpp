@@ -21,8 +21,8 @@ std::pair<std::string, std::string> show_login_form(box::BorderStyle style) {
     wchar_t fill_style = ' ';
     Account account;
 
-    short width = 30;
-    short align_middle = static_cast<short>(width - title.size()) / 2;
+    size_t width = 30;
+    size_t align_middle = (width - title.size()) / 2;
 
     system("cls");
     std::cout << bgreen;
@@ -43,7 +43,7 @@ std::pair<std::string, std::string> show_login_form(box::BorderStyle style) {
               << border.bottom_right() << std::endl;
 
     std::cout << baqua;
-    go_to_xy(align_middle + 1, 2);
+    go_to_xy(static_cast<short>(align_middle) + 1, 2);
     std::cout << title;
     go_to_xy(2, 6);
     std::cout << username_label;
@@ -103,7 +103,7 @@ void form_info(
 
 void show_a_part_border_horizontal(
     box::Border2 border,
-    std::vector<std::pair<std::string, short>> number_of_fill,
+    std::vector<std::pair<std::string, size_t>> number_of_fill,
     std::string middle,
     std::string last
 ) {
@@ -121,7 +121,7 @@ void show_a_part_border_horizontal(
 };
 
 void show_a_part_border(
-    std::vector<std::pair<std::string, short>> number_of_fill,
+    std::vector<std::pair<std::string, size_t>> number_of_fill,
     Position position,
     box::BorderStyle style
 ) {
@@ -154,7 +154,7 @@ void show_a_part_border(
 // Pair (maxSize: maximum cell size, wString: One sentence), BorderStyle:
 // Single(customizable)
 void show_info_account(
-    std::vector<std::pair<std::string, short>> max_size_and_wstring_pairs,
+    std::vector<std::pair<std::string, size_t>> max_size_and_wstring_pairs,
     Color text_color,
     std::string fill_type,
     box::BorderStyle style
@@ -163,7 +163,7 @@ void show_info_account(
 
     std::cout << border.vertical();
     for (auto & element : max_size_and_wstring_pairs) {
-        short max_size = element.second;
+        size_t max_size = element.second;
         set_color(text_color);
         std::cout << fill_type;
         std::cout << box::utf8_setw(max_size, fill_type, element.first);
@@ -173,7 +173,7 @@ void show_info_account(
 }
 
 void show_info_accounts() {
-    std::vector<std::pair<std::string, short>> titles = {
+    std::vector<std::pair<std::string, size_t>> titles = {
         std::make_pair("No.", 3),
         std::make_pair("Username", 8),
         std::make_pair("Password", 8),
@@ -209,10 +209,11 @@ void show_info_accounts() {
         // Find the maximum size of each table cell, horizontally
         if (account.get_username() != "") {
             rows.push_back(properties);
-            for (short i = 0; i < properties.size(); i++)
-                if (titles.at(i).second < properties.at(i).size())
-                    titles.at(i).second =
-                        static_cast<short>(properties.at(i).size());
+            for (size_t i = 0; i < properties.size(); i++) {
+                if (titles.at(i).second < properties.at(i).size()) {
+                    titles.at(i).second = properties.at(i).size();
+                }
+            }
         }
     }
     fin.close();
@@ -231,8 +232,8 @@ void show_info_accounts() {
     for (int i = 0; i < rows.size(); i++) {
         std::vector<std::string> row = rows.at(i);
 
-        std::vector<std::pair<std::string, short>> vec_title_and_max_size_temp;
-        for (short j = 0; j < titles.size(); j++) {
+        std::vector<std::pair<std::string, size_t>> vec_title_and_max_size_temp;
+        for (size_t j = 0; j < titles.size(); j++) {
             vec_title_and_max_size_temp.push_back(
                 std::make_pair(row.at(j), titles.at(j).second)
             );
@@ -268,7 +269,7 @@ char menu_options(
     std::cout << border.top_left()
               << box::utf8_setw(width, border.horizontal(), title)
               << border.top_right() << std::endl;
-    for (short i = 0; i < options.size(); i++) {
+    for (size_t i = 0; i < options.size(); i++) {
         std::cout << border.vertical() << bwhite
                   << box::utf8_setw(width, fill_style, options[i]) << byellow
                   << border.vertical() << std::endl;
