@@ -5,8 +5,8 @@ void MainForm::show() {
 
     int number_of_login = 3;
     while (true) {
-        console::resize(350, 400);
-        console::move_to::center();
+        window::resize(350, 400);
+        window::move_to_center();
 
         auto pair_user_pass = show_login_form();
         auto result = AccountService::try_login(

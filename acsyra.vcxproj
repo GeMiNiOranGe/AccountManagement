@@ -154,10 +154,9 @@
     <ClInclude Include="include/display/console_color.hpp" />
     <ClInclude Include="include/display/console_io.hpp" />
     <ClInclude Include="include/display/employee_form.hpp" />
-    <ClInclude Include="include/display/handle_console.hpp" />
-    <ClInclude Include="include/display/handle_window.hpp" />
     <ClInclude Include="include/display/main_form.hpp" />
     <ClInclude Include="include/display/position.hpp" />
+    <ClInclude Include="include/display/sysutils.hpp" />
     <ClInclude Include="include/display/table.hpp" />
     <ClInclude Include="include/display/ui_have_no_ux.hpp" />
     <ClInclude Include="include/display/utilities.hpp" />
@@ -184,10 +183,9 @@
     <ClCompile Include="library/display/console_color.cpp" />
     <ClCompile Include="library/display/console_io.cpp" />
     <ClCompile Include="library/display/employee_form.cpp" />
-    <ClCompile Include="library/display/handle_console.cpp" />
-    <ClCompile Include="library/display/handle_window.cpp" />
     <ClCompile Include="library/display/main_form.cpp" />
     <ClCompile Include="library/display/main.cpp" />
+    <ClCompile Include="library/display/sysutils.cpp" />
     <ClCompile Include="library/display/table.cpp" />
     <ClCompile Include="library/display/ui_have_no_ux.cpp" />
     <ClCompile Include="library/display/utilities.cpp" />

@@ -12,8 +12,8 @@ void AdministratorForm::show() {
     };
 
     while (true) {
-        console::resize(500, 500);
-        console::move_to::center();
+        window::resize(500, 500);
+        window::move_to_center();
 
         char event = menu_options(header, option);
 
@@ -157,8 +157,8 @@ void AdministratorForm::handle_update() {
 
 void AdministratorForm::handle_show_accounts() {
     system("cls");
-    console::resize(1275, 750);
-    console::move_to::center();
+    window::resize(1275, 750);
+    window::move_to_center();
 
     std::cout << byellow << "<Show full account information>" << reset_color;
     std::cout << std::endl;

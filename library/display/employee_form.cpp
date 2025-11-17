@@ -7,8 +7,8 @@ void EmployeeForm::show(const Account & account) {
     };
 
     while (true) {
-        console::resize(500, 500);
-        console::move_to::center();
+        window::resize(500, 500);
+        window::move_to_center();
 
         char event = menu_options(header, option);
 

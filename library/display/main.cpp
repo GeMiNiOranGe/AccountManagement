@@ -4,11 +4,11 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
     MainForm::show();
 
-    // console::resize(1275, 750);
-    // console::move_to::center();
+    // window::resize(1275, 750);
+    // window::move_to_center();
 
-    // console::resize(1920, 1080);// 377
-    // console::move_to::center();
+    // window::resize(1920, 1080);// 377
+    // window::move_to_center();
 
     /*
     form_info(
