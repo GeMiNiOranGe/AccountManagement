@@ -12,9 +12,11 @@ size_t get_max_size_of_strings(std::vector<std::string> strings) {
     return max_size;
 }
 
-std::pair<std::string, std::string> show_login_form(box::BorderStyle style) {
+std::pair<bool, std::pair<std::string, std::string>> show_login_form(
+    box::BorderStyle style
+) {
     box::Border2 border(style);
-    std::string username, password;
+    InputResult username, password;
     std::string title = "Log in";
     std::string username_label = "Username: ";
     std::string password_label = "Password: ";
@@ -41,6 +43,7 @@ std::pair<std::string, std::string> show_login_form(box::BorderStyle style) {
     std::cout << border.bottom_left()
               << box::utf8_setw(width, border.horizontal())
               << border.bottom_right() << std::endl;
+    std::cout << "<ESC> to quit" << std::endl;
 
     std::cout << baqua;
     go_to_xy(static_cast<short>(align_middle) + 1, 2);
@@ -49,15 +52,21 @@ std::pair<std::string, std::string> show_login_form(box::BorderStyle style) {
     std::cout << username_label;
     go_to_xy(2, 8);
     std::cout << password_label;
-
     std::cout << reset_color;
-    go_to_xy(static_cast<short>(username_label.size()) + 2, 6);
-    getline(std::cin, username);
-    go_to_xy(static_cast<short>(password_label.size()) + 2, 8);
-    password = input_password();
-    go_to_xy(0, 11);
 
-    return std::make_pair(username, password);
+    go_to_xy(static_cast<short>(username_label.size()) + 2, 6);
+    username = input_text();
+    if (username.cancelled) {
+        return {true, {"", ""}};
+    }
+
+    go_to_xy(static_cast<short>(password_label.size()) + 2, 8);
+    password = input_text(true);
+    if (password.cancelled) {
+        return {true, {"", ""}};
+    }
+
+    return {false, {username.value, password.value}};
 }
 void form_info(
     std::string title,

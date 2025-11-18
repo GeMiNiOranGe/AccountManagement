@@ -15,7 +15,7 @@
 
 size_t get_max_size_of_strings(std::vector<std::string> strings);
 
-std::pair<std::string, std::string> show_login_form(
+std::pair<bool, std::pair<std::string, std::string>> show_login_form(
     box::BorderStyle style = box::BorderStyle::SINGLE
 );
 
