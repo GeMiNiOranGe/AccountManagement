@@ -15,7 +15,7 @@ size_t get_max_size_of_strings(std::vector<std::string> strings) {
 std::pair<bool, std::pair<std::string, std::string>> show_login_form(
     box::BorderStyle style
 ) {
-    box::Border2 border(style);
+    box::Border border(style);
     InputResult username, password;
     std::string title = "Log in";
     std::string username_label = "Username: ";
@@ -74,7 +74,7 @@ void form_info(
     box::BorderStyle style,
     size_t input_size
 ) {
-    box::Border2 border(style);
+    box::Border border(style);
 
     // Get max size of label
     size_t label_max_size = get_max_size_of_strings(labels);
@@ -111,7 +111,7 @@ void form_info(
 }
 
 void show_a_part_border_horizontal(
-    box::Border2 border,
+    box::Border border,
     std::vector<std::pair<std::string, size_t>> number_of_fill,
     std::string middle,
     std::string last
@@ -134,7 +134,7 @@ void show_a_part_border(
     Position position,
     box::BorderStyle style
 ) {
-    box::Border2 border(style);
+    box::Border border(style);
 
     if (position == Position::FIRST) {
         std::cout << border.top_left();
@@ -168,7 +168,7 @@ void show_info_account(
     std::string fill_type,
     box::BorderStyle style
 ) {
-    box::Border2 border(style);
+    box::Border border(style);
 
     std::cout << border.vertical();
     for (auto & element : max_size_and_wstring_pairs) {
@@ -265,7 +265,7 @@ char menu_options(
     std::vector<std::string> sub_options,
     box::BorderStyle style
 ) {
-    box::Border2 border(style);
+    box::Border border(style);
     std::string fill_style = " ";
     size_t width = get_max_size_of_strings(options);
 

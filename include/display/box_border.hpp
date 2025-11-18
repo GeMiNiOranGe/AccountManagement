@@ -15,12 +15,12 @@ enum class BorderStyle {
     DOUBLE_OUTER_SINGLE_INNER
 };
 
-class Border2 {
+class Border {
 private:
     BorderStyle style_;
 
 public:
-    explicit Border2(BorderStyle style);
+    explicit Border(BorderStyle style);
 
     std::string horizontal() const;
     std::string vertical() const;

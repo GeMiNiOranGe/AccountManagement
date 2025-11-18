@@ -27,7 +27,7 @@ void form_info(
 );
 
 void show_a_part_border_horizontal(
-    box::Border2 border,
+    box::Border border,
     std::vector<std::pair<std::string, size_t>> number_of_fill,
     std::string middle,
     std::string last

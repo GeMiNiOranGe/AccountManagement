@@ -1,9 +1,9 @@
 #include "display/box_border.hpp"
 
 namespace box {
-Border2::Border2(BorderStyle style) : style_(style) {}
+Border::Border(BorderStyle style) : style_(style) {}
 
-std::string Border2::horizontal() const {
+std::string Border::horizontal() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_DOUBLE:
@@ -21,7 +21,7 @@ std::string Border2::horizontal() const {
     }
 }
 
-std::string Border2::vertical() const {
+std::string Border::vertical() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_DOUBLE:
@@ -39,7 +39,7 @@ std::string Border2::vertical() const {
     }
 }
 
-std::string Border2::top_left() const {
+std::string Border::top_left() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
@@ -61,7 +61,7 @@ std::string Border2::top_left() const {
     }
 }
 
-std::string Border2::top() const {
+std::string Border::top() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
@@ -83,7 +83,7 @@ std::string Border2::top() const {
     }
 }
 
-std::string Border2::top_right() const {
+std::string Border::top_right() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
@@ -105,7 +105,7 @@ std::string Border2::top_right() const {
     }
 }
 
-std::string Border2::left() const {
+std::string Border::left() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
@@ -127,7 +127,7 @@ std::string Border2::left() const {
     }
 }
 
-std::string Border2::center() const {
+std::string Border::center() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
@@ -149,7 +149,7 @@ std::string Border2::center() const {
     }
 }
 
-std::string Border2::right() const {
+std::string Border::right() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
@@ -171,7 +171,7 @@ std::string Border2::right() const {
     }
 }
 
-std::string Border2::bottom_left() const {
+std::string Border::bottom_left() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
@@ -193,7 +193,7 @@ std::string Border2::bottom_left() const {
     }
 }
 
-std::string Border2::bottom() const {
+std::string Border::bottom() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
@@ -215,7 +215,7 @@ std::string Border2::bottom() const {
     }
 }
 
-std::string Border2::bottom_right() const {
+std::string Border::bottom_right() const {
     switch (this->style_) {
         case BorderStyle::SINGLE:
         case BorderStyle::CORNER_SINGLE: {
