@@ -7,8 +7,11 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
+#include "display/box_border.hpp"
 #include "display/console_color.hpp"
+#include "display/table.hpp"
 
 struct InputResult {
     bool cancelled;
@@ -23,6 +26,18 @@ InputResult input_text(bool hide_input = false, size_t max_length = 64);
 void go_to_xy(SHORT x_coord, SHORT y_coord);
 void warning(std::string message);
 void success(std::string message);
+
+void write_fields(
+    std::string header,
+    std::vector<std::pair<std::string, std::string>> fields,
+    box::Border border
+);
+std::vector<std::string> read_fields(
+    std::string header,
+    std::vector<std::string> fields,
+    box::Border border,
+    size_t width_
+);
 
 template <typename data_type>
 bool is_even(data_type value) {

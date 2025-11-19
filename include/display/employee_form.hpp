@@ -8,6 +8,8 @@
 
 class EmployeeForm {
 private:
+    static const box::Border border_;
+
     static void handle_change_password(const Account & account);
     static void handle_view_personal_information(const Account & account);
 

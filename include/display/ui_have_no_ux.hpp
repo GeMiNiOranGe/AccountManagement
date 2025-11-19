@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "display/box_border.hpp"
-#include "display/console_io.hpp"
 #include "display/position.hpp"
 #include "display/table.hpp"
 #include "storage/account_storage.hpp"

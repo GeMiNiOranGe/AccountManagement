@@ -1,5 +1,7 @@
 #include "display/employee_form.hpp"
 
+const box::Border EmployeeForm::border_;
+
 void EmployeeForm::show(const Account & account) {
     std::string header = "< EMPLOYEE MENU >";
     std::vector<std::string> option = {
@@ -40,7 +42,16 @@ void EmployeeForm::handle_view_personal_information(const Account & account) {
     std::cout << account.get_username() << std::endl;
 
     User user = UserStorage::get_user(account.get_username());
-    console::write_info(user);
+    write_fields(
+        "Account information",
+        {
+            {" Full name: ", user.get_full_name()},
+            {" Address  : ", user.get_address()},
+            {" Phone    : ", user.get_phone_number()},
+            {" Email    : ", user.get_email_address()},
+        },
+        border_
+    );
 
     system("pause");
 }

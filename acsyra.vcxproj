@@ -152,7 +152,6 @@
     <ClInclude Include="include/display/box_border.hpp" />
     <ClInclude Include="include/display/color.hpp" />
     <ClInclude Include="include/display/console_color.hpp" />
-    <ClInclude Include="include/display/console_io.hpp" />
     <ClInclude Include="include/display/employee_form.hpp" />
     <ClInclude Include="include/display/main_form.hpp" />
     <ClInclude Include="include/display/position.hpp" />
@@ -181,7 +180,6 @@
     <ClCompile Include="library/display/administrator_form.cpp" />
     <ClCompile Include="library/display/box_border.cpp" />
     <ClCompile Include="library/display/console_color.cpp" />
-    <ClCompile Include="library/display/console_io.cpp" />
     <ClCompile Include="library/display/employee_form.cpp" />
     <ClCompile Include="library/display/main_form.cpp" />
     <ClCompile Include="library/display/main.cpp" />
