@@ -48,6 +48,7 @@ void AdministratorForm::show() {
             }
             default: {
                 warning("Invalid choice!!!");
+                system("pause");
                 break;
             }
         }
@@ -58,20 +59,54 @@ void AdministratorForm::write_fields(
     std::string header,
     std::vector<std::pair<std::string, std::string>> fields
 ) {
-    std::cout << byellow << header << reset_color << std::endl;
+    std::cout << byellow << "[+] " + header << reset_color << std::endl;
 
     size_t size = fields.size();
     for (size_t i = 0; i < size - 1; i++) {
-        std::cout << "    " << border_.left() << border_.horizontal() << " "
-                  << baqua << fields[i].first << reset_color << fields[i].second
+        std::cout << "    " << border_.left() << border_.horizontal() << baqua
+                  << fields[i].first << reset_color << fields[i].second
                   << std::endl;
     }
-    std::cout << "    " << border_.bottom_left() << border_.horizontal() << " "
+    std::cout << "    " << border_.bottom_left() << border_.horizontal()
               << baqua << fields[size - 1].first << reset_color
               << fields[size - 1].second << std::endl;
 }
 
+std::vector<std::string> AdministratorForm::read_fields(
+    std::string header,
+    std::vector<std::string> fields
+) {
+    std::vector<std::string> values;
+
+    std::cout << border_.top_left()
+              << box::utf8_setw(width_ - 2, border_.horizontal())
+              << border_.top_right() << std::endl;
+    std::cout << border_.vertical() << byellow
+              << box::utf8_setw(width_ - 2, " ", " > " + header) << reset_color
+              << border_.vertical() << std::endl;
+    std::cout << border_.left()
+              << box::utf8_setw(width_ - 2, border_.horizontal())
+              << border_.right() << std::endl;
+    for (auto && field : fields) {
+        std::cout << border_.vertical() << baqua << field << reset_color;
+        // Here, using `std::cin` can display the correct UI. Don't ask me why,
+        // I don't know.
+        InputResult input_result = input_text();
+        values.push_back(input_result.value);
+        std::cout << box::utf8_setw(
+            width_ - 2 - field.size() - input_result.value.size(), " "
+        );
+        std::cout << border_.vertical() << reset_color << std::endl;
+    }
+    std::cout << border_.bottom_left()
+              << box::utf8_setw(width_ - 2, border_.horizontal())
+              << border_.bottom_right() << std::endl;
+
+    return values;
+}
+
 void AdministratorForm::pause_screen() {
+    std::cout << std::endl;
     std::cout << box::utf8_setw(width_, border_.horizontal()) << std::endl;
     system("pause");
 }
@@ -118,8 +153,10 @@ InputResult AdministratorForm::prompt_username_until(
 
         if (must_exist) {
             warning("Can't find \"" + input_result.value + "\"!!!");
+            pause_screen();
         } else {
             warning("Username already exists!!!");
+            pause_screen();
         }
     }
 }
@@ -133,16 +170,14 @@ void AdministratorForm::handle_search() {
     User user = UserService::get_user(input_result.value);
 
     write_fields(
-        "[+] Account information",
+        "Account information",
         {
-            {"Full name: ", user.get_full_name()},
-            {"Address  : ", user.get_address()},
-            {"Phone    : ", user.get_phone_number()},
-            {"Email    : ", user.get_email_address()},
+            {" Full name: ", user.get_full_name()},
+            {" Address  : ", user.get_address()},
+            {" Phone    : ", user.get_phone_number()},
+            {" Email    : ", user.get_email_address()},
         }
     );
-
-    std::cout << std::endl;
 
     pause_screen();
 }
@@ -153,11 +188,20 @@ void AdministratorForm::handle_create() {
         return;
     }
 
-    User user(input_result.value);
-    console::read_info(user);
+    std::vector<std::string> values = read_fields(
+        "Enter account information",
+        {
+            " Full name: ",
+            " Address  : ",
+            " Phone    : ",
+            " Email    : ",
+        }
+    );
+    User user(input_result.value, values[0], values[1], values[2], values[3]);
 
     UserService::create_user(user);
     success("Account created successfully!");
+    pause_screen();
 }
 
 void AdministratorForm::handle_delete() {
@@ -168,6 +212,7 @@ void AdministratorForm::handle_delete() {
 
     UserService::delete_user(input_result.value);
     success("Account deleted successfully!");
+    pause_screen();
 }
 
 void AdministratorForm::handle_update() {
@@ -203,10 +248,12 @@ void AdministratorForm::handle_update() {
             UserService::update_user(input_result.value, event, new_value);
 
             success("Account updated successfully!");
+            pause_screen();
             return;
         }
 
         warning("Invalid choice!!!");
+        pause_screen();
     }
 }
 

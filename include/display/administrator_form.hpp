@@ -18,6 +18,8 @@ private:
         std::string header,
         std::vector<std::pair<std::string, std::string>> fields
     );
+    static std::vector<std::string>
+    read_fields(std::string header, std::vector<std::string> fields);
     static void pause_screen();
     static InputResult prompt_username(const std::string & header);
 

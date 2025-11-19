@@ -48,8 +48,10 @@ void MainForm::show() {
                 AccountService::update_password(username, new_password.value);
 
                 success("Password updated successfully!");
+                system("pause");
             } else {
                 warning("Wrong information!!!");
+                system("pause");
             }
         }
 
@@ -74,6 +76,7 @@ void MainForm::show() {
             std::cout << "Number of remaining logins: " << number_of_login
                       << "\n\n";
             warning("Incorrect username or password!");
+            system("pause");
         }
 
         if (number_of_login == 0) {

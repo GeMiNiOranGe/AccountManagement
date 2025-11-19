@@ -26,6 +26,7 @@ void EmployeeForm::show(const Account & account) {
             }
             default: {
                 warning("Invalid choice!!!");
+                system("pause");
                 break;
             }
         }
@@ -76,9 +77,11 @@ void EmployeeForm::handle_change_password(const Account & account) {
 
     if (!is_valid_password) {
         warning("Wrong information!!!");
+        system("pause");
         return;
     }
 
     AccountService::update_password(account.get_username(), new_password.value);
     success("Password updated successfully!");
+    system("pause");
 }

@@ -68,10 +68,8 @@ void go_to_xy(SHORT x_coord, SHORT y_coord) {
 
 void warning(std::string message) {
     std::cout << white_on_red << "\a" << message << reset_color << std::endl;
-    system("pause");
 }
 
 void success(std::string message) {
     std::cout << bgreen << message << reset_color << std::endl;
-    system("pause");
 }
