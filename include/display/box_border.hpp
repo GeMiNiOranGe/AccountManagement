@@ -20,7 +20,7 @@ private:
     BorderStyle style_;
 
 public:
-    explicit Border(BorderStyle style);
+    explicit Border(BorderStyle style = BorderStyle::SINGLE);
 
     std::string horizontal() const;
     std::string vertical() const;

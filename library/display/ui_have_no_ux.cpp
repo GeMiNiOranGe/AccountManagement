@@ -295,7 +295,7 @@ char menu_options(
         }
     }
 
-    std::cout << baqua << "Moi ban chon chuc nang" << std::endl;
+    std::cout << baqua << "Choose an option" << reset_color << std::endl;
 
     return _getch();
 }

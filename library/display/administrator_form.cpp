@@ -1,5 +1,7 @@
 #include "display/administrator_form.hpp"
 
+const box::Border AdministratorForm::border_;
+
 void AdministratorForm::show() {
     std::string header = "< ADMINISTRATOR MENU >";
     std::vector<std::string> option = {
@@ -17,40 +19,82 @@ void AdministratorForm::show() {
 
         char event = menu_options(header, option);
 
+        window::resize(640, 500);
+        window::move_to_center();
+
         switch (event) {
-            case 49:
+            case 49: {
                 handle_create();
                 break;
-            case 50:
+            }
+            case 50: {
                 handle_delete();
                 break;
-            case 51:
+            }
+            case 51: {
                 handle_search();
                 break;
-            case 52:
+            }
+            case 52: {
                 handle_update();
                 break;
-            case 53:
+            }
+            case 53: {
                 handle_show_accounts();
                 break;
-            case 54:
+            }
+            case 54: {
                 return;
-            default:
+            }
+            default: {
                 warning("Invalid choice!!!");
                 break;
+            }
         }
     }
 }
 
+void AdministratorForm::write_fields(
+    std::string header,
+    std::vector<std::pair<std::string, std::string>> fields
+) {
+    std::cout << byellow << header << reset_color << std::endl;
+
+    size_t size = fields.size();
+    for (size_t i = 0; i < size - 1; i++) {
+        std::cout << "    " << border_.left() << border_.horizontal() << " "
+                  << baqua << fields[i].first << reset_color << fields[i].second
+                  << std::endl;
+    }
+    std::cout << "    " << border_.bottom_left() << border_.horizontal() << " "
+              << baqua << fields[size - 1].first << reset_color
+              << fields[size - 1].second << std::endl;
+}
+
+void AdministratorForm::pause_screen() {
+    std::cout << box::utf8_setw(width_, border_.horizontal()) << std::endl;
+    system("pause");
+}
+
 InputResult AdministratorForm::prompt_username(const std::string & header) {
     system("cls");
-    std::cout << byellow << "<" << header << ">" << std::endl;
-    std::cout << bred << "Username cannot have spaces" << std::endl;
+    std::cout << border_.top_left()
+              << box::utf8_setw(width_ - 2, border_.horizontal())
+              << border_.top_right() << std::endl;
+    std::cout << border_.vertical() << byellow
+              << box::utf8_setw(width_ - 2, " ", " > " + header) << reset_color
+              << border_.vertical() << std::endl;
+    std::cout << border_.bottom_left()
+              << box::utf8_setw(width_ - 2, border_.horizontal())
+              << border_.bottom_right() << std::endl;
+
     std::cout << white << "<ESC> to back" << std::endl;
-    std::cout << bblue << "    Enter username: " << reset_color;
+    std::cout << bred << "[!] Username cannot have spaces" << std::endl
+              << std::endl;
+    std::cout << bblue << "[?] Enter username: " << reset_color;
 
     InputResult input_result = input_text();
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 
     return input_result;
 }
@@ -87,9 +131,20 @@ void AdministratorForm::handle_search() {
     }
 
     User user = UserService::get_user(input_result.value);
-    std::cout << byellow << "    Account information: " << std::endl;
-    console::write_info(user);
-    system("pause");
+
+    write_fields(
+        "[+] Account information",
+        {
+            {"Full name: ", user.get_full_name()},
+            {"Address  : ", user.get_address()},
+            {"Phone    : ", user.get_phone_number()},
+            {"Email    : ", user.get_email_address()},
+        }
+    );
+
+    std::cout << std::endl;
+
+    pause_screen();
 }
 
 void AdministratorForm::handle_create() {
@@ -165,5 +220,5 @@ void AdministratorForm::handle_show_accounts() {
 
     show_info_accounts();
 
-    system("pause");
+    pause_screen();
 }
