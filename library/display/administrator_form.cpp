@@ -53,35 +53,21 @@ void AdministratorForm::show() {
     }
 }
 
-InputResult AdministratorForm::prompt_username(const std::string & header) {
-    system("cls");
-    std::cout << border_.top_left()
-              << box::utf8_setw(width_ - 2, border_.horizontal())
-              << border_.top_right() << std::endl;
-    std::cout << border_.vertical() << byellow
-              << box::utf8_setw(width_ - 2, " ", " > " + header) << reset_color
-              << border_.vertical() << std::endl;
-    std::cout << border_.bottom_left()
-              << box::utf8_setw(width_ - 2, border_.horizontal())
-              << border_.bottom_right() << std::endl;
-
-    std::cout << white << "<ESC> to back" << std::endl;
-    std::cout << bred << "[!] Username cannot have spaces" << std::endl
-              << std::endl;
-    std::cout << bblue << "[?] Enter username: " << reset_color;
-
-    InputResult input_result = input_text();
-    std::cout << std::endl << std::endl;
-
-    return input_result;
-}
-
-InputResult AdministratorForm::prompt_username_until(
+InputResult AdministratorForm::prompt_username(
     const std::string & header,
     bool must_exist
 ) {
     while (true) {
-        InputResult input_result = prompt_username(header);
+        system("cls");
+        draw_header(header);
+
+        std::cout << white << "<ESC> to back" << std::endl;
+        std::cout << bred << "[!] Username cannot have spaces" << std::endl
+                  << std::endl;
+        std::cout << bblue << "[?] Enter username: " << reset_color;
+
+        InputResult input_result = input_text();
+        std::cout << std::endl << std::endl;
 
         if (input_result.cancelled) {
             return input_result;
@@ -104,7 +90,7 @@ InputResult AdministratorForm::prompt_username_until(
 }
 
 void AdministratorForm::handle_search() {
-    InputResult input_result = prompt_username_until("Search account", true);
+    InputResult input_result = prompt_username("Search account", true);
     if (input_result.cancelled) {
         return;
     }
@@ -125,7 +111,7 @@ void AdministratorForm::handle_search() {
 }
 
 void AdministratorForm::handle_create() {
-    InputResult input_result = prompt_username_until("Add account", false);
+    InputResult input_result = prompt_username("Add account", false);
     if (input_result.cancelled) {
         return;
     }
@@ -147,7 +133,7 @@ void AdministratorForm::handle_create() {
 }
 
 void AdministratorForm::handle_delete() {
-    InputResult input_result = prompt_username_until("Delete account", true);
+    InputResult input_result = prompt_username("Delete account", true);
     if (input_result.cancelled) {
         return;
     }
@@ -158,7 +144,7 @@ void AdministratorForm::handle_delete() {
 }
 
 void AdministratorForm::handle_update() {
-    InputResult input_result = prompt_username_until("Edit account", true);
+    InputResult input_result = prompt_username("Edit account", true);
     if (input_result.cancelled) {
         return;
     }

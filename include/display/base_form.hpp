@@ -14,6 +14,7 @@ protected:
     static const int width_;
     static const box::Border border_;
 
+    static void draw_header(std::string header);
     static void pause_screen();
 
     static void write_fields(

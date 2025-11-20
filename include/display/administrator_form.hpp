@@ -12,8 +12,6 @@
 
 class AdministratorForm : public BaseForm {
 private:
-    static InputResult prompt_username(const std::string & header);
-
     /**
      * @param header The header to display in the prompt
      * @param must_exist true: username must exist, false: username must not
@@ -21,7 +19,7 @@ private:
      * @return InputResult The result of the input prompt
      */
     static InputResult
-    prompt_username_until(const std::string & header, bool must_exist);
+    prompt_username(const std::string & header, bool must_exist);
 
     static void handle_search();
     static void handle_create();

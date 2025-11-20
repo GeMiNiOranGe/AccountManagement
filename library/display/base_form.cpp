@@ -3,6 +3,20 @@
 const int BaseForm::width_ = 80;
 const box::Border BaseForm::border_;
 
+void BaseForm::draw_header(std::string header) {
+    std::cout << border_.top_left()
+              << box::utf8_setw(width_ - 2, border_.horizontal())
+              << border_.top_right() << std::endl;
+
+    std::cout << border_.vertical() << byellow
+              << box::utf8_setw(width_ - 2, " ", " > " + header) << reset_color
+              << border_.vertical() << std::endl;
+
+    std::cout << border_.bottom_left()
+              << box::utf8_setw(width_ - 2, border_.horizontal())
+              << border_.bottom_right() << std::endl;
+}
+
 void BaseForm::pause_screen() {
     std::cout << std::endl;
     std::cout << box::utf8_setw(width_, border_.horizontal()) << std::endl;
@@ -21,8 +35,8 @@ void BaseForm::write_fields(
                   << fields[i].first << reset_color << fields[i].second
                   << std::endl;
     }
-    std::cout << "    " << border_.bottom_left() << border_.horizontal() << baqua
-              << fields[size - 1].first << reset_color
+    std::cout << "    " << border_.bottom_left() << border_.horizontal()
+              << baqua << fields[size - 1].first << reset_color
               << fields[size - 1].second << std::endl;
 }
 
@@ -36,7 +50,8 @@ BaseForm::read_fields(std::string header, std::vector<std::string> fields) {
     std::cout << border_.vertical() << byellow
               << box::utf8_setw(width_ - 2, " ", " > " + header) << reset_color
               << border_.vertical() << std::endl;
-    std::cout << border_.left() << box::utf8_setw(width_ - 2, border_.horizontal())
+    std::cout << border_.left()
+              << box::utf8_setw(width_ - 2, border_.horizontal())
               << border_.right() << std::endl;
     for (auto && field : fields) {
         std::cout << border_.vertical() << baqua << field << reset_color;

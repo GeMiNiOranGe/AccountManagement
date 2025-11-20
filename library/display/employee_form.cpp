@@ -38,9 +38,10 @@ void EmployeeForm::show(const Account & account) {
 
 void EmployeeForm::handle_view_personal_information(const Account & account) {
     system("cls");
-    std::cout << byellow << "<Account information>" << std::endl;
-    std::cout << yellow << "    Username: " << reset_color;
-    std::cout << account.get_username() << std::endl;
+    draw_header("Account information");
+    std::cout << yellow << "[+] Your username: " << reset_color
+              << account.get_username() << std::endl
+              << std::endl;
 
     User user = UserStorage::get_user(account.get_username());
     write_fields(
