@@ -64,7 +64,7 @@ void MainForm::show() {
                     break;
                 }
                 case AccountRole::EMPLOYEE: {
-                    EmployeeForm::show(username);
+                    EmployeeForm::show(Account(username));
                     break;
                 }
                 default: {

@@ -193,12 +193,10 @@
     <ClCompile Include="library/service/user_service.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="library/storage/account.cpp" />
     <ClCompile Include="library/storage/account_file_io.cpp" />
     <ClCompile Include="library/storage/account_storage.cpp" />
     <ClCompile Include="library/storage/user_file_io.cpp" />
     <ClCompile Include="library/storage/user_storage.cpp" />
-    <ClCompile Include="library/storage/user.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
