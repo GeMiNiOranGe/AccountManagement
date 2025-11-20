@@ -1,7 +1,5 @@
 #include "display/employee_form.hpp"
 
-const box::Border EmployeeForm::border_;
-
 void EmployeeForm::show(const Account & account) {
     std::string header = "< EMPLOYEE MENU >";
     std::vector<std::string> option = {
@@ -13,6 +11,9 @@ void EmployeeForm::show(const Account & account) {
         window::move_to_center();
 
         char event = menu_options(header, option);
+
+        window::resize(640, 500);
+        window::move_to_center();
 
         switch (event) {
             case 49: {
@@ -28,7 +29,7 @@ void EmployeeForm::show(const Account & account) {
             }
             default: {
                 warning("Invalid choice!!!");
-                system("pause");
+                pause_screen();
                 break;
             }
         }
@@ -49,11 +50,10 @@ void EmployeeForm::handle_view_personal_information(const Account & account) {
             {" Address  : ", user.get_address()},
             {" Phone    : ", user.get_phone_number()},
             {" Email    : ", user.get_email_address()},
-        },
-        border_
+        }
     );
 
-    system("pause");
+    pause_screen();
 }
 
 void EmployeeForm::handle_change_password(const Account & account) {
@@ -88,11 +88,11 @@ void EmployeeForm::handle_change_password(const Account & account) {
 
     if (!is_valid_password) {
         warning("Wrong information!!!");
-        system("pause");
+        pause_screen();
         return;
     }
 
     AccountService::update_password(account.get_username(), new_password.value);
     success("Password updated successfully!");
-    system("pause");
+    pause_screen();
 }

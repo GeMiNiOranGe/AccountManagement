@@ -2,7 +2,7 @@
 #ifndef BOX_BORDER_HPP
 #define BOX_BORDER_HPP
 
-#include <iostream>
+#include <string>
 
 namespace box {
 enum class BorderStyle {

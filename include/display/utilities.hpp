@@ -27,18 +27,6 @@ void go_to_xy(SHORT x_coord, SHORT y_coord);
 void warning(std::string message);
 void success(std::string message);
 
-void write_fields(
-    std::string header,
-    std::vector<std::pair<std::string, std::string>> fields,
-    box::Border border
-);
-std::vector<std::string> read_fields(
-    std::string header,
-    std::vector<std::string> fields,
-    box::Border border,
-    size_t width_
-);
-
 template <typename data_type>
 bool is_even(data_type value) {
     return (value % 2) == 0;

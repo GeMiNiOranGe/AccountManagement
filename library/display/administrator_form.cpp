@@ -1,7 +1,5 @@
 #include "display/administrator_form.hpp"
 
-const box::Border AdministratorForm::border_;
-
 void AdministratorForm::show() {
     std::string header = "< ADMINISTRATOR MENU >";
     std::vector<std::string> option = {
@@ -53,12 +51,6 @@ void AdministratorForm::show() {
             }
         }
     }
-}
-
-void AdministratorForm::pause_screen() {
-    std::cout << std::endl;
-    std::cout << box::utf8_setw(width_, border_.horizontal()) << std::endl;
-    system("pause");
 }
 
 InputResult AdministratorForm::prompt_username(const std::string & header) {
@@ -126,8 +118,7 @@ void AdministratorForm::handle_search() {
             {" Address  : ", user.get_address()},
             {" Phone    : ", user.get_phone_number()},
             {" Email    : ", user.get_email_address()},
-        },
-        border_
+        }
     );
 
     pause_screen();
@@ -146,9 +137,7 @@ void AdministratorForm::handle_create() {
             " Address  : ",
             " Phone    : ",
             " Email    : ",
-        },
-        border_,
-        width_
+        }
     );
     User user(input_result.value, values[0], values[1], values[2], values[3]);
 

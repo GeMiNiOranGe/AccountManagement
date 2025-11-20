@@ -2,6 +2,7 @@
 #ifndef ADMINISTRATOR_FORM_HPP
 #define ADMINISTRATOR_FORM_HPP
 
+#include "display/base_form.hpp"
 #include "display/console_color.hpp"
 #include "display/sysutils.hpp"
 #include "display/ui_have_no_ux.hpp"
@@ -9,12 +10,8 @@
 #include "service/user_service.hpp"
 #include "storage/config.hpp"
 
-class AdministratorForm {
+class AdministratorForm : public BaseForm {
 private:
-    static const int width_ = 80;
-    static const box::Border border_;
-
-    static void pause_screen();
     static InputResult prompt_username(const std::string & header);
 
     /**

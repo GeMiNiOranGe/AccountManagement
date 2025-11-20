@@ -2,14 +2,13 @@
 #ifndef EMPLOYEE_FORM_HPP
 #define EMPLOYEE_FORM_HPP
 
+#include "display/base_form.hpp"
 #include "display/sysutils.hpp"
 #include "display/ui_have_no_ux.hpp"
 #include "service/account_service.hpp"
 
-class EmployeeForm {
+class EmployeeForm : public BaseForm {
 private:
-    static const box::Border border_;
-
     static void handle_change_password(const Account & account);
     static void handle_view_personal_information(const Account & account);
 
