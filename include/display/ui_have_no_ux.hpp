@@ -18,13 +18,6 @@ std::pair<bool, std::pair<std::string, std::string>> show_login_form(
     box::BorderStyle style = box::BorderStyle::SINGLE
 );
 
-void form_info(
-    std::string title,
-    std::vector<std::string> labels,
-    box::BorderStyle style = box::BorderStyle::SINGLE,
-    size_t input_size = 30
-);
-
 void show_a_part_border_horizontal(
     box::Border border,
     std::vector<std::pair<std::string, size_t>> number_of_fill,

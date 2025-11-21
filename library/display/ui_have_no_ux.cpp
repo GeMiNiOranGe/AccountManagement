@@ -68,47 +68,6 @@ std::pair<bool, std::pair<std::string, std::string>> show_login_form(
 
     return {false, {username.value, password.value}};
 }
-void form_info(
-    std::string title,
-    std::vector<std::string> labels,
-    box::BorderStyle style,
-    size_t input_size
-) {
-    box::Border border(style);
-
-    // Get max size of label
-    size_t label_max_size = get_max_size_of_strings(labels);
-    size_t total_size = label_max_size + input_size;
-
-    // Show form
-    std::cout << border.top_left()
-              << box::utf8_setw(total_size, border.horizontal())
-              << border.top_right() << std::endl;
-    std::cout << border.vertical() << box::utf8_setw(total_size, " ")
-              << border.vertical() << std::endl;
-    std::cout << border.vertical()
-              << box::utf8_setw(total_size, " ", title, box::Alignment::CENTER)
-              << border.vertical() << std::endl;
-    std::cout << border.vertical() << box::utf8_setw(total_size, " ")
-              << border.vertical() << std::endl;
-
-    for (auto & element : labels) {
-        std::cout << border.left()
-                  << box::utf8_setw(total_size, border.horizontal())
-                  << border.right() << std::endl;
-        std::cout << border.vertical()
-                  << box::utf8_setw(
-                         total_size, " ", element, box::Alignment::LEFT
-                     )
-                  << border.vertical() << std::endl;
-        std::cout << border.vertical() << box::utf8_setw(total_size, " ")
-                  << border.vertical() << std::endl;
-    }
-
-    std::cout << border.bottom_left()
-              << box::utf8_setw(total_size, border.horizontal())
-              << border.bottom_right() << std::endl;
-}
 
 void show_a_part_border_horizontal(
     box::Border border,

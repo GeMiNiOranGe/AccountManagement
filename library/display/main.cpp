@@ -10,17 +10,6 @@ int main() {
     // window::resize(1920, 1080);// 377
     // window::move_to_center();
 
-    /*
-    form_info(
-        "Enter your information",
-        {"     Full name:",
-         "       Address:",
-         "  Phone number:",
-         " Email address:"},
-        box::BorderStyle::CORNER_DOUBLE
-    );
-    */
-
     // show_info_accounts();
 
     /*

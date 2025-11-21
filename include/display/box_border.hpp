@@ -36,6 +36,7 @@ public:
     std::string bottom_left() const;
     std::string bottom() const;
     std::string bottom_right() const;
+    // Box Drawing Characters Reference
     // ─│┌┐└┘├┤┬┴┼
     // ═║╔╗╚╝╠╣╦╩╬
     //   ╒╕╘╛╞╡╤╧╪
