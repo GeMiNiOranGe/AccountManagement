@@ -1,40 +1,34 @@
 #include "display/administrator_form.hpp"
 
 void AdministratorForm::show() {
-    std::string header = "< ADMINISTRATOR MENU >";
+    std::string header = "Administrator menu";
     std::vector<std::string> option = {
-        " 1. Search for an employee account ",
-        " 2. Create a new employee account ",
-        " 3. Update an employee's account information ",
-        " 4. Delete an employee account ",
-        " 5. Display the employee account information list ",
-        " 6. Log out ",
+        " [1] Search for an employee account ",
+        " [2] Create a new employee account ",
+        " [3] Update an employee's account information ",
+        " [4] Delete an employee account ",
+        " [5] Display the employee account information list ",
+        " [6] Log out ",
     };
 
     while (true) {
-        window::resize(500, 500);
-        window::move_to_center();
-
+        setup_window_layout();
         char event = menu_options(header, option);
 
         switch (event) {
             case 49: {
-                setup_window_layout();
                 handle_search();
                 break;
             }
             case 50: {
-                setup_window_layout();
                 handle_create();
                 break;
             }
             case 51: {
-                setup_window_layout();
                 handle_update();
                 break;
             }
             case 52: {
-                setup_window_layout();
                 handle_delete();
                 break;
             }
@@ -150,12 +144,12 @@ void AdministratorForm::handle_update() {
         return;
     }
 
-    std::string header = "< Select the information to edit >";
+    std::string header = "Select the information to edit";
     std::vector<std::string> option = {
-        " 1. Full name ",
-        " 2. Address ",
-        " 3. Phone number ",
-        " 4. Email address ",
+        " [1] Full name ",
+        " [2] Address ",
+        " [3] Phone number ",
+        " [4] Email address ",
     };
     std::vector<std::string> sub_option = {"<ESC> to back"};
 

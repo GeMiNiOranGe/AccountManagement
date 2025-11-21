@@ -75,3 +75,37 @@ BaseForm::read_fields(std::string header, std::vector<std::string> fields) {
 
     return values;
 }
+
+char BaseForm::menu_options(
+    std::string header,
+    std::vector<std::string> options,
+    std::vector<std::string> sub_options
+) {
+    std::string fill_style = " ";
+
+    system("cls");
+    draw_header(header);
+
+    if (!sub_options.empty()) {
+        std::cout << bgreen;
+        for (auto && element : sub_options) {
+            std::cout << element << std::endl;
+        }
+        std::cout << reset_color;
+    }
+
+    std::cout << std::endl;
+    std::cout << byellow << "[+] Available actions" << reset_color << std::endl;
+
+    size_t size = options.size();
+    for (size_t i = 0; i < size; i++) {
+        std::cout << "    "
+                  << (i != size - 1 ? border_.left() : border_.bottom_left())
+                  << border_.horizontal() << options[i] << std::endl;
+    }
+
+    std::cout << std::endl;
+    std::cout << baqua << "Choose an option" << reset_color << std::endl;
+
+    return _getch();
+}

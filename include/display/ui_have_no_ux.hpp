@@ -12,8 +12,6 @@
 #include "storage/account_storage.hpp"
 #include "storage/user_storage.hpp"
 
-size_t get_max_size_of_strings(std::vector<std::string> strings);
-
 std::pair<bool, std::pair<std::string, std::string>> show_login_form(
     box::BorderStyle style = box::BorderStyle::SINGLE
 );
@@ -39,12 +37,5 @@ void show_info_account(
 );
 
 void show_info_accounts();
-
-char menu_options(
-    std::string title,
-    std::vector<std::string> options,
-    std::vector<std::string> sub_options = {},
-    box::BorderStyle style = box::BorderStyle::SINGLE
-);
 
 #endif  // end UI_HAVE_NO_UX_HPP

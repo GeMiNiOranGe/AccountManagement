@@ -1,27 +1,23 @@
 #include "display/employee_form.hpp"
 
 void EmployeeForm::show(const Account & account) {
-    std::string header = "< EMPLOYEE MENU >";
+    std::string header = "Employee menu";
     std::vector<std::string> option = {
-        " 1. View your personal information ",
-        " 2. Change your password ",
-        " 3. Log out "
+        " [1] View your personal information ",
+        " [2] Change your password ",
+        " [3] Log out "
     };
 
     while (true) {
-        window::resize(500, 500);
-        window::move_to_center();
-
+        setup_window_layout();
         char event = menu_options(header, option);
 
         switch (event) {
             case 49: {
-                setup_window_layout();
                 handle_view_personal_information(account);
                 break;
             }
             case 50: {
-                setup_window_layout();
                 handle_change_password(account);
                 break;
             }

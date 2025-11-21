@@ -1,17 +1,5 @@
 #include "display/ui_have_no_ux.hpp"
 
-size_t get_max_size_of_strings(std::vector<std::string> strings) {
-    size_t max_size = 0;
-
-    for (auto & str : strings) {
-        if (max_size < str.size()) {
-            max_size = str.size();
-        }
-    }
-
-    return max_size;
-}
-
 std::pair<bool, std::pair<std::string, std::string>> show_login_form(
     box::BorderStyle style
 ) {
@@ -216,45 +204,4 @@ void show_info_accounts() {
         }
     }
     show_a_part_border(titles, Position::LAST);
-}
-
-char menu_options(
-    std::string title,
-    std::vector<std::string> options,
-    std::vector<std::string> sub_options,
-    box::BorderStyle style
-) {
-    box::Border border(style);
-    std::string fill_style = " ";
-    size_t width = get_max_size_of_strings(options);
-
-    if (title.size() > width) {
-        width = title.size();
-    }
-
-    system("cls");
-    std::cout << byellow;
-    std::cout << border.top_left()
-              << box::utf8_setw(width, border.horizontal(), title)
-              << border.top_right() << std::endl;
-    for (size_t i = 0; i < options.size(); i++) {
-        std::cout << border.vertical() << bwhite
-                  << box::utf8_setw(width, fill_style, options[i]) << byellow
-                  << border.vertical() << std::endl;
-    }
-    std::cout << byellow;
-    std::cout << border.bottom_left()
-              << box::utf8_setw(width, border.horizontal())
-              << border.bottom_right() << std::endl;
-
-    if (!sub_options.empty()) {
-        std::cout << bgreen;
-        for (auto && element : sub_options) {
-            std::cout << element << std::endl;
-        }
-    }
-
-    std::cout << baqua << "Choose an option" << reset_color << std::endl;
-
-    return _getch();
 }
