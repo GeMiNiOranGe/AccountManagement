@@ -4,7 +4,6 @@
 
 #include "display/base_form.hpp"
 #include "display/console_color.hpp"
-#include "display/sysutils.hpp"
 #include "display/ui_have_no_ux.hpp"
 #include "service/account_service.hpp"
 #include "service/user_service.hpp"
@@ -23,8 +22,8 @@ private:
 
     static void handle_search();
     static void handle_create();
-    static void handle_delete();
     static void handle_update();
+    static void handle_delete();
     static void handle_show_accounts();
 
 public:

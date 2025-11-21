@@ -3,6 +3,11 @@
 const int BaseForm::width_ = 80;
 const box::Border BaseForm::border_;
 
+void BaseForm::setup_window_layout() {
+    window::resize(640, 500);
+    window::move_to_center();
+}
+
 void BaseForm::draw_header(std::string header) {
     std::cout << border_.top_left()
               << box::utf8_setw(width_ - 2, border_.horizontal())

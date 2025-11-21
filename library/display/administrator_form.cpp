@@ -3,11 +3,11 @@
 void AdministratorForm::show() {
     std::string header = "< ADMINISTRATOR MENU >";
     std::vector<std::string> option = {
-        " 1. Add employee account ",
-        " 2. Delete employee account ",
-        " 3. Search employee account ",
-        " 4. Edit employee account ",
-        " 5. Display employee account information ",
+        " 1. Search for an employee account ",
+        " 2. Create a new employee account ",
+        " 3. Update an employee's account information ",
+        " 4. Delete an employee account ",
+        " 5. Display the employee account information list ",
         " 6. Log out ",
     };
 
@@ -17,24 +17,25 @@ void AdministratorForm::show() {
 
         char event = menu_options(header, option);
 
-        window::resize(640, 500);
-        window::move_to_center();
-
         switch (event) {
             case 49: {
-                handle_create();
-                break;
-            }
-            case 50: {
-                handle_delete();
-                break;
-            }
-            case 51: {
+                setup_window_layout();
                 handle_search();
                 break;
             }
-            case 52: {
+            case 50: {
+                setup_window_layout();
+                handle_create();
+                break;
+            }
+            case 51: {
+                setup_window_layout();
                 handle_update();
+                break;
+            }
+            case 52: {
+                setup_window_layout();
+                handle_delete();
                 break;
             }
             case 53: {
@@ -90,7 +91,7 @@ InputResult AdministratorForm::prompt_username(
 }
 
 void AdministratorForm::handle_search() {
-    InputResult input_result = prompt_username("Search account", true);
+    InputResult input_result = prompt_username("Search for an account", true);
     if (input_result.cancelled) {
         return;
     }
@@ -111,7 +112,7 @@ void AdministratorForm::handle_search() {
 }
 
 void AdministratorForm::handle_create() {
-    InputResult input_result = prompt_username("Add account", false);
+    InputResult input_result = prompt_username("Create a new account", false);
     if (input_result.cancelled) {
         return;
     }
@@ -133,7 +134,7 @@ void AdministratorForm::handle_create() {
 }
 
 void AdministratorForm::handle_delete() {
-    InputResult input_result = prompt_username("Delete account", true);
+    InputResult input_result = prompt_username("Delete an account", true);
     if (input_result.cancelled) {
         return;
     }
@@ -144,7 +145,7 @@ void AdministratorForm::handle_delete() {
 }
 
 void AdministratorForm::handle_update() {
-    InputResult input_result = prompt_username("Edit account", true);
+    InputResult input_result = prompt_username("Update an account", true);
     if (input_result.cancelled) {
         return;
     }
@@ -190,7 +191,8 @@ void AdministratorForm::handle_show_accounts() {
     window::resize(1275, 750);
     window::move_to_center();
 
-    std::cout << byellow << "<Show full account information>" << reset_color;
+    std::cout << byellow << "<The employee account information list>"
+              << reset_color;
     std::cout << std::endl;
 
     show_info_accounts();

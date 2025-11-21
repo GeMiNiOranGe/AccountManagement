@@ -7,6 +7,7 @@
 
 #include "display/box_border.hpp"
 #include "display/console_color.hpp"
+#include "display/sysutils.hpp"
 #include "display/utilities.hpp"
 
 class BaseForm {
@@ -14,6 +15,7 @@ protected:
     static const int width_;
     static const box::Border border_;
 
+    static void setup_window_layout();
     static void draw_header(std::string header);
     static void pause_screen();
 

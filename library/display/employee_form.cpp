@@ -3,7 +3,9 @@
 void EmployeeForm::show(const Account & account) {
     std::string header = "< EMPLOYEE MENU >";
     std::vector<std::string> option = {
-        " 1. View account information ", " 2. Change password ", " 3. Log out "
+        " 1. View your personal information ",
+        " 2. Change your password ",
+        " 3. Log out "
     };
 
     while (true) {
@@ -12,15 +14,14 @@ void EmployeeForm::show(const Account & account) {
 
         char event = menu_options(header, option);
 
-        window::resize(640, 500);
-        window::move_to_center();
-
         switch (event) {
             case 49: {
+                setup_window_layout();
                 handle_view_personal_information(account);
                 break;
             }
             case 50: {
+                setup_window_layout();
                 handle_change_password(account);
                 break;
             }
@@ -29,7 +30,7 @@ void EmployeeForm::show(const Account & account) {
             }
             default: {
                 warning("Invalid choice!!!");
-                pause_screen();
+                system("pause");
                 break;
             }
         }
