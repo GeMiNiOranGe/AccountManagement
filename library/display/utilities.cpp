@@ -66,10 +66,19 @@ void go_to_xy(SHORT x_coord, SHORT y_coord) {
     SetConsoleCursorPosition(handle_std_out, pos);
 }
 
-void warning(std::string message) {
-    std::cout << white_on_red << "\a" << message << reset_color << std::endl;
+void section(const std::string& message) {
+    std::cout << baqua << "[+] " << message << reset_color << std::endl;
 }
 
-void success(std::string message) {
-    std::cout << bgreen << message << reset_color << std::endl;
+void question(const std::string & message) {
+    std::cout << bblue << "[?] " << message << reset_color;
+}
+
+void warning(const std::string & message) {
+    std::cout << white_on_red << "\a[!] " << message << reset_color
+              << std::endl;
+}
+
+void success(const std::string & message) {
+    std::cout << bgreen << "[>] " << message << reset_color << std::endl;
 }

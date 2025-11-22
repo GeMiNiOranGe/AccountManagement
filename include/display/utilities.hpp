@@ -24,8 +24,11 @@ bool is_open_file(std::ofstream & fout, const std::string & path);
 InputResult input_text(bool hide_input = false, size_t max_length = 64);
 
 void go_to_xy(SHORT x_coord, SHORT y_coord);
-void warning(std::string message);
-void success(std::string message);
+
+void section(const std::string & message);
+void question(const std::string & message);
+void warning(const std::string & message);
+void success(const std::string & message);
 
 template <typename data_type>
 bool is_even(data_type value) {

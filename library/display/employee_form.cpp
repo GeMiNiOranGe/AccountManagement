@@ -56,24 +56,24 @@ void EmployeeForm::handle_view_personal_information(const Account & account) {
 
 void EmployeeForm::handle_change_password(const Account & account) {
     system("cls");
-    std::cout << byellow << "<Change password>" << std::endl;
-    std::cout << "<ESC> to back" << std::endl;
+    draw_header("Change password");
+    std::cout << "<ESC> to back" << std::endl << std::endl;
 
-    std::cout << bblue << "Enter current password: " << reset_color;
+    question("Enter current password: ");
     InputResult current_password = input_text(true);
     std::cout << std::endl;
     if (current_password.cancelled) {
         return;
     }
 
-    std::cout << bblue << "Enter new password: " << reset_color;
+    question("Enter new password    : ");
     InputResult new_password = input_text(true);
     std::cout << std::endl;
     if (new_password.cancelled) {
         return;
     }
 
-    std::cout << bblue << "Confirm new password: " << reset_color;
+    question("Confirm new password  : ");
     InputResult confirm_new_password = input_text(true);
     std::cout << std::endl;
     if (confirm_new_password.cancelled) {
@@ -91,6 +91,8 @@ void EmployeeForm::handle_change_password(const Account & account) {
     }
 
     AccountService::update_password(account.get_username(), new_password.value);
+
+    std::cout << std::endl;
     success("Password updated successfully!");
     pause_screen();
 }
