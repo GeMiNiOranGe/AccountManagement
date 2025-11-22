@@ -87,11 +87,9 @@ char BaseForm::menu_options(
     draw_header(header);
 
     if (!sub_options.empty()) {
-        std::cout << bgreen;
         for (auto && element : sub_options) {
             std::cout << element << std::endl;
         }
-        std::cout << reset_color;
     }
 
     std::cout << std::endl;
@@ -105,7 +103,7 @@ char BaseForm::menu_options(
     }
 
     std::cout << std::endl;
-    std::cout << baqua << "Choose an option" << reset_color << std::endl;
+    std::cout << baqua << "[?] Choose an option" << reset_color << std::endl;
 
     return _getch();
 }

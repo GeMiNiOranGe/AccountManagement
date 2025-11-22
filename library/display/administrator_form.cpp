@@ -90,6 +90,7 @@ void AdministratorForm::handle_search() {
         return;
     }
 
+    // TODO: Consider allowing relative searches
     User user = UserService::get_user(input_result.value);
 
     write_fields(
