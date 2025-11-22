@@ -18,6 +18,10 @@ protected:
     static void setup_window_layout();
     static void draw_header(std::string header);
     static void pause_screen();
+    static void question(const std::string & message);
+    static void section(const std::string & message);
+    static void warning(const std::string & message);
+    static void success(const std::string & message);
 
     static void write_fields(
         std::string header,

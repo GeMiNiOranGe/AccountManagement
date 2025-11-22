@@ -5,7 +5,7 @@
 #include "display/administrator_form.hpp"
 #include "display/employee_form.hpp"
 
-class MainForm {
+class MainForm : public BaseForm {
 public:
     static void show();
 };

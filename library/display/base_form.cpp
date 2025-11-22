@@ -28,6 +28,22 @@ void BaseForm::pause_screen() {
     system("pause");
 }
 
+void BaseForm::question(const std::string & message) {
+    std::cout << bblue << "[?] " << message << reset_color;
+}
+
+void BaseForm::section(const std::string & message) {
+    std::cout << baqua << "[+] " << message << reset_color << std::endl;
+}
+
+void BaseForm::warning(const std::string & message) {
+    std::cout << bred << "\a[!] " << message << reset_color << std::endl;
+}
+
+void BaseForm::success(const std::string & message) {
+    std::cout << bgreen << "[>] " << message << reset_color << std::endl;
+}
+
 void BaseForm::write_fields(
     std::string header,
     std::vector<std::pair<std::string, std::string>> fields
