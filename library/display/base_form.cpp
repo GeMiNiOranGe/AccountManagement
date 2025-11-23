@@ -33,7 +33,7 @@ void BaseForm::question(const std::string & message) {
 }
 
 void BaseForm::section(const std::string & message) {
-    std::cout << baqua << "[+] " << message << reset_color << std::endl;
+    std::cout << byellow << "[+] " << message << reset_color << std::endl;
 }
 
 void BaseForm::warning(const std::string & message) {
@@ -48,17 +48,15 @@ void BaseForm::write_fields(
     std::string header,
     std::vector<std::pair<std::string, std::string>> fields
 ) {
-    std::cout << byellow << "[+] " + header << reset_color << std::endl;
+    section(header);
 
     size_t size = fields.size();
-    for (size_t i = 0; i < size - 1; i++) {
-        std::cout << "    " << border_.left() << border_.horizontal() << baqua
-                  << fields[i].first << reset_color << fields[i].second
-                  << std::endl;
+    for (size_t i = 0; i < size; i++) {
+        std::cout << "    "
+                  << (i != size - 1 ? border_.left() : border_.bottom_left())
+                  << border_.horizontal() << baqua << fields[i].first
+                  << reset_color << fields[i].second << std::endl;
     }
-    std::cout << "    " << border_.bottom_left() << border_.horizontal()
-              << baqua << fields[size - 1].first << reset_color
-              << fields[size - 1].second << std::endl;
 }
 
 std::vector<std::string>
@@ -92,24 +90,11 @@ BaseForm::read_fields(std::string header, std::vector<std::string> fields) {
     return values;
 }
 
-char BaseForm::menu_options(
-    std::string header,
-    std::vector<std::string> options,
-    std::vector<std::string> sub_options
-) {
+char BaseForm::menu_options(std::vector<std::string> options) {
     std::string fill_style = " ";
 
-    system("cls");
-    draw_header(header);
-
-    if (!sub_options.empty()) {
-        for (auto && element : sub_options) {
-            std::cout << element << std::endl;
-        }
-    }
-
     std::cout << std::endl;
-    std::cout << byellow << "[+] Available actions" << reset_color << std::endl;
+    section("Available actions");
 
     size_t size = options.size();
     for (size_t i = 0; i < size; i++) {
@@ -119,7 +104,7 @@ char BaseForm::menu_options(
     }
 
     std::cout << std::endl;
-    std::cout << baqua << "[?] Choose an option" << reset_color << std::endl;
+    question("Choose an action: ");
 
     return _getch();
 }

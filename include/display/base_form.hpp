@@ -30,11 +30,7 @@ protected:
     static std::vector<std::string>
     read_fields(std::string header, std::vector<std::string> fields);
 
-    static char menu_options(
-        std::string header,
-        std::vector<std::string> options,
-        std::vector<std::string> sub_options = {}
-    );
+    static char menu_options(std::vector<std::string> options);
 };
 
 #endif  // end BASE_FORM_HPP

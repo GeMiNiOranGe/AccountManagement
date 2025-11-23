@@ -10,7 +10,11 @@ void EmployeeForm::show(const Account & account) {
 
     while (true) {
         setup_window_layout();
-        char event = menu_options(header, option);
+
+        system("cls");
+        draw_header(header);
+        char event = menu_options(option);
+        std::cout << std::endl;
 
         switch (event) {
             case 49: {

@@ -13,7 +13,11 @@ void AdministratorForm::show() {
 
     while (true) {
         setup_window_layout();
-        char event = menu_options(header, option);
+
+        system("cls");
+        draw_header(header);
+        char event = menu_options(option);
+        std::cout << std::endl;
 
         switch (event) {
             case 49: {
@@ -40,8 +44,9 @@ void AdministratorForm::show() {
                 return;
             }
             default: {
+                std::cout << std::endl;
                 warning("Invalid choice!!!");
-                system("pause");
+                pause_screen();
                 break;
             }
         }
@@ -145,7 +150,7 @@ void AdministratorForm::handle_update() {
         return;
     }
 
-    std::string header = "Select the information to edit";
+    std::string header = "Choose the field to edit: " + input_result.value;
     std::vector<std::string> option = {
         " [1] Full name ",
         " [2] Address ",
@@ -153,9 +158,25 @@ void AdministratorForm::handle_update() {
         " [4] Email address ",
     };
     std::vector<std::string> sub_option = {"<ESC> to back"};
+    User user = UserService::get_user(input_result.value);
 
     while (true) {
-        char event = menu_options(header, option, sub_option);
+        system("cls");
+        draw_header(header);
+        std::cout << "<ESC> to back" << std::endl;
+        std::cout << std::endl;
+
+        write_fields(
+            "Account information",
+            {
+                {" Full name: ", user.get_full_name()},
+                {" Address  : ", user.get_address()},
+                {" Phone    : ", user.get_phone_number()},
+                {" Email    : ", user.get_email_address()},
+            }
+        );
+        char event = menu_options(option);
+        std::cout << std::endl << std::endl;
 
         if (event == 27) {
             return;
@@ -164,13 +185,14 @@ void AdministratorForm::handle_update() {
         if (48 < event && event < 53) {
             std::string new_value;
 
-            std::cout << bblue << "Updating field: " << reset_color;
+            question("Updating field       : ");
             std::cout << event - 48 << std::endl;
-            std::cout << bblue << "Enter new information: " << reset_color;
+            question("Enter new information: ");
             getline(std::cin, new_value);
 
             UserService::update_user(input_result.value, event, new_value);
 
+            std::cout << std::endl;
             success("Account updated successfully!");
             pause_screen();
             return;
