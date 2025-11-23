@@ -39,7 +39,7 @@ void EmployeeForm::show(const Account & account) {
 
 void EmployeeForm::handle_view_personal_information(const Account & account) {
     system("cls");
-    draw_header("Account information");
+    draw_header("View personal information");
     std::cout << yellow << "[+] Your username: " << reset_color
               << account.get_username() << std::endl
               << std::endl;

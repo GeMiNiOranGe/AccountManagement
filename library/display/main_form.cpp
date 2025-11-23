@@ -23,35 +23,39 @@ void MainForm::show() {
 
         if (result.first && password == DEFAULT_PASSWORD) {
             system("cls");
-            std::cout << byellow;
-            std::cout << "<Change default password>" << std::endl;
-            std::cout << "<ESC> to back" << std::endl;
-            std::cout << "(The default password is: " + DEFAULT_PASSWORD + ")"
-                      << std::endl;
+            setup_window_layout();
+            draw_header("Change default password");
+            std::cout << "<ESC> to back" << std::endl << std::endl;
 
-            std::cout << bblue << "Enter new password: " << reset_color;
+            section("The default password is \"" + DEFAULT_PASSWORD + "\".");
+
+            question("Enter new password  : ");
             InputResult new_password = input_text(true);
             std::cout << std::endl;
             if (new_password.cancelled) {
                 continue;
             }
 
-            std::cout << bblue << "Confirm new password: " << reset_color;
+            question("Confirm new password: ");
             InputResult confirm_new_password = input_text(true);
             std::cout << std::endl;
             if (confirm_new_password.cancelled) {
                 continue;
             }
 
+            std::cout << std::endl;
+
             if (new_password.value != DEFAULT_PASSWORD
                 && new_password.value == confirm_new_password.value) {
                 AccountService::update_password(username, new_password.value);
 
                 success("Password updated successfully!");
-                system("pause");
+                pause_screen();
             } else {
                 warning("Wrong information!!!");
-                system("pause");
+                pause_screen();
+                // prevent login with default password
+                continue;
             }
         }
 
