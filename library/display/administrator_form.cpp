@@ -194,3 +194,141 @@ void AdministratorForm::handle_show_accounts() {
 
     pause_screen();
 }
+
+void AdministratorForm::show_a_part_border_horizontal(
+    std::vector<std::pair<std::string, size_t>> number_of_fill,
+    std::string middle,
+    std::string last
+) {
+    size_t size = number_of_fill.size();
+    for (int i = 0; i < size; i++) {
+        std::cout << box::utf8_setw(
+            number_of_fill[i].second + 2, border_.horizontal()
+        );
+        std::cout << (i != size - 1 ? middle : last);
+    }
+};
+
+void AdministratorForm::show_a_part_border(
+    std::vector<std::pair<std::string, size_t>> number_of_fill,
+    Position position
+) {
+    if (position == Position::FIRST) {
+        std::cout << border_.top_left();
+        show_a_part_border_horizontal(
+            number_of_fill, border_.top(), border_.top_right()
+        );
+        return;
+    }
+    if (position == Position::MIDDLE) {
+        std::cout << border_.left();
+        show_a_part_border_horizontal(
+            number_of_fill, border_.center(), border_.right()
+        );
+        return;
+    }
+    if (position == Position::LAST) {
+        std::cout << border_.bottom_left();
+        show_a_part_border_horizontal(
+            number_of_fill, border_.bottom(), border_.bottom_right()
+        );
+        return;
+    }
+}
+
+// Output to console in given format:
+// Pair (maxSize: maximum cell size, wString: One sentence), BorderStyle:
+// Single(customizable)
+void AdministratorForm::show_info_account(
+    std::vector<std::pair<std::string, size_t>> max_size_and_wstring_pairs,
+    Color text_color,
+    std::string fill_type
+) {
+    std::cout << border_.vertical();
+    for (auto & element : max_size_and_wstring_pairs) {
+        size_t max_size = element.second;
+        set_color(text_color);
+        std::cout << fill_type;
+        std::cout << box::utf8_setw(max_size, fill_type, element.first);
+        std::cout << fill_type;
+        std::cout << reset_color << border_.vertical();
+    }
+}
+
+void AdministratorForm::show_info_accounts() {
+    std::vector<std::pair<std::string, size_t>> titles = {
+        std::make_pair("No.", 3),
+        std::make_pair("Username", 8),
+        std::make_pair("Password", 8),
+        std::make_pair("Full name", 9),
+        std::make_pair("Address", 7),
+        std::make_pair("Phone number", 12),
+        std::make_pair("Email address", 13)
+    };
+    std::vector<std::vector<std::string>> rows;
+    std::ifstream fin;
+
+    std::unordered_map<std::string, User> user_map =
+        UserStorage::get_users_map();
+
+    fin.open(ACCOUNTS_FILE);
+    for (int index = 1; !fin.eof(); index++) {
+        User user;
+        Account account;
+
+        AccountFileIO::read_file(fin, account);
+        user = user_map[account.get_username()];
+
+        std::vector<std::string> properties = {
+            std::to_string(index),
+            account.get_username(),
+            account.get_password(),
+            user.get_full_name(),
+            user.get_address(),
+            user.get_phone_number(),
+            user.get_email_address()
+        };
+
+        // Find the maximum size of each table cell, horizontally
+        if (account.get_username() != "") {
+            rows.push_back(properties);
+            for (size_t i = 0; i < properties.size(); i++) {
+                if (titles.at(i).second < properties.at(i).size()) {
+                    titles.at(i).second = properties.at(i).size();
+                }
+            }
+        }
+    }
+    fin.close();
+
+    show_a_part_border(titles, Position::FIRST);
+    std::cout << std::endl;
+
+    // Show titles
+    show_info_account(titles, Color::BRIGHT_YELLOW);
+    std::cout << std::endl;
+
+    show_a_part_border(titles, Position::MIDDLE);
+    std::cout << std::endl;
+
+    // Show all account information
+    for (int i = 0; i < rows.size(); i++) {
+        std::vector<std::string> row = rows.at(i);
+
+        std::vector<std::pair<std::string, size_t>> vec_title_and_max_size_temp;
+        for (size_t j = 0; j < titles.size(); j++) {
+            vec_title_and_max_size_temp.push_back(
+                std::make_pair(row.at(j), titles.at(j).second)
+            );
+        }
+
+        show_info_account(vec_title_and_max_size_temp, Color::BRIGHT_YELLOW);
+        std::cout << std::endl;
+
+        if (i != rows.size() - 1) {
+            show_a_part_border(titles, Position::MIDDLE);
+            std::cout << std::endl;
+        }
+    }
+    show_a_part_border(titles, Position::LAST);
+}

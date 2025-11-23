@@ -5,7 +5,7 @@ void MainForm::show() {
 
     int number_of_login = 3;
     while (true) {
-        window::resize(350, 400);
+        window::resize(320, 400);
         window::move_to_center();
 
         // TODO: use `auto [cancelled, creds] = show_login_form();` when C++17
@@ -83,4 +83,56 @@ void MainForm::show() {
             break;
         }
     }
+}
+
+std::pair<bool, std::pair<std::string, std::string>>
+MainForm::show_login_form() {
+    std::string title = "Log in";
+    std::string username_label = "Username: ";
+    std::string password_label = "Password: ";
+
+    size_t width = width_ / 2 - 2;
+    size_t align_middle = (width - title.size()) / 2;
+
+    system("cls");
+    std::cout << border_.top_left()
+              << box::utf8_setw(width, border_.horizontal())
+              << border_.top_right() << std::endl;
+    for (int i = 0; i < 3; i++) {
+        std::cout << border_.vertical() << box::utf8_setw(width)
+                  << border_.vertical() << std::endl;
+    }
+    std::cout << border_.left() << box::utf8_setw(width, border_.horizontal())
+              << border_.right() << std::endl;
+    for (int i = 0; i < 5; i++) {
+        std::cout << border_.vertical() << box::utf8_setw(width)
+                  << border_.vertical() << std::endl;
+    }
+    std::cout << border_.bottom_left()
+              << box::utf8_setw(width, border_.horizontal())
+              << border_.bottom_right() << std::endl;
+    std::cout << "<ESC> to quit" << std::endl;
+
+    std::cout << byellow;
+    go_to_xy(static_cast<short>(align_middle) + 1, 2);
+    std::cout << title;
+    go_to_xy(2, 6);
+    std::cout << username_label;
+    go_to_xy(2, 8);
+    std::cout << password_label;
+    std::cout << reset_color;
+
+    go_to_xy(static_cast<short>(username_label.size()) + 2, 6);
+    InputResult username = input_text();
+    if (username.cancelled) {
+        return {true, {"", ""}};
+    }
+
+    go_to_xy(static_cast<short>(password_label.size()) + 2, 8);
+    InputResult password = input_text(true);
+    if (password.cancelled) {
+        return {true, {"", ""}};
+    }
+
+    return {false, {username.value, password.value}};
 }

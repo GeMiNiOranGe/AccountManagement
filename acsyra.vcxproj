@@ -158,7 +158,6 @@
     <ClInclude Include="include/display/position.hpp" />
     <ClInclude Include="include/display/sysutils.hpp" />
     <ClInclude Include="include/display/table.hpp" />
-    <ClInclude Include="include/display/ui_have_no_ux.hpp" />
     <ClInclude Include="include/display/utilities.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,7 +186,6 @@
     <ClCompile Include="library/display/main.cpp" />
     <ClCompile Include="library/display/sysutils.cpp" />
     <ClCompile Include="library/display/table.cpp" />
-    <ClCompile Include="library/display/ui_have_no_ux.cpp" />
     <ClCompile Include="library/display/utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
