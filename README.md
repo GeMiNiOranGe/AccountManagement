@@ -28,46 +28,129 @@
 
 ## Screenshots
 
-![image1](images/image1.png)
-*Figure 1: Login screen*
+<!-- Wrapper helps table scroll horizontally on mobile -->
+<div style="overflow-x: auto; width: 100%;">
 
-![image2](images/image2.png)
-*Figure 2: Administrator screen*
+<table>
+<!-- Row 1 -->
+<tr>
+    <th align="center" colspan="2">
+        <i>Figure 1: Login screen</i>
+    </th>
+</tr>
+<tr>
+    <td align="center" colspan="2">
+        <img src="images/image1.png">
+    </td>
+</tr>
+<!-- Row 2 -->
+<tr>
+    <th align="center">
+        <i>Figure 2: Administrator screen</i>
+    </th>
+    <th align="center">
+        <i>Figure 3: Administrator account search screen</i>
+    </th>
+</tr>
+<tr>
+    <td align="center">
+        <img src="images/image2.png">
+    </td>
+    <td align="center">
+        <img src="images/image3.png">
+    </td>
+</tr>
+</table>
 
 <details>
-    <summary>More</summary>
 
-![image3](images/image3.png)
-*Figure 3: Administrator account search screen*
+<summary>More</summary>
 
-![image4](images/image4.png)
-*Figure 4: Administrator account creation screen*
-
-![image5](images/image5.png)
-*Figure 5: Administrator account information update screen 1*
-
-![image6](images/image6.png)
-*Figure 6: Administrator account information update screen 2*
-
-![image7](images/image7.png)
-*Figure 7: Administrator account deletion screen*
-
-![image8](images/image8.png)
-*Figure 8: Screen to view all accounts*
-
-![image9](images/image9.png)
-*Figure 9: Default password change screen*
-
-![image10](images/image10.png)
-*Figure 10: Employee screen*
-
-![image11](images/image11.png)
-*Figure 11: Employee personal information screen*
-
-![image12](images/image12.png)
-*Figure 12: Employee password change screen*
+<table>
+<!-- Row 3 -->
+<tr>
+    <th align="center">
+        <i>Figure 4: Administrator account creation screen</i>
+    </th>
+    <th align="center">
+        <i>Figure 5: Administrator account information update screen 1</i>
+    </th>
+</tr>
+<tr>
+    <td align="center">
+        <img src="images/image4.png">
+    </td>
+    <td align="center">
+        <img src="images/image5.png">
+    </td>
+</tr>
+<!-- Row 4 -->
+<tr>
+    <th align="center">
+        <i>Figure 6: Administrator account information update screen 2</i>
+    </th>
+    <th align="center">
+        <i>Figure 7: Administrator account deletion screen</i>
+    </th>
+</tr>
+<tr>
+    <td align="center">
+        <img src="images/image6.png">
+    </td>
+    <td align="center">
+        <img src="images/image7.png">
+    </td>
+</tr>
+<!-- Row 5 -->
+<tr>
+    <th align="center" colspan="2">
+        <i>Figure 8: Screen to view all accounts</i>
+    </th>
+</tr>
+<tr>
+    <td align="center" colspan="2">
+        <img src="images/image8.png">
+    </td>
+</tr>
+<!-- Row 6 -->
+<tr>
+    <th align="center">
+        <i>Figure 9: Default password change screen</i>
+    </th>
+    <th align="center">
+        <i>Figure 10: Employee screen</i>
+    </th>
+</tr>
+<tr>
+    <td align="center">
+        <img src="images/image9.png">
+    </td>
+    <td align="center">
+        <img src="images/image10.png">
+    </td>
+</tr>
+<!-- Row 7 -->
+<tr>
+    <th align="center">
+        <i>Figure 11: Employee personal information screen</i>
+    </th>
+    <th align="center">
+        <i>Figure 12: Employee password change screen</i>
+    </th>
+</tr>
+<tr>
+    <td align="center">
+        <img src="images/image11.png">
+    </td>
+    <td align="center">
+        <img src="images/image12.png">
+    </td>
+</tr>
+</table>
 
 </details>
+
+</div>
 
 ## License
 
