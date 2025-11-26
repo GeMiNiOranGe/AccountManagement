@@ -1,6 +1,6 @@
 #include "display/employee_form.hpp"
 
-void EmployeeForm::show(const Account & account) {
+void EmployeeForm::show(const std::string & username) {
     std::string header = "Employee menu";
     std::vector<std::string> option = {
         " [1] View your personal information ",
@@ -18,11 +18,11 @@ void EmployeeForm::show(const Account & account) {
 
         switch (event) {
             case 49: {
-                handle_view_personal_information(account);
+                handle_view_personal_information(username);
                 break;
             }
             case 50: {
-                handle_change_password(account);
+                handle_change_password(username);
                 break;
             }
             case 51: {
@@ -37,14 +37,16 @@ void EmployeeForm::show(const Account & account) {
     }
 }
 
-void EmployeeForm::handle_view_personal_information(const Account & account) {
+void EmployeeForm::handle_view_personal_information(
+    const std::string & username
+) {
     system("cls");
     draw_header("View personal information");
-    std::cout << yellow << "[+] Your username: " << reset_color
-              << account.get_username() << std::endl
+    std::cout << yellow << "[+] Your username: " << reset_color << username
+              << std::endl
               << std::endl;
 
-    User user = UserStorage::get_user(account.get_username());
+    User user = UserStorage::get_user(username);
     write_fields(
         "Account information",
         {
@@ -58,7 +60,7 @@ void EmployeeForm::handle_view_personal_information(const Account & account) {
     pause_screen();
 }
 
-void EmployeeForm::handle_change_password(const Account & account) {
+void EmployeeForm::handle_change_password(const std::string & username) {
     system("cls");
     draw_header("Change password");
     std::cout << "<ESC> to back" << std::endl << std::endl;
@@ -94,7 +96,7 @@ void EmployeeForm::handle_change_password(const Account & account) {
         return;
     }
 
-    AccountService::update_password(account.get_username(), new_password.value);
+    AccountService::update_password(username, new_password.value);
 
     std::cout << std::endl;
     success("Password updated successfully!");
