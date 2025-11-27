@@ -27,18 +27,18 @@ private:
     static void handle_show_accounts();
 
     static void show_a_part_border_horizontal(
-        std::vector<std::pair<std::string, size_t>> number_of_fill,
-        std::string middle,
-        std::string last
+        const std::vector<std::pair<std::string, size_t>> & number_of_fill,
+        const std::string & middle,
+        const std::string & last
     );
     static void show_a_part_border(
-        std::vector<std::pair<std::string, size_t>> number_of_fill,
+        const std::vector<std::pair<std::string, size_t>> & number_of_fill,
         Position position
     );
     static void show_info_account(
-        std::vector<std::pair<std::string, size_t>> max_size_and_wstring_pairs,
-        Color text_color,
-        std::string fill_type = " "
+        const std::vector<std::pair<std::string, size_t>> &
+            max_size_and_wstring_pairs,
+        Color text_color
     );
     static void show_info_accounts();
 

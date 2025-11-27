@@ -14,11 +14,11 @@ private:
 
 public:
     explicit User(
-        std::string username = "",
-        std::string full_name = "",
-        std::string address = "",
-        std::string phone_number = "",
-        std::string email_address = ""
+        const std::string & username = "",
+        const std::string & full_name = "",
+        const std::string & address = "",
+        const std::string & phone_number = "",
+        const std::string & email_address = ""
     );
     User(const User & user);
     ~User();
@@ -37,11 +37,11 @@ public:
 };
 
 inline User::User(
-    std::string username,
-    std::string full_name,
-    std::string address,
-    std::string phone_number,
-    std::string email_address
+    const std::string & username,
+    const std::string & full_name,
+    const std::string & address,
+    const std::string & phone_number,
+    const std::string & email_address
 ) {
     this->username_ = username;
     this->full_name_ = full_name;

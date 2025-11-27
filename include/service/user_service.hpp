@@ -12,7 +12,7 @@ public:
     static void create_user(const User & user);
     static void update_user(
         const std::string & username,
-        const char & option,
+        char option,
         const std::string & new_value
     );
     static void delete_user(const std::string & username);

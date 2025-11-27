@@ -218,9 +218,9 @@ void AdministratorForm::handle_show_accounts() {
 }
 
 void AdministratorForm::show_a_part_border_horizontal(
-    std::vector<std::pair<std::string, size_t>> number_of_fill,
-    std::string middle,
-    std::string last
+    const std::vector<std::pair<std::string, size_t>> & number_of_fill,
+    const std::string & middle,
+    const std::string & last
 ) {
     size_t size = number_of_fill.size();
     for (int i = 0; i < size; i++) {
@@ -232,7 +232,7 @@ void AdministratorForm::show_a_part_border_horizontal(
 };
 
 void AdministratorForm::show_a_part_border(
-    std::vector<std::pair<std::string, size_t>> number_of_fill,
+    const std::vector<std::pair<std::string, size_t>> & number_of_fill,
     Position position
 ) {
     if (position == Position::FIRST) {
@@ -262,10 +262,11 @@ void AdministratorForm::show_a_part_border(
 // Pair (maxSize: maximum cell size, wString: One sentence), BorderStyle:
 // Single(customizable)
 void AdministratorForm::show_info_account(
-    std::vector<std::pair<std::string, size_t>> max_size_and_wstring_pairs,
-    Color text_color,
-    std::string fill_type
+    const std::vector<std::pair<std::string, size_t>> &
+        max_size_and_wstring_pairs,
+    Color text_color
 ) {
+    std::string fill_type = " ";
     std::cout << border_.vertical();
     for (auto & element : max_size_and_wstring_pairs) {
         size_t max_size = element.second;

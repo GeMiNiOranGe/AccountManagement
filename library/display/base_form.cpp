@@ -45,8 +45,8 @@ void BaseForm::success(const std::string & message) {
 }
 
 void BaseForm::write_fields(
-    std::string header,
-    std::vector<std::pair<std::string, std::string>> fields
+    const std::string & header,
+    const std::vector<std::pair<std::string, std::string>> & fields
 ) {
     section(header);
 
@@ -59,8 +59,10 @@ void BaseForm::write_fields(
     }
 }
 
-std::vector<std::string>
-BaseForm::read_fields(std::string header, std::vector<std::string> fields) {
+std::vector<std::string> BaseForm::read_fields(
+    const std::string & header,
+    const std::vector<std::string> & fields
+) {
     std::vector<std::string> values;
 
     std::cout << border_.top_left()
@@ -90,7 +92,7 @@ BaseForm::read_fields(std::string header, std::vector<std::string> fields) {
     return values;
 }
 
-char BaseForm::menu_options(std::vector<std::string> options) {
+char BaseForm::menu_options(const std::vector<std::string> & options) {
     std::string fill_style = " ";
 
     std::cout << std::endl;

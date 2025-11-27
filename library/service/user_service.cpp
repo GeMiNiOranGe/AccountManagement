@@ -11,7 +11,7 @@ void UserService::create_user(const User & user) {
 
 void UserService::update_user(
     const std::string & username,
-    const char & option,
+    char option,
     const std::string & new_value
 ) {
     User current = UserStorage::get_user(username);

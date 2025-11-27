@@ -24,13 +24,15 @@ protected:
     static void success(const std::string & message);
 
     static void write_fields(
-        std::string header,
-        std::vector<std::pair<std::string, std::string>> fields
+        const std::string & header,
+        const std::vector<std::pair<std::string, std::string>> & fields
     );
-    static std::vector<std::string>
-    read_fields(std::string header, std::vector<std::string> fields);
+    static std::vector<std::string> read_fields(
+        const std::string & header,
+        const std::vector<std::string> & fields
+    );
 
-    static char menu_options(std::vector<std::string> options);
+    static char menu_options(const std::vector<std::string> & options);
 };
 
 #endif  // end BASE_FORM_HPP
